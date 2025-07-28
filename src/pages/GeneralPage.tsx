@@ -1,0 +1,29 @@
+// Features:
+import GeneralInfo from '../app/features/general_info/GeneralInfo';
+import TransportOnTheWay from '../app/features/shipments/TransportOnTheWay';
+import DailyPlan from '../app/features/work_plans/DailyPlan';
+import FreeTranport from '../app/features/shipments/FreeTranport';
+import RecentRequests from '../app/features/requests/RecentRequests';
+
+const GeneralPage = () => {
+  return (
+    <main className="h-full flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:px-4">
+      {/* Секция (Общие Данные) */}
+      <GeneralInfo />
+
+      {/* Секция (Транспорт в Пути) */}
+      <TransportOnTheWay />
+
+      {/* Секция (Дневной План Работы) */}
+      <DailyPlan />
+
+      {/* Секция (Свободный Транспорт) */}
+      <FreeTranport />
+
+      {/* Секция (Недавние Запросы) */}
+      <RecentRequests />
+    </main>
+  );
+};
+
+export default GeneralPage;

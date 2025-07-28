@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom';
+
 // React-icons:
 import {
   BsBoxSeamFill,
@@ -15,7 +17,7 @@ import Logo from './Logo';
 
 const SideBarNav = () => {
   return (
-    <aside className="hidden min-h-screen flex-col gap-4 justify-between bg-white container-shadow xs:rounded-br-md lg:flex xl:ml-10 xl:rounded-b-md 2xl:ml-16">
+    <aside className="hidden min-h-screen flex-col gap-4 justify-between bg-white container-shadow xs:rounded-br-md lg:flex xl:ml-10 xl:rounded-b-md 2xl:ml-29">
       <div className="p-4 flex flex-col gap-4 border-b-2 border-gray-200">
         <Logo />
 
@@ -41,21 +43,116 @@ const SideBarNav = () => {
       <div className="h-full p-4 flex flex-col justify-between border-b-2 border-gray-200">
         <nav>
           <ul className="flex flex-col gap-4 text-gray-400">
-            <li className="p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]">
-              <RiHomeSmile2Line className="text-2xl flex-shrink-0 text-[#7B57DF]" />
-              <p className="text-black">Главная</p>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <RiHomeSmile2Line
+                      className={`text-2xl flex-shrink-0 ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    />
+                    <span
+                      className={`transition duration-200 ease-in group-hover:text-black ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    >
+                      Главная
+                    </span>
+                  </>
+                )}
+              </NavLink>
             </li>
-            <li className="ml-1 p-2 flex items-center gap-2">
-              <FaTruck className="text-xl flex-shrink-0" />
-              <p>Отгрузки</p>
+
+            <li>
+              <NavLink
+                to="shipments"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <FaTruck
+                      className={`ml-1 text-xl flex-shrink-0 ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    />
+                    <span
+                      className={`transition duration-200 ease-in group-hover:text-black ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    >
+                      Отгрузки
+                    </span>
+                  </>
+                )}
+              </NavLink>
             </li>
-            <li className="ml-1 p-2 flex items-center gap-2">
-              <BsBoxSeamFill className="text-xl flex-shrink-0" />
-              <p>Посылки</p>
+
+            <li>
+              <NavLink
+                to="parcels"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <BsBoxSeamFill
+                      className={`ml-1 text-xl flex-shrink-0 ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    />
+                    <span
+                      className={`transition duration-200 ease-in group-hover:text-black ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    >
+                      Посылки
+                    </span>
+                  </>
+                )}
+              </NavLink>
             </li>
-            <li className="ml-0.5 p-2 flex items-center gap-2">
-              <MdOutlinePersonOutline className="text-2xl flex-shrink-0" />
-              <p>Клиенты</p>
+
+            <li>
+              <NavLink
+                to="clients"
+                className={({ isActive }) =>
+                  isActive
+                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <MdOutlinePersonOutline
+                      className={`ml-1 text-2xl flex-shrink-0 ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    />
+                    <span
+                      className={`transition duration-200 ease-in group-hover:text-black ${
+                        isActive && 'text-[#7B57DF]'
+                      }`}
+                    >
+                      Клиенты
+                    </span>
+                  </>
+                )}
+              </NavLink>
             </li>
           </ul>
         </nav>

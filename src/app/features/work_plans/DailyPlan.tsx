@@ -3,10 +3,11 @@ import { BsThreeDots } from 'react-icons/bs';
 
 // Ui:
 import CustomButton from '../../../shared/ui/CustomButton';
+import CustomSection from '../../../shared/ui/CustomSection';
 
 const DailyPlan = () => {
   return (
-    <section className="p-2 flex flex-col gap-4 bg-white container-shadow xs:p-4 xs:mx-4 xs:rounded-md lg:m-0">
+    <CustomSection className="flex flex-col gap-4">
       <div className="text-sm flex justify-between gap-2">
         <h2 className="font-semibold lg:text-lg">Дневной план</h2>
 
@@ -35,7 +36,7 @@ const DailyPlan = () => {
           Диаграмма статистики
         </div>
       </div>
-    </section>
+    </CustomSection>
   );
 };
 
