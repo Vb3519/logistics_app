@@ -6,6 +6,39 @@ export const tableHeaderCols: string[] = [
   'Статус',
 ];
 
+export const availableShipmentsData = [
+  {
+    id: '1231123f',
+    adress: 'Санкт-Петербург - Москва',
+    date: '30.07.2025',
+    progress: '80%',
+    current_weight: 20,
+    max_weight: 200,
+    shipment_number: 'V435322',
+    truck_number: 'Iveco 80E18',
+  },
+  {
+    id: '1231124a',
+    adress: 'Санкт-Петербург - Москва',
+    date: '30.07.2025',
+    progress: '80%',
+    current_weight: 20,
+    max_weight: 200,
+    shipment_number: 'V435322',
+    truck_number: 'Iveco 80E18',
+  },
+  {
+    id: '1231129h',
+    adress: 'Санкт-Петербург - Москва',
+    date: '30.07.2025',
+    progress: '80%',
+    current_weight: 20,
+    max_weight: 200,
+    shipment_number: 'V435322',
+    truck_number: 'Iveco 80E18',
+  },
+];
+
 export const shipmentsData = [
   {
     adress: 'Казань - Уфа',

@@ -39,13 +39,13 @@ const ShipmentsPage = () => {
         <h1 className="font-semibold text-base lg:text-lg">Отгрузки</h1>
         <ul className="flex items-center gap-2 flex-wrap leading-4">
           <li className="p-2 rounded-sm bg-[#7B57DF] text-white">
-            <NavLink to="completed">
-              Завершены <span>(10)</span>
+            <NavLink to="available">
+              Доступно <span>(3)</span>
             </NavLink>
           </li>
           <li className="p-2 rounded-sm bg-[#7B57DF] text-white">
-            <NavLink to="available">
-              Доступно <span>(3)</span>
+            <NavLink to="completed">
+              Завершены <span>(10)</span>
             </NavLink>
           </li>
         </ul>

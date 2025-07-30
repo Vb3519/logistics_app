@@ -8,7 +8,9 @@ import GeneralPage from '../pages/GeneralPage';
 
 import ShipmentsPage from '../pages/shipments/ShipmentsPage';
 import CompletedShipmentsPage from '../pages/shipments/CompletedShipmentsPage';
-import AvailableShipmentsPage from '../pages/shipments/AvailableShipmentsPage';
+
+import AvailableShipmentsPage from '../pages/shipments/available/AvailableShipmentsPage';
+import AvailableShipmentDetails from '../pages/shipments/available/AvailableShipmentDetails';
 
 import ParcelsPage from '../pages/ParcelsPage';
 import ClientsPage from '../pages/ClientsPage';
@@ -25,9 +27,14 @@ const App = () => {
             path="shipments/completed"
             element={<CompletedShipmentsPage />}
           />
+
           <Route
             path="shipments/available"
             element={<AvailableShipmentsPage />}
+          />
+          <Route
+            path="shipments/available/:id"
+            element={<AvailableShipmentDetails />}
           />
 
           <Route path="parcels" element={<ParcelsPage />} />
