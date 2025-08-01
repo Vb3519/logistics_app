@@ -10,7 +10,7 @@ import GeneralInfoCard from './GeneralInfoCard';
 
 const GeneralInfo = () => {
   return (
-    <CustomSection className="lg:col-span-2">
+    <CustomSection className="xs:mx-4 lg:col-span-2">
       <h2 className="font-semibold lg:text-lg">Общие данные</h2>
 
       <ul className="py-4 flex justify-between gap-4 text-sm overflow-x-auto md:gap-8 lg:text-base">

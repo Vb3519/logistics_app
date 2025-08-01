@@ -19,7 +19,9 @@ const BreadCrumbs: React.FC<BreadCrumbs_Props> = ({ ...props }) => {
 
   return (
     <ul
-      className={`${className} mr-auto p-2 gap-1 flex bg-white rounded-sm text-sm container-shadow xs:p-4 lg:text-base`}
+      className={`${
+        className ? className : ''
+      } mr-auto p-2 gap-1 flex bg-white rounded-sm text-sm container-shadow flex-wrap xs:p-4 lg:text-base`}
     >
       <li className="text-black">
         <NavLink to={backTopath}>{backToPageTitle} /</NavLink>

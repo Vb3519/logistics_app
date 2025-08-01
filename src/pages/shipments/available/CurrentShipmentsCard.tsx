@@ -1,7 +1,7 @@
 // React-icons:
 import { BsTruckFlatbed } from 'react-icons/bs';
 
-interface AvailableShipmentsCard_Props
+interface CurrentShipmentsCard_Props
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
   id?: string;
   adress: string;
@@ -14,7 +14,7 @@ interface AvailableShipmentsCard_Props
   children?: React.ReactNode;
 }
 
-const AvailableShipmentsCard: React.FC<AvailableShipmentsCard_Props> = ({
+const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
   id,
   adress,
   date,
@@ -64,4 +64,4 @@ const AvailableShipmentsCard: React.FC<AvailableShipmentsCard_Props> = ({
   );
 };
 
-export default AvailableShipmentsCard;
+export default CurrentShipmentsCard;

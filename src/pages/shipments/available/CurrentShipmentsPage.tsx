@@ -1,33 +1,37 @@
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 // Ui:
 import CustomSection from '../../../shared/ui/CustomSection';
-import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
-import AvailableShipmentsCard from './AvailableShipmentsCard';
+import CurrentShipmentsCard from './CurrentShipmentsCard';
 
 // Data:
-import { availableShipmentsData } from '../../../shared/data/shipmentsData';
+import { currentShipmentsData } from '../../../shared/data/shipmentsData';
 
-const AvailableShipmentsPage = () => {
+const CurrentShipmentsPage = () => {
   const navigate = useNavigate();
 
   const handleNavigateToShipmentDetails = (id: string) => {
-    navigate(`/shipments/available/${id}`);
+    navigate(`/shipments/${id}`);
   };
 
   return (
     <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
-      <BreadCrumbs
-        backTopath="/shipments"
-        backToPageTitle="Все отгрузки"
-        currentPath="/shipments/available"
-        currentPageTitle="Текущие заявки"
-      />
+      <div className="p-2 mr-auto flex items-center gap-2 flex-wrap text-sm">
+        <h1 className="font-semibold text-base lg:text-lg">Текущие отгрузки</h1>
+        <ul className="flex items-center gap-2 flex-wrap leading-4">
+          <li className="p-2 rounded-sm bg-[#7B57DF] text-white">
+            <NavLink to="all">Все</NavLink>
+          </li>
+          <li className="p-2 rounded-sm bg-[#7B57DF] text-white">
+            <NavLink to="completed">Завершены</NavLink>
+          </li>
+        </ul>
+      </div>
 
       <CustomSection className="min-h-screen w-full p-2 grid grid-rows-6 gap-2 bg-white container-shadow xs:rounded-md xs:gap-4 sm:grid-cols-2 sm:grid-rows-3 lg:min-h-0 lg:h-full">
-        {availableShipmentsData.map((el) => {
+        {currentShipmentsData.map((el) => {
           return (
-            <AvailableShipmentsCard
+            <CurrentShipmentsCard
               onClick={() => {
                 handleNavigateToShipmentDetails(el.id);
               }}
@@ -47,4 +51,4 @@ const AvailableShipmentsPage = () => {
   );
 };
 
-export default AvailableShipmentsPage;
+export default CurrentShipmentsPage;

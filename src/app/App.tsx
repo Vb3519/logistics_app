@@ -6,11 +6,11 @@ import MainLayout from '../shared/layouts/MainLayout';
 // Pages:
 import GeneralPage from '../pages/GeneralPage';
 
-import ShipmentsPage from '../pages/shipments/ShipmentsPage';
+import AllShipmentsPage from '../pages/shipments/AllShipmentsPage';
 import CompletedShipmentsPage from '../pages/shipments/CompletedShipmentsPage';
 
-import AvailableShipmentsPage from '../pages/shipments/available/AvailableShipmentsPage';
-import AvailableShipmentDetails from '../pages/shipments/available/AvailableShipmentDetails';
+import CurrentShipmentsPage from '../pages/shipments/available/CurrentShipmentsPage';
+import CurrentShipmentDetails from '../pages/shipments/available/CurrentShipmentDetails';
 
 import ParcelsPage from '../pages/ParcelsPage';
 import ClientsPage from '../pages/ClientsPage';
@@ -22,19 +22,13 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index={true} element={<GeneralPage />} />
 
-          <Route path="shipments" element={<ShipmentsPage />} />
+          <Route path="shipments" element={<CurrentShipmentsPage />} />
+          <Route path="shipments/:id" element={<CurrentShipmentDetails />} />
+
+          <Route path="shipments/all" element={<AllShipmentsPage />} />
           <Route
             path="shipments/completed"
             element={<CompletedShipmentsPage />}
-          />
-
-          <Route
-            path="shipments/available"
-            element={<AvailableShipmentsPage />}
-          />
-          <Route
-            path="shipments/available/:id"
-            element={<AvailableShipmentDetails />}
           />
 
           <Route path="parcels" element={<ParcelsPage />} />

@@ -10,7 +10,7 @@ const CustomSection: React.FC<CustomSection_Props> = ({
 }) => {
   return (
     <section
-      className={`${className} p-2 bg-white container-shadow xs:p-4 xs:mx-4 xs:rounded-md lg:m-0`}
+      className={`${className} p-2 bg-white container-shadow xs:p-4 xs:rounded-md lg:m-0`}
       {...props}
     >
       {children}

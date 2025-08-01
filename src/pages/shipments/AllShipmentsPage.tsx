@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 
 // Ui:
 import CustomSection from '../../shared/ui/CustomSection';
+import BreadCrumbs from '../../shared/ui/BreadCrumbs';
 
 // Data:
 import {
@@ -18,7 +19,7 @@ import {
   shipmentsData,
 } from '../../shared/data/shipmentsData';
 
-const ShipmentsPage = () => {
+const AllShipmentsPage = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(20);
 
@@ -35,21 +36,12 @@ const ShipmentsPage = () => {
 
   return (
     <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
-      <div className="p-2 mr-auto flex items-center gap-2 flex-wrap text-sm">
-        <h1 className="font-semibold text-base lg:text-lg">Отгрузки</h1>
-        <ul className="flex items-center gap-2 flex-wrap leading-4">
-          <li className="p-2 rounded-sm bg-[#7B57DF] text-white">
-            <NavLink to="available">
-              Доступно <span>(3)</span>
-            </NavLink>
-          </li>
-          <li className="p-2 rounded-sm bg-[#7B57DF] text-white">
-            <NavLink to="completed">
-              Завершены <span>(10)</span>
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+      <BreadCrumbs
+        backTopath="/shipments"
+        backToPageTitle="Текущие отгрузки"
+        currentPath="/shipments/all"
+        currentPageTitle="Все отгрузки"
+      />
 
       <CustomSection className="min-h-screen w-full p-2 flex flex-col justify-between bg-white container-shadow xs:rounded-md lg:min-h-0 lg:h-full">
         <TableContainer sx={{ maxHeight: '100vh' }}>
@@ -64,6 +56,7 @@ const ShipmentsPage = () => {
                         textAlign: 'center',
                         fontWeight: 'bold',
                         color: '#6B7280',
+                        fontFamily: 'inter',
                       }}
                     >
                       {colTitle}
@@ -78,20 +71,34 @@ const ShipmentsPage = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((el, index) => {
                   return (
-                    <TableRow key={index}>
-                      <TableCell sx={{ textAlign: 'center' }}>
+                    <TableRow
+                      key={index}
+                      sx={{ cursor: 'pointer' }}
+                      className="transition delay-50 ease-in hover:bg-gray-200"
+                    >
+                      <TableCell
+                        sx={{ textAlign: 'center', fontFamily: 'inter' }}
+                      >
                         {el.adress}
                       </TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>
+                      <TableCell
+                        sx={{ textAlign: 'center', fontFamily: 'inter' }}
+                      >
                         {el.shipment_number}
                       </TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>
+                      <TableCell
+                        sx={{ textAlign: 'center', fontFamily: 'inter' }}
+                      >
                         {el.truck_number}
                       </TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>
+                      <TableCell
+                        sx={{ textAlign: 'center', fontFamily: 'inter' }}
+                      >
                         {el.total_weight}
                       </TableCell>
-                      <TableCell sx={{ textAlign: 'center' }}>
+                      <TableCell
+                        sx={{ textAlign: 'center', fontFamily: 'inter' }}
+                      >
                         {el.status}
                       </TableCell>
                     </TableRow>
@@ -115,7 +122,7 @@ const ShipmentsPage = () => {
   );
 };
 
-export default ShipmentsPage;
+export default AllShipmentsPage;
 
 // Самостоятельная верстка таблицы:
 // --------------------------------------

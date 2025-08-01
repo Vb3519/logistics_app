@@ -7,7 +7,7 @@ import CustomSection from '../../../shared/ui/CustomSection';
 
 const DailyPlan = () => {
   return (
-    <CustomSection className="flex flex-col gap-4">
+    <CustomSection className="flex flex-col gap-4 xs:mx-4">
       <div className="text-sm flex justify-between gap-2">
         <h2 className="font-semibold lg:text-lg">Дневной план</h2>
 

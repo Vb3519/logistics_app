@@ -42,7 +42,7 @@ const CompletedShipmentsPage = () => {
     <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
       <BreadCrumbs
         backTopath="/shipments"
-        backToPageTitle="Все отгрузки"
+        backToPageTitle="Текущие отгрузки"
         currentPath="/shipments/completed"
         currentPageTitle="Завершенные отгрузки"
       />
@@ -74,7 +74,11 @@ const CompletedShipmentsPage = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((el, index) => {
                   return (
-                    <TableRow key={index}>
+                    <TableRow
+                      key={index}
+                      sx={{ cursor: 'pointer' }}
+                      className="transition delay-50 ease-in hover:bg-gray-200"
+                    >
                       <TableCell sx={{ textAlign: 'center' }}>
                         {el.adress}
                       </TableCell>
