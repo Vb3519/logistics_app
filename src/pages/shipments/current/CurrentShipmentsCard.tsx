@@ -29,7 +29,7 @@ const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
   return (
     <div
       {...props}
-      className="p-2 flex flex-col gap-2 bg-gray-200 rounded-sm xs:p-4"
+      className="p-2 flex flex-col gap-2 bg-element_primary rounded-sm xs:p-4"
     >
       <div className="flex items-center gap-2 text-sm lg:text-base">
         <div>{adress}</div>
@@ -40,17 +40,17 @@ const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
       <div className="flex gap-2 justify-between text-sm lg:text-base">
         <ul className="flex flex-col gap-2">
           <li className="flex flex-col gap-1">
-            <span className="text-gray-500">Доступно, кг</span>
+            <span className="text-primary">Доступно, кг</span>
             <span>
               <span>{current_weight}</span> / {max_weight}
             </span>
           </li>
           <li className="flex flex-col gap-1">
-            <span className="text-gray-500">Номер отгрузки</span>
+            <span className="text-primary">Номер отгрузки</span>
             <span>{shipment_number}</span>
           </li>
           <li className="flex flex-col gap-1">
-            <span className="text-gray-500">Машина</span>
+            <span className="text-primary">Машина</span>
             <span>{truck_number}</span>
           </li>
         </ul>

@@ -4,7 +4,7 @@ import CustomButton from '../../shared/ui/CustomButton';
 
 const AddClientForm = () => {
   return (
-    <CustomSection className="h-full">
+    <CustomSection className="h-full bg-section_primary">
       <form className="flex flex-col gap-3">
         <div className="pb-4 w-full flex flex-col gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
           <label
@@ -15,7 +15,7 @@ const AddClientForm = () => {
           </label>
           <input
             id="company_name"
-            className="p-2 bg-gray-200 rounded-sm outline-none"
+            className="p-2 bg-element_primary rounded-sm outline-none"
             type="text"
             placeholder={`ООО "Пример Названия"`}
           />
@@ -26,48 +26,48 @@ const AddClientForm = () => {
             Данные сотрудника компании:
           </h3>
           <div className="w-full flex flex-col gap-1">
-            <label htmlFor="surname" className="text-gray-400">
+            <label htmlFor="surname" className="text-secondary">
               Фамилия
             </label>
             <input
               id="surname"
-              className="p-2 bg-gray-200 rounded-sm outline-none"
+              className="p-2 bg-element_primary rounded-sm outline-none"
               type="text"
               placeholder="Петров"
             />
           </div>
 
           <div className="w-full flex flex-col gap-1">
-            <label htmlFor="name" className="text-gray-400">
+            <label htmlFor="name" className="text-secondary">
               Имя
             </label>
             <input
               id="name"
-              className="p-2 bg-gray-200 rounded-sm outline-none"
+              className="p-2 bg-element_primary rounded-sm outline-none"
               type="text"
               placeholder="Петр"
             />
           </div>
 
           <div className="w-full flex flex-col gap-1">
-            <label htmlFor="phone" className="text-gray-400">
+            <label htmlFor="phone" className="text-secondary">
               Телефон
             </label>
             <input
               id="phone"
-              className="p-2 bg-gray-200 rounded-sm outline-none"
+              className="p-2 bg-element_primary rounded-sm outline-none"
               type="text"
               placeholder="+7 (___) ___-__-__"
             />
           </div>
 
           <div className="w-full flex flex-col gap-1">
-            <label htmlFor="email" className="text-gray-400">
+            <label htmlFor="email" className="text-secondary">
               Эл. почта
             </label>
             <input
               id="email"
-              className="p-2 bg-gray-200 rounded-sm outline-none"
+              className="p-2 bg-element_primary rounded-sm outline-none"
               type="text"
               placeholder="example@mail.ru"
             />

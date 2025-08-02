@@ -7,7 +7,7 @@ import CustomSection from '../../../shared/ui/CustomSection';
 
 const TransportOnTheWay = () => {
   return (
-    <CustomSection className="flex flex-col gap-4 xs:mx-4">
+    <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
       <div className="text-sm flex justify-between gap-2 lg:text-base">
         <h2 className="font-semibold lg:text-lg">Транспорт в пути</h2>
 
@@ -19,11 +19,11 @@ const TransportOnTheWay = () => {
 
       <div className="w-full overflow-x-auto">
         <table className="w-full text-sm text-center lg:text-base">
-          <thead className="bg-gray-200">
+          <thead className="bg-element_primary">
             <tr>
-              <th className="p-2 rounded-l-md text-gray-500">Адрес</th>
-              <th className="p-2 text-gray-500">Автомобиль</th>
-              <th className="p-2 rounded-r-md text-gray-500">Опоздание</th>
+              <th className="p-2 rounded-l-md text-primary">Адрес</th>
+              <th className="p-2 text-primary">Автомобиль</th>
+              <th className="p-2 rounded-r-md text-primary">Опоздание</th>
             </tr>
           </thead>
 

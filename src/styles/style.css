@@ -2,6 +2,15 @@
 
 @theme {
   --breakpoint-xs: 450px;
+
+  /* Background-color */
+  --color-layout_primary: #f3f4f6; /* bg-gray-100 */
+  --color-section_primary: white; /* bg-white */
+  --color-element_primary: #e5e7eb; /* bg-gray-200 */
+
+  /* Text-color */
+  --color-primary: #6a7282; /* color-gray-500 */
+  --color-secondary: #99a1af; /* color-gray-400 */
 }
 
 .container-shadow {

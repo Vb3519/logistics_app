@@ -28,7 +28,7 @@ const CurrentShipmentsPage = () => {
         </ul>
       </div>
 
-      <CustomSection className="min-h-screen w-full p-2 grid grid-rows-6 gap-2 bg-white container-shadow xs:rounded-md xs:gap-4 sm:grid-cols-2 sm:grid-rows-3 lg:min-h-0 lg:h-full">
+      <CustomSection className="min-h-screen w-full p-2 grid grid-rows-6 gap-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 sm:grid-cols-2 sm:grid-rows-3 lg:min-h-0 lg:h-full">
         {currentShipmentsData.map((el) => {
           return (
             <CurrentShipmentsCard

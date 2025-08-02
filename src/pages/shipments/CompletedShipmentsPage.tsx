@@ -47,7 +47,7 @@ const CompletedShipmentsPage = () => {
         currentPageTitle="Завершенные"
       />
 
-      <CustomSection className="min-h-screen w-full p-2 flex flex-col justify-between bg-white container-shadow xs:rounded-md lg:min-h-0 lg:h-full">
+      <CustomSection className="min-h-screen w-full p-2 flex flex-col justify-between bg-section_primary container-shadow xs:rounded-md lg:min-h-0 lg:h-full">
         <TableContainer>
           <Table stickyHeader>
             <TableHead>

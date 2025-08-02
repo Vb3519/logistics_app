@@ -17,23 +17,23 @@ import Logo from './Logo';
 
 const SideBarNav = () => {
   return (
-    <aside className="hidden min-h-screen flex-col gap-4 justify-between bg-white container-shadow xs:rounded-br-md lg:flex xl:ml-10 xl:rounded-b-md 2xl:ml-29">
+    <aside className="hidden min-h-screen flex-col gap-4 justify-between bg-section_primary container-shadow xs:rounded-br-md lg:flex xl:ml-10 xl:rounded-b-md 2xl:ml-29">
       <div className="p-4 flex flex-col gap-4 border-b-2 border-gray-200">
         <Logo />
 
         <ul className="flex flex-col gap-1">
-          <li className="ml-0.5 p-2 flex gap-2 items-center text-gray-400">
+          <li className="ml-0.5 p-2 flex gap-2 items-center text-secondary">
             <BsExclamationCircle className="text-xl" />
             <p>Запросы</p>
-            <div className="ml-auto w-8 h-8 flex items-center justify-center bg-gray-200 rounded-sm">
+            <div className="ml-auto w-8 h-8 flex items-center justify-center bg-element_primary rounded-sm">
               3
             </div>
           </li>
 
-          <li className="p-2 flex gap-2 items-center text-gray-400">
+          <li className="p-2 flex gap-2 items-center text-secondary">
             <IoIosNotificationsOutline className="text-2xl" />
             <p>Уведомления</p>
-            <div className="ml-auto w-8 h-8 flex items-center justify-center bg-gray-200 rounded-sm">
+            <div className="ml-auto w-8 h-8 flex items-center justify-center bg-element_primary rounded-sm">
               15
             </div>
           </li>
@@ -42,14 +42,14 @@ const SideBarNav = () => {
 
       <div className="h-full p-4 flex flex-col justify-between border-b-2 border-gray-200">
         <nav>
-          <ul className="flex flex-col gap-4 text-gray-400">
+          <ul className="flex flex-col gap-4 text-secondary">
             <li>
               <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
-                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                    ? 'group p-2 flex items-center gap-2 bg-element_primary rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-element_primary border-l-3 border-transparent hover:border-gray-300'
                 }
               >
                 {({ isActive }) => (
@@ -76,8 +76,8 @@ const SideBarNav = () => {
                 to="shipments"
                 className={({ isActive }) =>
                   isActive
-                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
-                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                    ? 'group p-2 flex items-center gap-2 bg-element_primary rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-element_primary border-l-3 border-transparent hover:border-gray-300'
                 }
               >
                 {({ isActive }) => (
@@ -104,8 +104,8 @@ const SideBarNav = () => {
                 to="parcels"
                 className={({ isActive }) =>
                   isActive
-                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
-                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                    ? 'group p-2 flex items-center gap-2 bg-element_primary rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-element_primary border-l-3 border-transparent hover:border-gray-300'
                 }
               >
                 {({ isActive }) => (
@@ -132,8 +132,8 @@ const SideBarNav = () => {
                 to="clients"
                 className={({ isActive }) =>
                   isActive
-                    ? 'group p-2 flex items-center gap-2 bg-gray-200 rounded-r-sm border-l-3 border-[#7B57DF]'
-                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-gray-200 border-l-3 border-transparent hover:border-gray-300'
+                    ? 'group p-2 flex items-center gap-2 bg-element_primary rounded-r-sm border-l-3 border-[#7B57DF]'
+                    : 'group p-2 flex items-center gap-2 rounded-r-sm transition duration-200 ease-in hover:bg-element_primary border-l-3 border-transparent hover:border-gray-300'
                 }
               >
                 {({ isActive }) => (
@@ -163,14 +163,14 @@ const SideBarNav = () => {
       </div>
 
       <div className="p-4 flex items-center gap-2">
-        <div className="w-10 h-10 flex items-center justify-center rounded-[50%] bg-gray-200 flex-shrink-0">
-          <MdOutlinePersonOutline className="text-2xl flex-shrink-0 text-gray-500" />
+        <div className="w-10 h-10 flex items-center justify-center rounded-[50%] bg-element_primary flex-shrink-0">
+          <MdOutlinePersonOutline className="text-2xl flex-shrink-0 text-primary" />
         </div>
         <div className="flex flex-col">
           <div className="font-semibold">Имя Фамилия</div>
-          <div className="text-sm text-gray-500">Менеджер</div>
+          <div className="text-sm text-primary">Менеджер</div>
         </div>
-        <BsThreeDots className="ml-auto text-gray-500" />
+        <BsThreeDots className="ml-auto text-primary" />
       </div>
     </aside>
   );

@@ -34,7 +34,7 @@ const ClientsTable = () => {
   };
 
   return (
-    <CustomSection className="w-full flex flex-col gap-2 justify-between overflow-x-auto">
+    <CustomSection className="w-full flex flex-col gap-2 justify-between overflow-x-auto bg-section_primary">
       <TableContainer sx={{ maxHeight: '90vh' }}>
         <Table stickyHeader>
           <TableHead>

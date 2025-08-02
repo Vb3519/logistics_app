@@ -36,7 +36,7 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   };
 
   return (
-    <CustomSection className="w-full flex flex-col justify-between xs:rounded-md lg:basis-3/5">
+    <CustomSection className="w-full flex flex-col justify-between bg-section_primary xs:rounded-md lg:basis-3/5">
       <TableContainer sx={{ maxHeight: '70vh' }}>
         <Table stickyHeader>
           <TableHead>

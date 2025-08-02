@@ -17,14 +17,14 @@ const Header = () => {
             + Создать Заявку
           </CustomButton>
 
-          <CustomButton className="p-2 flex items-center justify-center bg-gray-200">
+          <CustomButton className="p-2 flex items-center justify-center bg-element_primary">
             <MdOutlineSegment className="text-[#7B57DF] text-xl" />
           </CustomButton>
         </div>
       </div>
 
-      <section className="p-2 flex items-center justify-between gap-2 text-sm bg-white container-shadow xs:p-4 xs:rounded-md lg:text-base">
-        <form className="w-full max-w-95 p-2 flex gap-1 items-center bg-gray-100 rounded-sm">
+      <section className="p-2 flex items-center justify-between gap-2 text-sm bg-section_primary container-shadow xs:p-4 xs:rounded-md lg:text-base">
+        <form className="w-full max-w-95 p-2 flex gap-1 items-center bg-element_primary rounded-sm">
           <PiMagnifyingGlassBold className="text-2xl text-gray-300" />
           <input
             className="w-full outline-none"

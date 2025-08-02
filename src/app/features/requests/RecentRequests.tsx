@@ -8,7 +8,7 @@ import CustomSection from '../../../shared/ui/CustomSection';
 
 const RecentRequests = () => {
   return (
-    <CustomSection className="flex flex-col gap-4 xs:mx-4">
+    <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
       <div className="text-sm flex justify-between gap-2 lg:text-base">
         <h2 className="font-semibold lg:text-lg">Недавние запросы</h2>
 
@@ -23,7 +23,7 @@ const RecentRequests = () => {
           <BsBoxSeamFill className="text-3xl text-red-900/70 flex-shrink-0" />
           <div>
             <h3 className="font-semibold">Перенаправление заказа</h3>
-            <p className="text-gray-500">
+            <p className="text-primary">
               Адрес{' '}
               <span className="font-semibold">Санкт-Петербург - Москва</span>
             </p>
@@ -34,7 +34,7 @@ const RecentRequests = () => {
           <BsBoxSeamFill className="text-3xl text-red-900/70 flex-shrink-0" />
           <div>
             <h3 className="font-semibold">Перенаправление заказа</h3>
-            <p className="text-gray-500">
+            <p className="text-primary">
               Адрес{' '}
               <span className="font-semibold">Санкт-Петербург - Москва</span>
             </p>
@@ -45,7 +45,7 @@ const RecentRequests = () => {
           <BsBoxSeamFill className="text-3xl text-red-900/70 flex-shrink-0" />
           <div>
             <h3 className="font-semibold">Перенаправление заказа</h3>
-            <p className="text-gray-500">
+            <p className="text-primary">
               Адрес{' '}
               <span className="font-semibold">Санкт-Петербург - Москва</span>
             </p>

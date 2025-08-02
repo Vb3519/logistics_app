@@ -28,7 +28,7 @@ const CurrentShipmentDetails = () => {
       />
 
       <div className="w-full flex flex-col gap-4 md:flex-row">
-        <CustomSection className="w-full p-2 flex flex-col gap-4 bg-white container-shadow xs:rounded-md lg:min-h-0 lg:h-full lg:flex-row lg:gap-8 lg:basis-2/5">
+        <CustomSection className="w-full p-2 flex flex-col gap-4 bg-section_primary container-shadow xs:rounded-md lg:min-h-0 lg:h-full lg:flex-row lg:gap-8 lg:basis-2/5">
           {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
           {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
           {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
@@ -37,31 +37,31 @@ const CurrentShipmentDetails = () => {
               <div className="font-bold lg:text-lg">
                 {currentShipmentData?.adress}
               </div>
-              <div className="mt-0.5 text-gray-400">
+              <div className="mt-0.5 text-secondary">
                 {currentShipmentData?.date}
               </div>
             </div>
 
-            <div className="p-4 flex items-center gap-2 text-sm bg-gray-200 rounded-md lg:text-base">
+            <div className="p-4 flex items-center gap-2 text-sm bg-element_primary rounded-md lg:text-base">
               <p>Загруженность машины</p>
               <span className="ml-auto text-lg text-amber-400 lg:text-4xl">
                 {currentShipmentData?.progress}
               </span>
             </div>
 
-            <div className="p-4 flex flex-col gap-4 bg-gray-200 rounded-md text-sm lg:text-base">
+            <div className="p-4 flex flex-col gap-4 bg-element_primary rounded-md text-sm lg:text-base">
               <div className="flex flex-col gap-2">
-                <span className="text-gray-400">Заявка </span>
+                <span className="text-secondary">Заявка </span>
                 <span>{id}</span>
               </div>
               <div className="flex flex-col gap-2">
-                <span className="text-gray-400">Автомобиль </span>
+                <span className="text-secondary">Автомобиль </span>
                 <span>{currentShipmentData?.truck_number}</span>
               </div>
             </div>
 
-            <div className="p-4 flex flex-col gap-2 bg-gray-200 rounded-md text-sm lg:text-base">
-              <span className="text-gray-400">Статус отгрузки</span>
+            <div className="p-4 flex flex-col gap-2 bg-element_primary rounded-md text-sm lg:text-base">
+              <span className="text-secondary">Статус отгрузки</span>
               <select className="w-1/2 outline-none cursor-pointer">
                 <option>В пути</option>
                 <option>Завершен</option>
@@ -71,12 +71,12 @@ const CurrentShipmentDetails = () => {
 
             <div className="p-4 flex items-center justify-between gap-2 text-sm lg:text-base">
               <div className="flex flex-col gap-2">
-                <span className="text-gray-400">Доступно, кг</span>
+                <span className="text-secondary">Доступно, кг</span>
                 <div>
                   <span className="lg:text-4xl">
                     {currentShipmentData?.current_weight}
                   </span>
-                  <span className="text-gray-400 lg:text-4xl">
+                  <span className="text-secondary lg:text-4xl">
                     /{currentShipmentData?.max_weight}
                   </span>
                 </div>
@@ -89,11 +89,11 @@ const CurrentShipmentDetails = () => {
             </div>
 
             <div className="flex flex-col gap-4">
-              <CustomButton className="p-2 text-[#7B57DF] bg-gray-200">
+              <CustomButton className="p-2 text-[#7B57DF] bg-element_primary">
                 Завершить загрузку
               </CustomButton>
 
-              <CustomButton className="p-2 text-[#7B57DF] bg-gray-200">
+              <CustomButton className="p-2 text-[#7B57DF] bg-element_primary">
                 Отменить заявку
               </CustomButton>
             </div>
