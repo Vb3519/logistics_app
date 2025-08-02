@@ -1,6 +1,7 @@
 interface CustomButton_Props
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
+  children: React.ReactNode;
 }
 
 const CustomButton: React.FC<CustomButton_Props> = ({

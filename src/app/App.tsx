@@ -9,11 +9,11 @@ import GeneralPage from '../pages/GeneralPage';
 import AllShipmentsPage from '../pages/shipments/AllShipmentsPage';
 import CompletedShipmentsPage from '../pages/shipments/CompletedShipmentsPage';
 
-import CurrentShipmentsPage from '../pages/shipments/available/CurrentShipmentsPage';
-import CurrentShipmentDetails from '../pages/shipments/available/CurrentShipmentDetails';
+import CurrentShipmentsPage from '../pages/shipments/current/CurrentShipmentsPage';
+import CurrentShipmentDetails from '../pages/shipments/current/CurrentShipmentDetails';
 
-import ParcelsPage from '../pages/ParcelsPage';
-import ClientsPage from '../pages/ClientsPage';
+import ParcelsPage from '../pages/parcels/ParcelsPage';
+import ClientsPage from '../pages/clients/ClientsPage';
 
 const App = () => {
   return (

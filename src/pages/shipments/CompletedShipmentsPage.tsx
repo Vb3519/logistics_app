@@ -44,7 +44,7 @@ const CompletedShipmentsPage = () => {
         backTopath="/shipments"
         backToPageTitle="Текущие отгрузки"
         currentPath="/shipments/completed"
-        currentPageTitle="Завершенные отгрузки"
+        currentPageTitle="Завершенные"
       />
 
       <CustomSection className="min-h-screen w-full p-2 flex flex-col justify-between bg-white container-shadow xs:rounded-md lg:min-h-0 lg:h-full">
