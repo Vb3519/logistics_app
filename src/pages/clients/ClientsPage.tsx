@@ -1,8 +1,4 @@
-// React-icons:
-import { MdOutlinePersonOutline } from 'react-icons/md';
-
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
 import BreadCrumbs from '../../shared/ui/BreadCrumbs';
 import ClientsTable from './ClientsTable';
 import AddClientForm from './AddClientForm';

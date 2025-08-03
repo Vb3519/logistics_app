@@ -8,5 +8,8 @@ export default defineConfig({
   base: '/repo_name/',
   server: {
     proxy: {},
+    watch: {
+      ignored: ['**/logistics_appData.json'],
+    },
   },
 });

@@ -1,7 +1,7 @@
 {
   "shipments": [
     {
-      "id": 0,
+      "id": "0",
       "from_city": "",
       "to_city": "",
       "shipment_number": 123,
@@ -10,7 +10,7 @@
       "dispatched": false
     },
     {
-      "id": 1,
+      "id": "1",
       "from_city": "",
       "to_city": "",
       "shipment_number": 1234,
@@ -19,7 +19,7 @@
       "dispatched": false
     },
     {
-      "id": 2,
+      "id": "2",
       "from_city": "",
       "to_city": "",
       "shipment_number": 1234,
@@ -30,7 +30,7 @@
   ],
   "parcels": [
     {
-      "id": 0,
+      "id": "0",
       "shipment_id": 1,
       "weight": 10,
       "creation_date": "25.07.2025",
@@ -38,7 +38,7 @@
       "packingProblem": false
     },
     {
-      "id": 1,
+      "id": "1",
       "shipment_id": 1,
       "weight": 15,
       "creation_date": "25.07.2025",
@@ -46,7 +46,7 @@
       "packingProblem": false
     },
     {
-      "id": 2,
+      "id": "2",
       "shipment_id": null,
       "weight": 5,
       "creation_date": "25.07.2025",
@@ -54,7 +54,7 @@
       "packingProblem": false
     },
     {
-      "id": 3,
+      "id": "3",
       "shipment_id": 0,
       "weight": 20,
       "creation_date": "25.07.2025",
@@ -64,44 +64,66 @@
   ],
   "trucks": [
     {
-      "id": 0,
+      "id": "0",
       "truck_number": "Iveco 80E16",
       "max_capacity": 600
     },
     {
-      "id": 1,
+      "id": "1",
       "truck_number": "Iveco 80E18",
       "max_capacity": 800
     },
     {
-      "id": 2,
+      "id": "2",
       "truck_number": "Iveco 80E14",
       "max_capacity": 400
     },
     {
-      "id": 3,
+      "id": "3",
       "truck_number": "Iveco 80E12",
       "max_capacity": 200
     }
   ],
   "clients": [
     {
-      "id": 0,
-      "company": "Company 1",
-      "person": {
-        "name": "Name Example 1",
-        "phone": 89811112222,
-        "email": "email1@example.com"
-      }
+      "company_email": "vb3519@yandex.ru",
+      "company_phone": "+7 981 755 47 56",
+      "company_title": "ООО Тестовая Компания №1",
+      "employee_name": "Виктор",
+      "employee_sern": "Бордюгов",
+      "id": "098d44a1-639a-4c27-b431-2754a5e2c607"
     },
     {
-      "id": 1,
-      "company": "Company 2",
-      "person": {
-        "name": "Name Example 2",
-        "phone": 89812223333,
-        "email": "email2@example.com"
-      }
+      "company_email": "example@bk.ru",
+      "company_phone": "+7 981 755 47 56",
+      "company_title": "ООО Тестовая Компания №2",
+      "employee_name": "Петр",
+      "employee_sern": "Петров",
+      "id": "ca2b3b2e-e792-4e89-ae7f-c5341892cd33"
+    },
+    {
+      "company_email": "example@bk.ru",
+      "company_phone": "+7 981 755 47 56",
+      "company_title": "ООО Тестовая Компания №3",
+      "employee_name": "Петр",
+      "employee_sern": "Петров",
+      "id": "509460b5-6edd-482e-bfad-2c16c8725537"
+    },
+    {
+      "company_email": "example@bk.ru",
+      "company_phone": "+7 981 755 47 56",
+      "company_title": "ООО Тестовая Компания №4",
+      "employee_name": "Виктор",
+      "employee_sern": "Бордюгов",
+      "id": "1c6b4caf-c742-450b-bc0f-6ac533af7e55"
+    },
+    {
+      "company_email": "example@bk.ru",
+      "company_phone": "+7 981 755 47 56",
+      "company_title": "ООО Тестовая Компания №5",
+      "employee_name": "Виктор",
+      "employee_sern": "Бордюгов",
+      "id": "9bb015e0-5e8b-4c27-a3d6-7ba5689519f8"
     }
   ]
 }

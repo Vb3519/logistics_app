@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // MUI:
 import Table from '@mui/material/Table';
@@ -18,10 +19,26 @@ import {
   clientsTableHeaderTitles,
 } from '../../shared/data/clientsData';
 
+// State:
+import {
+  selectClients,
+  loadClientsData,
+} from '../../app/redux/slices/clientsSlice';
+
+// Api:
+import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
+
+// Types:
+import { AppDispatch } from '../../app/redux/store';
+
 const ClientsTable = () => {
+  const dispatch: AppDispatch = useDispatch();
+
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
+  // Пагинация таблицы с клиентами компании:
+  // -------------------------------------------
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -33,12 +50,35 @@ const ClientsTable = () => {
     setPage(0);
   };
 
+  // Загрузка данных по клиентам компании:
+  // -------------------------------------------
+  const handleLoadClientsData = (url: string) => {
+    dispatch(loadClientsData(url));
+  };
+
+  useEffect(() => {
+    handleLoadClientsData(CLIENTS_URL);
+  }, []);
+
+  const currentCompanyClients = useSelector(selectClients);
+
   return (
     <CustomSection className="w-full flex flex-col gap-2 justify-between overflow-x-auto bg-section_primary">
       <TableContainer sx={{ maxHeight: '90vh' }}>
         <Table stickyHeader>
-          <TableHead>
-            <TableRow>
+          <TableHead className="container-shadow">
+            <TableRow
+              sx={{
+                'th:first-of-type': {
+                  borderTopLeftRadius: '4px',
+                  borderBottomLeftRadius: '4px',
+                },
+                'th:last-of-type': {
+                  borderTopRightRadius: '4px',
+                  borderBottomRightRadius: '4px',
+                },
+              }}
+            >
               {clientsTableHeaderTitles.map((title, index) => {
                 return (
                   <TableCell
@@ -48,6 +88,8 @@ const ClientsTable = () => {
                       fontWeight: 'bold',
                       color: '#6B7280',
                       fontFamily: 'inter',
+                      padding: '14px',
+                      backgroundColor: '#e5e7eb',
                     }}
                   >
                     {title}
@@ -58,26 +100,46 @@ const ClientsTable = () => {
           </TableHead>
 
           <TableBody>
-            {clientsData
+            {currentCompanyClients
               .slice(rowsPerPage * page, rowsPerPage * page + rowsPerPage)
               .map((clientInfo) => {
                 return (
-                  <TableRow
-                    key={clientInfo.id}
-                    sx={{ cursor: 'pointer' }}
-                    className="transition delay-50 ease-in hover:bg-gray-200"
-                  >
-                    <TableCell sx={{ textAlign: 'center' }}>
-                      {clientInfo.company}
+                  <TableRow key={clientInfo.id}>
+                    <TableCell
+                      sx={{
+                        textAlign: 'center',
+                        fontFamily: 'inter',
+                        padding: '14px',
+                      }}
+                    >
+                      {clientInfo.company_title}
                     </TableCell>
-                    <TableCell sx={{ textAlign: 'center' }}>
-                      {clientInfo.contact}
+                    <TableCell
+                      sx={{
+                        textAlign: 'center',
+                        fontFamily: 'inter',
+                        padding: '14px',
+                      }}
+                    >
+                      {clientInfo.employee_name} {clientInfo.employee_sern}
                     </TableCell>
-                    <TableCell sx={{ textAlign: 'center', textWrap: 'nowrap' }}>
-                      {clientInfo.phone}
+                    <TableCell
+                      sx={{
+                        textAlign: 'center',
+                        fontFamily: 'inter',
+                        padding: '14px',
+                      }}
+                    >
+                      {clientInfo.company_phone}
                     </TableCell>
-                    <TableCell sx={{ textAlign: 'center' }}>
-                      {clientInfo.email}
+                    <TableCell
+                      sx={{
+                        textAlign: 'center',
+                        fontFamily: 'inter',
+                        padding: '14px',
+                      }}
+                    >
+                      {clientInfo.company_email}
                     </TableCell>
                   </TableRow>
                 );
@@ -89,7 +151,7 @@ const ClientsTable = () => {
       <TablePagination
         rowsPerPageOptions={[10, 20, 30]}
         component="div"
-        count={clientsData.length}
+        count={currentCompanyClients.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
