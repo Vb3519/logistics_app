@@ -8,7 +8,7 @@ import CustomButton from '../../shared/ui/CustomButton';
 // State:
 import {
   addNewClient,
-  selectIsLoadingViaApi,
+  selectIsClientsFormDataSending,
   selectErrorMessage,
 } from '../../app/redux/slices/clientsSlice';
 
@@ -28,7 +28,9 @@ import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
 const AddClientForm = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const isClientsDataLoading: boolean = useSelector(selectIsLoadingViaApi);
+  const isClientsFormDataSending: boolean = useSelector(
+    selectIsClientsFormDataSending
+  );
   const clientsErrorMsg: string = useSelector(selectErrorMessage);
 
   const {
@@ -40,7 +42,9 @@ const AddClientForm = () => {
   } = useForm<ClientFormFields>();
 
   const onSubmit: SubmitHandler<ClientFormFields> = async (formData) => {
-    dispatch(addNewClient({ clientFormData: formData, url: CLIENTS_URL }));
+    await dispatch(
+      addNewClient({ clientFormData: formData, url: CLIENTS_URL })
+    );
 
     reset();
   };
@@ -54,7 +58,7 @@ const AddClientForm = () => {
   const userEmailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return (
-    <CustomSection className="h-full bg-section_primary">
+    <CustomSection className="h-full w-full bg-section_primary">
       <form
         className="flex flex-col gap-3"
         onSubmit={handleSubmit(onSubmit)}
@@ -203,11 +207,13 @@ const AddClientForm = () => {
 
         <CustomButton
           className={`m-auto py-2 px-4 text-white bg-[#7B57DF] ${
-            isClientsDataLoading && 'bg-gray-300'
+            isClientsFormDataSending && 'bg-gray-300'
           } text-sm lg:text-base`}
-          disabled={isClientsDataLoading}
+          disabled={isClientsFormDataSending}
         >
-          {isClientsDataLoading ? 'Отправка данных' : 'Добавить контрагента'}
+          {isClientsFormDataSending
+            ? 'Отправка данных'
+            : 'Добавить контрагента'}
         </CustomButton>
 
         {/* ------------------------------ */}

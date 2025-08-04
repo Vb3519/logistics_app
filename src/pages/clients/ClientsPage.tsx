@@ -14,8 +14,8 @@ const ClientsPage = () => {
         currentPageTitle="Клиенты"
       />
 
-      <div className="w-full flex flex-col gap-4 md:flex-row">
-        <div className="flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-4 md:flex-row lg:flex-col xl:flex-row">
+        <div className="flex flex-col gap-4 lg:flex-row xl:flex-col">
           <AddClientTip />
 
           <AddClientForm />

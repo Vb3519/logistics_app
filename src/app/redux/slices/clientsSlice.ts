@@ -20,6 +20,7 @@ interface ClientsState {
   clients: Client[];
   errorMsg: string;
   isLoadingViaAPI: boolean;
+  isClientsFormDataSending: boolean;
 }
 
 interface ClientsStateSlice {
@@ -104,6 +105,7 @@ const initialState: ClientsState = {
   clients: [],
   errorMsg: '',
   isLoadingViaAPI: false,
+  isClientsFormDataSending: false,
 };
 
 const clientsSlice = createSlice({
@@ -133,16 +135,16 @@ const clientsSlice = createSlice({
 
     // Добавление нового заказчика:
     builder.addCase(addNewClient.pending, (state) => {
-      return { ...state, isLoadingViaAPI: true };
+      return { ...state, isClientsFormDataSending: true };
     });
 
     builder.addCase(addNewClient.fulfilled, (state, action) => {
-      state.isLoadingViaAPI = false;
+      state.isClientsFormDataSending = false;
       state.clients.push(action.payload);
     });
 
     builder.addCase(addNewClient.rejected, (state, action) => {
-      state.isLoadingViaAPI = false;
+      state.isClientsFormDataSending = false;
 
       if (typeof action.payload === 'string') {
         state.errorMsg = action.payload;
@@ -158,5 +160,7 @@ export const selectErrorMessage = (state: ClientsStateSlice) =>
   state.clients.errorMsg;
 export const selectIsLoadingViaApi = (state: ClientsStateSlice) =>
   state.clients.isLoadingViaAPI;
+export const selectIsClientsFormDataSending = (state: ClientsStateSlice) =>
+  state.clients.isClientsFormDataSending;
 
 export default clientsSlice.reducer;

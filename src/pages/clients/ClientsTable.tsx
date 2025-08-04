@@ -57,13 +57,15 @@ const ClientsTable = () => {
   };
 
   useEffect(() => {
-    handleLoadClientsData(CLIENTS_URL);
+    if (currentCompanyClients.length === 0) {
+      handleLoadClientsData(CLIENTS_URL);
+    }
   }, []);
 
   const currentCompanyClients = useSelector(selectClients);
 
   return (
-    <CustomSection className="w-full flex flex-col gap-2 justify-between overflow-x-auto bg-section_primary">
+    <CustomSection className="w-full min-h-[30vh] flex flex-col gap-2 justify-between overflow-x-auto bg-section_primary">
       <TableContainer sx={{ maxHeight: '90vh' }}>
         <Table stickyHeader>
           <TableHead className="container-shadow">
