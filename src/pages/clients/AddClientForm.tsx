@@ -6,11 +6,7 @@ import CustomSection from '../../shared/ui/CustomSection';
 import CustomButton from '../../shared/ui/CustomButton';
 
 // State:
-import {
-  addNewClient,
-  selectIsClientsFormDataSending,
-  selectErrorMessage,
-} from '../../app/redux/slices/clientsSlice';
+import { addNewClient } from '../../app/redux/slices/clientsSlice';
 
 // Types:
 import { AppDispatch } from '../../app/redux/store';
@@ -26,27 +22,29 @@ export interface ClientFormFields {
 import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
 
 const AddClientForm = () => {
+  console.log('AddClientForm Rendered');
   const dispatch: AppDispatch = useDispatch();
-
-  const isClientsFormDataSending: boolean = useSelector(
-    selectIsClientsFormDataSending
-  );
-  const clientsErrorMsg: string = useSelector(selectErrorMessage);
 
   const {
     register,
     handleSubmit,
     setError,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<ClientFormFields>();
 
   const onSubmit: SubmitHandler<ClientFormFields> = async (formData) => {
-    await dispatch(
-      addNewClient({ clientFormData: formData, url: CLIENTS_URL })
-    );
+    try {
+      await dispatch(
+        addNewClient({ clientFormData: formData, url: CLIENTS_URL })
+      ).unwrap();
 
-    reset();
+      reset();
+    } catch (error: unknown) {
+      setError('root', {
+        message: 'Что-то пошло не так...',
+      });
+    }
   };
 
   // Регулярные выражения для проверки полей формы:
@@ -207,21 +205,19 @@ const AddClientForm = () => {
 
         <CustomButton
           className={`m-auto py-2 px-4 text-white bg-[#7B57DF] ${
-            isClientsFormDataSending && 'bg-gray-300'
+            isSubmitting && 'bg-gray-300'
           } text-sm lg:text-base`}
-          disabled={isClientsFormDataSending}
+          disabled={isSubmitting}
         >
-          {isClientsFormDataSending
-            ? 'Отправка данных'
-            : 'Добавить контрагента'}
+          {isSubmitting ? 'Отправка данных' : 'Добавить контрагента'}
         </CustomButton>
 
         {/* ------------------------------ */}
         {/* Общая ошибка для всей таблицы: */}
         {/* ------------------------------ */}
-        {clientsErrorMsg && (
+        {errors.root && (
           <div className="text-center text-amber-500 text-sm leading-4">
-            Что-то пошло не так...
+            {errors.root.message}
           </div>
         )}
       </form>

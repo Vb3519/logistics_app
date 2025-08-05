@@ -18,7 +18,8 @@ export interface Client {
 
 interface ClientsState {
   clients: Client[];
-  errorMsg: string;
+  clientsDataError: string;
+  clientsFormError: string;
   isLoadingViaAPI: boolean;
   isClientsFormDataSending: boolean;
 }
@@ -103,7 +104,8 @@ export const addNewClient = createAsyncThunk(
 // ------------------------------------------------
 const initialState: ClientsState = {
   clients: [],
-  errorMsg: '',
+  clientsDataError: '',
+  clientsFormError: '',
   isLoadingViaAPI: false,
   isClientsFormDataSending: false,
 };
@@ -116,7 +118,7 @@ const clientsSlice = createSlice({
   extraReducers: (builder) => {
     // Загрузка данных по заказчикам:
     builder.addCase(loadClientsData.pending, (state) => {
-      return { ...state, isLoadingViaAPI: true };
+      return { ...state, isLoadingViaAPI: true, clientsDataError: '' };
     });
 
     builder.addCase(loadClientsData.fulfilled, (state, action) => {
@@ -129,13 +131,13 @@ const clientsSlice = createSlice({
       state.isLoadingViaAPI = false;
 
       if (typeof action.payload === 'string') {
-        state.errorMsg = action.payload;
+        state.clientsDataError = action.payload;
       }
     });
 
     // Добавление нового заказчика:
     builder.addCase(addNewClient.pending, (state) => {
-      return { ...state, isClientsFormDataSending: true };
+      return { ...state, isClientsFormDataSending: true, clientsFormError: '' };
     });
 
     builder.addCase(addNewClient.fulfilled, (state, action) => {
@@ -147,7 +149,7 @@ const clientsSlice = createSlice({
       state.isClientsFormDataSending = false;
 
       if (typeof action.payload === 'string') {
-        state.errorMsg = action.payload;
+        state.clientsFormError = action.payload;
       }
     });
   },
@@ -156,11 +158,7 @@ const clientsSlice = createSlice({
 // Состояние:
 export const selectClients = (state: ClientsStateSlice) =>
   state.clients.clients;
-export const selectErrorMessage = (state: ClientsStateSlice) =>
-  state.clients.errorMsg;
 export const selectIsLoadingViaApi = (state: ClientsStateSlice) =>
   state.clients.isLoadingViaAPI;
-export const selectIsClientsFormDataSending = (state: ClientsStateSlice) =>
-  state.clients.isClientsFormDataSending;
 
 export default clientsSlice.reducer;

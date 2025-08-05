@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // MUI:
@@ -30,8 +30,11 @@ import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
 
 // Types:
 import { AppDispatch } from '../../app/redux/store';
+import { Client } from '../../app/redux/slices/clientsSlice';
 
 const ClientsTable = () => {
+  console.log('ClientsTable Rendered');
+
   const dispatch: AppDispatch = useDispatch();
 
   const [page, setPage] = useState<number>(0);
@@ -106,44 +109,10 @@ const ClientsTable = () => {
               .slice(rowsPerPage * page, rowsPerPage * page + rowsPerPage)
               .map((clientInfo) => {
                 return (
-                  <TableRow key={clientInfo.id}>
-                    <TableCell
-                      sx={{
-                        textAlign: 'center',
-                        fontFamily: 'inter',
-                        padding: '14px',
-                      }}
-                    >
-                      {clientInfo.company_title}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: 'center',
-                        fontFamily: 'inter',
-                        padding: '14px',
-                      }}
-                    >
-                      {clientInfo.employee_name} {clientInfo.employee_sern}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: 'center',
-                        fontFamily: 'inter',
-                        padding: '14px',
-                      }}
-                    >
-                      {clientInfo.company_phone}
-                    </TableCell>
-                    <TableCell
-                      sx={{
-                        textAlign: 'center',
-                        fontFamily: 'inter',
-                        padding: '14px',
-                      }}
-                    >
-                      {clientInfo.company_email}
-                    </TableCell>
-                  </TableRow>
+                  <ClientsTableRow
+                    key={clientInfo.id}
+                    companyClientData={clientInfo}
+                  />
                 );
               })}
           </TableBody>
@@ -164,3 +133,59 @@ const ClientsTable = () => {
 };
 
 export default ClientsTable;
+
+// Ряд с данными о клиенте из таблицы клиентов:
+// -------------------------------------------------------
+interface ClientsTableRow_Props {
+  companyClientData: Client;
+}
+
+const ClientsTableRow: React.FC<ClientsTableRow_Props> = memo(
+  ({ companyClientData }) => {
+    console.log('ClientsTableRow Rendered');
+
+    return (
+      <TableRow>
+        <TableCell
+          sx={{
+            textAlign: 'center',
+            fontFamily: 'inter',
+            padding: '14px',
+          }}
+        >
+          {companyClientData.company_title}
+        </TableCell>
+
+        <TableCell
+          sx={{
+            textAlign: 'center',
+            fontFamily: 'inter',
+            padding: '14px',
+          }}
+        >
+          {companyClientData.employee_name} {companyClientData.employee_sern}
+        </TableCell>
+
+        <TableCell
+          sx={{
+            textAlign: 'center',
+            fontFamily: 'inter',
+            padding: '14px',
+          }}
+        >
+          {companyClientData.company_phone}
+        </TableCell>
+
+        <TableCell
+          sx={{
+            textAlign: 'center',
+            fontFamily: 'inter',
+            padding: '14px',
+          }}
+        >
+          {companyClientData.company_email}
+        </TableCell>
+      </TableRow>
+    );
+  }
+);
