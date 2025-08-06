@@ -22,7 +22,6 @@ export interface ClientFormFields {
 import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
 
 const AddClientForm = () => {
-  console.log('AddClientForm Rendered');
   const dispatch: AppDispatch = useDispatch();
 
   const {

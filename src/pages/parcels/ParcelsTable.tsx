@@ -39,10 +39,30 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
     <CustomSection className="w-full flex flex-col justify-between bg-section_primary xs:rounded-md lg:basis-3/5">
       <TableContainer sx={{ maxHeight: '70vh' }}>
         <Table stickyHeader>
-          <TableHead>
-            <TableRow>
+          <TableHead className="container-shadow">
+            <TableRow
+              sx={{
+                'th:first-of-type': {
+                  borderTopLeftRadius: '4px',
+                  borderBottomLeftRadius: '4px',
+                },
+                'th:last-of-type': {
+                  borderTopRightRadius: '4px',
+                  borderBottomRightRadius: '4px',
+                },
+              }}
+            >
               {isCheckBoxNeeded ? (
-                <TableCell sx={{ textAlign: 'center' }}>
+                <TableCell
+                  sx={{
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    color: '#6B7280',
+                    fontFamily: 'inter',
+                    padding: '14px',
+                    backgroundColor: '#e5e7eb',
+                  }}
+                >
                   <Checkbox></Checkbox>
                 </TableCell>
               ) : null}
@@ -53,6 +73,8 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                   fontWeight: 'bold',
                   color: '#6B7280',
                   fontFamily: 'inter',
+                  padding: '14px',
+                  backgroundColor: '#e5e7eb',
                 }}
               >
                 Номер посылки
@@ -63,6 +85,8 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                   fontWeight: 'bold',
                   color: '#6B7280',
                   fontFamily: 'inter',
+                  padding: '14px',
+                  backgroundColor: '#e5e7eb',
                 }}
               >
                 Вес, кг
@@ -75,31 +99,11 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((parcelInfo) => {
                 return (
-                  <TableRow
+                  <ParcelsTableRow
                     key={parcelInfo.id}
-                    sx={{ cursor: 'pointer' }}
-                    className="transition delay-50 ease-in hover:bg-gray-200"
-                  >
-                    {isCheckBoxNeeded ? (
-                      <TableCell sx={{ textAlign: 'center' }}>
-                        <Checkbox></Checkbox>
-                      </TableCell>
-                    ) : null}
-
-                    <TableCell
-                      sx={{
-                        textAlign: 'center',
-                        fontFamily: 'inter',
-                      }}
-                    >
-                      {parcelInfo.parcel_number}
-                    </TableCell>
-                    <TableCell
-                      sx={{ textAlign: 'center', fontFamily: 'inter' }}
-                    >
-                      {parcelInfo.weight}
-                    </TableCell>
-                  </TableRow>
+                    isCheckBoxNeeded={isCheckBoxNeeded}
+                    parcelData={parcelInfo}
+                  />
                 );
               })}
           </TableBody>
@@ -120,3 +124,41 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
 };
 
 export default ParcelsTable;
+
+// Ряд с данными о посылке из таблицы посылок:
+// -------------------------------------------------------
+interface ParcelsTableRow_Props {
+  isCheckBoxNeeded: boolean;
+  parcelData: {
+    id?: string;
+    isSelected?: boolean;
+    parcel_number: string;
+    weight: number;
+  };
+}
+
+const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = (props) => {
+  const { isCheckBoxNeeded, parcelData } = props;
+
+  return (
+    <TableRow>
+      {isCheckBoxNeeded ? (
+        <TableCell sx={{ textAlign: 'center' }}>
+          <Checkbox></Checkbox>
+        </TableCell>
+      ) : null}
+
+      <TableCell
+        sx={{
+          textAlign: 'center',
+          fontFamily: 'inter',
+        }}
+      >
+        {parcelData.parcel_number}
+      </TableCell>
+      <TableCell sx={{ textAlign: 'center', fontFamily: 'inter' }}>
+        {parcelData.weight}
+      </TableCell>
+    </TableRow>
+  );
+};

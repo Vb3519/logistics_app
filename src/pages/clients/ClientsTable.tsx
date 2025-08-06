@@ -33,8 +33,6 @@ import { AppDispatch } from '../../app/redux/store';
 import { Client } from '../../app/redux/slices/clientsSlice';
 
 const ClientsTable = () => {
-  console.log('ClientsTable Rendered');
-
   const dispatch: AppDispatch = useDispatch();
 
   const [page, setPage] = useState<number>(0);
@@ -142,8 +140,6 @@ interface ClientsTableRow_Props {
 
 const ClientsTableRow: React.FC<ClientsTableRow_Props> = memo(
   ({ companyClientData }) => {
-    console.log('ClientsTableRow Rendered');
-
     return (
       <TableRow>
         <TableCell

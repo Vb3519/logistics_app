@@ -28,40 +28,6 @@
       "dispatched": false
     }
   ],
-  "parcels": [
-    {
-      "id": "0",
-      "shipment_id": 1,
-      "weight": 10,
-      "creation_date": "25.07.2025",
-      "isRedirected": false,
-      "packingProblem": false
-    },
-    {
-      "id": "1",
-      "shipment_id": 1,
-      "weight": 15,
-      "creation_date": "25.07.2025",
-      "isRedirected": false,
-      "packingProblem": false
-    },
-    {
-      "id": "2",
-      "shipment_id": null,
-      "weight": 5,
-      "creation_date": "25.07.2025",
-      "isRedirected": false,
-      "packingProblem": false
-    },
-    {
-      "id": "3",
-      "shipment_id": 0,
-      "weight": 20,
-      "creation_date": "25.07.2025",
-      "isRedirected": false,
-      "packingProblem": false
-    }
-  ],
   "trucks": [
     {
       "id": "0",
@@ -124,6 +90,43 @@
       "employee_name": "Виктор",
       "employee_sern": "Бордюгов",
       "id": "9bb015e0-5e8b-4c27-a3d6-7ba5689519f8"
+    }
+  ],
+  "parcels": [
+    {
+      "id": "4671fecc-1a5f-4de7-89aa-af6878381995",
+      "isSelected": false,
+      "parcel_number": "4671fec",
+      "parcel_status": "Изменен адрес отправки",
+      "parcel_weight": "60"
+    },
+    {
+      "id": "ba929e1b-2da1-48e7-8cf9-10ba3ebbcece",
+      "isSelected": false,
+      "parcel_number": "ba929e1",
+      "parcel_status": "Изменен адрес отправки",
+      "parcel_weight": "40"
+    },
+    {
+      "id": "7149fa8e-2bf5-4b62-823d-da7c1f4a4ff3",
+      "isSelected": false,
+      "parcel_number": "7149fa8",
+      "parcel_status": "Проблема с упаковкой",
+      "parcel_weight": "80"
+    },
+    {
+      "id": "5751f2dd-f562-4f12-b504-870bae650ebb",
+      "isSelected": false,
+      "parcel_number": "5751f2d",
+      "parcel_status": "Проблема с упаковкой",
+      "parcel_weight": "20"
+    },
+    {
+      "id": "97580e51-c1fd-4606-a6c1-33913fcf8abd",
+      "isSelected": false,
+      "parcel_number": "97580e5",
+      "parcel_status": "Проблема с упаковкой",
+      "parcel_weight": "80"
     }
   ]
 }
