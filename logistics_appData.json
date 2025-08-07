@@ -96,37 +96,114 @@
     {
       "id": "4671fecc-1a5f-4de7-89aa-af6878381995",
       "isSelected": false,
-      "parcel_number": "4671fec",
+      "parcel_number": "CN-4671fec",
       "parcel_status": "Изменен адрес отправки",
       "parcel_weight": "60"
     },
     {
       "id": "ba929e1b-2da1-48e7-8cf9-10ba3ebbcece",
       "isSelected": false,
-      "parcel_number": "ba929e1",
+      "parcel_number": "CN-ba929e1",
       "parcel_status": "Изменен адрес отправки",
       "parcel_weight": "40"
     },
     {
       "id": "7149fa8e-2bf5-4b62-823d-da7c1f4a4ff3",
       "isSelected": false,
-      "parcel_number": "7149fa8",
+      "parcel_number": "CN-7149fa8",
       "parcel_status": "Проблема с упаковкой",
       "parcel_weight": "80"
     },
     {
       "id": "5751f2dd-f562-4f12-b504-870bae650ebb",
       "isSelected": false,
-      "parcel_number": "5751f2d",
+      "parcel_number": "CN-5751f2d",
       "parcel_status": "Проблема с упаковкой",
       "parcel_weight": "20"
     },
     {
       "id": "97580e51-c1fd-4606-a6c1-33913fcf8abd",
       "isSelected": false,
-      "parcel_number": "97580e5",
+      "parcel_number": "CN-97580e5",
       "parcel_status": "Проблема с упаковкой",
       "parcel_weight": "80"
+    },
+    {
+      "id": "5bfd7ab4-5b80-4f4b-a95c-68ce285eaf6a",
+      "parcel_number": "CN-5bfd7ab",
+      "isSelected": false,
+      "parcel_weight": "40",
+      "parcel_status": "Вышел из строя транспорт"
+    },
+    {
+      "id": "2c04cc79-4a75-4d5d-8f55-919a86f0c830",
+      "parcel_number": "CN-2c04cc7",
+      "isSelected": false,
+      "parcel_weight": "40",
+      "parcel_status": "Изменен адрес отправки"
+    },
+    {
+      "id": "c56de5a5-f968-403c-9cd5-11937cacd669",
+      "parcel_number": "CN-c56de5a",
+      "isSelected": false,
+      "parcel_weight": "100",
+      "parcel_status": "Проблема с упаковкой"
+    },
+    {
+      "id": "b91de2d7-59e8-4046-8d8a-58eb627c43d0",
+      "parcel_number": "CN-b91de2d",
+      "isSelected": false,
+      "parcel_weight": "20",
+      "parcel_status": "Изменен адрес отправки"
+    },
+    {
+      "id": "ba12e778-c28a-43bc-9072-8f714b15f74a",
+      "parcel_number": "CN-ba12e77",
+      "isSelected": false,
+      "parcel_weight": "60",
+      "parcel_status": "Вышел из строя транспорт"
+    },
+    {
+      "id": "922b9072-7426-4715-a145-87dff1c7b2cc",
+      "parcel_number": "CN-922b907",
+      "isSelected": false,
+      "parcel_weight": "20",
+      "parcel_status": "Проблема с упаковкой"
+    },
+    {
+      "id": "47df38bd-290c-4211-887f-f6a1e56f482d",
+      "parcel_number": "CN-47df38b",
+      "isSelected": false,
+      "parcel_weight": "80",
+      "parcel_status": "Изменен адрес отправки"
+    },
+    {
+      "id": "c88171aa-324c-48b2-ae59-634f0317915f",
+      "parcel_number": "CN-c88171a",
+      "isSelected": false,
+      "parcel_weight": "100",
+      "parcel_status": "Проблема с упаковкой"
+    },
+    {
+      "id": "6caff6c0-4867-4f8b-b4db-d0cc56b70098",
+      "parcel_number": "CN-6caff6c",
+      "isSelected": false,
+      "parcel_weight": "40",
+      "parcel_status": "Проблема с упаковкой"
+    },
+    {
+      "id": "4020ccac-a3a4-4129-a813-e531aecd74c4",
+      "parcel_number": "CN-4020cca",
+      "isSelected": false,
+      "parcel_weight": "60",
+      "parcel_status": "Вышел из строя транспорт"
+    },
+    {
+      "id": "fa80a99e-1539-4a33-aa5d-60cc88eb7b30",
+      "parcel_number": "CN-fa80a99",
+      "isSelected": false,
+      "parcel_weight": "40",
+      "parcel_status": "Проблема с упаковкой"
     }
   ]
 }

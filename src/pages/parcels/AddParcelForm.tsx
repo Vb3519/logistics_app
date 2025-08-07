@@ -1,10 +1,15 @@
+import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 // Ui:
 import CustomSection from '../../shared/ui/CustomSection';
 import CustomButton from '../../shared/ui/CustomButton';
 
+// State:
+import { addNewParcel } from '../../app/redux/slices/parcelsSlice';
+
 // Types:
+import { AppDispatch } from '../../app/redux/store';
 export interface ParcelFormFields {
   parcel_weight: string;
   parcel_status:
@@ -13,10 +18,12 @@ export interface ParcelFormFields {
     | 'Вышел из строя транспорт';
 }
 
-// Utils:
-import { createParcel } from '../../shared/utils/createParcel';
+// Api:
+import { PARCELS_URL } from '../../shared/api/logistics_appApi';
 
 const AddParcelForm = () => {
+  const dispatch: AppDispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -38,17 +45,15 @@ const AddParcelForm = () => {
       return;
     }
 
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        resolve('');
-      }, 2000);
-    });
+    try {
+      await dispatch(
+        addNewParcel({ url: PARCELS_URL, parcelFormData: formData })
+      ).unwrap();
 
-    reset();
-
-    const createdParcel = createParcel(formData);
-
-    console.log('Посылка собрана:', createdParcel);
+      reset();
+    } catch (error: unknown) {
+      setError('root', { message: 'Что-то пошло не так...' });
+    }
   };
 
   // Регулярные выражения для проверки полей формы:
@@ -159,6 +164,15 @@ const AddParcelForm = () => {
         >
           {isSubmitting ? 'Сборка посылки' : 'Собрать посылку'}
         </CustomButton>
+
+        {/* ------------------------------ */}
+        {/* Общая ошибка для всей таблицы: */}
+        {/* ------------------------------ */}
+        {errors.root && (
+          <div className="text-center text-amber-500 text-sm leading-4">
+            {errors.root.message}
+          </div>
+        )}
       </form>
     </CustomSection>
   );

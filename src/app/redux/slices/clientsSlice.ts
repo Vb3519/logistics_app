@@ -33,9 +33,9 @@ interface ClientsStateSlice {
 export const loadClientsData = createAsyncThunk(
   'clients/loadData',
   async (url: string, thunkAPI) => {
-    await serverResponseImitation(2000);
-
     try {
+      await serverResponseImitation(2000);
+
       const clientsDataResponse: Response = await fetch(url, { method: 'GET' });
 
       if (clientsDataResponse.ok) {

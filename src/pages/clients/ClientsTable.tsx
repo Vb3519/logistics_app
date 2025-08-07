@@ -23,6 +23,7 @@ import {
 import {
   selectClients,
   loadClientsData,
+  selectIsLoadingViaApi,
 } from '../../app/redux/slices/clientsSlice';
 
 // Api:
@@ -37,6 +38,9 @@ const ClientsTable = () => {
 
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+
+  const currentCompanyClients = useSelector(selectClients);
+  const isClientsDataLoading: boolean = useSelector(selectIsLoadingViaApi);
 
   // Пагинация таблицы с клиентами компании:
   // -------------------------------------------
@@ -58,12 +62,10 @@ const ClientsTable = () => {
   };
 
   useEffect(() => {
-    if (currentCompanyClients.length === 0) {
+    if (currentCompanyClients.length === 0 && !isClientsDataLoading) {
       handleLoadClientsData(CLIENTS_URL);
     }
   }, []);
-
-  const currentCompanyClients = useSelector(selectClients);
 
   return (
     <CustomSection className="w-full min-h-[30vh] flex flex-col gap-2 justify-between overflow-x-auto bg-section_primary">
