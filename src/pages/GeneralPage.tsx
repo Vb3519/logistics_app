@@ -4,6 +4,7 @@ import TransportOnTheWay from '../app/features/shipments/TransportOnTheWay';
 import DailyPlan from '../app/features/work_plans/DailyPlan';
 import FreeTranport from '../app/features/shipments/FreeTranport';
 import RecentRequests from '../app/features/requests/RecentRequests';
+import MobileNavPage from '../app/features/mobile_nav_menu/MobileNavPage';
 
 const GeneralPage = () => {
   return (

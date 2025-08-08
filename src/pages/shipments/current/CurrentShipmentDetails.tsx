@@ -49,24 +49,67 @@ const CurrentShipmentDetails = () => {
               </span>
             </div>
 
-            <div className="p-4 flex flex-col gap-4 bg-element_primary rounded-md text-sm lg:text-base">
-              <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4 text-sm lg:text-base">
+              <div className="flex flex-col gap-1">
                 <span className="text-secondary">Заявка </span>
-                <span>{id}</span>
+                <span className="p-4 bg-element_primary text-primary rounded-md">
+                  {id}
+                </span>
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 <span className="text-secondary">Автомобиль </span>
-                <span>{currentShipmentData?.truck_number}</span>
+                <span className="p-4 bg-element_primary text-primary rounded-md">
+                  {currentShipmentData?.truck_number}
+                </span>
               </div>
             </div>
 
-            <div className="p-4 flex flex-col gap-2 bg-element_primary rounded-md text-sm lg:text-base">
+            <div className="flex flex-col gap-1 text-sm lg:text-base">
               <span className="text-secondary">Статус отгрузки</span>
-              <select className="w-1/2 outline-none cursor-pointer">
-                <option>В пути</option>
-                <option>Завершен</option>
-                <option>Опаздывает</option>
-              </select>
+
+              <fieldset className="p-4 bg-element_primary rounded-md">
+                <div className="flex items-center gap-2">
+                  <input
+                    name="shipment_status"
+                    id="shipment_in_proccess"
+                    type="radio"
+                  ></input>
+                  <label
+                    htmlFor="shipment_in_proccess"
+                    className="cursor-pointer"
+                  >
+                    В пути
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <input
+                    name="shipment_status"
+                    id="shipment_completed"
+                    type="radio"
+                  ></input>
+                  <label
+                    htmlFor="shipment_completed"
+                    className="cursor-pointer"
+                  >
+                    Завершен
+                  </label>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <input
+                    name="shipment_status"
+                    id="shipment_is_delayed"
+                    type="radio"
+                  ></input>
+                  <label
+                    htmlFor="shipment_is_delayed"
+                    className="cursor-pointer"
+                  >
+                    Опаздывает
+                  </label>
+                </div>
+              </fieldset>
             </div>
 
             <div className="p-4 flex items-center justify-between gap-2 text-sm lg:text-base">
@@ -83,8 +126,8 @@ const CurrentShipmentDetails = () => {
               </div>
 
               <div className="relative flex items-center justify-center">
-                <div className="absolute w-22 h-15 top-5 left-0 bg-amber-300 lg:w-43 lg:h-30 lg:top-10"></div>
-                <BsTruckFlatbed className="text-9xl text-gray-300 lg:text-[250px]" />
+                <div className="absolute w-22 h-15 top-5 left-0 border-2 border-gray-400/70 bg-amber-300 lg:w-43 lg:h-30 lg:top-10"></div>
+                <BsTruckFlatbed className="text-9xl text-gray-500/40 lg:text-[250px]" />
               </div>
             </div>
 
