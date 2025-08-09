@@ -1,3 +1,5 @@
+import { useForm, SubmitHandler } from 'react-hook-form';
+
 // React-icons:
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
 
@@ -5,10 +7,55 @@ import { FaTruck, FaChevronDown } from 'react-icons/fa';
 import CustomSection from '../../../shared/ui/CustomSection';
 import CustomButton from '../../../shared/ui/CustomButton';
 
+// Types:
+import { ShipmentRequestFormFileds } from '../../../shared/utils/createShipmentRequest';
+
+// Utils:
+import { createShipmentRequest } from '../../../shared/utils/createShipmentRequest';
+
 const AddShipmentRequestForm = () => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ShipmentRequestFormFileds>();
+
+  const onSubmit: SubmitHandler<ShipmentRequestFormFileds> = async (
+    formData
+  ) => {
+    try {
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve('');
+        }, 2000);
+      });
+      // throw new Error('Что-то пошло не так...');
+
+      const newShipmentRequest = createShipmentRequest(formData);
+
+      console.log('Заявка на отгрузку:', newShipmentRequest);
+
+      reset();
+    } catch (error: unknown) {
+      console.log(`Error: ${(error as Error).message}`);
+      setError('root', { message: 'Что-то пошло не так...' });
+    }
+  };
+
+  // Регулярные выражения для проверки полей формы:
+  // ------------------------------------------------------------
+  const shipmentAdressPattern: RegExp = /^[А-Яа-яЁё]+([\- ][А-Яа-яЁё]+)*$/;
+
   return (
     <CustomSection className="bg-section_primary xs:mx-4 sm:mx-0 sm:w-full">
-      <form className="flex flex-col gap-2 xs:gap-4">
+      <form
+        className="flex flex-col gap-2 xs:gap-4"
+        action="#"
+        method="post"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2">
             <FaTruck className="text-3xl text-secondary/70" />
@@ -27,7 +74,19 @@ const AddShipmentRequestForm = () => {
               type="text"
               placeholder="Название города"
               maxLength={20}
+              {...register('from_city', {
+                required: 'Укажите город отправки',
+                pattern: {
+                  message: 'Принимаются только буквенные значения',
+                  value: shipmentAdressPattern,
+                },
+              })}
             />
+            {errors.from_city && (
+              <span className="text-amber-500 text-sm leading-4">
+                {errors.from_city.message}
+              </span>
+            )}
           </div>
 
           <div className="w-full flex flex-col gap-1">
@@ -40,7 +99,19 @@ const AddShipmentRequestForm = () => {
               type="text"
               placeholder="Название города"
               maxLength={20}
+              {...register('to_city', {
+                required: 'Укажите город доставки',
+                pattern: {
+                  message: 'Принимаются только буквенные значения',
+                  value: shipmentAdressPattern,
+                },
+              })}
             />
+            {errors.to_city && (
+              <span className="text-amber-500 text-sm leading-4">
+                {errors.to_city.message}
+              </span>
+            )}
           </div>
 
           <div className="w-full flex flex-col gap-1">
@@ -48,25 +119,56 @@ const AddShipmentRequestForm = () => {
               Транспорт
             </label>
             <div className="group relative flex gap-2 bg-gray-200 rounded-sm">
-              <select className="w-full p-2 appearance-none outline-none rounded-sm transition delay-100 ease-in cursor-pointer group-hover:text-[#7B57DF]">
-                <option className="bg-white text-black">
-                  Iveco 80E12 (до 100 кг)
+              <select
+                className="w-full p-2 appearance-none outline-none rounded-sm transition delay-100 ease-in cursor-pointer group-hover:text-[#7B57DF]"
+                {...register('transport_info', {
+                  required: 'Выберите транспорт',
+                })}
+              >
+                <option className="bg-white text-black"></option>
+                <option
+                  className="bg-white text-black"
+                  value='{"transport":"ГАЗель A21R22 (до 100 кг)","max_load_value":"100"}'
+                >
+                  ГАЗель A21R22 (до 100 кг)
                 </option>
-                <option className="bg-white text-black">
-                  Iveco 80E14 (до 160 кг)
+                <option
+                  className="bg-white text-black"
+                  value='{"transport":"ГАЗель 3302 (до 160 кг)","max_load_value":"160"}'
+                >
+                  ГАЗель 3302 (до 160 кг)
                 </option>
-                <option className="bg-white text-black">
-                  Iveco 80E16 (до 200 кг)
+                <option
+                  className="bg-white text-black"
+                  value='{"transport":"ГАЗель A21R32 (до 200 кг)","max_load_value":"200"}'
+                >
+                  ГАЗель A21R32 (до 200 кг)
                 </option>
               </select>
               <FaChevronDown className="absolute right-2.5 top-3.5 text-sm text-secondary transition delay-100 ease-in group-hover:text-[#7B57DF]" />
             </div>
+            {errors.transport_info && (
+              <span className="text-amber-500 text-sm leading-4">
+                {errors.transport_info.message}
+              </span>
+            )}
           </div>
         </div>
 
-        <CustomButton className="w-1/2 min-w-41 mx-auto py-2 px-4 bg-[#7B57DF] text-[whitesmoke] text-sm">
-          Провести заявку
+        <CustomButton
+          className={`min-w-41 mx-auto py-2 px-4 bg-[#7B57DF] text-[whitesmoke] ${
+            isSubmitting && 'bg-gray-300'
+          }`}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Создание заявки' : 'Провести заявку'}
         </CustomButton>
+
+        {errors.root && (
+          <div className="text-center text-amber-500 text-sm leading-4">
+            {errors.root.message}
+          </div>
+        )}
       </form>
     </CustomSection>
   );

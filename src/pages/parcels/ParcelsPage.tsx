@@ -14,7 +14,7 @@ const ParcelsPage = () => {
         currentPageTitle="Посылки"
       />
 
-      <div className="w-full h-full flex flex-col gap-4 sm:flex-row">
+      <div className="w-full h-full flex flex-col gap-4 sm:flex-row sm:h-[80vh] lg:h-full">
         <div className="w-full flex flex-col gap-4">
           <AddParcelTip />
 

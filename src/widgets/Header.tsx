@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // React-icons:
 import { MdOutlineSegment } from 'react-icons/md';
@@ -9,20 +10,27 @@ import MobileNavPage from '../app/features/mobile_nav_menu/MobileNavPage';
 import CustomButton from '../shared/ui/CustomButton';
 import Logo from './Logo';
 
+// State:
+import {
+  toggleMobileNavPage,
+  selectIsMobileNavPageOpened,
+} from '../app/redux/slices/mobileNavMenuSlice';
+
 const Header = () => {
-  const [isMobileMenuPageOpened, setIsMobileMenuPageOpened] =
-    useState<boolean>(false);
+  const dispatch = useDispatch();
+
+  const isMobileMenuPageOpened: boolean = useSelector(
+    selectIsMobileNavPageOpened
+  );
 
   const handleToggleMobileMenuPage = () => {
-    setIsMobileMenuPageOpened((prevValue) => {
-      return (prevValue = !prevValue);
-    });
+    dispatch(toggleMobileNavPage());
   };
 
   // Автозакрытие мобильного меню при ресайзе:
   const handleMobileMenuAutoClose = () => {
     if (isMobileMenuPageOpened && window.innerWidth >= 1024) {
-      setIsMobileMenuPageOpened(false);
+      dispatch(toggleMobileNavPage());
     }
   };
 
@@ -42,8 +50,8 @@ const Header = () => {
   }, [isMobileMenuPageOpened]);
 
   return (
-    <header className="flex flex-col gap-2 xs:px-4 lg:mt-4">
-      <div className="p-2 flex justify-between gap-4 flex-wrap xs:px-0 lg:hidden">
+    <header className="flex flex-col gap-2 lg:px-4 lg:mt-4">
+      <div className="p-2 flex justify-between gap-4 flex-wrap bg-section_primary z-50 xs:px-4 lg:hidden">
         <Logo />
 
         <div className="flex items-center gap-2">
