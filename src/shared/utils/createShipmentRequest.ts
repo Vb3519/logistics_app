@@ -13,7 +13,7 @@ export interface ShipmentRequestFormFileds {
     | '{"transport":"ГАЗель A21R32 (до 200 кг)","max_load_value":"200"}';
 }
 
-interface ShipmentRequest {
+export interface ShipmentRequest {
   id: string;
   created_at: string;
   shipment_number: string;
@@ -38,7 +38,7 @@ export const createShipmentRequest = (
   shipmentRequestFormData: ShipmentRequestFormFileds
 ): ShipmentRequest => {
   const shipmentRequestId: string = uuidv4();
-  const shipmentNumber: string = 'B' + shipmentRequestId.slice(0, 7);
+  const shipmentNumber: string = 'SH-' + shipmentRequestId.slice(0, 7);
 
   const { transport_info } = shipmentRequestFormData;
   const parcedTransportInfo: TransportInfo = JSON.parse(transport_info);

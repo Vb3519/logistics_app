@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // MUI:
@@ -11,27 +11,27 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
+import CustomSection from '../../../../shared/ui/CustomSection';
+import ClientsTableRow from '../elements/ClientsTableRow';
 
 // Data:
 import {
   clientsData,
   clientsTableHeaderTitles,
-} from '../../shared/data/clientsData';
+} from '../../../../shared/data/clientsData';
 
 // State:
 import {
   selectClients,
-  loadClientsData,
   selectIsLoadingViaApi,
-} from '../../app/redux/slices/clientsSlice';
+  loadClientsData,
+} from '../../../redux/slices/clientsSlice';
 
 // Api:
-import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
+import { CLIENTS_URL } from '../../../../shared/api/logistics_appApi';
 
 // Types:
-import { AppDispatch } from '../../app/redux/store';
-import { Client } from '../../app/redux/slices/clientsSlice';
+import { AppDispatch } from '../../../redux/store';
 
 const ClientsTable = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -133,57 +133,3 @@ const ClientsTable = () => {
 };
 
 export default ClientsTable;
-
-// Ряд с данными о клиенте из таблицы клиентов:
-// -------------------------------------------------------
-interface ClientsTableRow_Props {
-  companyClientData: Client;
-}
-
-const ClientsTableRow: React.FC<ClientsTableRow_Props> = memo(
-  ({ companyClientData }) => {
-    return (
-      <TableRow>
-        <TableCell
-          sx={{
-            textAlign: 'center',
-            fontFamily: 'inter',
-            padding: '14px',
-          }}
-        >
-          {companyClientData.company_title}
-        </TableCell>
-
-        <TableCell
-          sx={{
-            textAlign: 'center',
-            fontFamily: 'inter',
-            padding: '14px',
-          }}
-        >
-          {companyClientData.employee_name} {companyClientData.employee_sern}
-        </TableCell>
-
-        <TableCell
-          sx={{
-            textAlign: 'center',
-            fontFamily: 'inter',
-            padding: '14px',
-          }}
-        >
-          {companyClientData.company_phone}
-        </TableCell>
-
-        <TableCell
-          sx={{
-            textAlign: 'center',
-            fontFamily: 'inter',
-            padding: '14px',
-          }}
-        >
-          {companyClientData.company_email}
-        </TableCell>
-      </TableRow>
-    );
-  }
-);

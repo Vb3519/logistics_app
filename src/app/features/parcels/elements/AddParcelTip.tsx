@@ -2,7 +2,7 @@
 import { BsBoxSeamFill } from 'react-icons/bs';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
+import CustomSection from '../../../../shared/ui/CustomSection';
 
 const AddParcelTip = () => {
   return (
@@ -11,7 +11,7 @@ const AddParcelTip = () => {
         <div className="flex items-center gap-3">
           <BsBoxSeamFill className="text-4xl text-secondary/70" />
           <h2 className="font-semibold text-[#7B57DF] title-shadow">
-            Сборка посылки:
+            Сборка посылки
           </h2>
         </div>
 

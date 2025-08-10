@@ -12,24 +12,25 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
+import CustomSection from '../../../../shared/ui/CustomSection';
+import ParcelsTableRow from '../elements/ParcelsTableRow';
 
 // Data:
-import { parcelsData } from '../../shared/data/parcelsData';
+import { parcelsData } from '../../../../shared/data/parcelsData';
 
 // State:
 import {
   loadParcelsData,
   selectParcels,
   selectIsParcelsDataLoading,
-} from '../../app/redux/slices/parcelsSlice';
+} from '../../../redux/slices/parcelsSlice';
 
 // Types:
-import { AppDispatch } from '../../app/redux/store';
-import { Parcel } from '../../app/redux/slices/parcelsSlice';
+import { AppDispatch } from '../../../redux/store';
+import { Parcel } from '../../../redux/slices/parcelsSlice';
 
 // Api:
-import { PARCELS_URL } from '../../shared/api/logistics_appApi';
+import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
 
 interface ParcelsTable_Props {
   isCheckBoxNeeded: boolean;
@@ -152,47 +153,3 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
 };
 
 export default ParcelsTable;
-
-// Ряд с данными о посылке из таблицы посылок:
-// -------------------------------------------------------
-interface ParcelsTableRow_Props {
-  isCheckBoxNeeded: boolean;
-  parcelData: {
-    id: string;
-    parcel_number: string;
-    parcel_weight: string;
-    parcel_status:
-      | 'Изменен адрес отправки'
-      | 'Проблема с упаковкой'
-      | 'Вышел из строя транспорт';
-    isSelected?: boolean;
-  };
-}
-
-const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo((props) => {
-  const { isCheckBoxNeeded, parcelData } = props;
-
-  console.log('ParcelsTableRow rendered');
-
-  return (
-    <TableRow>
-      {isCheckBoxNeeded ? (
-        <TableCell sx={{ textAlign: 'center' }}>
-          <Checkbox></Checkbox>
-        </TableCell>
-      ) : null}
-
-      <TableCell
-        sx={{
-          textAlign: 'center',
-          fontFamily: 'inter',
-        }}
-      >
-        {parcelData.parcel_number}
-      </TableCell>
-      <TableCell sx={{ textAlign: 'center', fontFamily: 'inter' }}>
-        {parcelData.parcel_weight}
-      </TableCell>
-    </TableRow>
-  );
-});

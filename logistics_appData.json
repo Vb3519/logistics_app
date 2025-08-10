@@ -1,31 +1,16 @@
 {
   "shipments": [
     {
-      "id": "0",
-      "from_city": "",
-      "to_city": "",
-      "shipment_number": 123,
-      "truck_id": null,
-      "total_weight": 0,
-      "dispatched": false
-    },
-    {
-      "id": "1",
-      "from_city": "",
-      "to_city": "",
-      "shipment_number": 1234,
-      "truck_id": null,
-      "total_weight": 0,
-      "dispatched": false
-    },
-    {
-      "id": "2",
-      "from_city": "",
-      "to_city": "",
-      "shipment_number": 1234,
-      "truck_id": null,
-      "total_weight": 0,
-      "dispatched": false
+      "id": "5d01fcf9-eb25-4498-9223-a7df04cb8548",
+      "created_at": "09.08.2025",
+      "shipment_number": "SH-5d01fcf",
+      "current_load_value": 60,
+      "max_load_value": 160,
+      "transport": "ГАЗель 3302 (до 160 кг)",
+      "shipment_status": "",
+      "from_city": "Санкт-Петербург",
+      "to_city": "Москва",
+      "transport_info": "{\"transport\":\"ГАЗель 3302 (до 160 кг)\",\"max_load_value\":\"160\"}"
     }
   ],
   "trucks": [

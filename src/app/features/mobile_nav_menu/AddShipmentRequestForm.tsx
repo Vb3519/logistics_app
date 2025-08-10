@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 
 // React-icons:
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
@@ -12,12 +13,16 @@ import { ShipmentRequestFormFileds } from '../../../shared/utils/createShipmentR
 
 // Utils:
 import { createShipmentRequest } from '../../../shared/utils/createShipmentRequest';
+import { useEffect } from 'react';
 
 const AddShipmentRequestForm = () => {
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<ShipmentRequestFormFileds>();
@@ -48,6 +53,10 @@ const AddShipmentRequestForm = () => {
   // ------------------------------------------------------------
   const shipmentAdressPattern: RegExp = /^[А-Яа-яЁё]+([\- ][А-Яа-яЁё]+)*$/;
 
+  useEffect(() => {
+    clearErrors();
+  }, [location.pathname]);
+
   return (
     <CustomSection className="bg-section_primary xs:mx-4 sm:mx-0 sm:w-full">
       <form
@@ -60,7 +69,7 @@ const AddShipmentRequestForm = () => {
           <div className="flex items-center gap-2">
             <FaTruck className="text-3xl text-secondary/70" />
             <h3 className="font-semibold text-[#7B57DF] title-shadow">
-              Заявка на отгрузку:
+              Заявка на отгрузку
             </h3>
           </div>
 

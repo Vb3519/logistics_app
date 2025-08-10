@@ -2,7 +2,7 @@
 import { MdOutlinePersonOutline } from 'react-icons/md';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
+import CustomSection from '../../../../shared/ui/CustomSection';
 
 const AddClientTip = () => {
   return (
@@ -10,7 +10,7 @@ const AddClientTip = () => {
       <div className="pb-2 flex items-center gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
         <MdOutlinePersonOutline className="text-4xl text-secondary" />
         <h2 className="font-semibold text-[#7B57DF] title-shadow">
-          Добавление контрагента:
+          Добавление контрагента
         </h2>
       </div>
 

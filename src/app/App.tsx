@@ -12,8 +12,8 @@ import CompletedShipmentsPage from '../pages/shipments/CompletedShipmentsPage';
 import CurrentShipmentsPage from '../pages/shipments/current/CurrentShipmentsPage';
 import CurrentShipmentDetails from '../pages/shipments/current/CurrentShipmentDetails';
 
-import ParcelsPage from '../pages/parcels/ParcelsPage';
-import ClientsPage from '../pages/clients/ClientsPage';
+import ParcelsPage from '../pages/ParcelsPage';
+import ClientsPage from '../pages/ClientsPage';
 
 const App = () => {
   return (

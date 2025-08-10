@@ -1,15 +1,15 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
-import CustomButton from '../../shared/ui/CustomButton';
+import CustomSection from '../../../../shared/ui/CustomSection';
+import CustomButton from '../../../../shared/ui/CustomButton';
 
 // State:
-import { addNewClient } from '../../app/redux/slices/clientsSlice';
+import { addNewClient } from '../../../redux/slices/clientsSlice';
 
 // Types:
-import { AppDispatch } from '../../app/redux/store';
+import { AppDispatch } from '../../../redux/store';
 export interface ClientFormFields {
   company_title: string;
   employee_name: string;
@@ -19,7 +19,7 @@ export interface ClientFormFields {
 }
 
 // Api:
-import { CLIENTS_URL } from '../../shared/api/logistics_appApi';
+import { CLIENTS_URL } from '../../../../shared/api/logistics_appApi';
 
 const AddClientForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -70,7 +70,7 @@ const AddClientForm = () => {
             htmlFor="company_name"
             className="font-semibold text-[#7B57DF] title-shadow"
           >
-            Название компании:
+            Название компании
           </label>
           <input
             id="company_name"
@@ -98,7 +98,7 @@ const AddClientForm = () => {
         {/* ------------------------------ */}
         <div className="pb-4 flex flex-col gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
           <h3 className="font-semibold text-[#7B57DF] title-shadow">
-            Данные сотрудника компании:
+            Данные сотрудника компании
           </h3>
           <div className="w-full flex flex-col gap-1">
             <label htmlFor="name" className="text-secondary">

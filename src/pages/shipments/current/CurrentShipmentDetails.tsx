@@ -7,7 +7,7 @@ import { BsTruckFlatbed } from 'react-icons/bs';
 import CustomSection from '../../../shared/ui/CustomSection';
 import CustomButton from '../../../shared/ui/CustomButton';
 import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
-import ParcelsTable from '../../parcels/ParcelsTable';
+import ParcelsTable from '../../../app/features/parcels/containers/ParcelsTable';
 
 // Data:
 import { currentShipmentsData } from '../../../shared/data/shipmentsData';

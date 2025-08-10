@@ -2,14 +2,14 @@ import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
-import CustomButton from '../../shared/ui/CustomButton';
+import CustomButton from '../../../../shared/ui/CustomButton';
+import CustomSection from '../../../../shared/ui/CustomSection';
 
 // State:
-import { addNewParcel } from '../../app/redux/slices/parcelsSlice';
+import { addNewParcel } from '../../../redux/slices/parcelsSlice';
 
 // Types:
-import { AppDispatch } from '../../app/redux/store';
+import { AppDispatch } from '../../../redux/store';
 export interface ParcelFormFields {
   parcel_weight: string;
   parcel_status:
@@ -19,7 +19,7 @@ export interface ParcelFormFields {
 }
 
 // Api:
-import { PARCELS_URL } from '../../shared/api/logistics_appApi';
+import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
 
 const AddParcelForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -70,7 +70,7 @@ const AddParcelForm = () => {
       >
         <div className="pb-4 flex flex-col gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
           <h3 className="font-semibold text-[#7B57DF] title-shadow">
-            Данные о посылке:
+            Данные о посылке
           </h3>
 
           <div className="flex flex-col gap-4">
