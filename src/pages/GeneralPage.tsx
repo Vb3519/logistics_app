@@ -2,8 +2,8 @@
 import GeneralInfo from '../app/features/general_info/GeneralInfo';
 import TransportOnTheWay from '../app/features/shipments/TransportOnTheWay';
 import DailyPlan from '../app/features/work_plans/DailyPlan';
-import FreeTranport from '../app/features/shipments/FreeTranport';
 import RecentRequests from '../app/features/requests/RecentRequests';
+import CurrentShipmentRequestsList from '../app/features/shipments/containers/CurrentShipmentRequestsList';
 
 const GeneralPage = () => {
   return (
@@ -18,7 +18,7 @@ const GeneralPage = () => {
       <DailyPlan />
 
       {/* Секция (Свободный Транспорт) */}
-      <FreeTranport />
+      <CurrentShipmentRequestsList title="Свободный транспорт" />
 
       {/* Секция (Недавние Запросы) */}
       <RecentRequests />

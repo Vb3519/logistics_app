@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
-import CurrentShipmentsCard from './CurrentShipmentsCard';
+import CustomSection from '../../shared/ui/CustomSection';
+import CurrentShipmentsCard from '../../app/features/shipments/elements/CurrentShipmentsCard';
 
 // Data:
-import { currentShipmentsData } from '../../../shared/data/shipmentsData';
+import { currentShipmentsData } from '../../shared/data/shipmentsData';
 
 const CurrentShipmentsPage = () => {
   const navigate = useNavigate();

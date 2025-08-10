@@ -4,15 +4,15 @@ import { useParams } from 'react-router-dom';
 import { BsTruckFlatbed } from 'react-icons/bs';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
-import CustomButton from '../../../shared/ui/CustomButton';
-import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
-import ParcelsTable from '../../../app/features/parcels/containers/ParcelsTable';
+import BreadCrumbs from '../../shared/ui/BreadCrumbs';
+import CustomButton from '../../shared/ui/CustomButton';
+import CustomSection from '../../shared/ui/CustomSection';
+import ParcelsTable from '../../app/features/parcels/containers/ParcelsTable';
 
 // Data:
-import { currentShipmentsData } from '../../../shared/data/shipmentsData';
+import { currentShipmentsData } from '../../shared/data/shipmentsData';
 
-const CurrentShipmentDetails = () => {
+const CurrentShipmentDetailsPage = () => {
   const params = useParams();
   const { id } = params;
 
@@ -152,4 +152,4 @@ const CurrentShipmentDetails = () => {
   );
 };
 
-export default CurrentShipmentDetails;
+export default CurrentShipmentDetailsPage;

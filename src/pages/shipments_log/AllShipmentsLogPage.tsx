@@ -10,8 +10,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 // Ui:
-import CustomSection from '../../shared/ui/CustomSection';
 import BreadCrumbs from '../../shared/ui/BreadCrumbs';
+import CustomSection from '../../shared/ui/CustomSection';
 
 // Data:
 import {
@@ -19,7 +19,7 @@ import {
   shipmentsData,
 } from '../../shared/data/shipmentsData';
 
-const AllShipmentsPage = () => {
+const AllShipmentsLogPage = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(20);
 
@@ -122,7 +122,7 @@ const AllShipmentsPage = () => {
   );
 };
 
-export default AllShipmentsPage;
+export default AllShipmentsLogPage;
 
 // Самостоятельная верстка таблицы:
 // --------------------------------------

@@ -5,7 +5,7 @@ import serverResponseImitation from '../../../shared/utils/serverResponseImitati
 import { createParcel } from '../../../shared/utils/createParcel';
 
 // Types:
-import { ParcelFormFields } from '../../../pages/parcels/AddParcelForm';
+import { ParcelFormFields } from '../../features/parcels/containers/AddParcelForm';
 
 export interface Parcel {
   id: string;

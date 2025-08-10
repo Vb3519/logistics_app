@@ -5,7 +5,7 @@ import serverResponseImitation from '../../../shared/utils/serverResponseImitati
 import createCompanyClient from '../../../shared/utils/createCompanyClient';
 
 // Types:
-import { ClientFormFields } from '../../../pages/clients/AddClientForm';
+import { ClientFormFields } from '../../features/clients/containers/AddClientForm';
 
 export interface Client {
   id: string;

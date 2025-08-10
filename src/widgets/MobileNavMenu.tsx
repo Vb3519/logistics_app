@@ -8,10 +8,10 @@ import { RiHomeSmile2Line } from 'react-icons/ri';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomSection from '../shared/ui/CustomSection';
 
 // State:
-import { toggleMobileNavPage } from '../../redux/slices/mobileNavMenuSlice';
+import { toggleMobileNavPage } from '../app/redux/slices/mobileNavMenuSlice';
 
 const MobileNavMenu = () => {
   const dispatch = useDispatch();

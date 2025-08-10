@@ -6,7 +6,7 @@ import { MdOutlineSegment } from 'react-icons/md';
 import { PiMagnifyingGlassBold } from 'react-icons/pi';
 
 // Ui:
-import MobileNavPage from '../app/features/mobile_nav_menu/MobileNavPage';
+import MobileNavPage from '../pages/MobileNavPage';
 import CustomButton from '../shared/ui/CustomButton';
 import Logo from './Logo';
 

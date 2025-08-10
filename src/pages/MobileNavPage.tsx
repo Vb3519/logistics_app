@@ -2,12 +2,12 @@
 import { MdOutlineSegment } from 'react-icons/md';
 
 // Ui:
-import { SearchShipment } from '../../../widgets/Header';
-import MobileNavMenu from './MobileNavMenu';
-import AddShipmentRequestForm from './AddShipmentRequestForm';
-import CustomButton from '../../../shared/ui/CustomButton';
-import Logo from '../../../widgets/Logo';
-import CurrentShipmentRequests from './CurrentShipmentRequests';
+import { SearchShipment } from '../widgets/Header';
+import MobileNavMenu from '../widgets/MobileNavMenu';
+import AddShipmentRequestForm from '../app/features/shipments/containers/AddShipmentRequestForm';
+import CustomButton from '../shared/ui/CustomButton';
+import Logo from '../widgets/Logo';
+import CurrentShipmentRequests from '../app/features/shipments/containers/CurrentShipmentRequestsList';
 
 interface MobileNavPage_Props {
   isOpened?: boolean;
@@ -49,15 +49,15 @@ const MobileNavPage = (props: MobileNavPage_Props) => {
       <SearchShipment className="flex xs:mx-4 lg:hidden" />
 
       <div className="flex flex-col gap-4 sm:flex-row sm:mx-4">
-        {/* -------------- Навигация: -------------- */}
+        {/* --- Навигация: --- */}
         <MobileNavMenu />
 
-        {/* -------------- Форма создания заявки на отгрузку: -------------- */}
+        {/* --- Форма создания заявки на отгрузку: --- */}
         <AddShipmentRequestForm />
       </div>
 
-      {/* -------------- Секция (Текущие заявки на отгрузку) -------------- */}
-      <CurrentShipmentRequests />
+      {/* --- Текущие заявки на отгрузку: --- */}
+      <CurrentShipmentRequests title="Текущие заявки" />
     </div>
   );
 };
