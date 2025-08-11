@@ -1,46 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
 // React-icons:
 import { FaAngleRight } from 'react-icons/fa';
 
 // Ui:
 import CustomSection from '../../../../shared/ui/CustomSection';
-import ShipmentRequestsListItem from '../elements/ShipmentRequestsListItem';
-
-// Types:
-import { ShipmentRequest } from '../../../../types/shipments.interface';
-import { AppDispatch } from '../../../redux/store';
-
-// Api:
-import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
+import ShipmentRequestsListItem from './ShipmentRequestsListItem';
 
 // State:
+import { selectCurrentShipmentRequests } from '../../../redux/slices/shipmentsSlice';
 import { toggleMobileNavPage } from '../../../redux/slices/mobileNavMenuSlice';
-import {
-  loadCurrentShipmentRequestsData,
-  selectCurrentShipmentRequests,
-  selectIsShipmentsDataLoading,
-} from '../../../redux/slices/shipmentsSlice';
 
-const CurrentShipmentRequestsList = () => {
-  const dispatch: AppDispatch = useDispatch();
+const FreeTransport = () => {
+  const dispatch = useDispatch();
 
   const currentShipmentRequests = useSelector(selectCurrentShipmentRequests);
-  const isShipmentsDataLoading: boolean = useSelector(
-    selectIsShipmentsDataLoading
-  );
 
-  const handleLoadCurrentShipmentRequestsData = (url: string) => {
-    dispatch(loadCurrentShipmentRequestsData(url));
+  const handleToggleMobileMenuPage = () => {
+    dispatch(toggleMobileNavPage());
   };
-
-  useEffect(() => {
-    if (currentShipmentRequests.length === 0 && !isShipmentsDataLoading) {
-      handleLoadCurrentShipmentRequestsData(SHIPMENTS_URL);
-    }
-  }, []);
 
   const min_items_to_render: number = 3;
   const listPlaceholdersCounter: number =
@@ -50,12 +29,13 @@ const CurrentShipmentRequestsList = () => {
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
       <div className="text-sm flex justify-between gap-2 lg:text-base">
         <h3 className="font-semibold text-[#7B57DF] title-shadow text-base">
-          Текущие заявки
+          Свободный транспорт
         </h3>
 
         <NavLink
           to="shipments"
           className="flex items-center gap-1 text-base text-[#7B57DF]"
+          onClick={handleToggleMobileMenuPage}
         >
           Отгрузки
           <FaAngleRight className="mt-[1px]" />
@@ -91,4 +71,4 @@ const CurrentShipmentRequestsList = () => {
   );
 };
 
-export default CurrentShipmentRequestsList;
+export default FreeTransport;

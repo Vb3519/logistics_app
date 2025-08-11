@@ -2,28 +2,19 @@
 import { BsTruckFlatbed } from 'react-icons/bs';
 
 // Types:
-interface CurrentShipmentsCard_Props
-  extends React.HtmlHTMLAttributes<HTMLDivElement> {
-  id?: string;
-  adress: string;
-  date: string;
-  progress: string;
-  current_weight: number;
-  max_weight: number;
-  shipment_number: string;
-  truck_number: string;
-  children?: React.ReactNode;
-}
+import { CurrentShipmentsCard_Props } from '../../../../types/shipments.interface';
 
 const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
   id,
-  adress,
-  date,
-  progress,
-  current_weight,
-  max_weight,
+  created_at,
   shipment_number,
-  truck_number,
+  current_load_value,
+  max_load_value,
+  transport,
+  shipment_status,
+  from_city,
+  to_city,
+  transport_info,
   children,
   ...props
 }) => {
@@ -34,10 +25,15 @@ const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
     >
       <div className="pb-4 flex items-center gap-2 text-sm border-b-2 border-gray-400/20 lg:text-base">
         <div className="flex items-center gap-2 flex-wrap">
-          <h3 className="font-semibold text-base lg:text-lg">{adress}</h3>
-          <div className="text-primary">{date}</div>
+          <h3 className="font-semibold text-base lg:text-lg">
+            <span>{from_city} - </span>
+            <span>{to_city}</span>
+          </h3>
+          <div className="text-primary">{created_at}</div>
         </div>
-        <span className="ml-auto text-3xl text-amber-500/70">{progress}</span>
+        <span className="ml-auto text-3xl text-amber-500/70">
+          {Math.floor((current_load_value / max_load_value) * 100)}%
+        </span>
       </div>
 
       <div className="flex gap-2 justify-between text-sm lg:text-base">
@@ -45,8 +41,8 @@ const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
           <li className="flex flex-col gap-1">
             <span className="text-primary">Доступно, кг</span>
             <span className="text-base lg:text-lg">
-              <span>{current_weight}</span> /{' '}
-              <span className="text-primary">{max_weight}</span>
+              <span>{current_load_value}</span> /{' '}
+              <span className="text-primary">{max_load_value}</span>
             </span>
           </li>
           <li className="flex flex-col gap-1">
@@ -55,9 +51,10 @@ const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
           </li>
           <li className="flex flex-col gap-1">
             <span className="text-primary">Машина</span>
-            <span className="text-base lg:text-lg">{truck_number}</span>
+            <span className="text-base lg:text-lg">{transport}</span>
           </li>
         </ul>
+
         <div className="relative max-h-37 flex items-center justify-center">
           <div className="absolute w-22 h-15 top-7.5 left-0 border-2 border-gray-400/70 bg-amber-300"></div>
           <BsTruckFlatbed className="text-9xl text-gray-500/40" />

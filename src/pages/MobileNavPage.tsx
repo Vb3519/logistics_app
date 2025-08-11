@@ -7,7 +7,8 @@ import MobileNavMenu from '../widgets/MobileNavMenu';
 import AddShipmentRequestForm from '../app/features/shipments/containers/AddShipmentRequestForm';
 import CustomButton from '../shared/ui/CustomButton';
 import Logo from '../widgets/Logo';
-import CurrentShipmentRequests from '../app/features/shipments/containers/CurrentShipmentRequestsList';
+// import CurrentShipmentRequests from '../app/features/shipments/containers/CurrentShipmentRequestsList';
+import FreeTransport from '../app/features/shipments/elements/FreeTransport';
 
 interface MobileNavPage_Props {
   isOpened?: boolean;
@@ -57,7 +58,7 @@ const MobileNavPage = (props: MobileNavPage_Props) => {
       </div>
 
       {/* --- Текущие заявки на отгрузку: --- */}
-      <CurrentShipmentRequests title="Текущие заявки" />
+      <FreeTransport />
     </div>
   );
 };

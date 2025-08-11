@@ -11,28 +11,18 @@
       "from_city": "Санкт-Петербург",
       "to_city": "Москва",
       "transport_info": "{\"transport\":\"ГАЗель 3302 (до 160 кг)\",\"max_load_value\":\"160\"}"
-    }
-  ],
-  "trucks": [
-    {
-      "id": "0",
-      "truck_number": "Iveco 80E16",
-      "max_capacity": 600
     },
     {
-      "id": "1",
-      "truck_number": "Iveco 80E18",
-      "max_capacity": 800
-    },
-    {
-      "id": "2",
-      "truck_number": "Iveco 80E14",
-      "max_capacity": 400
-    },
-    {
-      "id": "3",
-      "truck_number": "Iveco 80E12",
-      "max_capacity": 200
+      "id": "bb18b5c4-dcba-4f28-a4e7-bf270fc5afec",
+      "created_at": "11.08.2025",
+      "shipment_number": "SH-bb18b5c",
+      "current_load_value": 100,
+      "transport": "ГАЗель A21R32 (до 200 кг)",
+      "max_load_value": 200,
+      "shipment_status": "",
+      "from_city": "Москва",
+      "to_city": "Нижний-Новгород",
+      "transport_info": "{\"transport\":\"ГАЗель A21R32 (до 200 кг)\",\"max_load_value\":\"200\"}"
     }
   ],
   "clients": [

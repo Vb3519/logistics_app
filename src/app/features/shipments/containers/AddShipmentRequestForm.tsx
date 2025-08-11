@@ -1,6 +1,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 // React-icons:
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
@@ -10,12 +11,23 @@ import CustomButton from '../../../../shared/ui/CustomButton';
 import CustomSection from '../../../../shared/ui/CustomSection';
 
 // Types:
-import { ShipmentRequestFormFileds } from '../../../../shared/utils/createShipmentRequest';
+import {
+  ShipmentRequestFormFileds,
+  ShipmentRequest,
+} from '../../../../types/shipments.interface';
+import { AppDispatch } from '../../../redux/store';
 
 // Utils:
 import { createShipmentRequest } from '../../../../shared/utils/createShipmentRequest';
 
+// Api:
+import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
+
+// State:
+import { addNewShipmentRequest } from '../../../redux/slices/shipmentsSlice';
+
 const AddShipmentRequestForm = () => {
+  const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
 
   const {
@@ -31,20 +43,15 @@ const AddShipmentRequestForm = () => {
     formData
   ) => {
     try {
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve('');
-        }, 2000);
-      });
-      // throw new Error('Что-то пошло не так...');
-
-      const newShipmentRequest = createShipmentRequest(formData);
-
-      console.log('Заявка на отгрузку:', newShipmentRequest);
+      await dispatch(
+        addNewShipmentRequest({
+          url: SHIPMENTS_URL,
+          shipmentRequestFormData: formData,
+        })
+      ).unwrap();
 
       reset();
     } catch (error: unknown) {
-      console.log(`Error: ${(error as Error).message}`);
       setError('root', { message: 'Что-то пошло не так...' });
     }
   };

@@ -19,6 +19,9 @@ import {
   shipmentsData,
 } from '../../shared/data/shipmentsData';
 
+// Types:
+import { ShipmentsTableElem_Props } from '../../types/shipments.interface';
+
 const AllShipmentsLogPage = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(20);
@@ -126,15 +129,6 @@ export default AllShipmentsLogPage;
 
 // Самостоятельная верстка таблицы:
 // --------------------------------------
-interface ShipmentsTableElem_Props
-  extends React.HTMLAttributes<HTMLTableRowElement> {
-  destination: string;
-  shipment_number: string;
-  truck_number: string;
-  total_weight: string;
-  status: 'В пути' | 'Завершен' | 'Опаздывает';
-}
-
 const ShipmentsTableElem: React.FC<ShipmentsTableElem_Props> = ({
   destination,
   shipment_number,

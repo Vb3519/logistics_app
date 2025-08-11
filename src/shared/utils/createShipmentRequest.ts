@@ -4,30 +4,10 @@ import { v4 as uuidv4 } from 'uuid';
 import getCurrentDate from './getCurrentDate';
 
 // Types:
-export interface ShipmentRequestFormFileds {
-  from_city: string;
-  to_city: string;
-  transport_info:
-    | '{"transport":"ГАЗель A21R22 (до 100 кг)","max_load_value":"100"}'
-    | '{"transport":"ГАЗель 3302 (до 160 кг)","max_load_value":"160"}'
-    | '{"transport":"ГАЗель A21R32 (до 200 кг)","max_load_value":"200"}';
-}
-
-export interface ShipmentRequest {
-  id: string;
-  created_at: string;
-  shipment_number: string;
-  current_load_value: number;
-  max_load_value: number;
-  transport: string;
-  shipment_status?: 'В пути' | 'Завершена' | 'Опаздывает' | '';
-  from_city: string;
-  to_city: string;
-  transport_info:
-    | '{"transport":"ГАЗель A21R22 (до 100 кг)","max_load_value":"100"}'
-    | '{"transport":"ГАЗель 3302 (до 160 кг)","max_load_value":"160"}'
-    | '{"transport":"ГАЗель A21R32 (до 200 кг)","max_load_value":"200"}';
-}
+import {
+  ShipmentRequestFormFileds,
+  ShipmentRequest,
+} from '../../types/shipments.interface';
 
 interface TransportInfo {
   transport: string;

@@ -1,12 +1,5 @@
-interface ShipmentRequestListItem_Props
-  extends React.LiHTMLAttributes<HTMLLIElement> {
-  id?: string;
-  shipment_number: string;
-  from_city: string;
-  to_city: string;
-  current_load_value: number;
-  max_load_value: number;
-}
+// Types:
+import { ShipmentRequestListItem_Props } from '../../../../types/shipments.interface';
 
 const ShipmentRequestsListItem: React.FC<ShipmentRequestListItem_Props> = (
   props
