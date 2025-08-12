@@ -17,6 +17,7 @@ import { currentShipmentsData } from '../../shared/data/shipmentsData';
 // State:
 import {
   selectCurrentShipmentRequests,
+  selectIsShipmentsDataLoading,
   loadCurrentShipmentRequestsData,
 } from '../../app/redux/slices/shipmentsSlice';
 
@@ -37,13 +38,19 @@ const CurrentShRequestDetailsPage = () => {
   };
 
   const currentShipmentRequests = useSelector(selectCurrentShipmentRequests);
+  const isCurrentShipmentRequestsDataLoading: boolean = useSelector(
+    selectIsShipmentsDataLoading
+  );
 
   const currentShipmentRequestData = currentShipmentRequests.find(
     (shipmentRequest) => shipmentRequest.id === id
   );
 
   useEffect(() => {
-    if (currentShipmentRequests.length === 0) {
+    if (
+      currentShipmentRequests.length === 0 &&
+      !isCurrentShipmentRequestsDataLoading
+    ) {
       handleLoadCurrentShipmentRequestsData(SHIPMENTS_URL);
     }
   }, []);
@@ -74,7 +81,7 @@ const CurrentShRequestDetailsPage = () => {
                 </div>
               </div>
 
-              <div className="p-4 flex items-center gap-2 text-sm bg-element_primary rounded-md lg:text-base">
+              <div className="p-4 flex items-center gap-2 text-sm border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md lg:text-base">
                 <p>Загруженность машины</p>
                 <span className="ml-auto text-lg text-amber-400 lg:text-4xl">
                   {Math.floor(
@@ -89,22 +96,22 @@ const CurrentShRequestDetailsPage = () => {
               <div className="flex flex-col gap-4 text-sm lg:text-base">
                 <div className="flex flex-col gap-1">
                   <span className="text-secondary">Заявка </span>
-                  <span className="p-4 bg-element_primary text-primary rounded-md">
+                  <div className="p-4 border-b-2 border-b-[#cbcbcb] bg-element_primary text-primary rounded-md">
                     {currentShipmentRequestData.shipment_number}
-                  </span>
+                  </div>
                 </div>
                 <div className="flex flex-col gap-1">
                   <span className="text-secondary">Автомобиль </span>
-                  <span className="p-4 bg-element_primary text-primary rounded-md">
+                  <div className="p-4 border-b-2 border-b-[#cbcbcb] bg-element_primary text-primary rounded-md">
                     {currentShipmentRequestData.transport}
-                  </span>
+                  </div>
                 </div>
               </div>
 
               <div className="flex flex-col gap-1 text-sm lg:text-base">
-                <span className="text-secondary">Статус отгрузки</span>
+                <span className="text-[#7B57DF]">Статус отгрузки</span>
 
-                <fieldset className="p-4 bg-element_primary rounded-md">
+                <fieldset className="p-4 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md">
                   <div className="flex items-center gap-2">
                     <input
                       name="shipment_status"
@@ -153,18 +160,18 @@ const CurrentShRequestDetailsPage = () => {
                 <div className="flex flex-col gap-2">
                   <span className="text-secondary">Доступно, кг</span>
                   <div>
-                    <span className="lg:text-4xl">
+                    <span className="lg:text-2xl xl:text-4xl">
                       {currentShipmentRequestData.current_load_value}
                     </span>
-                    <span className="text-secondary lg:text-4xl">
+                    <span className="text-secondary lg:text-2xl xl:text-4xl">
                       /{currentShipmentRequestData.max_load_value}
                     </span>
                   </div>
                 </div>
 
                 <div className="relative flex items-center justify-center">
-                  <div className="absolute w-22 h-15 top-5 left-0 border-2 border-gray-400/70 bg-amber-300 lg:w-43 lg:h-30 lg:top-10"></div>
-                  <BsTruckFlatbed className="text-9xl text-gray-500/40 lg:text-[250px]" />
+                  <div className="absolute w-22 h-15 top-5 left-0 border-2 border-gray-400/70 bg-amber-300 xl:w-43 xl:h-30 xl:top-10"></div>
+                  <BsTruckFlatbed className="text-9xl text-gray-500/40 xl:text-[250px]" />
                 </div>
               </div>
 

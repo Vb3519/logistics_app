@@ -13,7 +13,10 @@ const ShipmentRequestsListItem: React.FC<ShipmentRequestListItem_Props> = (
   } = props;
 
   return (
-    <li className="pb-4 flex gap-2 border-b-2 border-b-gray-200" {...props}>
+    <li
+      className="p-2 flex flex-col gap-2 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md sm:p-4 sm:flex-row"
+      {...props}
+    >
       <div className="w-full flex flex-col gap-1">
         <p className="font-semibold">{shipment_number}</p>
         <p className="text-primary">

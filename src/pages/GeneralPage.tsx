@@ -18,7 +18,7 @@ const GeneralPage = () => {
       <DailyPlan />
 
       {/* Секция (Свободный Транспорт) */}
-      <CurrentShipmentRequestsList title="Свободный транспорт" />
+      <CurrentShipmentRequestsList />
 
       {/* Секция (Недавние Запросы) */}
       <RecentRequests />

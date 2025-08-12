@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 // React-icons:
 import { FaAngleRight } from 'react-icons/fa';
+import { BsClockHistory } from 'react-icons/bs';
 
 // Ui:
 import CustomSection from '../../../../shared/ui/CustomSection';
@@ -42,7 +43,7 @@ const FreeTransport = () => {
         </NavLink>
       </div>
 
-      <ul className="max-h-58 flex flex-col gap-2 text-sm overflow-y-auto lg:text-base">
+      <ul className="max-h-58 flex flex-col gap-1 text-sm overflow-y-auto lg:text-base">
         {currentShipmentRequests.map((shipmentInfo) => {
           return (
             <ShipmentRequestsListItem
@@ -62,7 +63,12 @@ const FreeTransport = () => {
               key={index}
               className="p-4 flex gap-2 border-b-2 border-b-gray-200"
             >
-              <div className="text-secondary flex items-center">...</div>
+              <div className="flex items-center gap-3 text-secondary">
+                <BsClockHistory className="text-2xl text-secondary/30" />
+                <p className="text-secondary/60">
+                  Ожидается заявка на отгрузку
+                </p>
+              </div>
             </li>
           );
         })}
