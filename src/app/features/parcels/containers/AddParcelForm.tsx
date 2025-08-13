@@ -61,7 +61,7 @@ const AddParcelForm = () => {
   const parcelWeightPattern: RegExp = /^(?:[1-9]\d*)$/;
 
   return (
-    <CustomSection className="w-full p-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 lg:min-h-0 lg:h-full">
+    <CustomSection className="w-full p-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 lg:min-h-0 lg:h-full lg:basis-2/5">
       <form
         className="h-full flex flex-col gap-3"
         onSubmit={handleSubmit(onSubmit)}

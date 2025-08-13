@@ -20,7 +20,6 @@ export interface Parcel {
 
 interface ParcelsState {
   parcels: Parcel[];
-  uploadedParcels: Parcel[];
   parcelsDataError: string;
   parcelsFormError: string;
   isLoadingViaApi: boolean;
@@ -106,7 +105,6 @@ export const addNewParcel = createAsyncThunk(
 
 const initialState: ParcelsState = {
   parcels: [],
-  uploadedParcels: [],
   parcelsDataError: '',
   parcelsFormError: '',
   isLoadingViaApi: false,
@@ -116,22 +114,7 @@ const initialState: ParcelsState = {
 const parcelsSlice = createSlice({
   name: 'parcels',
   initialState: initialState,
-  reducers: {
-    uploadParcel: (state, action) => {
-      // return {
-      //   ...state,
-      //   uploadedParcels: [...state.uploadedParcels, action.payload],
-      // };
-
-      state.uploadedParcels.push(action.payload);
-    },
-
-    removeParcel: (state, action) => {
-      state.uploadedParcels = state.uploadedParcels.filter(
-        (parcelInfo) => parcelInfo.id !== action.payload
-      );
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     //  Загрузка с api данных по посылкам:
@@ -191,7 +174,6 @@ const parcelsSlice = createSlice({
 });
 
 // Действия:
-export const { uploadParcel, removeParcel } = parcelsSlice.actions;
 
 // Состояние:
 export const selectParcels = (state: ParcelsStateSlice) =>
@@ -199,8 +181,5 @@ export const selectParcels = (state: ParcelsStateSlice) =>
 
 export const selectIsParcelsDataLoading = (state: ParcelsStateSlice) =>
   state.parcels.isLoadingViaApi;
-
-export const selectUploadedParcels = (state: ParcelsStateSlice) =>
-  state.parcels.uploadedParcels;
 
 export default parcelsSlice.reducer;

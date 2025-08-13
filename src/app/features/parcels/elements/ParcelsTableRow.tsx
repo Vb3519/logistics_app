@@ -31,11 +31,18 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
           sx={{
             textAlign: 'center',
             fontFamily: 'inter',
+            color: `${isAlrdyUploaded && '#99a1af'}`,
           }}
         >
           {parcelData.parcel_number}
         </TableCell>
-        <TableCell sx={{ textAlign: 'center', fontFamily: 'inter' }}>
+        <TableCell
+          sx={{
+            textAlign: 'center',
+            fontFamily: 'inter',
+            color: `${isAlrdyUploaded && '#99a1af'}`,
+          }}
+        >
           {parcelData.parcel_weight}
         </TableCell>
       </TableRow>

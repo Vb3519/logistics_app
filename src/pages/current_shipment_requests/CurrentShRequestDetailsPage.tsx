@@ -23,6 +23,7 @@ import {
 
 // Types:
 import { AppDispatch } from '../../app/redux/store';
+import { ShipmentRequest } from '../../types/shipments.interface';
 
 // Api:
 import { SHIPMENTS_URL } from '../../shared/api/logistics_appApi';

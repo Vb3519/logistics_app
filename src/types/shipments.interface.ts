@@ -1,3 +1,5 @@
+import { Parcel } from '../app/redux/slices/parcelsSlice';
+
 // Form:
 // ------------------------
 export interface ShipmentRequestFormFileds {
@@ -15,6 +17,7 @@ export interface ShipmentRequest {
   id: string;
   created_at: string;
   shipment_number: string;
+  shipment_parcels: Parcel[];
   current_load_value: number;
   max_load_value: number;
   transport: string;

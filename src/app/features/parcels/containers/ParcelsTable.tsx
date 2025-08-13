@@ -1,5 +1,6 @@
 import { useState, useEffect, memo, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 // MUI:
 import Table from '@mui/material/Table';
@@ -15,6 +16,7 @@ import Checkbox from '@mui/material/Checkbox';
 import CustomButton from '../../../../shared/ui/CustomButton';
 import CustomSection from '../../../../shared/ui/CustomSection';
 import ParcelsTableRow from '../elements/ParcelsTableRow';
+import ParcelsToUpload from './ParcelsToUpload';
 
 // Data:
 import { parcelsData } from '../../../../shared/data/parcelsData';
@@ -24,10 +26,13 @@ import {
   loadParcelsData,
   selectParcels,
   selectIsParcelsDataLoading,
-  uploadParcel,
-  removeParcel,
-  selectUploadedParcels,
 } from '../../../redux/slices/parcelsSlice';
+
+import {
+  selectParcelsToUpload,
+  addParcelToUpload,
+  removeParcelFromUpload,
+} from '../../../redux/slices/parcelsToUploadSlice';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
@@ -42,6 +47,7 @@ interface ParcelsTable_Props {
 
 const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   const dispatch: AppDispatch = useDispatch();
+  const { id } = useParams();
 
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -64,23 +70,22 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   const currentParcelsData: Parcel[] = useSelector(selectParcels);
   const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
 
-  const uploadedParcels: Parcel[] = useSelector(selectUploadedParcels);
-  const uploadedParcelsTotalWeight: number = uploadedParcels.reduce(
-    (totalWeightVal, parcelInfo) => {
-      return (totalWeightVal =
-        totalWeightVal + Number(parcelInfo.parcel_weight));
-    },
-    0
-  );
+  const uploadedParcels: Parcel[] = useSelector(selectParcelsToUpload);
 
   // Добавление и удаление посылок в непроведенную заявку на отгрузку:
-  // -----------------------------------
-  const handleUploadParcel = (parcelData: Parcel) => {
-    dispatch(uploadParcel(parcelData));
+  // ----------------------------------- parcelData: Parcel
+  interface ParcelAndShipmentInfo {
+    parcelData: Parcel;
+    shipmentId: string;
+  }
+  const handleAddParcelToUpload = (
+    parcelAndShipmentData: ParcelAndShipmentInfo
+  ) => {
+    dispatch(addParcelToUpload(parcelAndShipmentData));
   };
 
-  const handleRemoveParcel = (parcelId: string) => {
-    dispatch(removeParcel(parcelId));
+  const handleRemoveParcelFromUpload = (parcelId: string) => {
+    dispatch(removeParcelFromUpload(parcelId));
   };
 
   useEffect(() => {
@@ -91,32 +96,7 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <CustomSection className="w-full p-2 flex flex-col gap-4 bg-section_primary container-shadow text-sm xs:rounded-md lg:text-base">
-        <div className="flex flex-col gap-2">
-          <h2 className="font-semibold text-[#7B57DF] title-shadow text-base">
-            Доступные посылки
-          </h2>
-          <div className="p-2 flex flex-col gap-1 bg-element_primary border-b-2 border-b-[#cbcbcb] rounded-md xs:p-4 xs:flex-row xs:gap-6">
-            <div>
-              <span className="text-primary">Выбрано, шт: </span>
-              <span>{uploadedParcels.length}</span>
-            </div>
-            <div>
-              <span className="text-primary">Вес, кг: </span>
-              <span>{uploadedParcelsTotalWeight}</span>
-            </div>
-          </div>
-          <CustomButton
-            disabled={uploadedParcels.length === 0}
-            className={`p-2 mx-auto w-1/2 min-w-45 max-w-60 text-[whitesmoke] ${
-              uploadedParcels.length === 0 ? 'bg-gray-300' : 'bg-[#7B57DF]'
-            }`}
-            onClick={() => console.log('Click')}
-          >
-            Загрузить в машину
-          </CustomButton>
-        </div>
-      </CustomSection>
+      <ParcelsToUpload />
 
       <CustomSection className="w-full min-h-[80vh] flex flex-col justify-between bg-section_primary xs:rounded-md lg:basis-3/5">
         <TableContainer sx={{ maxHeight: '70vh' }}>
@@ -192,9 +172,12 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                       isAlrdyUploaded={isAlrdyUploaded}
                       onClick={() => {
                         if (isAlrdyUploaded) {
-                          handleRemoveParcel(parcelInfo.id);
-                        } else {
-                          handleUploadParcel(parcelInfo);
+                          handleRemoveParcelFromUpload(parcelInfo.id);
+                        } else if (id) {
+                          handleAddParcelToUpload({
+                            parcelData: parcelInfo,
+                            shipmentId: id,
+                          });
                         }
                       }}
                     />

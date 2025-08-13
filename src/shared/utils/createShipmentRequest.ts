@@ -27,6 +27,7 @@ export const createShipmentRequest = (
     id: shipmentRequestId,
     created_at: getCurrentDate(),
     shipment_number: shipmentNumber,
+    shipment_parcels: [],
     current_load_value: 0,
     transport: parcedTransportInfo.transport,
     max_load_value: Number(parcedTransportInfo.max_load_value),

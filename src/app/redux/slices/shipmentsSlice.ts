@@ -11,6 +11,7 @@ import {
   ShipmentRequest,
   ShipmentRequestFormFileds,
 } from '../../../types/shipments.interface';
+import { Parcel } from './parcelsSlice';
 
 // Загрузка с api данных по непроведенным заявкам на отгрузку:
 // ---------------------------------------------------
@@ -111,7 +112,38 @@ const initialState: ShipmentsState = {
 const shipmentsSlice = createSlice({
   name: 'shipments',
   initialState,
-  reducers: {},
+  reducers: {
+    addParcelsToShipment: (
+      state,
+      action: {
+        payload: {
+          activeShipmentId: string;
+          parcelsToUpload: Parcel[];
+          parcelsTotalWeight: number;
+        };
+      }
+    ) => {
+      const { activeShipmentId, parcelsToUpload, parcelsTotalWeight } =
+        action.payload;
+
+      const activeShipmentRequest = state.currentShipmentRequests.find(
+        (shipmentRequest) => {
+          return shipmentRequest.id === activeShipmentId;
+        }
+      );
+
+      if (activeShipmentRequest) {
+        activeShipmentRequest.shipment_parcels.push(...parcelsToUpload);
+
+        activeShipmentRequest.current_load_value =
+          activeShipmentRequest.shipment_parcels.reduce(
+            (totalWeight, shipment) =>
+              totalWeight + Number(shipment.parcel_weight),
+            0
+          );
+      }
+    },
+  },
 
   extraReducers: (builder) => {
     // Загрузка с api данных по запросам на создание заявки на отгрузку:
@@ -179,10 +211,12 @@ const shipmentsSlice = createSlice({
 });
 
 // Действия:
+export const { addParcelsToShipment } = shipmentsSlice.actions;
 
 // Состояние:
 export const selectCurrentShipmentRequests = (state: ShipmentsStateSlice) =>
   state.shipments.currentShipmentRequests;
+
 export const selectIsShipmentsDataLoading = (state: ShipmentsStateSlice) =>
   state.shipments.isLoadingViaApi;
 
