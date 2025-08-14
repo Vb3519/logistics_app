@@ -13,15 +13,34 @@ import {
   addParcelsToShipment,
 } from '../../../redux/slices/shipmentsSlice';
 
-import { selectParcelsToUpload } from '../../../redux/slices/parcelsToUploadSlice';
+import {
+  selectParcelsToUpload,
+  selectParcelsToUploadErrorMsg,
+  setParcelsToUploadErrorMsg,
+  resetParcelsToUpload,
+} from '../../../redux/slices/parcelsToUploadSlice';
+
+import {
+  attachParcelToShipmentRequest,
+  selectisAttachingParcel,
+} from '../../../redux/slices/parcelsSlice';
 
 // Types:
+import { AppDispatch } from '../../../redux/store';
 import { Parcel } from '../../../redux/slices/parcelsSlice';
 import { ShipmentRequest } from '../../../../types/shipments.interface';
 
+// Api:
+import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
+
 const ParcelsToUpload = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
+
+  const parcelsToUploadErrorMsg: string = useSelector(
+    selectParcelsToUploadErrorMsg
+  );
+  const isAttachingParcel: boolean = useSelector(selectisAttachingParcel);
 
   // Текущие не проведенные заявки на отгрузку:
   // ---------------------------------------------
@@ -41,8 +60,9 @@ const ParcelsToUpload = () => {
 
   // "Привязать" выбранные посылки к непроведенной заявке на отгрузку:
   // -----------------------------------------------------------------------
-  const handleAddParcelsToShipment = () => {
+  const handleAddParcelsToShipment = async () => {
     if (activeShipmentRequest) {
+      // Расчет суммарного веса посылок:
       const totalMaxLoadVal: number = activeShipmentRequest.max_load_value;
 
       const remainingLoadVal: number =
@@ -53,19 +73,38 @@ const ParcelsToUpload = () => {
         totalMaxLoadVal < parcelsTotalWeight ||
         remainingLoadVal < parcelsTotalWeight;
 
-      const parcelsAndShipmentData = {
-        activeShipmentId: activeShipmentRequest.id,
-        parcelsToUpload: parcelsToUpload,
-        parcelsTotalWeight: parcelsTotalWeight,
-      };
-
+      // Логика обработки веса выбранных посылок по сравнению с грузоподъемностью машины:
       if (isWeightOverload) {
-        alert('Уменьшите вес посылок');
+        if (parcelsToUploadErrorMsg === '') {
+          dispatch(setParcelsToUploadErrorMsg('Уменьшите вес посылок'));
+        }
       } else {
+        // Сервер: обход всех посылок и замена у нужных поля isUploaded на true
+        const attachAllParcels = parcelsToUpload.map((parcelInfo) => {
+          const parcelToAttach = {
+            url: PARCELS_URL,
+            parcelId: parcelInfo.id,
+          };
+
+          return dispatch(attachParcelToShipmentRequest(parcelToAttach));
+        });
+
+        await Promise.all(attachAllParcels);
+
+        // Клиент: Добавление всех выбранных посылок в массив посылок активной заявки на отгрузку:
+        const parcelsAndShipmentData = {
+          activeShipmentId: activeShipmentRequest.id,
+          parcelsToUpload: parcelsToUpload,
+          parcelsTotalWeight: parcelsTotalWeight,
+        };
+
         dispatch(addParcelsToShipment(parcelsAndShipmentData));
 
-        // очистка массива parcelsToUpload
-        // отправка на сервер POST запроса по выбранным посылкам, что они загружены в машину (рендер их стейта в таблице)
+        // Клиент: ресет выбранных посылок в компоненте расчета их общего веса:
+        dispatch(resetParcelsToUpload());
+
+        // Done: очистка массива parcelsToUpload
+        // Done: отправка на сервер POST запроса по выбранным посылкам, что они загружены в машину (рендер их стейта в таблице)
         // рендер данных о посылках в карточке отгрузки
       }
     }
@@ -88,17 +127,27 @@ const ParcelsToUpload = () => {
           </div>
         </div>
         <CustomButton
-          disabled={parcelsToUpload.length === 0}
+          disabled={
+            parcelsToUpload.length === 0 ||
+            parcelsToUploadErrorMsg !== '' ||
+            isAttachingParcel
+          }
           className={`p-2 mx-auto w-1/2 min-w-45 max-w-60 text-[whitesmoke] ${
-            parcelsToUpload.length === 0 ? 'bg-gray-300' : 'bg-[#7B57DF]'
+            parcelsToUpload.length === 0 ||
+            parcelsToUploadErrorMsg !== '' ||
+            isAttachingParcel
+              ? 'bg-gray-300'
+              : 'bg-[#7B57DF]'
           }`}
           onClick={() => {
             handleAddParcelsToShipment();
           }}
         >
-          Загрузить в машину
+          {isAttachingParcel ? 'Погрузка посылок' : 'Загрузить в машину'}
         </CustomButton>
-        <span>123</span>
+        <span className="text-amber-500 text-sm text-center leading-4">
+          {parcelsToUploadErrorMsg !== '' && parcelsToUploadErrorMsg}
+        </span>
       </div>
     </CustomSection>
   );

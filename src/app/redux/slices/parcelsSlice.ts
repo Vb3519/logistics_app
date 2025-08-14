@@ -16,14 +16,17 @@ export interface Parcel {
     | 'Проблема с упаковкой'
     | 'Вышел из строя транспорт';
   shipment_id: string;
+  isUploaded: boolean;
 }
 
 interface ParcelsState {
   parcels: Parcel[];
   parcelsDataError: string;
   parcelsFormError: string;
+  attachParcelError: string;
   isLoadingViaApi: boolean;
   isParcelsFormDataSending: boolean;
+  isAttachingParcel: boolean;
 }
 
 interface ParcelsStateSlice {
@@ -103,12 +106,56 @@ export const addNewParcel = createAsyncThunk(
   }
 );
 
+// Загрузка и "привязка" посылки к непроведенной заявке на отгрузку:
+// ------------------------------------------------------------------
+export const attachParcelToShipmentRequest = createAsyncThunk(
+  'parcels/attachParcel',
+  async (payload: { url: string; parcelId: string }, thunkApi) => {
+    try {
+      await serverResponseImitation(3000);
+
+      const { url, parcelId } = payload;
+
+      const attachParcelResponse: Response = await fetch(`${url}/${parcelId}`, {
+        method: 'PATCH',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ isUploaded: true }),
+      });
+
+      if (attachParcelResponse.ok) {
+        const attachedParcel: Parcel = await attachParcelResponse.json();
+        console.log(
+          'Прикрепленная к заявке на отгрузку посылка:',
+          attachedParcel
+        );
+
+        return attachedParcel;
+      } else {
+        const errorMsg: string = `HTTP Error: ${attachParcelResponse.status} ${attachParcelResponse.statusText}`;
+        console.log(errorMsg);
+
+        return thunkApi.rejectWithValue(errorMsg);
+      }
+    } catch (error: unknown) {
+      // Рантайм ошибки:
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);
+
 const initialState: ParcelsState = {
   parcels: [],
   parcelsDataError: '',
-  parcelsFormError: '',
   isLoadingViaApi: false,
+
+  parcelsFormError: '',
   isParcelsFormDataSending: false,
+
+  attachParcelError: '',
+  isAttachingParcel: false,
 };
 
 const parcelsSlice = createSlice({
@@ -118,7 +165,7 @@ const parcelsSlice = createSlice({
 
   extraReducers: (builder) => {
     //  Загрузка с api данных по посылкам:
-
+    // ----------------------------------------------------------------------------
     builder.addCase(loadParcelsData.pending, (state) => {
       return { ...state, isLoadingViaApi: true, parcelsDataError: '' };
     });
@@ -145,7 +192,7 @@ const parcelsSlice = createSlice({
     });
 
     // Добавление информации о новой посылке:
-
+    // ----------------------------------------------------------------------------
     builder.addCase(addNewParcel.pending, (state) => {
       return { ...state, isParcelsFormDataSending: true, parcelsFormError: '' };
     });
@@ -170,6 +217,37 @@ const parcelsSlice = createSlice({
         };
       }
     });
+
+    // Загрузка и "привязка" посылки к непроведенной заявке на отгрузку:
+    // ----------------------------------------------------------------------------
+    builder.addCase(attachParcelToShipmentRequest.pending, (state) => {
+      return { ...state, isAttachingParcel: true, attachParcelError: '' };
+    });
+
+    builder.addCase(
+      attachParcelToShipmentRequest.fulfilled,
+      (state, action) => {
+        const { id } = action.payload;
+
+        const parcelToAttach: Parcel | undefined = state.parcels.find(
+          (parcelInfo) => parcelInfo.id === id
+        );
+
+        if (parcelToAttach) {
+          parcelToAttach.isUploaded = true;
+        }
+
+        state.isAttachingParcel = false;
+      }
+    );
+
+    builder.addCase(attachParcelToShipmentRequest.rejected, (state, action) => {
+      state.isAttachingParcel = false;
+
+      if (typeof action.payload === 'string') {
+        state.attachParcelError = action.payload;
+      }
+    });
   },
 });
 
@@ -181,5 +259,8 @@ export const selectParcels = (state: ParcelsStateSlice) =>
 
 export const selectIsParcelsDataLoading = (state: ParcelsStateSlice) =>
   state.parcels.isLoadingViaApi;
+
+export const selectisAttachingParcel = (state: ParcelsStateSlice) =>
+  state.parcels.isAttachingParcel;
 
 export default parcelsSlice.reducer;

@@ -49,18 +49,29 @@ const parcelsToUploadSlice = createSlice({
       );
     },
 
-    setErrorMsg: (state, action) => {
+    setParcelsToUploadErrorMsg: (state, action) => {
       return { ...state, errorMsg: action.payload };
+    },
+
+    resetParcelsToUpload: (state) => {
+      return { ...state, parcelsToUpload: [], errorMsg: '' };
     },
   },
 });
 
 // Действия:
-export const { addParcelToUpload, removeParcelFromUpload, setErrorMsg } =
-  parcelsToUploadSlice.actions;
+export const {
+  addParcelToUpload,
+  removeParcelFromUpload,
+  setParcelsToUploadErrorMsg,
+  resetParcelsToUpload,
+} = parcelsToUploadSlice.actions;
 
 // Состояние:
 export const selectParcelsToUpload = (state: ParcelsToUploadSlice) =>
   state.parcelsToUpload.parcelsToUpload;
+
+export const selectParcelsToUploadErrorMsg = (state: ParcelsToUploadSlice) =>
+  state.parcelsToUpload.errorMsg;
 
 export default parcelsToUploadSlice.reducer;

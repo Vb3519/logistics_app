@@ -26,12 +26,15 @@ import {
   loadParcelsData,
   selectParcels,
   selectIsParcelsDataLoading,
+  selectisAttachingParcel,
 } from '../../../redux/slices/parcelsSlice';
 
 import {
   selectParcelsToUpload,
+  selectParcelsToUploadErrorMsg,
   addParcelToUpload,
   removeParcelFromUpload,
+  setParcelsToUploadErrorMsg,
 } from '../../../redux/slices/parcelsToUploadSlice';
 
 // Types:
@@ -71,9 +74,14 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
 
   const uploadedParcels: Parcel[] = useSelector(selectParcelsToUpload);
+  const parcelsToUploadErrorMsg: string = useSelector(
+    selectParcelsToUploadErrorMsg
+  );
+
+  const isAttachingParcel: boolean = useSelector(selectisAttachingParcel);
 
   // Добавление и удаление посылок в непроведенную заявку на отгрузку:
-  // ----------------------------------- parcelData: Parcel
+  // -----------------------------------
   interface ParcelAndShipmentInfo {
     parcelData: Parcel;
     shipmentId: string;
@@ -82,10 +90,18 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
     parcelAndShipmentData: ParcelAndShipmentInfo
   ) => {
     dispatch(addParcelToUpload(parcelAndShipmentData));
+
+    if (parcelsToUploadErrorMsg !== '') {
+      dispatch(setParcelsToUploadErrorMsg(''));
+    }
   };
 
   const handleRemoveParcelFromUpload = (parcelId: string) => {
     dispatch(removeParcelFromUpload(parcelId));
+
+    if (parcelsToUploadErrorMsg !== '') {
+      dispatch(setParcelsToUploadErrorMsg(''));
+    }
   };
 
   useEffect(() => {
@@ -160,18 +176,23 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
               {currentParcelsData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((parcelInfo) => {
-                  const isAlrdyUploaded: boolean = uploadedParcels.some(
-                    (parcel) => parcel.id === parcelInfo.id
-                  );
+                  const isParcelSelectedToUpload: boolean =
+                    uploadedParcels.some(
+                      (parcel) => parcel.id === parcelInfo.id
+                    );
 
                   return (
                     <ParcelsTableRow
                       key={parcelInfo.id}
                       isCheckBoxNeeded={isCheckBoxNeeded}
                       parcelData={parcelInfo}
-                      isAlrdyUploaded={isAlrdyUploaded}
+                      isParcelSelectedToUpload={isParcelSelectedToUpload}
                       onClick={() => {
-                        if (isAlrdyUploaded) {
+                        if (parcelInfo.isUploaded || isAttachingParcel) {
+                          return;
+                        }
+
+                        if (isParcelSelectedToUpload) {
                           handleRemoveParcelFromUpload(parcelInfo.id);
                         } else if (id) {
                           handleAddParcelToUpload({

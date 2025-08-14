@@ -46,6 +46,7 @@ const CurrentShRequestDetailsPage = () => {
   const currentShipmentRequestData = currentShipmentRequests.find(
     (shipmentRequest) => shipmentRequest.id === id
   );
+  const uploadedParcels = currentShipmentRequestData?.shipment_parcels;
 
   useEffect(() => {
     if (
@@ -67,7 +68,7 @@ const CurrentShRequestDetailsPage = () => {
 
       <div className="w-full flex flex-col gap-4 md:flex-row">
         {currentShipmentRequestData ? (
-          <CustomSection className="w-full p-2 flex flex-col gap-4 bg-section_primary container-shadow xs:rounded-md lg:min-h-0 lg:h-full lg:flex-row lg:gap-8 lg:basis-2/5">
+          <CustomSection className="w-full p-2 flex flex-col gap-4 bg-section_primary container-shadow xs:rounded-md lg:min-h-0 lg:h-full lg:gap-8 lg:basis-2/5">
             {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
             {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
             {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
@@ -185,6 +186,24 @@ const CurrentShRequestDetailsPage = () => {
                   Отменить заявку
                 </CustomButton>
               </div>
+            </div>
+
+            {/* ПОСЫЛКИ, ДОБАВЛЕННЫЕ В ЗАЯВКУ НА ОТГРУЗКУ: */}
+            {/* ПОСЫЛКИ, ДОБАВЛЕННЫЕ В ЗАЯВКУ НА ОТГРУЗКУ: */}
+            {/* ПОСЫЛКИ, ДОБАВЛЕННЫЕ В ЗАЯВКУ НА ОТГРУЗКУ: */}
+            <div>
+              <h3>Загруженные посылки:</h3>
+              <ul>
+                {uploadedParcels?.length
+                  ? uploadedParcels?.map((parcelInfo) => {
+                      return (
+                        <li key={parcelInfo.parcel_number}>
+                          {parcelInfo.parcel_number}
+                        </li>
+                      );
+                    })
+                  : null}
+              </ul>
             </div>
           </CustomSection>
         ) : (

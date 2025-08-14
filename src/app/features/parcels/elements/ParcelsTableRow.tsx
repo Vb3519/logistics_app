@@ -1,5 +1,8 @@
 import { memo } from 'react';
 
+// React-icons:
+import { BsBoxSeamFill } from 'react-icons/bs';
+
 // MUI:
 import TableCell from '@mui/material/TableCell';
 import TableRow, { TableRowProps } from '@mui/material/TableRow';
@@ -10,11 +13,11 @@ import { Parcel } from '../../../redux/slices/parcelsSlice';
 interface ParcelsTableRow_Props extends TableRowProps {
   isCheckBoxNeeded: boolean;
   parcelData: Parcel;
-  isAlrdyUploaded: boolean;
+  isParcelSelectedToUpload: boolean;
 }
 
 const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
-  ({ isCheckBoxNeeded, parcelData, isAlrdyUploaded, ...props }) => {
+  ({ isCheckBoxNeeded, parcelData, isParcelSelectedToUpload, ...props }) => {
     // const { isCheckBoxNeeded, parcelData } = props;
 
     console.log('ParcelsTableRow rendered');
@@ -23,7 +26,13 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
       <TableRow {...props} sx={{ cursor: 'pointer' }}>
         {isCheckBoxNeeded ? (
           <TableCell sx={{ textAlign: 'center' }}>
-            <Checkbox checked={isAlrdyUploaded}></Checkbox>
+            {parcelData.isUploaded ? (
+              <BsBoxSeamFill className="m-auto text-xl text-secondary" />
+            ) : (
+              <Checkbox
+                checked={isParcelSelectedToUpload || parcelData.isUploaded}
+              ></Checkbox>
+            )}
           </TableCell>
         ) : null}
 
@@ -31,7 +40,11 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
           sx={{
             textAlign: 'center',
             fontFamily: 'inter',
-            color: `${isAlrdyUploaded && '#99a1af'}`,
+            color: `${
+              isParcelSelectedToUpload
+                ? '#7B57DF'
+                : parcelData.isUploaded && '#99a1af'
+            }`,
           }}
         >
           {parcelData.parcel_number}
@@ -40,7 +53,11 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
           sx={{
             textAlign: 'center',
             fontFamily: 'inter',
-            color: `${isAlrdyUploaded && '#99a1af'}`,
+            color: `${
+              isParcelSelectedToUpload
+                ? '#7B57DF'
+                : parcelData.isUploaded && '#99a1af'
+            }`,
           }}
         >
           {parcelData.parcel_weight}
