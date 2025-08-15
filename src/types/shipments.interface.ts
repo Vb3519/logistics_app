@@ -33,11 +33,12 @@ export interface ShipmentRequest {
 // State:
 // ------------------------
 export interface ShipmentsState {
-  currentShipmentRequests: ShipmentRequest[];
+  shipmentRequestsData: ShipmentRequest[];
+  isShipmentRequestsDataLoading: boolean;
   shipmentRequestsDataError: string;
-  shipmentRequestsFormError: string;
-  isLoadingViaApi: boolean;
+
   isShipmentRequestsFormDataSending: boolean;
+  shipmentRequestsFormError: string;
 }
 
 export interface ShipmentsStateSlice {
@@ -57,7 +58,7 @@ export interface ShipmentsTableElem_Props
 
 // Components:
 // ------------------------
-export interface CurrentShipmentsCard_Props
+export interface ShipmentRequestCard_Props
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
   id?: string;
   created_at: string;

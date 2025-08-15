@@ -9,8 +9,8 @@ import GeneralPage from '../pages/GeneralPage';
 import AllShipmentsLogPage from '../pages/shipments_log/AllShipmentsLogPage';
 import CompletedShipmentsLogPage from '../pages/shipments_log/CompletedShipmentsLogPage';
 
-import CurrentShRequestsPage from '../pages/current_shipment_requests/CurrentShRequestsPage';
-import CurrentShRequestDetailsPage from '../pages/current_shipment_requests/CurrentShRequestDetailsPage';
+import ShipmentRequestsPage from '../pages/shipment_requests/ShipmentRequestsPage';
+import ShipmentRequestDetailsPage from '../pages/shipment_requests/ShipmentRequestDetailsPage';
 
 import ParcelsPage from '../pages/ParcelsPage';
 import ClientsPage from '../pages/ClientsPage';
@@ -22,10 +22,10 @@ const App = () => {
         <Route path="/" element={<MainLayout />}>
           <Route index={true} element={<GeneralPage />} />
 
-          <Route path="shipments" element={<CurrentShRequestsPage />} />
+          <Route path="shipments" element={<ShipmentRequestsPage />} />
           <Route
             path="shipments/:id"
-            element={<CurrentShRequestDetailsPage />}
+            element={<ShipmentRequestDetailsPage />}
           />
 
           <Route path="shipments/all" element={<AllShipmentsLogPage />} />

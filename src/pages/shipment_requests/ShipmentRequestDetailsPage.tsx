@@ -12,13 +12,13 @@ import CustomSection from '../../shared/ui/CustomSection';
 import ParcelsTable from '../../app/features/parcels/containers/ParcelsTable';
 
 // Data:
-import { currentShipmentsData } from '../../shared/data/shipmentsData';
+import { shipmentRequestsData } from '../../shared/data/shipmentsData';
 
 // State:
 import {
-  selectCurrentShipmentRequests,
-  selectIsShipmentsDataLoading,
-  loadCurrentShipmentRequestsData,
+  selectShipmentRequests,
+  selectisShipmentRequestsDataLoading,
+  loadShipmentRequestsData,
 } from '../../app/redux/slices/shipmentsSlice';
 
 // Types:
@@ -28,32 +28,30 @@ import { ShipmentRequest } from '../../types/shipments.interface';
 // Api:
 import { SHIPMENTS_URL } from '../../shared/api/logistics_appApi';
 
-const CurrentShRequestDetailsPage = () => {
+const ShipmentRequestDetailsPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const params = useParams();
   const { id } = params;
 
   // Загрузка с api данных по непроведенным заявкам на отгрузку:
-  const handleLoadCurrentShipmentRequestsData = (url: string) => {
-    dispatch(loadCurrentShipmentRequestsData(url));
+  const handleLoadShipmentRequestsData = (url: string) => {
+    dispatch(loadShipmentRequestsData(url));
   };
 
-  const currentShipmentRequests = useSelector(selectCurrentShipmentRequests);
-  const isCurrentShipmentRequestsDataLoading: boolean = useSelector(
-    selectIsShipmentsDataLoading
+  const shipmentRequests = useSelector(selectShipmentRequests);
+  const isShipmentRequestsDataLoading: boolean = useSelector(
+    selectisShipmentRequestsDataLoading
   );
 
-  const currentShipmentRequestData = currentShipmentRequests.find(
+  // Информация по текущей непроведенной заявке на отгрузку:
+  const currentShipmentRequestData = shipmentRequests.find(
     (shipmentRequest) => shipmentRequest.id === id
   );
   const uploadedParcels = currentShipmentRequestData?.shipment_parcels;
 
   useEffect(() => {
-    if (
-      currentShipmentRequests.length === 0 &&
-      !isCurrentShipmentRequestsDataLoading
-    ) {
-      handleLoadCurrentShipmentRequestsData(SHIPMENTS_URL);
+    if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
+      handleLoadShipmentRequestsData(SHIPMENTS_URL);
     }
   }, []);
 
@@ -221,4 +219,4 @@ const CurrentShRequestDetailsPage = () => {
   );
 };
 
-export default CurrentShRequestDetailsPage;
+export default ShipmentRequestDetailsPage;

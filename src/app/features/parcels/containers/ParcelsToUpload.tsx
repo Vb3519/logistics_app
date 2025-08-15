@@ -9,7 +9,7 @@ import CustomButton from '../../../../shared/ui/CustomButton';
 // State:
 
 import {
-  selectCurrentShipmentRequests,
+  selectShipmentRequests,
   addParcelsToShipment,
 } from '../../../redux/slices/shipmentsSlice';
 
@@ -44,11 +44,9 @@ const ParcelsToUpload = () => {
 
   // Текущие не проведенные заявки на отгрузку:
   // ---------------------------------------------
-  const currentShipmentRequests = useSelector(selectCurrentShipmentRequests);
-  const activeShipmentRequest: ShipmentRequest | undefined =
-    currentShipmentRequests.find(
-      (shipmentRequest) => shipmentRequest.id === id
-    );
+  const shipmentRequests = useSelector(selectShipmentRequests);
+  const currentShipmentRequest: ShipmentRequest | undefined =
+    shipmentRequests.find((shipmentRequest) => shipmentRequest.id === id);
 
   // Выбранные на отгрузку посылки:
   // ---------------------------------------------
@@ -61,13 +59,13 @@ const ParcelsToUpload = () => {
   // "Привязать" выбранные посылки к непроведенной заявке на отгрузку:
   // -----------------------------------------------------------------------
   const handleAddParcelsToShipment = async () => {
-    if (activeShipmentRequest) {
+    if (currentShipmentRequest) {
       // Расчет суммарного веса посылок:
-      const totalMaxLoadVal: number = activeShipmentRequest.max_load_value;
+      const totalMaxLoadVal: number = currentShipmentRequest.max_load_value;
 
       const remainingLoadVal: number =
-        activeShipmentRequest.max_load_value -
-        activeShipmentRequest.current_load_value;
+        currentShipmentRequest.max_load_value -
+        currentShipmentRequest.current_load_value;
 
       const isWeightOverload: boolean =
         totalMaxLoadVal < parcelsTotalWeight ||
@@ -93,7 +91,7 @@ const ParcelsToUpload = () => {
 
         // Клиент: Добавление всех выбранных посылок в массив посылок активной заявки на отгрузку:
         const parcelsAndShipmentData = {
-          activeShipmentId: activeShipmentRequest.id,
+          currentShipmentId: currentShipmentRequest.id,
           parcelsToUpload: parcelsToUpload,
           parcelsTotalWeight: parcelsTotalWeight,
         };

@@ -10,13 +10,13 @@ import CustomSection from '../../../../shared/ui/CustomSection';
 import ShipmentRequestsListItem from './ShipmentRequestsListItem';
 
 // State:
-import { selectCurrentShipmentRequests } from '../../../redux/slices/shipmentsSlice';
+import { selectShipmentRequests } from '../../../redux/slices/shipmentsSlice';
 import { toggleMobileNavPage } from '../../../redux/slices/mobileNavMenuSlice';
 
 const FreeTransport = () => {
   const dispatch = useDispatch();
 
-  const currentShipmentRequests = useSelector(selectCurrentShipmentRequests);
+  const shipmentRequests = useSelector(selectShipmentRequests);
 
   const handleToggleMobileMenuPage = () => {
     dispatch(toggleMobileNavPage());
@@ -24,7 +24,7 @@ const FreeTransport = () => {
 
   const min_items_to_render: number = 3;
   const listPlaceholdersCounter: number =
-    min_items_to_render - currentShipmentRequests.length;
+    min_items_to_render - shipmentRequests.length;
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
@@ -44,7 +44,7 @@ const FreeTransport = () => {
       </div>
 
       <ul className="max-h-58 flex flex-col gap-1 text-sm overflow-y-auto lg:text-base">
-        {currentShipmentRequests.map((shipmentInfo) => {
+        {shipmentRequests.map((shipmentInfo) => {
           return (
             <ShipmentRequestsListItem
               key={shipmentInfo.id}

@@ -20,32 +20,32 @@ import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
 // State:
 import { toggleMobileNavPage } from '../../../redux/slices/mobileNavMenuSlice';
 import {
-  loadCurrentShipmentRequestsData,
-  selectCurrentShipmentRequests,
-  selectIsShipmentsDataLoading,
+  loadShipmentRequestsData,
+  selectShipmentRequests,
+  selectisShipmentRequestsDataLoading,
 } from '../../../redux/slices/shipmentsSlice';
 
-const CurrentShipmentRequestsList = () => {
+const ShipmentRequestsList = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const currentShipmentRequests = useSelector(selectCurrentShipmentRequests);
-  const isShipmentsDataLoading: boolean = useSelector(
-    selectIsShipmentsDataLoading
+  const shipmentRequests = useSelector(selectShipmentRequests);
+  const isShipmentRequestsDataLoading: boolean = useSelector(
+    selectisShipmentRequestsDataLoading
   );
 
-  const handleLoadCurrentShipmentRequestsData = (url: string) => {
-    dispatch(loadCurrentShipmentRequestsData(url));
+  const handleLoadShipmentRequestsData = (url: string) => {
+    dispatch(loadShipmentRequestsData(url));
   };
 
   useEffect(() => {
-    if (currentShipmentRequests.length === 0 && !isShipmentsDataLoading) {
-      handleLoadCurrentShipmentRequestsData(SHIPMENTS_URL);
+    if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
+      handleLoadShipmentRequestsData(SHIPMENTS_URL);
     }
   }, []);
 
   const min_items_to_render: number = 3;
   const listPlaceholdersCounter: number =
-    min_items_to_render - currentShipmentRequests.length;
+    min_items_to_render - shipmentRequests.length;
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
@@ -64,15 +64,15 @@ const CurrentShipmentRequestsList = () => {
       </div>
 
       <ul className="grid grid-rows-3 gap-2 text-sm overflow-y-auto lg:text-base">
-        {currentShipmentRequests.map((shipmentInfo) => {
+        {shipmentRequests.map((shipmentRequestInfo) => {
           return (
             <ShipmentRequestsListItem
-              key={shipmentInfo.id}
-              shipment_number={shipmentInfo.shipment_number}
-              from_city={shipmentInfo.from_city}
-              to_city={shipmentInfo.to_city}
-              current_load_value={shipmentInfo.current_load_value}
-              max_load_value={shipmentInfo.max_load_value}
+              key={shipmentRequestInfo.id}
+              shipment_number={shipmentRequestInfo.shipment_number}
+              from_city={shipmentRequestInfo.from_city}
+              to_city={shipmentRequestInfo.to_city}
+              current_load_value={shipmentRequestInfo.current_load_value}
+              max_load_value={shipmentRequestInfo.max_load_value}
             />
           );
         })}
@@ -97,4 +97,4 @@ const CurrentShipmentRequestsList = () => {
   );
 };
 
-export default CurrentShipmentRequestsList;
+export default ShipmentRequestsList;

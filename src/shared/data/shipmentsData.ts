@@ -6,7 +6,7 @@ export const tableHeaderCols: string[] = [
   'Статус',
 ];
 
-export const currentShipmentsData = [
+export const shipmentRequestsData = [
   {
     id: '1231123f',
     adress: 'Санкт-Петербург - Москва',

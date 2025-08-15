@@ -24,7 +24,7 @@ import { createShipmentRequest } from '../../../../shared/utils/createShipmentRe
 import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
 
 // State:
-import { addNewShipmentRequest } from '../../../redux/slices/shipmentsSlice';
+import { addShipmentRequest } from '../../../redux/slices/shipmentsSlice';
 
 const AddShipmentRequestForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -44,7 +44,7 @@ const AddShipmentRequestForm = () => {
   ) => {
     try {
       await dispatch(
-        addNewShipmentRequest({
+        addShipmentRequest({
           url: SHIPMENTS_URL,
           shipmentRequestFormData: formData,
         })

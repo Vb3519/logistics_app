@@ -2,9 +2,9 @@
 import { BsTruckFlatbed } from 'react-icons/bs';
 
 // Types:
-import { CurrentShipmentsCard_Props } from '../../../../types/shipments.interface';
+import { ShipmentRequestCard_Props } from '../../../../types/shipments.interface';
 
-const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
+const ShipmentRequestCard: React.FC<ShipmentRequestCard_Props> = ({
   id,
   created_at,
   shipment_number,
@@ -65,4 +65,4 @@ const CurrentShipmentsCard: React.FC<CurrentShipmentsCard_Props> = ({
   );
 };
 
-export default CurrentShipmentsCard;
+export default ShipmentRequestCard;

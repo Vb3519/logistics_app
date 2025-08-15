@@ -15,7 +15,7 @@ import { Parcel } from './parcelsSlice';
 
 // Загрузка с api данных по непроведенным заявкам на отгрузку:
 // ---------------------------------------------------
-export const loadCurrentShipmentRequestsData = createAsyncThunk(
+export const loadShipmentRequestsData = createAsyncThunk(
   'shipments/loadShipmentRequestsData',
   async (url: string, thunkApi) => {
     try {
@@ -24,15 +24,15 @@ export const loadCurrentShipmentRequestsData = createAsyncThunk(
       const shipmentRequestsDataResponse: Response = await fetch(url);
 
       if (shipmentRequestsDataResponse.ok) {
-        const currentShipmentRequestsData: ShipmentRequest[] =
+        const shipmentRequestsData: ShipmentRequest[] =
           await shipmentRequestsDataResponse.json();
 
         console.log(
           'Данные по непроведенным заявкам на отгрузку:',
-          currentShipmentRequestsData
+          shipmentRequestsData
         );
 
-        return currentShipmentRequestsData;
+        return shipmentRequestsData;
       } else {
         const errorMsg: string = `HTTP Error: ${shipmentRequestsDataResponse.status} ${shipmentRequestsDataResponse.statusText}`;
         console.log(errorMsg);
@@ -51,8 +51,8 @@ export const loadCurrentShipmentRequestsData = createAsyncThunk(
 
 // Добавление нового запроса на создание заявки на отгрузку:
 // -----------------------------------------------------------------
-export const addNewShipmentRequest = createAsyncThunk(
-  'shipments/addNewShipmentRequest',
+export const addShipmentRequest = createAsyncThunk(
+  'shipments/addShipmentRequest',
   async (
     payload: {
       url: string;
@@ -69,15 +69,15 @@ export const addNewShipmentRequest = createAsyncThunk(
         shipmentRequestFormData
       );
 
-      const addNewShipmentRequestResponse: Response = await fetch(url, {
+      const addShipmentRequestResponse: Response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(newShipmentRequest),
       });
 
-      if (addNewShipmentRequestResponse.ok) {
+      if (addShipmentRequestResponse.ok) {
         const addedShipmentRequest: ShipmentRequest =
-          await addNewShipmentRequestResponse.json();
+          await addShipmentRequestResponse.json();
 
         console.log(
           'Новый запрос на создание заявки на отгрузку:',
@@ -86,7 +86,7 @@ export const addNewShipmentRequest = createAsyncThunk(
 
         return addedShipmentRequest;
       } else {
-        const errorMsg: string = `HTTP Error: ${addNewShipmentRequestResponse.status} ${addNewShipmentRequestResponse.statusText}`;
+        const errorMsg: string = `HTTP Error: ${addShipmentRequestResponse.status} ${addShipmentRequestResponse.statusText}`;
 
         console.log(errorMsg);
 
@@ -102,11 +102,12 @@ export const addNewShipmentRequest = createAsyncThunk(
 );
 
 const initialState: ShipmentsState = {
-  currentShipmentRequests: [],
+  shipmentRequestsData: [],
+  isShipmentRequestsDataLoading: false,
   shipmentRequestsDataError: '',
-  shipmentRequestsFormError: '',
-  isLoadingViaApi: false,
+
   isShipmentRequestsFormDataSending: false,
+  shipmentRequestsFormError: '',
 };
 
 const shipmentsSlice = createSlice({
@@ -117,26 +118,24 @@ const shipmentsSlice = createSlice({
       state,
       action: {
         payload: {
-          activeShipmentId: string;
+          currentShipmentId: string;
           parcelsToUpload: Parcel[];
-          parcelsTotalWeight: number;
         };
       }
     ) => {
-      const { activeShipmentId, parcelsToUpload, parcelsTotalWeight } =
-        action.payload;
+      const { currentShipmentId, parcelsToUpload } = action.payload;
 
-      const activeShipmentRequest = state.currentShipmentRequests.find(
+      const currentShipmentRequest = state.shipmentRequestsData.find(
         (shipmentRequest) => {
-          return shipmentRequest.id === activeShipmentId;
+          return shipmentRequest.id === currentShipmentId;
         }
       );
 
-      if (activeShipmentRequest) {
-        activeShipmentRequest.shipment_parcels.push(...parcelsToUpload);
+      if (currentShipmentRequest) {
+        currentShipmentRequest.shipment_parcels.push(...parcelsToUpload);
 
-        activeShipmentRequest.current_load_value =
-          activeShipmentRequest.shipment_parcels.reduce(
+        currentShipmentRequest.current_load_value =
+          currentShipmentRequest.shipment_parcels.reduce(
             (totalWeight, shipment) =>
               totalWeight + Number(shipment.parcel_weight),
             0
@@ -146,40 +145,38 @@ const shipmentsSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    // Загрузка с api данных по запросам на создание заявки на отгрузку:
-    builder.addCase(loadCurrentShipmentRequestsData.pending, (state) => {
-      return { ...state, isLoadingViaApi: true, shipmentRequestsDataError: '' };
+    // Загрузка с api данных по непроведенным заявкам на отгрузку:
+    builder.addCase(loadShipmentRequestsData.pending, (state) => {
+      return {
+        ...state,
+        isShipmentRequestsDataLoading: true,
+        shipmentRequestsDataError: '',
+      };
     });
 
-    builder.addCase(
-      loadCurrentShipmentRequestsData.fulfilled,
-      (state, action) => {
-        // return {
-        //   ...state,
-        //   isLoadingViaApi: false,
-        //   currentShipmentRequests: [...state.currentShipmentRequests, ...action.payload],
-        // };
+    builder.addCase(loadShipmentRequestsData.fulfilled, (state, action) => {
+      // return {
+      //   ...state,
+      //   isShipmentRequestsDataLoading: false,
+      //   shipmentRequestsData: [...state.shipmentRequestsData, ...action.payload],
+      // };
 
-        state.isLoadingViaApi = false;
-        state.currentShipmentRequests.push(...action.payload);
-      }
-    );
+      state.isShipmentRequestsDataLoading = false;
+      state.shipmentRequestsData.push(...action.payload);
+    });
 
-    builder.addCase(
-      loadCurrentShipmentRequestsData.rejected,
-      (state, action) => {
-        if (typeof action.payload === 'string') {
-          return {
-            ...state,
-            isLoadingViaApi: false,
-            shipmentRequestsDataError: action.payload,
-          };
-        }
+    builder.addCase(loadShipmentRequestsData.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        return {
+          ...state,
+          isShipmentRequestsDataLoading: false,
+          shipmentRequestsDataError: action.payload,
+        };
       }
-    );
+    });
 
     // Добавление нового запроса на создание заявки на отгрузку:
-    builder.addCase(addNewShipmentRequest.pending, (state) => {
+    builder.addCase(addShipmentRequest.pending, (state) => {
       return {
         ...state,
         isShipmentRequestsFormDataSending: true,
@@ -187,18 +184,15 @@ const shipmentsSlice = createSlice({
       };
     });
 
-    builder.addCase(addNewShipmentRequest.fulfilled, (state, action) => {
+    builder.addCase(addShipmentRequest.fulfilled, (state, action) => {
       return {
         ...state,
         isShipmentRequestsFormDataSending: false,
-        currentShipmentRequests: [
-          ...state.currentShipmentRequests,
-          action.payload,
-        ],
+        shipmentRequestsData: [...state.shipmentRequestsData, action.payload],
       };
     });
 
-    builder.addCase(addNewShipmentRequest.rejected, (state, action) => {
+    builder.addCase(addShipmentRequest.rejected, (state, action) => {
       if (typeof action.payload === 'string') {
         return {
           ...state,
@@ -214,10 +208,11 @@ const shipmentsSlice = createSlice({
 export const { addParcelsToShipment } = shipmentsSlice.actions;
 
 // Состояние:
-export const selectCurrentShipmentRequests = (state: ShipmentsStateSlice) =>
-  state.shipments.currentShipmentRequests;
+export const selectShipmentRequests = (state: ShipmentsStateSlice) =>
+  state.shipments.shipmentRequestsData;
 
-export const selectIsShipmentsDataLoading = (state: ShipmentsStateSlice) =>
-  state.shipments.isLoadingViaApi;
+export const selectisShipmentRequestsDataLoading = (
+  state: ShipmentsStateSlice
+) => state.shipments.isShipmentRequestsDataLoading;
 
 export default shipmentsSlice.reducer;

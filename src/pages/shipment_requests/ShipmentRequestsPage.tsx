@@ -8,17 +8,17 @@ import { BsClockHistory } from 'react-icons/bs';
 
 // Ui:
 import CustomSection from '../../shared/ui/CustomSection';
-import CurrentShipmentsCard from '../../app/features/shipments/elements/CurrentShipmentsCard';
+import ShipmentRequestCard from '../../app/features/shipments/elements/ShipmentRequestCard';
 import BreadCrumbs from '../../shared/ui/BreadCrumbs';
 
 // Data:
-import { currentShipmentsData } from '../../shared/data/shipmentsData';
+import { shipmentRequestsData } from '../../shared/data/shipmentsData';
 
 // State:
 import {
-  selectCurrentShipmentRequests,
-  selectIsShipmentsDataLoading,
-  loadCurrentShipmentRequestsData,
+  selectShipmentRequests,
+  selectisShipmentRequestsDataLoading,
+  loadShipmentRequestsData,
 } from '../../app/redux/slices/shipmentsSlice';
 
 // Types:
@@ -28,38 +28,35 @@ import { AppDispatch } from '../../app/redux/store';
 // Api:
 import { SHIPMENTS_URL } from '../../shared/api/logistics_appApi';
 
-const CurrentShRequestsPage = () => {
+const ShipmentRequestsPage = () => {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleNavigateToShipmentDetails = (id: string) => {
+  const handleNavigateToShipmentRequestDetails = (id: string) => {
     navigate(`/shipments/${id}`);
   };
 
   // Загрузка с api данных по непроведенным заявкам на отгрузку:
-  const handleLoadCurrentShipmentRequestsData = (url: string) => {
-    dispatch(loadCurrentShipmentRequestsData(url));
+  const handleLoadShipmentRequestsData = (url: string) => {
+    dispatch(loadShipmentRequestsData(url));
   };
 
-  const currentShipmentRequests: ShipmentRequest[] = useSelector(
-    selectCurrentShipmentRequests
+  const shipmentRequests: ShipmentRequest[] = useSelector(
+    selectShipmentRequests
   );
-  const isCurrentShipmentRequestsDataLoading: boolean = useSelector(
-    selectIsShipmentsDataLoading
+  const isShipmentRequestsDataLoading: boolean = useSelector(
+    selectisShipmentRequestsDataLoading
   );
 
   useEffect(() => {
-    if (
-      currentShipmentRequests.length === 0 &&
-      !isCurrentShipmentRequestsDataLoading
-    ) {
-      handleLoadCurrentShipmentRequestsData(SHIPMENTS_URL);
+    if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
+      handleLoadShipmentRequestsData(SHIPMENTS_URL);
     }
   }, []);
 
   const min_shipmentRequests_toRender = 6;
   const shipmentRequestsPlaceholdersCounter: number =
-    min_shipmentRequests_toRender - currentShipmentRequests.length;
+    min_shipmentRequests_toRender - shipmentRequests.length;
 
   return (
     <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
@@ -95,11 +92,11 @@ const CurrentShRequestsPage = () => {
       </div>
 
       <CustomSection className="min-h-screen w-full p-2 grid grid-rows-6 gap-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 sm:grid-cols-2 sm:grid-rows-3 lg:min-h-0 lg:h-full">
-        {currentShipmentRequests.map((shipmentRequest) => {
+        {shipmentRequests.map((shipmentRequest) => {
           return (
-            <CurrentShipmentsCard
+            <ShipmentRequestCard
               onClick={() => {
-                handleNavigateToShipmentDetails(shipmentRequest.id);
+                handleNavigateToShipmentRequestDetails(shipmentRequest.id);
               }}
               key={shipmentRequest.id}
               created_at={shipmentRequest.created_at}
@@ -134,4 +131,4 @@ const CurrentShRequestsPage = () => {
   );
 };
 
-export default CurrentShRequestsPage;
+export default ShipmentRequestsPage;
