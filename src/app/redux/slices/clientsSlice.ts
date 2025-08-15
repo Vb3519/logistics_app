@@ -5,28 +5,12 @@ import serverResponseImitation from '../../../shared/utils/serverResponseImitati
 import createCompanyClient from '../../../shared/utils/createCompanyClient';
 
 // Types:
-import { ClientFormFields } from '../../features/clients/containers/AddClientForm';
-
-export interface Client {
-  id: string;
-  company_title: string;
-  employee_name: string;
-  employee_sern: string;
-  company_phone: string;
-  company_email: string;
-}
-
-interface ClientsState {
-  clients: Client[];
-  clientsDataError: string;
-  clientsFormError: string;
-  isLoadingViaAPI: boolean;
-  isClientsFormDataSending: boolean;
-}
-
-interface ClientsStateSlice {
-  clients: ClientsState;
-}
+import {
+  Client,
+  ClientFormFields,
+  ClientsState,
+  ClientsStateSlice,
+} from '../../../types/clients.interface';
 
 // Загрузка данных по клиентам компании:
 // ------------------------------------------------
@@ -103,11 +87,12 @@ export const addNewClient = createAsyncThunk(
 // Слайс состояния клиентов компании:
 // ------------------------------------------------
 const initialState: ClientsState = {
-  clients: [],
+  clientsData: [],
+  isClientsDataLoading: false,
   clientsDataError: '',
-  clientsFormError: '',
-  isLoadingViaAPI: false,
+
   isClientsFormDataSending: false,
+  clientsFormError: '',
 };
 
 const clientsSlice = createSlice({
@@ -118,17 +103,17 @@ const clientsSlice = createSlice({
   extraReducers: (builder) => {
     // Загрузка данных по заказчикам:
     builder.addCase(loadClientsData.pending, (state) => {
-      return { ...state, isLoadingViaAPI: true, clientsDataError: '' };
+      return { ...state, isClientsDataLoading: true, clientsDataError: '' };
     });
 
     builder.addCase(loadClientsData.fulfilled, (state, action) => {
-      state.isLoadingViaAPI = false;
+      state.isClientsDataLoading = false;
 
-      state.clients.push(...action.payload);
+      state.clientsData.push(...action.payload);
     });
 
     builder.addCase(loadClientsData.rejected, (state, action) => {
-      state.isLoadingViaAPI = false;
+      state.isClientsDataLoading = false;
 
       if (typeof action.payload === 'string') {
         state.clientsDataError = action.payload;
@@ -142,7 +127,7 @@ const clientsSlice = createSlice({
 
     builder.addCase(addNewClient.fulfilled, (state, action) => {
       state.isClientsFormDataSending = false;
-      state.clients.push(action.payload);
+      state.clientsData.push(action.payload);
     });
 
     builder.addCase(addNewClient.rejected, (state, action) => {
@@ -156,9 +141,9 @@ const clientsSlice = createSlice({
 });
 
 // Состояние:
-export const selectClients = (state: ClientsStateSlice) =>
-  state.clients.clients;
-export const selectIsLoadingViaApi = (state: ClientsStateSlice) =>
-  state.clients.isLoadingViaAPI;
+export const selectClientsData = (state: ClientsStateSlice) =>
+  state.clients.clientsData;
+export const selectIsClientsDataLoading = (state: ClientsStateSlice) =>
+  state.clients.isClientsDataLoading;
 
 export default clientsSlice.reducer;

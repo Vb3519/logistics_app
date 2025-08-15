@@ -10,13 +10,7 @@ import { addNewClient } from '../../../redux/slices/clientsSlice';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
-export interface ClientFormFields {
-  company_title: string;
-  employee_name: string;
-  employee_sern: string;
-  company_phone: string;
-  company_email: string;
-}
+import { ClientFormFields } from '../../../../types/clients.interface';
 
 // Api:
 import { CLIENTS_URL } from '../../../../shared/api/logistics_appApi';

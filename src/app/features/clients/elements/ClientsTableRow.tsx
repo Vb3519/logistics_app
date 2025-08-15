@@ -5,11 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 // Types:
-import { Client } from '../../../redux/slices/clientsSlice';
-
-interface ClientsTableRow_Props {
-  companyClientData: Client;
-}
+import { ClientsTableRow_Props } from '../../../../types/clients.interface';
 
 const ClientsTableRow: React.FC<ClientsTableRow_Props> = memo(
   ({ companyClientData }) => {

@@ -22,8 +22,8 @@ import {
 
 // State:
 import {
-  selectClients,
-  selectIsLoadingViaApi,
+  selectClientsData,
+  selectIsClientsDataLoading,
   loadClientsData,
 } from '../../../redux/slices/clientsSlice';
 
@@ -39,8 +39,8 @@ const ClientsTable = () => {
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
-  const currentCompanyClients = useSelector(selectClients);
-  const isClientsDataLoading: boolean = useSelector(selectIsLoadingViaApi);
+  const companyClientsData = useSelector(selectClientsData);
+  const isClientsDataLoading: boolean = useSelector(selectIsClientsDataLoading);
 
   // Пагинация таблицы с клиентами компании:
   // -------------------------------------------
@@ -62,7 +62,7 @@ const ClientsTable = () => {
   };
 
   useEffect(() => {
-    if (currentCompanyClients.length === 0 && !isClientsDataLoading) {
+    if (companyClientsData.length === 0 && !isClientsDataLoading) {
       handleLoadClientsData(CLIENTS_URL);
     }
   }, []);
@@ -105,7 +105,7 @@ const ClientsTable = () => {
           </TableHead>
 
           <TableBody>
-            {currentCompanyClients
+            {companyClientsData
               .slice(rowsPerPage * page, rowsPerPage * page + rowsPerPage)
               .map((clientInfo) => {
                 return (
@@ -122,7 +122,7 @@ const ClientsTable = () => {
       <TablePagination
         rowsPerPageOptions={[10, 20, 30]}
         component="div"
-        count={currentCompanyClients.length}
+        count={companyClientsData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
