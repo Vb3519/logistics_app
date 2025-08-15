@@ -1,20 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 // Types:
-import { Parcel } from './parcelsSlice';
-
-interface ParcelsToUploadState {
-  parcelsToUpload: Parcel[];
-  errorMsg: string;
-}
-
-interface ParcelsToUploadSlice {
-  parcelsToUpload: ParcelsToUploadState;
-}
+import {
+  Parcel,
+  ParcelsToUploadState,
+  ParcelsToUploadSlice,
+} from '../../../types/parcels.interface';
 
 const initialState: ParcelsToUploadState = {
-  parcelsToUpload: [],
-  errorMsg: '',
+  parcelsToUploadData: [],
+  parcelsWeightOverloadError: '',
 };
 
 const parcelsToUploadSlice = createSlice({
@@ -35,26 +30,33 @@ const parcelsToUploadSlice = createSlice({
         shipment_id: shipmentId,
       };
 
-      //   state.parcelsToUpload.push(parcelDataWithShipmentId);
+      //   state.parcelsToUploadData.push(parcelDataWithShipmentId);
 
       return {
         ...state,
-        parcelsToUpload: [...state.parcelsToUpload, parcelDataWithShipmentId],
+        parcelsToUploadData: [
+          ...state.parcelsToUploadData,
+          parcelDataWithShipmentId,
+        ],
       };
     },
 
     removeParcelFromUpload: (state, action) => {
-      state.parcelsToUpload = state.parcelsToUpload.filter(
+      state.parcelsToUploadData = state.parcelsToUploadData.filter(
         (parcelInfo) => parcelInfo.id !== action.payload
       );
     },
 
-    setParcelsToUploadErrorMsg: (state, action) => {
-      return { ...state, errorMsg: action.payload };
+    setParcelsWeightOverloadError: (state, action) => {
+      return { ...state, parcelsWeightOverloadError: action.payload };
     },
 
-    resetParcelsToUpload: (state) => {
-      return { ...state, parcelsToUpload: [], errorMsg: '' };
+    resetParcelsToUploadState: (state) => {
+      return {
+        ...state,
+        parcelsToUploadData: [],
+        parcelsWeightOverloadError: '',
+      };
     },
   },
 });
@@ -63,15 +65,15 @@ const parcelsToUploadSlice = createSlice({
 export const {
   addParcelToUpload,
   removeParcelFromUpload,
-  setParcelsToUploadErrorMsg,
-  resetParcelsToUpload,
+  setParcelsWeightOverloadError,
+  resetParcelsToUploadState,
 } = parcelsToUploadSlice.actions;
 
 // Состояние:
-export const selectParcelsToUpload = (state: ParcelsToUploadSlice) =>
-  state.parcelsToUpload.parcelsToUpload;
+export const selectParcelsToUploadData = (state: ParcelsToUploadSlice) =>
+  state.parcelsToUpload.parcelsToUploadData;
 
-export const selectParcelsToUploadErrorMsg = (state: ParcelsToUploadSlice) =>
-  state.parcelsToUpload.errorMsg;
+export const selectParcelsWeightOverloadError = (state: ParcelsToUploadSlice) =>
+  state.parcelsToUpload.parcelsWeightOverloadError;
 
 export default parcelsToUploadSlice.reducer;

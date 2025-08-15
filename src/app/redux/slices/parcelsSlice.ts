@@ -5,33 +5,12 @@ import serverResponseImitation from '../../../shared/utils/serverResponseImitati
 import { createParcel } from '../../../shared/utils/createParcel';
 
 // Types:
-import { ParcelFormFields } from '../../features/parcels/containers/AddParcelForm';
-
-export interface Parcel {
-  id: string;
-  parcel_number: string;
-  parcel_weight: string;
-  parcel_status:
-    | 'Изменен адрес отправки'
-    | 'Проблема с упаковкой'
-    | 'Вышел из строя транспорт';
-  shipment_id: string;
-  isUploaded: boolean;
-}
-
-interface ParcelsState {
-  parcels: Parcel[];
-  parcelsDataError: string;
-  parcelsFormError: string;
-  attachParcelError: string;
-  isLoadingViaApi: boolean;
-  isParcelsFormDataSending: boolean;
-  isAttachingParcel: boolean;
-}
-
-interface ParcelsStateSlice {
-  parcels: ParcelsState;
-}
+import {
+  Parcel,
+  ParcelsState,
+  ParcelsStateSlice,
+  ParcelFormFields,
+} from '../../../types/parcels.interface';
 
 // Загрузка с api данных по посылкам:
 // ---------------------------------------------------
@@ -65,7 +44,7 @@ export const loadParcelsData = createAsyncThunk(
 // Добавление информации о новой посылке:
 // ---------------------------------------------------
 export const addNewParcel = createAsyncThunk(
-  'parcels/addParcel',
+  'parcels/addNewParcel',
   async (
     payload: { url: string; parcelFormData: ParcelFormFields },
     thunkAPI
@@ -108,30 +87,30 @@ export const addNewParcel = createAsyncThunk(
 
 // Загрузка и "привязка" посылки к непроведенной заявке на отгрузку:
 // ------------------------------------------------------------------
-export const attachParcelToShipmentRequest = createAsyncThunk(
-  'parcels/attachParcel',
+export const uploadParcelToShipmentRequest = createAsyncThunk(
+  'parcels/uploadParcel',
   async (payload: { url: string; parcelId: string }, thunkApi) => {
     try {
       await serverResponseImitation(3000);
 
       const { url, parcelId } = payload;
 
-      const attachParcelResponse: Response = await fetch(`${url}/${parcelId}`, {
+      const uploadParcelResponse: Response = await fetch(`${url}/${parcelId}`, {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify({ isUploaded: true }),
       });
 
-      if (attachParcelResponse.ok) {
-        const attachedParcel: Parcel = await attachParcelResponse.json();
+      if (uploadParcelResponse.ok) {
+        const uploadedParcel: Parcel = await uploadParcelResponse.json();
         console.log(
           'Прикрепленная к заявке на отгрузку посылка:',
-          attachedParcel
+          uploadedParcel
         );
 
-        return attachedParcel;
+        return uploadedParcel;
       } else {
-        const errorMsg: string = `HTTP Error: ${attachParcelResponse.status} ${attachParcelResponse.statusText}`;
+        const errorMsg: string = `HTTP Error: ${uploadParcelResponse.status} ${uploadParcelResponse.statusText}`;
         console.log(errorMsg);
 
         return thunkApi.rejectWithValue(errorMsg);
@@ -147,15 +126,15 @@ export const attachParcelToShipmentRequest = createAsyncThunk(
 );
 
 const initialState: ParcelsState = {
-  parcels: [],
+  parcelsData: [],
+  isParcelsDataLoading: false,
   parcelsDataError: '',
-  isLoadingViaApi: false,
 
-  parcelsFormError: '',
   isParcelsFormDataSending: false,
+  parcelsFormError: '',
 
-  attachParcelError: '',
-  isAttachingParcel: false,
+  isUploadingParcel: false,
+  parcelUploadError: '',
 };
 
 const parcelsSlice = createSlice({
@@ -167,17 +146,17 @@ const parcelsSlice = createSlice({
     //  Загрузка с api данных по посылкам:
     // ----------------------------------------------------------------------------
     builder.addCase(loadParcelsData.pending, (state) => {
-      return { ...state, isLoadingViaApi: true, parcelsDataError: '' };
+      return { ...state, isParcelsDataLoading: true, parcelsDataError: '' };
     });
 
     builder.addCase(loadParcelsData.fulfilled, (state, action) => {
-      //   state.isLoadingViaApi = false;
-      //   state.parcels.push(...action.payload);
+      //   state.isParcelsDataLoading = false;
+      //   state.parcelsData.push(...action.payload);
 
       return {
         ...state,
-        isLoadingViaApi: false,
-        parcels: [...state.parcels, ...action.payload],
+        isParcelsDataLoading: false,
+        parcelsData: [...state.parcelsData, ...action.payload],
       };
     });
 
@@ -185,7 +164,7 @@ const parcelsSlice = createSlice({
       if (typeof action.payload === 'string') {
         return {
           ...state,
-          isLoadingViaApi: false,
+          isParcelsDataLoading: false,
           parcelsDataError: action.payload,
         };
       }
@@ -199,12 +178,12 @@ const parcelsSlice = createSlice({
 
     builder.addCase(addNewParcel.fulfilled, (state, action) => {
       state.isParcelsFormDataSending = false; // immer
-      state.parcels.push(action.payload);
+      state.parcelsData.push(action.payload);
 
       // return {
       //   ...state,
       //   isParcelsFormDataSending: false,
-      //   parcels: [...state.parcels, action.payload],
+      //   parcelsData: [...state.parcelsData, action.payload],
       // };
     });
 
@@ -220,32 +199,32 @@ const parcelsSlice = createSlice({
 
     // Загрузка и "привязка" посылки к непроведенной заявке на отгрузку:
     // ----------------------------------------------------------------------------
-    builder.addCase(attachParcelToShipmentRequest.pending, (state) => {
-      return { ...state, isAttachingParcel: true, attachParcelError: '' };
+    builder.addCase(uploadParcelToShipmentRequest.pending, (state) => {
+      return { ...state, isUploadingParcel: true, parcelUploadError: '' };
     });
 
     builder.addCase(
-      attachParcelToShipmentRequest.fulfilled,
+      uploadParcelToShipmentRequest.fulfilled,
       (state, action) => {
         const { id } = action.payload;
 
-        const parcelToAttach: Parcel | undefined = state.parcels.find(
+        const parcelToUpload: Parcel | undefined = state.parcelsData.find(
           (parcelInfo) => parcelInfo.id === id
         );
 
-        if (parcelToAttach) {
-          parcelToAttach.isUploaded = true;
+        if (parcelToUpload) {
+          parcelToUpload.isUploaded = true;
         }
 
-        state.isAttachingParcel = false;
+        state.isUploadingParcel = false;
       }
     );
 
-    builder.addCase(attachParcelToShipmentRequest.rejected, (state, action) => {
-      state.isAttachingParcel = false;
+    builder.addCase(uploadParcelToShipmentRequest.rejected, (state, action) => {
+      state.isUploadingParcel = false;
 
       if (typeof action.payload === 'string') {
-        state.attachParcelError = action.payload;
+        state.parcelUploadError = action.payload;
       }
     });
   },
@@ -254,13 +233,13 @@ const parcelsSlice = createSlice({
 // Действия:
 
 // Состояние:
-export const selectParcels = (state: ParcelsStateSlice) =>
-  state.parcels.parcels;
+export const selectParcelsData = (state: ParcelsStateSlice) =>
+  state.parcels.parcelsData;
 
 export const selectIsParcelsDataLoading = (state: ParcelsStateSlice) =>
-  state.parcels.isLoadingViaApi;
+  state.parcels.isParcelsDataLoading;
 
-export const selectisAttachingParcel = (state: ParcelsStateSlice) =>
-  state.parcels.isAttachingParcel;
+export const selectIsUploadingParcel = (state: ParcelsStateSlice) =>
+  state.parcels.isUploadingParcel;
 
 export default parcelsSlice.reducer;

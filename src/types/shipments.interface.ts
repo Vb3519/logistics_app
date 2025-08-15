@@ -1,4 +1,4 @@
-import { Parcel } from '../app/redux/slices/parcelsSlice';
+import { Parcel } from './parcels.interface';
 
 // Form:
 // ------------------------

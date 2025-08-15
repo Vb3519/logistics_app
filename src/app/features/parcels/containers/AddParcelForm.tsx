@@ -10,13 +10,7 @@ import { addNewParcel } from '../../../redux/slices/parcelsSlice';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
-export interface ParcelFormFields {
-  parcel_weight: string;
-  parcel_status:
-    | 'Изменен адрес отправки'
-    | 'Проблема с упаковкой'
-    | 'Вышел из строя транспорт';
-}
+import { ParcelFormFields } from '../../../../types/parcels.interface';
 
 // Api:
 import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';

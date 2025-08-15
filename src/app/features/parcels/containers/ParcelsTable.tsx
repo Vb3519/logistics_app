@@ -24,29 +24,29 @@ import { parcelsData } from '../../../../shared/data/parcelsData';
 // State:
 import {
   loadParcelsData,
-  selectParcels,
+  selectParcelsData,
   selectIsParcelsDataLoading,
-  selectisAttachingParcel,
+  selectIsUploadingParcel,
 } from '../../../redux/slices/parcelsSlice';
 
 import {
-  selectParcelsToUpload,
-  selectParcelsToUploadErrorMsg,
+  selectParcelsToUploadData,
+  selectParcelsWeightOverloadError,
   addParcelToUpload,
   removeParcelFromUpload,
-  setParcelsToUploadErrorMsg,
+  setParcelsWeightOverloadError,
 } from '../../../redux/slices/parcelsToUploadSlice';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
-import { Parcel } from '../../../redux/slices/parcelsSlice';
+import {
+  Parcel,
+  ParcelAndShipmentInfo,
+  ParcelsTable_Props,
+} from '../../../../types/parcels.interface';
 
 // Api:
 import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
-
-interface ParcelsTable_Props {
-  isCheckBoxNeeded: boolean;
-}
 
 const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   const dispatch: AppDispatch = useDispatch();
@@ -68,44 +68,40 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
     setPage(0);
   };
 
-  // Загрузка данных по посылкам:
+  // Загрузка данных по посылкам (общие данные и данные посылок на погрузку в транспорт):
   // -----------------------------------
-  const currentParcelsData: Parcel[] = useSelector(selectParcels);
+  const parcelsData: Parcel[] = useSelector(selectParcelsData);
   const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
 
-  const uploadedParcels: Parcel[] = useSelector(selectParcelsToUpload);
-  const parcelsToUploadErrorMsg: string = useSelector(
-    selectParcelsToUploadErrorMsg
+  const parcelsToUploadData: Parcel[] = useSelector(selectParcelsToUploadData);
+  const parcelsWeightOverloadError: string = useSelector(
+    selectParcelsWeightOverloadError
   );
 
-  const isAttachingParcel: boolean = useSelector(selectisAttachingParcel);
+  const isUploadingParcel: boolean = useSelector(selectIsUploadingParcel);
 
   // Добавление и удаление посылок в непроведенную заявку на отгрузку:
   // -----------------------------------
-  interface ParcelAndShipmentInfo {
-    parcelData: Parcel;
-    shipmentId: string;
-  }
   const handleAddParcelToUpload = (
     parcelAndShipmentData: ParcelAndShipmentInfo
   ) => {
     dispatch(addParcelToUpload(parcelAndShipmentData));
 
-    if (parcelsToUploadErrorMsg !== '') {
-      dispatch(setParcelsToUploadErrorMsg(''));
+    if (parcelsWeightOverloadError !== '') {
+      dispatch(setParcelsWeightOverloadError(''));
     }
   };
 
   const handleRemoveParcelFromUpload = (parcelId: string) => {
     dispatch(removeParcelFromUpload(parcelId));
 
-    if (parcelsToUploadErrorMsg !== '') {
-      dispatch(setParcelsToUploadErrorMsg(''));
+    if (parcelsWeightOverloadError !== '') {
+      dispatch(setParcelsWeightOverloadError(''));
     }
   };
 
   useEffect(() => {
-    if (currentParcelsData.length === 0 && !isParcelsDataLoading) {
+    if (parcelsData.length === 0 && !isParcelsDataLoading) {
       dispatch(loadParcelsData(PARCELS_URL));
     }
   }, []);
@@ -173,11 +169,11 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
             </TableHead>
 
             <TableBody>
-              {currentParcelsData
+              {parcelsData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((parcelInfo) => {
                   const isParcelSelectedToUpload: boolean =
-                    uploadedParcels.some(
+                    parcelsToUploadData.some(
                       (parcel) => parcel.id === parcelInfo.id
                     );
 
@@ -188,7 +184,7 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                       parcelData={parcelInfo}
                       isParcelSelectedToUpload={isParcelSelectedToUpload}
                       onClick={() => {
-                        if (parcelInfo.isUploaded || isAttachingParcel) {
+                        if (parcelInfo.isUploaded || isUploadingParcel) {
                           return;
                         }
 
@@ -211,7 +207,7 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
         <TablePagination
           rowsPerPageOptions={[10, 20, 40]}
           component="div"
-          count={currentParcelsData.length}
+          count={parcelsData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

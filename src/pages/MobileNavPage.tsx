@@ -7,7 +7,6 @@ import MobileNavMenu from '../widgets/MobileNavMenu';
 import AddShipmentRequestForm from '../app/features/shipments/containers/AddShipmentRequestForm';
 import CustomButton from '../shared/ui/CustomButton';
 import Logo from '../widgets/Logo';
-// import CurrentShipmentRequests from '../app/features/shipments/containers/CurrentShipmentRequestsList';
 import FreeTransport from '../app/features/shipments/elements/FreeTransport';
 
 interface MobileNavPage_Props {

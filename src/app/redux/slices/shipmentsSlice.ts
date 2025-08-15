@@ -11,7 +11,7 @@ import {
   ShipmentRequest,
   ShipmentRequestFormFileds,
 } from '../../../types/shipments.interface';
-import { Parcel } from './parcelsSlice';
+import { Parcel } from '../../../types/parcels.interface';
 
 // Загрузка с api данных по непроведенным заявкам на отгрузку:
 // ---------------------------------------------------
@@ -119,25 +119,23 @@ const shipmentsSlice = createSlice({
       action: {
         payload: {
           currentShipmentId: string;
-          parcelsToUpload: Parcel[];
+          parcelsToUploadData: Parcel[];
         };
       }
     ) => {
-      const { currentShipmentId, parcelsToUpload } = action.payload;
+      const { currentShipmentId, parcelsToUploadData } = action.payload;
 
-      const currentShipmentRequest = state.shipmentRequestsData.find(
-        (shipmentRequest) => {
+      const currentShipmentRequest: ShipmentRequest | undefined =
+        state.shipmentRequestsData.find((shipmentRequest) => {
           return shipmentRequest.id === currentShipmentId;
-        }
-      );
+        });
 
       if (currentShipmentRequest) {
-        currentShipmentRequest.shipment_parcels.push(...parcelsToUpload);
+        currentShipmentRequest.shipment_parcels.push(...parcelsToUploadData);
 
         currentShipmentRequest.current_load_value =
           currentShipmentRequest.shipment_parcels.reduce(
-            (totalWeight, shipment) =>
-              totalWeight + Number(shipment.parcel_weight),
+            (totalWeight, parcel) => totalWeight + Number(parcel.parcel_weight),
             0
           );
       }

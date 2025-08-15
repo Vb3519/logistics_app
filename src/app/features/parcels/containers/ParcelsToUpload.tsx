@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,20 +13,20 @@ import {
 } from '../../../redux/slices/shipmentsSlice';
 
 import {
-  selectParcelsToUpload,
-  selectParcelsToUploadErrorMsg,
-  setParcelsToUploadErrorMsg,
-  resetParcelsToUpload,
+  selectParcelsToUploadData,
+  selectParcelsWeightOverloadError,
+  setParcelsWeightOverloadError,
+  resetParcelsToUploadState,
 } from '../../../redux/slices/parcelsToUploadSlice';
 
 import {
-  attachParcelToShipmentRequest,
-  selectisAttachingParcel,
+  uploadParcelToShipmentRequest,
+  selectIsUploadingParcel,
 } from '../../../redux/slices/parcelsSlice';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
-import { Parcel } from '../../../redux/slices/parcelsSlice';
+import { Parcel } from '../../../../types/parcels.interface';
 import { ShipmentRequest } from '../../../../types/shipments.interface';
 
 // Api:
@@ -37,10 +36,10 @@ const ParcelsToUpload = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
 
-  const parcelsToUploadErrorMsg: string = useSelector(
-    selectParcelsToUploadErrorMsg
+  const parcelsWeightOverloadError: string = useSelector(
+    selectParcelsWeightOverloadError
   );
-  const isAttachingParcel: boolean = useSelector(selectisAttachingParcel);
+  const isUploadingParcel: boolean = useSelector(selectIsUploadingParcel);
 
   // Текущие не проведенные заявки на отгрузку:
   // ---------------------------------------------
@@ -50,8 +49,8 @@ const ParcelsToUpload = () => {
 
   // Выбранные на отгрузку посылки:
   // ---------------------------------------------
-  const parcelsToUpload = useSelector(selectParcelsToUpload);
-  const parcelsTotalWeight = parcelsToUpload.reduce(
+  const parcelsToUploadData = useSelector(selectParcelsToUploadData);
+  const parcelsTotalWeight = parcelsToUploadData.reduce(
     (totalWeight, parcel) => (totalWeight += Number(parcel.parcel_weight)),
     0
   );
@@ -73,33 +72,33 @@ const ParcelsToUpload = () => {
 
       // Логика обработки веса выбранных посылок по сравнению с грузоподъемностью машины:
       if (isWeightOverload) {
-        if (parcelsToUploadErrorMsg === '') {
-          dispatch(setParcelsToUploadErrorMsg('Уменьшите вес посылок'));
+        if (parcelsWeightOverloadError === '') {
+          dispatch(setParcelsWeightOverloadError('Уменьшите вес посылок'));
         }
       } else {
         // Сервер: обход всех посылок и замена у нужных поля isUploaded на true
-        const attachAllParcels = parcelsToUpload.map((parcelInfo) => {
-          const parcelToAttach = {
+        const uploadAllParcels = parcelsToUploadData.map((parcelInfo) => {
+          const parcelToUpload = {
             url: PARCELS_URL,
             parcelId: parcelInfo.id,
           };
 
-          return dispatch(attachParcelToShipmentRequest(parcelToAttach));
+          return dispatch(uploadParcelToShipmentRequest(parcelToUpload));
         });
 
-        await Promise.all(attachAllParcels);
+        await Promise.all(uploadAllParcels);
 
         // Клиент: Добавление всех выбранных посылок в массив посылок активной заявки на отгрузку:
         const parcelsAndShipmentData = {
           currentShipmentId: currentShipmentRequest.id,
-          parcelsToUpload: parcelsToUpload,
+          parcelsToUploadData: parcelsToUploadData,
           parcelsTotalWeight: parcelsTotalWeight,
         };
 
         dispatch(addParcelsToShipment(parcelsAndShipmentData));
 
         // Клиент: ресет выбранных посылок в компоненте расчета их общего веса:
-        dispatch(resetParcelsToUpload());
+        dispatch(resetParcelsToUploadState());
 
         // Done: очистка массива parcelsToUpload
         // Done: отправка на сервер POST запроса по выбранным посылкам, что они загружены в машину (рендер их стейта в таблице)
@@ -117,7 +116,7 @@ const ParcelsToUpload = () => {
         <div className="p-2 flex flex-col gap-1 bg-element_primary border-b-2 border-b-[#cbcbcb] rounded-md xs:p-4 xs:flex-row xs:gap-6">
           <div>
             <span className="text-primary">Выбрано, шт: </span>
-            <span>{parcelsToUpload.length}</span>
+            <span>{parcelsToUploadData.length}</span>
           </div>
           <div>
             <span className="text-primary">Вес, кг: </span>
@@ -126,14 +125,14 @@ const ParcelsToUpload = () => {
         </div>
         <CustomButton
           disabled={
-            parcelsToUpload.length === 0 ||
-            parcelsToUploadErrorMsg !== '' ||
-            isAttachingParcel
+            parcelsToUploadData.length === 0 ||
+            parcelsWeightOverloadError !== '' ||
+            isUploadingParcel
           }
           className={`p-2 mx-auto w-1/2 min-w-45 max-w-60 text-[whitesmoke] ${
-            parcelsToUpload.length === 0 ||
-            parcelsToUploadErrorMsg !== '' ||
-            isAttachingParcel
+            parcelsToUploadData.length === 0 ||
+            parcelsWeightOverloadError !== '' ||
+            isUploadingParcel
               ? 'bg-gray-300'
               : 'bg-[#7B57DF]'
           }`}
@@ -141,10 +140,10 @@ const ParcelsToUpload = () => {
             handleAddParcelsToShipment();
           }}
         >
-          {isAttachingParcel ? 'Погрузка посылок' : 'Загрузить в машину'}
+          {isUploadingParcel ? 'Погрузка посылок' : 'Загрузить в машину'}
         </CustomButton>
         <span className="text-amber-500 text-sm text-center leading-4">
-          {parcelsToUploadErrorMsg !== '' && parcelsToUploadErrorMsg}
+          {parcelsWeightOverloadError !== '' && parcelsWeightOverloadError}
         </span>
       </div>
     </CustomSection>

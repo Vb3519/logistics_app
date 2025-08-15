@@ -5,16 +5,14 @@ import { BsBoxSeamFill } from 'react-icons/bs';
 
 // MUI:
 import TableCell from '@mui/material/TableCell';
-import TableRow, { TableRowProps } from '@mui/material/TableRow';
+import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 
 // Types:
-import { Parcel } from '../../../redux/slices/parcelsSlice';
-interface ParcelsTableRow_Props extends TableRowProps {
-  isCheckBoxNeeded: boolean;
-  parcelData: Parcel;
-  isParcelSelectedToUpload: boolean;
-}
+import {
+  Parcel,
+  ParcelsTableRow_Props,
+} from '../../../../types/parcels.interface';
 
 const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
   ({ isCheckBoxNeeded, parcelData, isParcelSelectedToUpload, ...props }) => {
