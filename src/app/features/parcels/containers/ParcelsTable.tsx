@@ -13,21 +13,21 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 
 // Ui:
-import CustomButton from '../../../../shared/ui/CustomButton';
 import CustomSection from '../../../../shared/ui/CustomSection';
 import ParcelsTableRow from '../elements/ParcelsTableRow';
-import ParcelsToUpload from './ParcelsToUpload';
 
 // Data:
 import { parcelsData } from '../../../../shared/data/parcelsData';
 
 // State:
 import {
-  loadParcelsData,
   selectParcelsData,
   selectIsParcelsDataLoading,
   selectIsUploadingParcel,
 } from '../../../redux/slices/parcelsSlice';
+
+// Services:
+import loadParcelsData from '../services/loadParcelsData';
 
 import {
   selectParcelsToUploadData,
@@ -74,6 +74,7 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
 
   const parcelsToUploadData: Parcel[] = useSelector(selectParcelsToUploadData);
+
   const parcelsWeightOverloadError: string = useSelector(
     selectParcelsWeightOverloadError
   );
@@ -107,114 +108,110 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      <ParcelsToUpload />
+    <CustomSection className="w-full min-h-[80vh] flex flex-col justify-between bg-section_primary xs:rounded-md lg:basis-3/5">
+      <TableContainer sx={{ maxHeight: '70vh' }}>
+        <Table stickyHeader>
+          <TableHead className="container-shadow">
+            <TableRow
+              sx={{
+                'th:first-of-type': {
+                  borderTopLeftRadius: '4px',
+                  borderBottomLeftRadius: '4px',
+                },
+                'th:last-of-type': {
+                  borderTopRightRadius: '4px',
+                  borderBottomRightRadius: '4px',
+                },
+              }}
+            >
+              {isCheckBoxNeeded ? (
+                <TableCell
+                  sx={{
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    color: '#6B7280',
+                    fontFamily: 'inter',
+                    padding: '14px',
+                    backgroundColor: '#e5e7eb',
+                  }}
+                >
+                  Выбор
+                </TableCell>
+              ) : null}
 
-      <CustomSection className="w-full min-h-[80vh] flex flex-col justify-between bg-section_primary xs:rounded-md lg:basis-3/5">
-        <TableContainer sx={{ maxHeight: '70vh' }}>
-          <Table stickyHeader>
-            <TableHead className="container-shadow">
-              <TableRow
+              <TableCell
                 sx={{
-                  'th:first-of-type': {
-                    borderTopLeftRadius: '4px',
-                    borderBottomLeftRadius: '4px',
-                  },
-                  'th:last-of-type': {
-                    borderTopRightRadius: '4px',
-                    borderBottomRightRadius: '4px',
-                  },
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  color: '#6B7280',
+                  fontFamily: 'inter',
+                  padding: '14px',
+                  backgroundColor: '#e5e7eb',
                 }}
               >
-                {isCheckBoxNeeded ? (
-                  <TableCell
-                    sx={{
-                      textAlign: 'center',
-                      fontWeight: 'bold',
-                      color: '#6B7280',
-                      fontFamily: 'inter',
-                      padding: '14px',
-                      backgroundColor: '#e5e7eb',
-                    }}
-                  >
-                    Выбор
-                  </TableCell>
-                ) : null}
+                Номер посылки
+              </TableCell>
+              <TableCell
+                sx={{
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  color: '#6B7280',
+                  fontFamily: 'inter',
+                  padding: '14px',
+                  backgroundColor: '#e5e7eb',
+                }}
+              >
+                Вес, кг
+              </TableCell>
+            </TableRow>
+          </TableHead>
 
-                <TableCell
-                  sx={{
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    color: '#6B7280',
-                    fontFamily: 'inter',
-                    padding: '14px',
-                    backgroundColor: '#e5e7eb',
-                  }}
-                >
-                  Номер посылки
-                </TableCell>
-                <TableCell
-                  sx={{
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    color: '#6B7280',
-                    fontFamily: 'inter',
-                    padding: '14px',
-                    backgroundColor: '#e5e7eb',
-                  }}
-                >
-                  Вес, кг
-                </TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {parcelsData
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((parcelInfo) => {
-                  const isParcelSelectedToUpload: boolean =
-                    parcelsToUploadData.some(
-                      (parcel) => parcel.id === parcelInfo.id
-                    );
-
-                  return (
-                    <ParcelsTableRow
-                      key={parcelInfo.id}
-                      isCheckBoxNeeded={isCheckBoxNeeded}
-                      parcelData={parcelInfo}
-                      isParcelSelectedToUpload={isParcelSelectedToUpload}
-                      onClick={() => {
-                        if (parcelInfo.isUploaded || isUploadingParcel) {
-                          return;
-                        }
-
-                        if (isParcelSelectedToUpload) {
-                          handleRemoveParcelFromUpload(parcelInfo.id);
-                        } else if (id) {
-                          handleAddParcelToUpload({
-                            parcelData: parcelInfo,
-                            shipmentId: id,
-                          });
-                        }
-                      }}
-                    />
+          <TableBody>
+            {parcelsData
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((parcelInfo) => {
+                const isParcelSelectedToUpload: boolean =
+                  parcelsToUploadData.some(
+                    (parcel) => parcel.id === parcelInfo.id
                   );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
 
-        <TablePagination
-          rowsPerPageOptions={[10, 20, 40]}
-          component="div"
-          count={parcelsData.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        ></TablePagination>
-      </CustomSection>
-    </div>
+                return (
+                  <ParcelsTableRow
+                    key={parcelInfo.id}
+                    isCheckBoxNeeded={isCheckBoxNeeded}
+                    parcelData={parcelInfo}
+                    isParcelSelectedToUpload={isParcelSelectedToUpload}
+                    onClick={() => {
+                      if (parcelInfo.isUploaded || isUploadingParcel) {
+                        return;
+                      }
+
+                      if (isParcelSelectedToUpload) {
+                        handleRemoveParcelFromUpload(parcelInfo.id);
+                      } else if (id) {
+                        handleAddParcelToUpload({
+                          parcelData: parcelInfo,
+                          shipmentId: id,
+                        });
+                      }
+                    }}
+                  />
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <TablePagination
+        rowsPerPageOptions={[10, 20, 40]}
+        component="div"
+        count={parcelsData.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      ></TablePagination>
+    </CustomSection>
   );
 };
 

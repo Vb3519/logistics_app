@@ -24,3 +24,40 @@
 .mobile-menu-opened {
   overflow-y: hidden;
 }
+
+.transport_load::-webkit-progress-bar {
+  background-color: #e5e7eb;
+}
+
+.transport_load_green::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    135deg,
+    #7ec850 0,
+    #7ec850 10px,
+    #4da62a 10px,
+    #4da62a 20px
+  );
+  opacity: 50%;
+}
+
+.transport_load_orange::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    135deg,
+    #f79d36 0,
+    #f79d36 10px,
+    #e98408 10px,
+    #e98408 20px
+  );
+  opacity: 50%;
+}
+
+.transport_load_red::-webkit-progress-value {
+  background: repeating-linear-gradient(
+    135deg,
+    #f45a5a 0,
+    #f45a5a 10px,
+    #d62828 10px,
+    #d62828 20px
+  );
+  opacity: 50%;
+}

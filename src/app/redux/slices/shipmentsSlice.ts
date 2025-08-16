@@ -131,13 +131,29 @@ const shipmentsSlice = createSlice({
         });
 
       if (currentShipmentRequest) {
-        currentShipmentRequest.shipment_parcels.push(...parcelsToUploadData);
+        // Получив данные посылок к погрузке, меняем статус каждой на isUploaded: true
+        const uploadedParcels = parcelsToUploadData.map((parcelInfo) => {
+          return { ...parcelInfo, isUploaded: true };
+        });
+
+        currentShipmentRequest.shipment_parcels.push(...uploadedParcels);
 
         currentShipmentRequest.current_load_value =
           currentShipmentRequest.shipment_parcels.reduce(
             (totalWeight, parcel) => totalWeight + Number(parcel.parcel_weight),
             0
           );
+      }
+    },
+
+    removeParcelsFromShipment: (state, action) => {
+      const currentShipmentRequest = state.shipmentRequestsData.find(
+        (shipmentRequest) => shipmentRequest.id === action.payload
+      );
+
+      if (currentShipmentRequest) {
+        currentShipmentRequest.shipment_parcels = [];
+        currentShipmentRequest.current_load_value = 0;
       }
     },
   },
@@ -203,7 +219,8 @@ const shipmentsSlice = createSlice({
 });
 
 // Действия:
-export const { addParcelsToShipment } = shipmentsSlice.actions;
+export const { addParcelsToShipment, removeParcelsFromShipment } =
+  shipmentsSlice.actions;
 
 // Состояние:
 export const selectShipmentRequests = (state: ShipmentsStateSlice) =>

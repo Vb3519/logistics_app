@@ -1,129 +1,17 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-// Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import { createParcel } from '../../../shared/utils/createParcel';
+import { createSlice } from '@reduxjs/toolkit';
 
 // Types:
 import {
   Parcel,
   ParcelsState,
   ParcelsStateSlice,
-  ParcelFormFields,
 } from '../../../types/parcels.interface';
 
-// Загрузка с api данных по посылкам:
-// ---------------------------------------------------
-export const loadParcelsData = createAsyncThunk(
-  'parcels/loadData',
-  async (url: string, thunkAPI) => {
-    try {
-      await serverResponseImitation(2000);
-
-      const parcelsDataResponse: Response = await fetch(url, { method: 'GET' });
-
-      if (parcelsDataResponse.ok) {
-        const parcelsData: Parcel[] = await parcelsDataResponse.json();
-        console.log('Загруженные данные по посылкам:', parcelsData);
-
-        return parcelsData;
-      } else {
-        const errorMsg: string = `HTTP Error: ${parcelsDataResponse.status} ${parcelsDataResponse.statusText}`;
-        console.log(errorMsg);
-
-        return thunkAPI.rejectWithValue(errorMsg);
-      }
-    } catch (error: unknown) {
-      const errorMsg: string = `Error: ${(error as Error).message}`;
-
-      return thunkAPI.rejectWithValue(errorMsg);
-    }
-  }
-);
-
-// Добавление информации о новой посылке:
-// ---------------------------------------------------
-export const addNewParcel = createAsyncThunk(
-  'parcels/addNewParcel',
-  async (
-    payload: { url: string; parcelFormData: ParcelFormFields },
-    thunkAPI
-  ) => {
-    const { url, parcelFormData } = payload;
-
-    const newParcel: Parcel = createParcel(parcelFormData);
-
-    try {
-      await serverResponseImitation(2000);
-
-      const addNewParcelResponse: Response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(newParcel),
-      });
-
-      if (addNewParcelResponse.ok) {
-        const addedParcel: Parcel = await addNewParcelResponse.json();
-
-        console.log('Добавлена посылка:', addedParcel);
-
-        return addedParcel;
-      } else {
-        const errorMsg: string = `HTTP Error: ${addNewParcelResponse.status} ${addNewParcelResponse.statusText}`;
-
-        console.log(errorMsg);
-
-        return thunkAPI.rejectWithValue(errorMsg);
-      }
-    } catch (error: unknown) {
-      const errorMsg: string = `Error: ${(error as Error).message}`;
-
-      console.log(errorMsg);
-
-      return thunkAPI.rejectWithValue(errorMsg);
-    }
-  }
-);
-
-// Загрузка и "привязка" посылки к непроведенной заявке на отгрузку:
-// ------------------------------------------------------------------
-export const uploadParcelToShipmentRequest = createAsyncThunk(
-  'parcels/uploadParcel',
-  async (payload: { url: string; parcelId: string }, thunkApi) => {
-    try {
-      await serverResponseImitation(3000);
-
-      const { url, parcelId } = payload;
-
-      const uploadParcelResponse: Response = await fetch(`${url}/${parcelId}`, {
-        method: 'PATCH',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ isUploaded: true }),
-      });
-
-      if (uploadParcelResponse.ok) {
-        const uploadedParcel: Parcel = await uploadParcelResponse.json();
-        console.log(
-          'Прикрепленная к заявке на отгрузку посылка:',
-          uploadedParcel
-        );
-
-        return uploadedParcel;
-      } else {
-        const errorMsg: string = `HTTP Error: ${uploadParcelResponse.status} ${uploadParcelResponse.statusText}`;
-        console.log(errorMsg);
-
-        return thunkApi.rejectWithValue(errorMsg);
-      }
-    } catch (error: unknown) {
-      // Рантайм ошибки:
-      const errorMsg: string = `Error: ${(error as Error).message}`;
-      console.log(errorMsg);
-
-      return thunkApi.rejectWithValue(errorMsg);
-    }
-  }
-);
+// Services:
+import loadParcelsData from '../../features/parcels/services/loadParcelsData';
+import addNewParcel from '../../features/parcels/services/addNewParcel';
+import uploadParcelToShipmentRequest from '../../features/parcels/services/uploadParcelToShipmentRequest';
+import unloadParcelFromShipmentRequest from '../../features/parcels/services/unloadParcelFromShipmentRequest';
 
 const initialState: ParcelsState = {
   parcelsData: [],
@@ -135,6 +23,9 @@ const initialState: ParcelsState = {
 
   isUploadingParcel: false,
   parcelUploadError: '',
+
+  isUnloadingParcel: false,
+  parcelUnloadError: '',
 };
 
 const parcelsSlice = createSlice({
@@ -227,6 +118,40 @@ const parcelsSlice = createSlice({
         state.parcelUploadError = action.payload;
       }
     });
+
+    // Убрать посылки из непроведенной заявки на отгрузку:
+    // ------------------------------------------------------------------
+    builder.addCase(unloadParcelFromShipmentRequest.pending, (state) => {
+      return { ...state, isUnloadingParcel: true, parcelUnloadError: '' };
+    });
+
+    builder.addCase(
+      unloadParcelFromShipmentRequest.fulfilled,
+      (state, action) => {
+        const { id } = action.payload;
+
+        const parcelToUnload: Parcel | undefined = state.parcelsData.find(
+          (parcelInfo) => parcelInfo.id === id
+        );
+
+        if (parcelToUnload) {
+          parcelToUnload.isUploaded = false;
+        }
+      }
+    );
+
+    builder.addCase(
+      unloadParcelFromShipmentRequest.rejected,
+      (state, action) => {
+        if (typeof action.payload === 'string') {
+          return {
+            ...state,
+            isUnloadingParcel: false,
+            parcelUnloadError: action.payload,
+          };
+        }
+      }
+    );
   },
 });
 

@@ -5,8 +5,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import CustomButton from '../../../../shared/ui/CustomButton';
 import CustomSection from '../../../../shared/ui/CustomSection';
 
-// State:
-import { addNewParcel } from '../../../redux/slices/parcelsSlice';
+// Services:
+import addNewParcel from '../services/addNewParcel';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';

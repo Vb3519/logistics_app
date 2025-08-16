@@ -41,6 +41,9 @@ export interface ParcelsState {
 
   isUploadingParcel: boolean;
   parcelUploadError: string;
+
+  isUnloadingParcel: boolean;
+  parcelUnloadError: string;
 }
 
 export interface ParcelsStateSlice {

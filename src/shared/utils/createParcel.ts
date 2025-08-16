@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 // Types:
-import { ParcelFormFields } from '../../app/features/parcels/containers/AddParcelForm';
-import { Parcel } from '../../app/redux/slices/parcelsSlice';
+import { ParcelFormFields, Parcel } from '../../types/parcels.interface';
 
 export const createParcel = (parcelFormData: ParcelFormFields): Parcel => {
   const parcelId: string = uuidv4();
@@ -11,6 +10,7 @@ export const createParcel = (parcelFormData: ParcelFormFields): Parcel => {
   const newParcel: Parcel = {
     id: parcelId,
     parcel_number: parcelNumber,
+    isUploaded: false,
     shipment_id: '',
     ...parcelFormData,
   };

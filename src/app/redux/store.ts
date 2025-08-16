@@ -5,6 +5,7 @@ import parcelsReducer from './slices/parcelsSlice';
 import parcelsToUploadReducer from './slices/parcelsToUploadSlice';
 import mobileNavPageReducer from './slices/mobileNavMenuSlice';
 import shipmentsReducer from './slices/shipmentsSlice';
+import shipmentParcelsListReducer from './slices/shipmentParcelsListSlice';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     parcelsToUpload: parcelsToUploadReducer,
     shipments: shipmentsReducer,
     mobileNavPage: mobileNavPageReducer,
+    shipmentParcelsList: shipmentParcelsListReducer,
   },
 });
 

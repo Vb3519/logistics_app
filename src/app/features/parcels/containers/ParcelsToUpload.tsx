@@ -6,7 +6,6 @@ import CustomSection from '../../../../shared/ui/CustomSection';
 import CustomButton from '../../../../shared/ui/CustomButton';
 
 // State:
-
 import {
   selectShipmentRequests,
   addParcelsToShipment,
@@ -19,10 +18,10 @@ import {
   resetParcelsToUploadState,
 } from '../../../redux/slices/parcelsToUploadSlice';
 
-import {
-  uploadParcelToShipmentRequest,
-  selectIsUploadingParcel,
-} from '../../../redux/slices/parcelsSlice';
+import { selectIsUploadingParcel } from '../../../redux/slices/parcelsSlice';
+
+// Services:
+import uploadParcelToShipmentRequest from '../services/uploadParcelToShipmentRequest';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
@@ -102,7 +101,7 @@ const ParcelsToUpload = () => {
 
         // Done: очистка массива parcelsToUpload
         // Done: отправка на сервер POST запроса по выбранным посылкам, что они загружены в машину (рендер их стейта в таблице)
-        // рендер данных о посылках в карточке отгрузки
+        // Done: рендер данных о посылках в карточке отгрузки
       }
     }
   };
@@ -113,6 +112,7 @@ const ParcelsToUpload = () => {
         <h2 className="font-semibold text-[#7B57DF] title-shadow text-base">
           Доступные посылки
         </h2>
+
         <div className="p-2 flex flex-col gap-1 bg-element_primary border-b-2 border-b-[#cbcbcb] rounded-md xs:p-4 xs:flex-row xs:gap-6">
           <div>
             <span className="text-primary">Выбрано, шт: </span>
@@ -123,6 +123,7 @@ const ParcelsToUpload = () => {
             <span>{parcelsTotalWeight}</span>
           </div>
         </div>
+
         <CustomButton
           disabled={
             parcelsToUploadData.length === 0 ||
@@ -142,6 +143,7 @@ const ParcelsToUpload = () => {
         >
           {isUploadingParcel ? 'Погрузка посылок' : 'Загрузить в машину'}
         </CustomButton>
+
         <span className="text-amber-500 text-sm text-center leading-4">
           {parcelsWeightOverloadError !== '' && parcelsWeightOverloadError}
         </span>

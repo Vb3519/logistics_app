@@ -18,8 +18,6 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
   ({ isCheckBoxNeeded, parcelData, isParcelSelectedToUpload, ...props }) => {
     // const { isCheckBoxNeeded, parcelData } = props;
 
-    console.log('ParcelsTableRow rendered');
-
     return (
       <TableRow {...props} sx={{ cursor: 'pointer' }}>
         {isCheckBoxNeeded ? (
@@ -47,6 +45,7 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
         >
           {parcelData.parcel_number}
         </TableCell>
+
         <TableCell
           sx={{
             textAlign: 'center',

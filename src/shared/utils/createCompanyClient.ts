@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 // Types:
-import { ClientFormFields } from '../../pages/clients/AddClientForm';
-import { Client } from '../../app/redux/slices/clientsSlice';
+import { ClientFormFields, Client } from '../../types/clients.interface';
 
 const createCompanyClient = (clientFormData: ClientFormFields) => {
   const companyClientData: Client = {
