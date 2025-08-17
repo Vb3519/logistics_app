@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 // React-icons:
-import { BsTruckFlatbed } from 'react-icons/bs';
+import { BsTruckFlatbed, BsBoxSeamFill, BsClockHistory } from 'react-icons/bs';
 
 // Ui:
 import CustomButton from '../../../../shared/ui/CustomButton';
@@ -86,13 +86,13 @@ const ShipmentRequestDetailsSection = () => {
       {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
       {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
       {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
-      <div className="w-full flex flex-col gap-2 lg:gap-4">
-        <div className="flex items-center gap-2 text-sm lg:text-base">
-          <div className="font-bold lg:text-lg">
+      <div className="w-full h-full flex flex-col gap-2 lg:gap-4">
+        <div className="flex items-center gap-1 text-sm flex-wrap xl:gap-2">
+          <div className="font-semibold leading-4 lg:text-base xl:text-lg">
             <span>{currentShipmentRequestData.from_city} - </span>
             <span>{currentShipmentRequestData.to_city}</span>
           </div>
-          <div className="mt-0.5 text-secondary">
+          <div className="text-primary xl:text-base">
             {currentShipmentRequestData.created_at}
           </div>
         </div>
@@ -110,33 +110,49 @@ const ShipmentRequestDetailsSection = () => {
         {/* ПОСЫЛКИ, ДОБАВЛЕННЫЕ В ЗАЯВКУ НА ОТГРУЗКУ: */}
         {/* ПОСЫЛКИ, ДОБАВЛЕННЫЕ В ЗАЯВКУ НА ОТГРУЗКУ: */}
         {/* ПОСЫЛКИ, ДОБАВЛЕННЫЕ В ЗАЯВКУ НА ОТГРУЗКУ: */}
-        {isShipmentParcelsListOpened ? (
-          <div className="flex flex-col gap-1">
-            <h3>Добавленные посылки:</h3>
-            <ul className="h-40 flex flex-col gap-1 overflow-y-auto">
-              {uploadedParcels?.length
-                ? uploadedParcels?.map((parcelInfo) => {
-                    return (
-                      <li
-                        key={parcelInfo.parcel_number}
-                        className="p-2 h-10 border-b-1 border-b-gray-200"
-                      >
-                        {parcelInfo.parcel_number}
-                      </li>
-                    );
-                  })
-                : null}
+        {isShipmentParcelsListOpened && uploadedParcels ? (
+          <div className="h-full pb-2 flex flex-col gap-1 border-b-2 border-b-gray-200 text-sm xl:text-base">
+            <h3 className="text-secondary">Добавленные посылки</h3>
+            <ul className="py-2 h-40 flex flex-col gap-2 overflow-y-auto">
+              {uploadedParcels.map((parcelInfo) => {
+                return (
+                  <li
+                    key={parcelInfo.parcel_number}
+                    className="h-full px-2 py-4 flex gap-2 items-center border-b-2 border-b-gray-300 rounded-sm bg-element_primary"
+                  >
+                    <BsBoxSeamFill className="text-secondary" />
+                    {parcelInfo.parcel_number}
+                  </li>
+                );
+              })}
+
+              {Array.from({ length: 2 - uploadedParcels.length }).map(
+                (_, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="h-full px-2 py-4 flex gap-2 items-center rounded-sm bg-gray-100 text-secondary"
+                    >
+                      <BsClockHistory className="text-base xl:text-xl" />
+                      <span>Добавьте посылку</span>
+                    </li>
+                  );
+                }
+              )}
             </ul>
           </div>
         ) : (
-          <div className="p-4 flex items-center justify-between gap-2 text-sm lg:text-base">
+          <div className="h-full p-4 flex items-center justify-between gap-2 flex-wrap text-sm lg:gap-6 lg:flex-nowrap xl:text-base 2xl:gap-12">
             <div className="flex flex-col gap-2">
-              <span className="text-secondary">Доступно, кг</span>
+              <span className="text-sm text-secondary lg:text-nowrap xl:text-base">
+                Доступно, кг
+              </span>
+
               <div>
-                <span className="lg:text-2xl xl:text-4xl">
+                <span className="text-lg xs:text-xl xl:text-2xl">
                   {currentShipmentRequestData.current_load_value}
                 </span>
-                <span className="text-secondary lg:text-2xl xl:text-4xl">
+                <span className="text-lg text-secondary xs:text-xl xl:text-2xl">
                   /{currentShipmentRequestData.max_load_value}
                 </span>
               </div>
@@ -147,31 +163,34 @@ const ShipmentRequestDetailsSection = () => {
                 className={`absolute w-22 h-15 top-5 left-0 border-2 border-gray-400/70 transport_load ${calcTransportLoad(
                   currentShipmentRequestData.current_load_value,
                   currentShipmentRequestData.max_load_value
-                )} xl:w-43 xl:h-30 xl:top-10`}
+                )} xl:w-34.5 xl:h-21.5 xl:top-10`}
                 value={currentShipmentRequestData.current_load_value}
                 max={currentShipmentRequestData.max_load_value}
               ></progress>
-              <BsTruckFlatbed className="text-9xl text-gray-500/40 xl:text-[250px]" />
+              <BsTruckFlatbed className="text-9xl text-gray-500/40 xl:text-[200px]" />
             </div>
           </div>
         )}
 
         <div className="flex flex-col gap-4">
-          <CustomButton
-            className="p-2 text-[#7B57DF] bg-element_primary"
-            onClick={() => {
-              handleToggleShipmentParcelsList();
-            }}
-          >
-            Список посылок
-          </CustomButton>
+          <div className="flex gap-2 justify-center text-sm flex-wrap xl:text-base">
+            <CustomButton
+              className="p-2 w-40 flex gap-2 items-center justify-center text-[#7B57DF] bg-element_primary xl:w-45"
+              onClick={() => {
+                handleToggleShipmentParcelsList();
+              }}
+            >
+              <BsBoxSeamFill />
+              <span className="text-nowrap">Список посылок</span>
+            </CustomButton>
 
-          <CustomButton className="p-2 text-[#7B57DF] bg-element_primary">
-            Завершить загрузку
-          </CustomButton>
+            <CustomButton className="p-2 w-40 text-[#7B57DF] bg-element_primary xl:w-45">
+              <span className="text-nowrap">Завершить загрузку</span>
+            </CustomButton>
+          </div>
 
           <CustomButton
-            className="p-2 text-[#7B57DF] bg-element_primary"
+            className="p-2 mx-auto w-1/2 min-w-50 border-2 border-[#e3d9ff] text-sm text-secondary transition duration-200 ease-in-out xl:text-base hover:text-primary hover:border-[#cbb9fd]"
             onClick={() => {
               handleRemoveParcelsFromShipment(PARCELS_URL, uploadedParcels);
             }}

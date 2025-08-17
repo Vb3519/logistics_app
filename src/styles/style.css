@@ -29,6 +29,17 @@
   background-color: #e5e7eb;
 }
 
+.transport_load_green {
+  background: repeating-linear-gradient(
+    135deg,
+    #7ec850 0,
+    #7ec850 10px,
+    #4da62a 10px,
+    #4da62a 20px
+  );
+  opacity: 50%;
+}
+
 .transport_load_green::-webkit-progress-value {
   background: repeating-linear-gradient(
     135deg,

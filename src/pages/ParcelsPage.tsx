@@ -6,7 +6,7 @@ import ParcelsTable from '../app/features/parcels/containers/ParcelsTable';
 
 const ParcelsPage = () => {
   return (
-    <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
+    <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4 lg:h-screen">
       <BreadCrumbs
         backTopath="/"
         backToPageTitle="Главная"

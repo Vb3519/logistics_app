@@ -9,25 +9,26 @@ const ShipmentRequestInfo: React.FC<ShipmentRequestInfo_Props> = memo(
   ({ shipment_number, transport }) => {
     return (
       <>
-        <div className="flex flex-col gap-4 text-sm lg:text-base">
-          <div className="flex flex-col gap-1">
+        <div className="h-full flex flex-col gap-4 text-sm xl:text-base">
+          <div className="h-full flex flex-col gap-1">
             <span className="text-secondary">Заявка </span>
-            <div className="p-4 border-b-2 border-b-[#cbcbcb] bg-element_primary text-primary rounded-md">
+            <div className="h-full p-4 flex items-center border-b-2 border-b-[#cbcbcb] bg-element_primary text-primary rounded-md">
               {shipment_number}
             </div>
           </div>
-          <div className="flex flex-col gap-1">
+
+          <div className="h-full flex flex-col gap-1">
             <span className="text-secondary">Автомобиль </span>
-            <div className="p-4 border-b-2 border-b-[#cbcbcb] bg-element_primary text-primary rounded-md">
+            <div className="h-full p-4 flex items-center border-b-2 border-b-[#cbcbcb] bg-element_primary text-primary rounded-md">
               {transport}
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col gap-1 text-sm lg:text-base">
+        <div className="flex flex-col gap-1 text-sm xl:text-base">
           <span className="text-[#7B57DF]">Статус отгрузки</span>
 
-          <fieldset className="p-4 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md">
+          <fieldset className="p-4 flex flex-col gap-1 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md lg:gap-2">
             <div className="flex items-center gap-2">
               <input
                 name="shipment_status"

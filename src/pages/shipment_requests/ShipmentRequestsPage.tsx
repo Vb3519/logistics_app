@@ -59,7 +59,7 @@ const ShipmentRequestsPage = () => {
     min_shipmentRequests_toRender - shipmentRequests.length;
 
   return (
-    <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
+    <main className="h-full flex flex-col items-center gap-2 xs:mx-4 lg:mx-0 xs:gap-4 lg:px-4">
       <div className="w-full flex flex-col gap-2 justify-between sm:flex-row">
         <BreadCrumbs
           backTopath="/"
@@ -68,8 +68,8 @@ const ShipmentRequestsPage = () => {
           currentPageTitle="Отгрузки"
         />
 
-        <div className="p-2 flex items-center gap-2 flex-wrap text-sm">
-          <h2 className="font-semibold text-base">Журнал отгрузок</h2>
+        <div className="p-2 flex items-center gap-2 flex-wrap text-sm lg:text-base">
+          <h2 className="font-semibold">Журнал отгрузок</h2>
           <ul className="flex items-center gap-2 flex-wrap leading-4">
             <li>
               <NavLink
@@ -92,39 +92,53 @@ const ShipmentRequestsPage = () => {
       </div>
 
       <CustomSection className="min-h-screen w-full p-2 grid grid-rows-6 gap-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 sm:grid-cols-2 sm:grid-rows-3 lg:min-h-0 lg:h-full">
-        {shipmentRequests.map((shipmentRequest) => {
-          return (
-            <ShipmentRequestCard
-              onClick={() => {
-                handleNavigateToShipmentRequestDetails(shipmentRequest.id);
-              }}
-              key={shipmentRequest.id}
-              created_at={shipmentRequest.created_at}
-              shipment_number={shipmentRequest.shipment_number}
-              current_load_value={shipmentRequest.current_load_value}
-              max_load_value={shipmentRequest.max_load_value}
-              transport={shipmentRequest.transport}
-              shipment_status={shipmentRequest.shipment_status}
-              from_city={shipmentRequest.from_city}
-              to_city={shipmentRequest.to_city}
-              transport_info={shipmentRequest.transport_info}
-            />
-          );
-        })}
-        {Array.from({ length: shipmentRequestsPlaceholdersCounter }).map(
-          (_, index) => {
+        {shipmentRequests.length ? (
+          <>
+            {shipmentRequests.map((shipmentRequest) => {
+              return (
+                <ShipmentRequestCard
+                  onClick={() => {
+                    handleNavigateToShipmentRequestDetails(shipmentRequest.id);
+                  }}
+                  key={shipmentRequest.id}
+                  created_at={shipmentRequest.created_at}
+                  shipment_number={shipmentRequest.shipment_number}
+                  current_load_value={shipmentRequest.current_load_value}
+                  max_load_value={shipmentRequest.max_load_value}
+                  transport={shipmentRequest.transport}
+                  shipment_status={shipmentRequest.shipment_status}
+                  from_city={shipmentRequest.from_city}
+                  to_city={shipmentRequest.to_city}
+                  transport_info={shipmentRequest.transport_info}
+                />
+              );
+            })}
+
+            {Array.from({ length: shipmentRequestsPlaceholdersCounter }).map(
+              (_, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="p-2 flex flex-col items-center justify-center gap-4 bg-gray-100 rounded-md text-sm xs:p-4 lg:text-base"
+                  >
+                    <h3 className="text-secondary/50">
+                      Ожидается заявка на отгрузку
+                    </h3>
+                    <BsClockHistory className="text-8xl text-secondary/20 lg:text-9xl" />
+                  </div>
+                );
+              }
+            )}
+          </>
+        ) : (
+          Array.from({ length: 6 }).map((_, index) => {
             return (
               <div
                 key={index}
-                className="p-2 flex flex-col items-center justify-center gap-4 bg-gray-100 rounded-md xs:p-4"
-              >
-                <h3 className="text-secondary/50">
-                  Ожидается заявка на отгрузку
-                </h3>
-                <BsClockHistory className="text-9xl text-secondary/20" />
-              </div>
+                className="h-57 bg-element_primary rounded-md animate-pulse sm:h-75 lg:h-60"
+              ></div>
             );
-          }
+          })
         )}
       </CustomSection>
     </main>

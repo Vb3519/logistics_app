@@ -1,4 +1,8 @@
 export function calcTransportLoad(currentLoadVal: number, maxLoadVal: number) {
+  if ((currentLoadVal / maxLoadVal) * 100 === 0) {
+    return 'text-secondary';
+  }
+
   if ((currentLoadVal / maxLoadVal) * 100 <= 35) {
     return 'transport_load_green';
   }
@@ -22,6 +26,10 @@ export function calcTransportLoadProgressColor(
   currentLoadVal: number,
   maxLoadVal: number
 ) {
+  if ((currentLoadVal / maxLoadVal) * 100 === 0) {
+    return 'text-secondary';
+  }
+
   if ((currentLoadVal / maxLoadVal) * 100 <= 35) {
     return 'text-green-700/80';
   }
