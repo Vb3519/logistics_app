@@ -1,6 +1,6 @@
 // Ui:
 import ParcelsToUpload from '../containers/ParcelsToUpload';
-import ParcelsTable from '../containers/ParcelsTable';
+import ShipmentParcelsTable from '../containers/ShipmentParcelsTable';
 
 const ParcelsTableAndSelectedParcels = () => {
   return (
@@ -9,7 +9,7 @@ const ParcelsTableAndSelectedParcels = () => {
       <ParcelsToUpload />
 
       {/* Таблица с общими данными о всех посылках: */}
-      <ParcelsTable isCheckBoxNeeded={true} />
+      <ShipmentParcelsTable />
     </div>
   );
 };

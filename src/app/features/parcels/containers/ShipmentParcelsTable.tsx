@@ -10,11 +10,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Checkbox from '@mui/material/Checkbox';
 
 // Ui:
 import CustomSection from '../../../../shared/ui/CustomSection';
-import ParcelsTableRow from '../elements/ParcelsTableRow';
+import ShipmentParcelsTableRow from '../elements/ShipmentParcelsTableRow';
+import ShipmentParcelsTableSkeleton from '../elements/skeletons/ShipmentParcelsTableSkeleton';
 
 // Data:
 import { parcelsData } from '../../../../shared/data/parcelsData';
@@ -42,13 +42,12 @@ import { AppDispatch } from '../../../redux/store';
 import {
   Parcel,
   ParcelAndShipmentInfo,
-  ParcelsTable_Props,
 } from '../../../../types/parcels.interface';
 
 // Api:
 import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
 
-const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
+const ShipmentParcelsTable = () => {
   const dispatch: AppDispatch = useDispatch();
   const { id } = useParams();
 
@@ -124,20 +123,24 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                 },
               }}
             >
-              {isCheckBoxNeeded ? (
-                <TableCell
-                  sx={{
-                    textAlign: 'center',
-                    fontWeight: 'bold',
-                    color: '#6B7280',
-                    fontFamily: 'inter',
-                    padding: '14px',
-                    backgroundColor: '#e5e7eb',
-                  }}
-                >
-                  Выбор
-                </TableCell>
-              ) : null}
+              <TableCell
+                sx={{
+                  textAlign: 'center',
+                  fontWeight: 'bold',
+                  color: '#6B7280',
+                  fontFamily: 'inter',
+                  padding: '14px',
+                  backgroundColor: '#e5e7eb',
+                  fontSize: {
+                    xs: '14px',
+                    '@media (min-width:1280px)': {
+                      fontSize: '16px',
+                    },
+                  },
+                }}
+              >
+                Выбор
+              </TableCell>
 
               <TableCell
                 sx={{
@@ -147,6 +150,12 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                   fontFamily: 'inter',
                   padding: '14px',
                   backgroundColor: '#e5e7eb',
+                  fontSize: {
+                    xs: '14px',
+                    '@media (min-width:1280px)': {
+                      fontSize: '16px',
+                    },
+                  },
                 }}
               >
                 Номер посылки
@@ -159,6 +168,12 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                   fontFamily: 'inter',
                   padding: '14px',
                   backgroundColor: '#e5e7eb',
+                  fontSize: {
+                    xs: '14px',
+                    '@media (min-width:1280px)': {
+                      fontSize: '16px',
+                    },
+                  },
                 }}
               >
                 Вес, кг
@@ -176,9 +191,8 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                   );
 
                 return (
-                  <ParcelsTableRow
+                  <ShipmentParcelsTableRow
                     key={parcelInfo.id}
-                    isCheckBoxNeeded={isCheckBoxNeeded}
                     parcelData={parcelInfo}
                     isParcelSelectedToUpload={isParcelSelectedToUpload}
                     onClick={() => {
@@ -198,6 +212,23 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
                   />
                 );
               })}
+
+            {/* ПЛЕЙСХОЛДЕРЫ ДЛЯ ТАБЛИЦЫ С ЧЕКБОКСАМИ: */}
+            {Array.from({
+              length:
+                rowsPerPage -
+                parcelsData.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                ).length,
+            }).map((_, index) => {
+              return (
+                <ShipmentParcelsTableSkeleton
+                  key={index}
+                  isParcelsDataLoading={isParcelsDataLoading}
+                />
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
@@ -215,4 +246,4 @@ const ParcelsTable: React.FC<ParcelsTable_Props> = ({ isCheckBoxNeeded }) => {
   );
 };
 
-export default ParcelsTable;
+export default ShipmentParcelsTable;

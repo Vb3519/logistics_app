@@ -107,9 +107,9 @@ const ParcelsToUpload = () => {
   };
 
   return (
-    <CustomSection className="w-full p-2 flex flex-col gap-4 bg-section_primary container-shadow text-sm xs:rounded-md lg:text-base">
+    <CustomSection className="w-full p-2 flex flex-col gap-4 bg-section_primary container-shadow text-sm xs:rounded-md xl:text-base">
       <div className="flex flex-col gap-2">
-        <h2 className="font-semibold text-[#7B57DF] title-shadow text-base">
+        <h2 className="font-semibold text-[#7B57DF] title-shadow">
           Доступные посылки
         </h2>
 

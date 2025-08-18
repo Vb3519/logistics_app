@@ -197,6 +197,14 @@
       "parcel_weight": "40",
       "parcel_status": "Проблема с упаковкой",
       "shipment_id": ""
+    },
+    {
+      "id": "a3b647e4-632a-4eeb-9973-c59039497716",
+      "parcel_number": "CN-a3b647e",
+      "isUploaded": false,
+      "shipment_id": "",
+      "parcel_weight": "60",
+      "parcel_status": "Изменен адрес отправки"
     }
   ]
 }

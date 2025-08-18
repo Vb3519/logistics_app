@@ -2,7 +2,7 @@
 import BreadCrumbs from '../shared/ui/BreadCrumbs';
 import AddParcelTip from '../app/features/parcels/elements/AddParcelTip';
 import AddParcelForm from '../app/features/parcels/containers/AddParcelForm';
-import ParcelsTable from '../app/features/parcels/containers/ParcelsTable';
+import ParcelsPageTable from '../app/features/parcels/containers/ParcelsPageTable';
 
 const ParcelsPage = () => {
   return (
@@ -21,7 +21,7 @@ const ParcelsPage = () => {
           <AddParcelForm />
         </div>
 
-        <ParcelsTable isCheckBoxNeeded={false} />
+        <ParcelsPageTable />
       </div>
     </main>
   );

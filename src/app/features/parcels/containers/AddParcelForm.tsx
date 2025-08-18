@@ -55,14 +55,14 @@ const AddParcelForm = () => {
   const parcelWeightPattern: RegExp = /^(?:[1-9]\d*)$/;
 
   return (
-    <CustomSection className="w-full p-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 lg:min-h-0 lg:h-full lg:basis-2/5">
+    <CustomSection className="w-full p-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 lg:h-full lg:basis-2/5">
       <form
         className="h-full flex flex-col gap-3"
         onSubmit={handleSubmit(onSubmit)}
         action="#"
         method="post"
       >
-        <div className="pb-4 flex flex-col gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
+        <div className="pb-4 flex flex-col gap-2 border-b-2 border-gray-200 text-sm xl:text-base">
           <h3 className="font-semibold text-[#7B57DF] title-shadow">
             Данные о посылке
           </h3>
@@ -153,7 +153,7 @@ const AddParcelForm = () => {
         <CustomButton
           className={`m-auto py-2 px-4 text-white bg-[#7B57DF] ${
             isSubmitting && 'bg-gray-300'
-          } text-sm lg:text-base`}
+          } text-sm xl:text-base`}
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Сборка посылки' : 'Собрать посылку'}

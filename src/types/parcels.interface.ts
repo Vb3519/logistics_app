@@ -61,15 +61,17 @@ export interface ParcelsToUploadSlice {
 
 // Table:
 // ------------------------------------------------------------------
-export interface ParcelsTableRow_Props extends TableRowProps {
-  isCheckBoxNeeded: boolean;
+export interface ShipmentParcelsTableRow_Props extends TableRowProps {
   parcelData: Parcel;
   isParcelSelectedToUpload: boolean;
 }
 
-export interface ParcelsTable_Props {
-  isCheckBoxNeeded: boolean;
-}
-
 // Components:
 // ------------------------------------------------------------------
+export interface ParcelsPageTableSkeleton_Props {
+  isParcelsDataLoading: boolean;
+}
+
+export interface ShipmentParcelsTableSkeleton_Props {
+  isParcelsDataLoading: boolean;
+}

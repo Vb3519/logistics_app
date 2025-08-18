@@ -11,26 +11,24 @@ import Checkbox from '@mui/material/Checkbox';
 // Types:
 import {
   Parcel,
-  ParcelsTableRow_Props,
+  ShipmentParcelsTableRow_Props,
 } from '../../../../types/parcels.interface';
 
-const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
-  ({ isCheckBoxNeeded, parcelData, isParcelSelectedToUpload, ...props }) => {
-    // const { isCheckBoxNeeded, parcelData } = props;
+const ShipmentParcelsTableRow: React.FC<ShipmentParcelsTableRow_Props> = memo(
+  ({ parcelData, isParcelSelectedToUpload, ...props }) => {
+    // const { parcelData, isParcelSelectedToUpload } = props;
 
     return (
       <TableRow {...props} sx={{ cursor: 'pointer' }}>
-        {isCheckBoxNeeded ? (
-          <TableCell sx={{ textAlign: 'center' }}>
-            {parcelData.isUploaded ? (
-              <BsBoxSeamFill className="h-10.5 m-auto text-xl text-secondary" />
-            ) : (
-              <Checkbox
-                checked={isParcelSelectedToUpload || parcelData.isUploaded}
-              ></Checkbox>
-            )}
-          </TableCell>
-        ) : null}
+        <TableCell sx={{ textAlign: 'center' }}>
+          {parcelData.isUploaded ? (
+            <BsBoxSeamFill className="h-10.5 m-auto text-xl text-secondary" />
+          ) : (
+            <Checkbox
+              checked={isParcelSelectedToUpload || parcelData.isUploaded}
+            ></Checkbox>
+          )}
+        </TableCell>
 
         <TableCell
           sx={{
@@ -41,6 +39,12 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
                 ? '#7B57DF'
                 : parcelData.isUploaded && '#99a1af'
             }`,
+            fontSize: {
+              xs: '14px',
+              '@media (min-width:1280px)': {
+                fontSize: '16px',
+              },
+            },
           }}
         >
           {parcelData.parcel_number}
@@ -55,6 +59,12 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
                 ? '#7B57DF'
                 : parcelData.isUploaded && '#99a1af'
             }`,
+            fontSize: {
+              xs: '14px',
+              '@media (min-width:1280px)': {
+                fontSize: '16px',
+              },
+            },
           }}
         >
           {parcelData.parcel_weight}
@@ -64,4 +74,4 @@ const ParcelsTableRow: React.FC<ParcelsTableRow_Props> = memo(
   }
 );
 
-export default ParcelsTableRow;
+export default ShipmentParcelsTableRow;

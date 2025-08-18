@@ -120,7 +120,7 @@ const ShipmentRequestDetailsSection = () => {
                     key={parcelInfo.parcel_number}
                     className="h-full px-2 py-4 flex gap-2 items-center border-b-2 border-b-gray-300 rounded-sm bg-element_primary"
                   >
-                    <BsBoxSeamFill className="text-secondary" />
+                    <BsBoxSeamFill className="text-secondary text-base xl:text-xl" />
                     {parcelInfo.parcel_number}
                   </li>
                 );
