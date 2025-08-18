@@ -9,7 +9,7 @@ const AddParcelTip = () => {
     <CustomSection className="hidden w-full h-full items-center gap-4 bg-section_primary sm:flex lg:basis-3/5">
       <div className="h-full flex flex-col gap-3">
         <div className="flex items-center gap-3">
-          <BsBoxSeamFill className="text-4xl text-secondary/70" />
+          <BsBoxSeamFill className="text-2xl text-secondary/70 xl:text-3xl" />
           <h2 className="font-semibold text-[#7B57DF] title-shadow text-sm xl:text-base">
             Сборка посылки
           </h2>

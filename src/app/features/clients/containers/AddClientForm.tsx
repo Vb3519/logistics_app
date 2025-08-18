@@ -59,7 +59,7 @@ const AddClientForm = () => {
         {/* ------------------------------ */}
         {/* Название компании: */}
         {/* ------------------------------ */}
-        <div className="pb-4 w-full flex flex-col gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
+        <div className="pb-4 w-full flex flex-col gap-2 border-b-2 border-gray-200 text-sm xl:text-base">
           <label
             htmlFor="company_name"
             className="font-semibold text-[#7B57DF] title-shadow"
@@ -90,7 +90,7 @@ const AddClientForm = () => {
         {/* ------------------------------ */}
         {/* Данные сотрудника компании: */}
         {/* ------------------------------ */}
-        <div className="pb-4 flex flex-col gap-2 border-b-2 border-gray-200 text-sm lg:text-base">
+        <div className="pb-4 flex flex-col gap-2 border-b-2 border-gray-200 text-sm xl:text-base">
           <h3 className="font-semibold text-[#7B57DF] title-shadow">
             Данные сотрудника компании
           </h3>
@@ -199,7 +199,7 @@ const AddClientForm = () => {
         <CustomButton
           className={`m-auto py-2 px-4 text-white bg-[#7B57DF] ${
             isSubmitting && 'bg-gray-300'
-          } text-sm lg:text-base`}
+          } text-sm xl:text-base`}
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Отправка данных' : 'Добавить контрагента'}

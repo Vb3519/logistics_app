@@ -41,3 +41,6 @@ export interface ClientsTableRow_Props {
 
 // Components:
 // ------------------------------------------------------------------
+export interface ClientsTableRowSkeleton_Props {
+  isClientsDataLoading: boolean;
+}

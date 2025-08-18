@@ -13,6 +13,7 @@ import TableRow from '@mui/material/TableRow';
 // Ui:
 import CustomSection from '../../../../shared/ui/CustomSection';
 import ClientsTableRow from '../elements/ClientsTableRow';
+import ClientsTableRowSkeleton from '../elements/skeletons/ClientsTableRowSkeleton';
 
 // Data:
 import {
@@ -37,7 +38,7 @@ const ClientsTable = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(15);
 
   const companyClientsData = useSelector(selectClientsData);
   const isClientsDataLoading: boolean = useSelector(selectIsClientsDataLoading);
@@ -69,7 +70,14 @@ const ClientsTable = () => {
 
   return (
     <CustomSection className="w-full min-h-[30vh] flex flex-col gap-2 justify-between overflow-x-auto bg-section_primary">
-      <TableContainer sx={{ maxHeight: '90vh' }}>
+      <TableContainer
+        sx={{
+          maxHeight: '50vh',
+          '@media (min-width:768px)': { maxHeight: '80vh' },
+          '@media (min-width:1028px)': { maxHeight: '40vh' },
+          '@media (min-width:1280px)': { maxHeight: '90vh' },
+        }}
+      >
         <Table stickyHeader>
           <TableHead className="container-shadow">
             <TableRow
@@ -115,12 +123,29 @@ const ClientsTable = () => {
                   />
                 );
               })}
+
+            {/* ПЛЕЙСХОЛДЕРЫ ДЛЯ ТАБЛИЦЫ С КЛИЕНТАМИ: */}
+            {Array.from({
+              length:
+                rowsPerPage -
+                companyClientsData.slice(
+                  rowsPerPage * page,
+                  rowsPerPage * page + rowsPerPage
+                ).length,
+            }).map((_, index) => {
+              return (
+                <ClientsTableRowSkeleton
+                  key={index}
+                  isClientsDataLoading={isClientsDataLoading}
+                />
+              );
+            })}
           </TableBody>
         </Table>
       </TableContainer>
 
       <TablePagination
-        rowsPerPageOptions={[10, 20, 30]}
+        rowsPerPageOptions={[15, 30, 45]}
         component="div"
         count={companyClientsData.length}
         rowsPerPage={rowsPerPage}
