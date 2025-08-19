@@ -65,9 +65,9 @@ const AddShipmentRequestForm = () => {
   }, [location.pathname]);
 
   return (
-    <CustomSection className="bg-section_primary xs:mx-4 sm:mx-0 sm:w-full">
+    <CustomSection className="min-w-70 bg-section_primary xs:mx-4 md:min-w-85">
       <form
-        className="h-full flex flex-col gap-2 text-sm xs:gap-4"
+        className="h-full flex flex-col gap-2 text-sm xs:gap-4 xl:text-base"
         action="#"
         method="post"
         onSubmit={handleSubmit(onSubmit)}
@@ -177,7 +177,7 @@ const AddShipmentRequestForm = () => {
           }`}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Создание заявки' : 'Провести заявку'}
+          {isSubmitting ? 'Создание заявки' : 'Создать заявку'}
         </CustomButton>
 
         {errors.root && (

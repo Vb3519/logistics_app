@@ -1,6 +1,6 @@
 // Features:
 import GeneralInfo from '../app/features/general_info/GeneralInfo';
-import TransportOnTheWay from '../app/features/shipments/TransportOnTheWay';
+import TransportOnTheWay from '../app/features/shipments/elements/TransportOnTheWay';
 import DailyPlan from '../app/features/work_plans/DailyPlan';
 import CollectedParcelsList from '../app/features/parcels/containers/CollectedParcelsList';
 import ShipmentRequestsList from '../app/features/shipments/containers/ShipmentRequestsList';
@@ -16,8 +16,8 @@ const GeneralPage = () => {
       {/* Секция (Транспорт в Пути) */}
       <TransportOnTheWay />
 
-      {/* Секция (Дневной План Работы) */}
-      <DailyPlan />
+      {/* Секция (Создание новой заявки на отгрузку) */}
+      <AddShipmentRequestForm />
 
       {/* Секция (Свободный Транспорт) */}
       <ShipmentRequestsList />

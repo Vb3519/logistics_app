@@ -6,6 +6,27 @@ export const tableHeaderCols: string[] = [
   'Статус',
 ];
 
+export const transportOnTheWayData = [
+  {
+    from_city: 'Санкт-Петербург',
+    to_city: 'Великий Новгород',
+    transport: 'ГАЗель A21R22 (до 100 кг)',
+    shipment_status: 'Нет',
+  },
+  {
+    from_city: 'Санкт-Петербург',
+    to_city: 'Москва',
+    transport: 'ГАЗель A21R32 (до 200 кг)',
+    shipment_status: 'Да',
+  },
+  {
+    from_city: 'Санкт-Петербург',
+    to_city: 'Москва',
+    transport: 'ГАЗель A21R22 (до 100 кг)',
+    shipment_status: 'Нет',
+  },
+];
+
 export const shipmentRequestsData = [
   {
     id: '1231123f',

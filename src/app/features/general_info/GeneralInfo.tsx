@@ -11,9 +11,11 @@ import GeneralInfoCard from './GeneralInfoCard';
 const GeneralInfo = () => {
   return (
     <CustomSection className="bg-section_primary xs:mx-4 lg:col-span-2">
-      <h2 className="font-semibold lg:text-lg">Общие данные</h2>
+      <h2 className="font-semibold text-[#7B57DF] title-shadow text-sm xl:text-base">
+        Общие данные
+      </h2>
 
-      <ul className="py-4 flex justify-between gap-4 text-sm overflow-x-auto md:gap-8 lg:text-base">
+      <ul className="py-4 flex justify-between gap-4 text-sm overflow-x-auto md:gap-8 xl:text-base">
         <GeneralInfoCard
           card_title="Новые заказы"
           value="5"

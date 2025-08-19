@@ -48,7 +48,7 @@ const MobileNavPage = (props: MobileNavPage_Props) => {
 
       <SearchShipment className="flex xs:mx-4 lg:hidden" />
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:mx-4">
+      <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row">
         {/* --- Навигация: --- */}
         <MobileNavMenu />
 

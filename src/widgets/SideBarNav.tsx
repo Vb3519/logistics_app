@@ -157,7 +157,7 @@ const SideBarNav = () => {
           </ul>
         </nav>
 
-        <CustomButton className="hidden py-2 px-4 bg-[#7B57DF] text-[whitesmoke] text-sm xl:text-base xs:block">
+        <CustomButton className="hidden py-2 px-4 bg-[#7B57DF] text-[whitesmoke] text-sm xl:text-base">
           + Создать Заявку
         </CustomButton>
       </div>

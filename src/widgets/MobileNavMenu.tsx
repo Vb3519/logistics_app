@@ -21,7 +21,7 @@ const MobileNavMenu = () => {
   };
 
   return (
-    <CustomSection className="bg-section_primary xs:mx-4 sm:mx-0 sm:w-full">
+    <CustomSection className="bg-section_primary xs:mx-4 sm:mx-0 sm:ml-4 sm:w-full ">
       <nav className="h-full flex flex-col gap-2 text-sm">
         <h3 className="font-semibold text-[#7B57DF] title-shadow">
           Разделы приложения

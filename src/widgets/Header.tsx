@@ -93,10 +93,13 @@ export const SearchShipment: React.FC<SearchShipment_Props> = ({
     >
       <form className="w-full max-w-95 p-2 flex gap-1 items-center bg-element_primary rounded-sm">
         <PiMagnifyingGlassBold className="text-2xl text-gray-300" />
-        <input className="w-full outline-none" placeholder="Номер заказа..." />
+        <input
+          className="w-full outline-none"
+          placeholder="Номер отгрузки..."
+        />
       </form>
 
-      <div className="font-semibold flex flex-col gap-1">
+      <div className="hidden font-semibold flex flex-col gap-1">
         <p className="text-nowrap">Сб, 26.07.25</p>
         <p>16:45</p>
       </div>
