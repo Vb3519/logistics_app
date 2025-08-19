@@ -99,7 +99,7 @@ export const SearchShipment: React.FC<SearchShipment_Props> = ({
         />
       </form>
 
-      <div className="hidden font-semibold flex flex-col gap-1">
+      <div className="hidden font-semibold flex-col gap-1">
         <p className="text-nowrap">Сб, 26.07.25</p>
         <p>16:45</p>
       </div>

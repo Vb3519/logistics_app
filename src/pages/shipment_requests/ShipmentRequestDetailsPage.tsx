@@ -15,8 +15,10 @@ import { shipmentRequestsData } from '../../shared/data/shipmentsData';
 import {
   selectShipmentRequests,
   selectisShipmentRequestsDataLoading,
-  loadShipmentRequestsData,
 } from '../../app/redux/slices/shipmentsSlice';
+
+// Services:
+import loadShipmentRequestsData from '../../app/features/shipments/services/loadShipmentRequestsData';
 
 // Types:
 import { AppDispatch } from '../../app/redux/store';

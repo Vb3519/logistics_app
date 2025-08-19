@@ -1,105 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import { createShipmentRequest } from '../../../shared/utils/createShipmentRequest';
-
 // Types:
 import {
   ShipmentsState,
   ShipmentsStateSlice,
   ShipmentRequest,
-  ShipmentRequestFormFileds,
 } from '../../../types/shipments.interface';
 import { Parcel } from '../../../types/parcels.interface';
 
-// Загрузка с api данных по непроведенным заявкам на отгрузку:
-// ---------------------------------------------------
-export const loadShipmentRequestsData = createAsyncThunk(
-  'shipments/loadShipmentRequestsData',
-  async (url: string, thunkApi) => {
-    try {
-      await serverResponseImitation(2000);
-
-      const shipmentRequestsDataResponse: Response = await fetch(url);
-
-      if (shipmentRequestsDataResponse.ok) {
-        const shipmentRequestsData: ShipmentRequest[] =
-          await shipmentRequestsDataResponse.json();
-
-        console.log(
-          'Данные по непроведенным заявкам на отгрузку:',
-          shipmentRequestsData
-        );
-
-        return shipmentRequestsData;
-      } else {
-        const errorMsg: string = `HTTP Error: ${shipmentRequestsDataResponse.status} ${shipmentRequestsDataResponse.statusText}`;
-        console.log(errorMsg);
-
-        return thunkApi.rejectWithValue(errorMsg);
-      }
-    } catch (error: unknown) {
-      const errorMsg: string = `Error: ${(error as Error).message}`;
-
-      console.log(errorMsg);
-
-      return thunkApi.rejectWithValue(errorMsg);
-    }
-  }
-);
-
-// Добавление нового запроса на создание заявки на отгрузку:
-// -----------------------------------------------------------------
-export const addShipmentRequest = createAsyncThunk(
-  'shipments/addShipmentRequest',
-  async (
-    payload: {
-      url: string;
-      shipmentRequestFormData: ShipmentRequestFormFileds;
-    },
-    thunkApi
-  ) => {
-    try {
-      await serverResponseImitation(2000);
-
-      const { url, shipmentRequestFormData } = payload;
-
-      const newShipmentRequest: ShipmentRequest = createShipmentRequest(
-        shipmentRequestFormData
-      );
-
-      const addShipmentRequestResponse: Response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(newShipmentRequest),
-      });
-
-      if (addShipmentRequestResponse.ok) {
-        const addedShipmentRequest: ShipmentRequest =
-          await addShipmentRequestResponse.json();
-
-        console.log(
-          'Новый запрос на создание заявки на отгрузку:',
-          addedShipmentRequest
-        );
-
-        return addedShipmentRequest;
-      } else {
-        const errorMsg: string = `HTTP Error: ${addShipmentRequestResponse.status} ${addShipmentRequestResponse.statusText}`;
-
-        console.log(errorMsg);
-
-        return thunkApi.rejectWithValue(errorMsg);
-      }
-    } catch (error: unknown) {
-      const errorMsg: string = `Error: ${(error as Error).message}`;
-      console.log(errorMsg);
-
-      return thunkApi.rejectWithValue(errorMsg);
-    }
-  }
-);
+// Services:
+import loadShipmentRequestsData from '../../features/shipments/services/loadShipmentRequestsData';
+import addShipmentRequest from '../../features/shipments/services/addShipmentRequest';
 
 const initialState: ShipmentsState = {
   shipmentRequestsData: [],

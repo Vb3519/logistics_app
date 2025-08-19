@@ -25,8 +25,10 @@ import {
 import {
   selectClientsData,
   selectIsClientsDataLoading,
-  loadClientsData,
 } from '../../../redux/slices/clientsSlice';
+
+// Services:
+import loadClientsData from '../services/loadClientsData';
 
 // Api:
 import { CLIENTS_URL } from '../../../../shared/api/logistics_appApi';

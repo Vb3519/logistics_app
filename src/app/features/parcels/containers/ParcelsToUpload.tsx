@@ -25,7 +25,6 @@ import uploadParcelToShipmentRequest from '../services/uploadParcelToShipmentReq
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
-import { Parcel } from '../../../../types/parcels.interface';
 import { ShipmentRequest } from '../../../../types/shipments.interface';
 
 // Api:
@@ -98,10 +97,6 @@ const ParcelsToUpload = () => {
 
         // Клиент: ресет выбранных посылок в компоненте расчета их общего веса:
         dispatch(resetParcelsToUploadState());
-
-        // Done: очистка массива parcelsToUpload
-        // Done: отправка на сервер POST запроса по выбранным посылкам, что они загружены в машину (рендер их стейта в таблице)
-        // Done: рендер данных о посылках в карточке отгрузки
       }
     }
   };

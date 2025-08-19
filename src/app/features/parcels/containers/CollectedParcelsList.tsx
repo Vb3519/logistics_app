@@ -25,6 +25,9 @@ import { AppDispatch } from '../../../redux/store';
 // Api:
 import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
 
+// Contants:
+import { MIN_PARCELS_TO_RENDER } from '../../../../constants/logisticAppContants';
+
 const CollectedParcelsList = () => {
   const dispatch: AppDispatch = useDispatch();
 
@@ -37,9 +40,8 @@ const CollectedParcelsList = () => {
     }
   }, []);
 
-  const min_items_to_render: number = 3;
   const parcelsListPlaceholdersCounter: number =
-    min_items_to_render - parcelsData.length;
+    MIN_PARCELS_TO_RENDER - parcelsData.length;
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
@@ -58,7 +60,7 @@ const CollectedParcelsList = () => {
       </div>
 
       <ul className="h-full flex flex-col gap-2 text-sm xl:text-base">
-        {parcelsData.slice(0, 3).map((parcelInfo) => {
+        {parcelsData.slice(0, MIN_PARCELS_TO_RENDER).map((parcelInfo) => {
           return (
             <CollectedParcelsListItem
               key={parcelInfo.id}

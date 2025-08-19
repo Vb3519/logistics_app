@@ -6,7 +6,7 @@ import CustomSection from '../../../../shared/ui/CustomSection';
 import CustomButton from '../../../../shared/ui/CustomButton';
 
 // State:
-import { addNewClient } from '../../../redux/slices/clientsSlice';
+import addNewClient from '../services/addNewClient';
 
 // Types:
 import { AppDispatch } from '../../../redux/store';

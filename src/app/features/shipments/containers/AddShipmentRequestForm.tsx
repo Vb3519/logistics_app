@@ -23,8 +23,8 @@ import { createShipmentRequest } from '../../../../shared/utils/createShipmentRe
 // Api:
 import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
 
-// State:
-import { addShipmentRequest } from '../../../redux/slices/shipmentsSlice';
+// Services:
+import addShipmentRequest from '../services/addShipmentRequest';
 
 const AddShipmentRequestForm = () => {
   const dispatch: AppDispatch = useDispatch();

@@ -77,7 +77,6 @@ const ShipmentRequestDetailsSection = () => {
       await Promise.all(parcelsToUnload);
 
       dispatch(removeParcelsFromShipment(id));
-      // Done: Очистка данных о посылках в shipmentRequestsData на клиенте
     }
   };
 

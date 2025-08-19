@@ -13,6 +13,9 @@ import ShipmentRequestsListItem from './ShipmentRequestsListItem';
 import { selectShipmentRequests } from '../../../redux/slices/shipmentsSlice';
 import { toggleMobileNavPage } from '../../../redux/slices/mobileNavMenuSlice';
 
+// Constants:
+import { MIN_FREE_TRANSPORT_ELEMS_TO_RENDER } from '../../../../constants/logisticAppContants';
+
 const FreeTransport = () => {
   const dispatch = useDispatch();
 
@@ -22,9 +25,8 @@ const FreeTransport = () => {
     dispatch(toggleMobileNavPage());
   };
 
-  const min_items_to_render: number = 6;
   const listPlaceholdersCounter: number =
-    min_items_to_render - shipmentRequests.length;
+    MIN_FREE_TRANSPORT_ELEMS_TO_RENDER - shipmentRequests.length;
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">

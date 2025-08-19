@@ -11,7 +11,6 @@ import CustomSection from '../../../../shared/ui/CustomSection';
 import ShipmentRequestsListItem from '../elements/ShipmentRequestsListItem';
 
 // Types:
-import { ShipmentRequest } from '../../../../types/shipments.interface';
 import { AppDispatch } from '../../../redux/store';
 
 // Api:
@@ -20,10 +19,15 @@ import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
 // State:
 import { toggleMobileNavPage } from '../../../redux/slices/mobileNavMenuSlice';
 import {
-  loadShipmentRequestsData,
   selectShipmentRequests,
   selectisShipmentRequestsDataLoading,
 } from '../../../redux/slices/shipmentsSlice';
+
+// Services:
+import loadShipmentRequestsData from '../services/loadShipmentRequestsData';
+
+// Constants:
+import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../../constants/logisticAppContants';
 
 const ShipmentRequestsList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -43,9 +47,8 @@ const ShipmentRequestsList = () => {
     }
   }, []);
 
-  const min_items_to_render: number = 3;
   const listPlaceholdersCounter: number =
-    min_items_to_render - shipmentRequests.length;
+    MIN_SHIPMENT_REQUESTS_TO_RENDER - shipmentRequests.length;
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
@@ -64,18 +67,20 @@ const ShipmentRequestsList = () => {
       </div>
 
       <ul className="grid grid-rows-3 gap-2 text-sm overflow-y-auto xl:text-base">
-        {shipmentRequests.slice(0, 3).map((shipmentRequestInfo) => {
-          return (
-            <ShipmentRequestsListItem
-              key={shipmentRequestInfo.id}
-              shipment_number={shipmentRequestInfo.shipment_number}
-              from_city={shipmentRequestInfo.from_city}
-              to_city={shipmentRequestInfo.to_city}
-              current_load_value={shipmentRequestInfo.current_load_value}
-              max_load_value={shipmentRequestInfo.max_load_value}
-            />
-          );
-        })}
+        {shipmentRequests
+          .slice(0, MIN_SHIPMENT_REQUESTS_TO_RENDER)
+          .map((shipmentRequestInfo) => {
+            return (
+              <ShipmentRequestsListItem
+                key={shipmentRequestInfo.id}
+                shipment_number={shipmentRequestInfo.shipment_number}
+                from_city={shipmentRequestInfo.from_city}
+                to_city={shipmentRequestInfo.to_city}
+                current_load_value={shipmentRequestInfo.current_load_value}
+                max_load_value={shipmentRequestInfo.max_load_value}
+              />
+            );
+          })}
 
         {Array.from({ length: listPlaceholdersCounter }).map((_, index) => {
           return (

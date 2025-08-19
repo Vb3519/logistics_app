@@ -1,0 +1,3 @@
+export const MIN_PARCELS_TO_RENDER = 3;
+export const MIN_SHIPMENT_REQUESTS_TO_RENDER = 3;
+export const MIN_FREE_TRANSPORT_ELEMS_TO_RENDER = 6;
