@@ -49,21 +49,21 @@ const ShipmentRequestsList = () => {
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
-      <div className="text-sm flex justify-between gap-2 lg:text-base">
-        <h3 className="font-semibold text-[#7B57DF] title-shadow text-base">
+      <div className="text-sm flex justify-between gap-2 xl:text-base">
+        <h3 className="font-semibold text-[#7B57DF] title-shadow">
           Текущие заявки
         </h3>
 
         <NavLink
           to="shipments"
-          className="flex items-center gap-1 text-base text-[#7B57DF]"
+          className="flex items-center gap-1 text-[#7B57DF]"
         >
           Отгрузки
           <FaAngleRight className="mt-[1px]" />
         </NavLink>
       </div>
 
-      <ul className="grid grid-rows-3 gap-2 text-sm overflow-y-auto lg:text-base">
+      <ul className="grid grid-rows-3 gap-2 text-sm overflow-y-auto xl:text-base">
         {shipmentRequests.slice(0, 3).map((shipmentRequestInfo) => {
           return (
             <ShipmentRequestsListItem
@@ -81,7 +81,9 @@ const ShipmentRequestsList = () => {
           return (
             <li
               key={index}
-              className="p-2 flex gap-2 border-b-2 border-b-gray-200 bg-gray-100 rounded-md sm:p-4 sm:min-h-19"
+              className={`p-2 min-h-20 flex gap-2 border-b-2 border-b-gray-200 bg-gray-100 rounded-md ${
+                isShipmentRequestsDataLoading ? 'animate-pulse' : null
+              } sm:p-4`}
             >
               <div className="flex items-center gap-3 text-secondary">
                 <BsClockHistory className="text-2xl text-secondary/30" />

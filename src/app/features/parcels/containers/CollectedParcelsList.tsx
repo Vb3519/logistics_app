@@ -1,0 +1,116 @@
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+
+// React-icons:
+import { BsBoxSeamFill } from 'react-icons/bs';
+import { FaAngleRight } from 'react-icons/fa';
+import { BsClockHistory } from 'react-icons/bs';
+
+// Ui:
+import CustomSection from '../../../../shared/ui/CustomSection';
+
+// State:
+import {
+  selectParcelsData,
+  selectIsParcelsDataLoading,
+} from '../../../redux/slices/parcelsSlice';
+
+// Services:
+import loadParcelsData from '../services/loadParcelsData';
+
+// Types:
+import { AppDispatch } from '../../../redux/store';
+
+// Api:
+import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
+
+const CollectedParcelsList = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const parcelsData = useSelector(selectParcelsData);
+  const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
+
+  useEffect(() => {
+    if (parcelsData.length === 0 && !isParcelsDataLoading) {
+      dispatch(loadParcelsData(PARCELS_URL));
+    }
+  }, []);
+
+  const min_items_to_render: number = 3;
+  const parcelsListPlaceholdersCounter: number =
+    min_items_to_render - parcelsData.length;
+
+  return (
+    <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
+      <div className="text-sm flex justify-between gap-2 xl:text-base">
+        <h3 className="font-semibold text-[#7B57DF] title-shadow">
+          Собранные посылки
+        </h3>
+
+        <NavLink
+          to="parcels"
+          className="flex items-center gap-1 text-[#7B57DF]"
+        >
+          Весь список
+          <FaAngleRight className="mt-0.5" />
+        </NavLink>
+      </div>
+
+      <ul className="h-full flex flex-col gap-2 text-sm xl:text-base">
+        {parcelsData.slice(0, 3).map((parcelInfo) => {
+          return (
+            <CollectedParcelsListItem
+              key={parcelInfo.id}
+              parcel_number={parcelInfo.parcel_number}
+              parcel_status={parcelInfo.parcel_status}
+            />
+          );
+        })}
+
+        {Array.from({
+          length: parcelsListPlaceholdersCounter,
+        }).map((_, index) => {
+          return (
+            <li
+              key={index}
+              className={`p-2 h-full min-h-15 flex gap-2 border-b-2 border-b-gray-200 bg-gray-100 rounded-md ${
+                isParcelsDataLoading ? 'animate-pulse' : null
+              } sm:p-4 sm:min-h-16`}
+            >
+              <div className="flex items-center gap-3 text-secondary">
+                <BsClockHistory className="text-2xl text-secondary/30" />
+                <p className="text-secondary/60">Ожидается посылка</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </CustomSection>
+  );
+};
+
+export default CollectedParcelsList;
+
+interface CollectedParcelsListItem_Props {
+  parcel_number: string;
+  parcel_status: string;
+}
+
+const CollectedParcelsListItem: React.FC<CollectedParcelsListItem_Props> = ({
+  parcel_number,
+  parcel_status,
+}) => {
+  return (
+    <li className="h-full p-2 flex items-center gap-2 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md text-sm sm:p-4 xl:text-base xl:gap-4">
+      <BsBoxSeamFill className="text-2xl text-secondary/60 flex-shrink-0 xl:text-3xl" />
+
+      <div className="flex flex-col gap-1">
+        <h3 className="font-semibold">{parcel_number}</h3>
+        <p className="text-primary">
+          <span className="">{parcel_status}</span>
+        </p>
+      </div>
+    </li>
+  );
+};
