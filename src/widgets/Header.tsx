@@ -89,7 +89,7 @@ export const SearchShipment: React.FC<SearchShipment_Props> = ({
     <section
       className={`${
         className ? className : ''
-      } p-2 justify-between gap-2 text-sm bg-section_primary container-shadow xs:p-4 xs:rounded-md lg:text-base`}
+      } p-2 justify-between gap-2 text-sm bg-section_primary container-shadow xs:p-4 xs:rounded-md xl:text-base`}
     >
       <form className="w-full max-w-95 p-2 flex gap-1 items-center bg-element_primary rounded-sm">
         <PiMagnifyingGlassBold className="text-2xl text-gray-300" />

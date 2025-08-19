@@ -21,7 +21,7 @@ const SideBarNav = () => {
       <div className="p-4 flex flex-col gap-4 border-b-2 border-gray-200">
         <Logo />
 
-        <ul className="flex flex-col gap-1">
+        <ul className="flex flex-col gap-1 text-sm xl:text-base">
           <li className="ml-0.5 p-2 flex gap-2 items-center text-secondary">
             <BsExclamationCircle className="text-xl" />
             <p>Запросы</p>
@@ -42,7 +42,7 @@ const SideBarNav = () => {
 
       <div className="h-full p-4 flex flex-col justify-between border-b-2 border-gray-200">
         <nav>
-          <ul className="flex flex-col gap-4 text-secondary">
+          <ul className="flex flex-col gap-4 text-secondary text-sm xl:text-base">
             <li>
               <NavLink
                 to="/"
@@ -157,7 +157,7 @@ const SideBarNav = () => {
           </ul>
         </nav>
 
-        <CustomButton className="hidden py-2 px-4 bg-[#7B57DF] text-[whitesmoke] text-sm xs:block">
+        <CustomButton className="hidden py-2 px-4 bg-[#7B57DF] text-[whitesmoke] text-sm xl:text-base xs:block">
           + Создать Заявку
         </CustomButton>
       </div>
@@ -166,7 +166,7 @@ const SideBarNav = () => {
         <div className="w-10 h-10 flex items-center justify-center rounded-[50%] bg-element_primary flex-shrink-0">
           <MdOutlinePersonOutline className="text-2xl flex-shrink-0 text-primary" />
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col text-sm xl:text-base">
           <div className="font-semibold">Имя Фамилия</div>
           <div className="text-sm text-primary">Менеджер</div>
         </div>

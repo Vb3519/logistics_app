@@ -67,7 +67,7 @@ const AddShipmentRequestForm = () => {
   return (
     <CustomSection className="bg-section_primary xs:mx-4 sm:mx-0 sm:w-full">
       <form
-        className="flex flex-col gap-2 xs:gap-4"
+        className="h-full flex flex-col gap-2 text-sm xs:gap-4"
         action="#"
         method="post"
         onSubmit={handleSubmit(onSubmit)}
@@ -172,7 +172,7 @@ const AddShipmentRequestForm = () => {
         </div>
 
         <CustomButton
-          className={`min-w-41 mx-auto py-2 px-4 bg-[#7B57DF] text-[whitesmoke] ${
+          className={`min-w-41 m-auto py-2 px-4 bg-[#7B57DF] text-[whitesmoke] ${
             isSubmitting && 'bg-gray-300'
           }`}
           disabled={isSubmitting}

@@ -64,7 +64,7 @@ const ShipmentRequestsList = () => {
       </div>
 
       <ul className="grid grid-rows-3 gap-2 text-sm overflow-y-auto lg:text-base">
-        {shipmentRequests.map((shipmentRequestInfo) => {
+        {shipmentRequests.slice(0, 3).map((shipmentRequestInfo) => {
           return (
             <ShipmentRequestsListItem
               key={shipmentRequestInfo.id}

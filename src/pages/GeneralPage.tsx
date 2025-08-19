@@ -5,6 +5,8 @@ import DailyPlan from '../app/features/work_plans/DailyPlan';
 import RecentRequests from '../app/features/requests/RecentRequests';
 import ShipmentRequestsList from '../app/features/shipments/containers/ShipmentRequestsList';
 
+import AddShipmentRequestForm from '../app/features/shipments/containers/AddShipmentRequestForm';
+
 const GeneralPage = () => {
   return (
     <main className="h-full flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:px-4">

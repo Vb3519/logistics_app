@@ -68,7 +68,7 @@ const ShipmentRequestsPage = () => {
           currentPageTitle="Отгрузки"
         />
 
-        <div className="p-2 flex items-center gap-2 flex-wrap text-sm lg:text-base">
+        <div className="p-2 flex items-center gap-2 flex-wrap text-sm xl:text-base">
           <h2 className="font-semibold">Журнал отгрузок</h2>
           <ul className="flex items-center gap-2 flex-wrap leading-4">
             <li>

@@ -22,20 +22,20 @@ const FreeTransport = () => {
     dispatch(toggleMobileNavPage());
   };
 
-  const min_items_to_render: number = 3;
+  const min_items_to_render: number = 6;
   const listPlaceholdersCounter: number =
     min_items_to_render - shipmentRequests.length;
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
-      <div className="text-sm flex justify-between gap-2 lg:text-base">
-        <h3 className="font-semibold text-[#7B57DF] title-shadow text-base">
+      <div className="text-sm flex justify-between gap-2">
+        <h3 className="font-semibold text-[#7B57DF] title-shadow">
           Свободный транспорт
         </h3>
 
         <NavLink
           to="shipments"
-          className="flex items-center gap-1 text-base text-[#7B57DF]"
+          className="flex items-center gap-1 text-[#7B57DF]"
           onClick={handleToggleMobileMenuPage}
         >
           Отгрузки
@@ -43,7 +43,7 @@ const FreeTransport = () => {
         </NavLink>
       </div>
 
-      <ul className="max-h-58 flex flex-col gap-1 text-sm overflow-y-auto lg:text-base">
+      <ul className="py-2 max-h-58 flex flex-col gap-2 text-sm overflow-y-auto">
         {shipmentRequests.map((shipmentInfo) => {
           return (
             <ShipmentRequestsListItem
@@ -61,7 +61,7 @@ const FreeTransport = () => {
           return (
             <li
               key={index}
-              className="p-4 flex gap-2 border-b-2 border-b-gray-200"
+              className="p-2 min-h-20 flex gap-2 border-b-2 border-b-gray-200 bg-gray-100 rounded-md sm:p-4"
             >
               <div className="flex items-center gap-3 text-secondary">
                 <BsClockHistory className="text-2xl text-secondary/30" />
