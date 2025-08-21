@@ -2,7 +2,7 @@
 import GeneralInfo from '../app/features/general_info/GeneralInfo';
 import TransportOnTheWay from '../app/features/shipments/elements/TransportOnTheWay';
 import DailyPlan from '../app/features/work_plans/DailyPlan';
-import CollectedParcelsList from '../app/features/parcels/containers/CollectedParcelsList';
+import RecentlyCollectedParcels from '../app/features/parcels/containers/RecentlyCollectedParcels';
 import ShipmentRequestsList from '../app/features/shipments/containers/ShipmentRequestsList';
 
 import AddShipmentRequestForm from '../app/features/shipments/containers/AddShipmentRequestForm';
@@ -22,8 +22,8 @@ const GeneralPage = () => {
       {/* Секция (Свободный Транспорт) */}
       <ShipmentRequestsList />
 
-      {/* Секция (Недавние Запросы) */}
-      <CollectedParcelsList />
+      {/* Секция (Недавно собранные посылки) */}
+      <RecentlyCollectedParcels />
     </main>
   );
 };

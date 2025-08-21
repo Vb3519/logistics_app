@@ -1,8 +1,8 @@
 // Ui:
 import ParcelsToUpload from '../containers/ParcelsToUpload';
-import ShipmentParcelsTable from '../containers/ShipmentParcelsTable';
+import ShipmentParcelsTable from '../containers/tables/ShipmentParcelsTable';
 
-const ParcelsTableAndSelectedParcels = () => {
+const ParcelsToUploadSection = () => {
   return (
     <div className="w-full flex flex-col gap-4 lg:basis-3/5">
       {/* Данные о количестве и весе выбранных посылок для добавления их в непроведенную заявку на отгрузку: */}
@@ -14,4 +14,4 @@ const ParcelsTableAndSelectedParcels = () => {
   );
 };
 
-export default ParcelsTableAndSelectedParcels;
+export default ParcelsToUploadSection;

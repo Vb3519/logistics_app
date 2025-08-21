@@ -28,10 +28,11 @@ import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
 // Contants:
 import { MIN_PARCELS_TO_RENDER } from '../../../../constants/logisticAppContants';
 
-const CollectedParcelsList = () => {
+const RecentlyCollectedParcels = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const parcelsData = useSelector(selectParcelsData);
+  const recentlyCollectedParcels = parcelsData.slice(-MIN_PARCELS_TO_RENDER);
   const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
 
   useEffect(() => {
@@ -60,59 +61,82 @@ const CollectedParcelsList = () => {
       </div>
 
       <ul className="h-full flex flex-col gap-2 text-sm xl:text-base">
-        {parcelsData.slice(0, MIN_PARCELS_TO_RENDER).map((parcelInfo) => {
+        {recentlyCollectedParcels.map((parcelInfo) => {
           return (
-            <CollectedParcelsListItem
+            <CollectedParcelsElem
               key={parcelInfo.id}
-              parcel_number={parcelInfo.parcel_number}
-              parcel_status={parcelInfo.parcel_status}
+              number={parcelInfo.parcel_number}
+              status={parcelInfo.parcel_status}
             />
           );
         })}
 
-        {Array.from({
-          length: parcelsListPlaceholdersCounter,
-        }).map((_, index) => {
-          return (
-            <li
-              key={index}
-              className={`p-2 h-full min-h-15 flex gap-2 border-b-2 border-b-gray-200 bg-gray-100 rounded-md ${
-                isParcelsDataLoading ? 'animate-pulse' : null
-              } sm:p-4 sm:min-h-16`}
-            >
-              <div className="flex items-center gap-3 text-secondary">
-                <BsClockHistory className="text-2xl text-secondary/30" />
-                <p className="text-secondary/60">Ожидается посылка</p>
-              </div>
-            </li>
-          );
-        })}
+        <CollectedParcelsPlaceholder
+          counter={parcelsListPlaceholdersCounter}
+          isDataLoading={isParcelsDataLoading}
+        />
       </ul>
     </CustomSection>
   );
 };
 
-export default CollectedParcelsList;
+export default RecentlyCollectedParcels;
 
-interface CollectedParcelsListItem_Props {
-  parcel_number: string;
-  parcel_status: string;
+// Элемент списка недавно собранных посылок:
+// ----------------------------------------------
+interface CollectedParcelsElem_Props {
+  number: string;
+  status: string;
 }
 
-const CollectedParcelsListItem: React.FC<CollectedParcelsListItem_Props> = ({
-  parcel_number,
-  parcel_status,
+const CollectedParcelsElem: React.FC<CollectedParcelsElem_Props> = ({
+  number,
+  status,
 }) => {
   return (
     <li className="h-full p-2 flex items-center gap-2 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md text-sm sm:p-4 xl:text-base xl:gap-4">
       <BsBoxSeamFill className="text-2xl text-secondary/60 flex-shrink-0 xl:text-3xl" />
 
       <div className="flex flex-col gap-1">
-        <h3 className="font-semibold">{parcel_number}</h3>
+        <h3 className="font-semibold">{number}</h3>
         <p className="text-primary">
-          <span className="">{parcel_status}</span>
+          <span className="">{status}</span>
         </p>
       </div>
     </li>
+  );
+};
+
+// Лоадеры:
+// ----------------------------------------------
+
+// Контейнер для плейсхолдеров:
+interface CollectedParcelsPlaceholder_Props {
+  counter: number;
+  isDataLoading: boolean;
+}
+const CollectedParcelsPlaceholder: React.FC<
+  CollectedParcelsPlaceholder_Props
+> = ({ counter, isDataLoading }) => {
+  return (
+    <>
+      {Array.from({
+        length: counter,
+      }).map((_, index) => {
+        return (
+          <li
+            key={index}
+            className={`p-2 h-full min-h-15 flex gap-2 border-b-2 border-b-gray-200 bg-gray-100 rounded-md ${
+              isDataLoading && 'animate-pulse'
+            } sm:p-4 sm:min-h-16`}
+          >
+            <div className="flex items-center gap-3 text-secondary">
+              <BsClockHistory className="text-2xl text-secondary/30" />
+              <p className="text-secondary/60">Ожидается посылка</p>
+            </div>
+          </li>
+        );
+      })}
+    </>
   );
 };

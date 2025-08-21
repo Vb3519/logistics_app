@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 // Ui:
 import BreadCrumbs from '../../shared/ui/BreadCrumbs';
 
-import ParcelsTableAndSelectedParcels from '../../app/features/parcels/elements/ParcelsTableAndSelectedParcels';
+import ParcelsToUploadSection from '../../app/features/parcels/elements/ParcelsToUploadSection';
 import ShipmentRequestDetailsSection from '../../app/features/shipments/containers/ShipmentRequestDetailsSection';
 
 // Data:
@@ -66,7 +66,7 @@ const ShipmentRequestDetailsPage = () => {
         <ShipmentRequestDetailsSection />
 
         {/* Таблица посылок и перечень выбранных к погрузке посылок: */}
-        <ParcelsTableAndSelectedParcels />
+        <ParcelsToUploadSection />
       </div>
     </main>
   );
