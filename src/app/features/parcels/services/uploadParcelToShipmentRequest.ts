@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -47,3 +48,36 @@ export const uploadParcelToShipmentRequest = createAsyncThunk(
 );
 
 export default uploadParcelToShipmentRequest;
+
+// Загрузка и "привязка" посылки к непроведенной заявке на отгрузку (axios):
+// --------------------------------------------------------------------------
+const uploadParcelToShipmentRequestAxios = createAsyncThunk(
+  'parcels/uploadParcel',
+  async (payload: { url: string; parcelId: string }, thunkApi) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const { url, parcelId } = payload;
+
+      const uploadParcelResponse = await axios.patch<Parcel>(
+        `${url}/${parcelId}`,
+        {
+          isUploaded: true,
+        }
+      );
+
+      const uploadedParcel: Parcel = uploadParcelResponse.data;
+      console.log(
+        'Прикрепленная к заявке на отгрузку посылка:',
+        uploadedParcel
+      );
+
+      return uploadedParcel;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

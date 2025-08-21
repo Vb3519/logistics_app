@@ -137,6 +137,8 @@ const parcelsSlice = createSlice({
         if (parcelToUnload) {
           parcelToUnload.isUploaded = false;
         }
+
+        state.isUnloadingParcel = false;
       }
     );
 
@@ -166,5 +168,8 @@ export const selectIsParcelsDataLoading = (state: ParcelsStateSlice) =>
 
 export const selectIsUploadingParcel = (state: ParcelsStateSlice) =>
   state.parcels.isUploadingParcel;
+
+export const selectIsUnloadingParcel = (state: ParcelsStateSlice) =>
+  state.parcels.isUnloadingParcel;
 
 export default parcelsSlice.reducer;

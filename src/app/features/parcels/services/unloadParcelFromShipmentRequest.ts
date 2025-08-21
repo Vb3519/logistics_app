@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -44,3 +45,31 @@ export const unloadParcelFromShipmentRequest = createAsyncThunk(
 );
 
 export default unloadParcelFromShipmentRequest;
+
+// Убрать посылки из непроведенной заявки на отгрузку (axios):
+// ------------------------------------------------------------------
+const unloadParcelFromShipmentRequestAxios = createAsyncThunk(
+  'parcels/unloadParcel',
+  async (payload: { url: string; parcelId: string }, thunkApi) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const { url, parcelId } = payload;
+
+      const unloadParcelResponse = await axios.patch<Parcel>(
+        `${url}/${parcelId}`,
+        { isUploaded: false }
+      );
+
+      const unloadedParcel: Parcel = unloadParcelResponse.data;
+      console.log('Открепленная от заявки посылка:', unloadedParcel);
+
+      return unloadedParcel;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

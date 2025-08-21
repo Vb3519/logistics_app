@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -29,6 +30,7 @@ export const loadParcelsData = createAsyncThunk(
       }
     } catch (error: unknown) {
       const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
 
       return thunkAPI.rejectWithValue(errorMsg);
     }
@@ -36,3 +38,26 @@ export const loadParcelsData = createAsyncThunk(
 );
 
 export default loadParcelsData;
+
+// Загрузка с api данных по посылкам (axios):
+// ---------------------------------------------------
+const loadParcelsDataAxios = createAsyncThunk(
+  'parcels/loadData',
+  async (url: string, thunkApi) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const parcelsDataResponse = await axios.get<Parcel[]>(url);
+
+      const parcelsData: Parcel[] = parcelsDataResponse.data;
+      console.log('Загруженные данные по посылкам:', parcelsData);
+
+      return parcelsData;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

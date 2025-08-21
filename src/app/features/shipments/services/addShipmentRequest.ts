@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -63,3 +64,45 @@ export const addShipmentRequest = createAsyncThunk(
 );
 
 export default addShipmentRequest;
+
+// Добавление нового запроса на создание заявки на отгрузку (axios):
+// -----------------------------------------------------------------
+const addShipmentRequestAxios = createAsyncThunk(
+  'shipments/addShipmentRequest',
+  async (
+    payload: {
+      url: string;
+      shipmentRequestFormData: ShipmentRequestFormFileds;
+    },
+    thunkApi
+  ) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const { url, shipmentRequestFormData } = payload;
+
+      const newShipmentRequest: ShipmentRequest = createShipmentRequest(
+        shipmentRequestFormData
+      );
+
+      const addShipmentRequestResponse = await axios.post<ShipmentRequest>(
+        url,
+        newShipmentRequest
+      );
+
+      const addedShipmentRequest = addShipmentRequestResponse.data;
+
+      console.log(
+        'Новый запрос на создание заявки на отгрузку:',
+        addedShipmentRequest
+      );
+
+      return addedShipmentRequest;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

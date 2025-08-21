@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -52,3 +53,33 @@ export const addNewParcel = createAsyncThunk(
 );
 
 export default addNewParcel;
+
+// Добавление информации о новой посылке (axios):
+// ---------------------------------------------------
+const addNewParcelAxios = createAsyncThunk(
+  'parcels/addNewParcel',
+  async (
+    payload: { url: string; parcelFormData: ParcelFormFields },
+    thunkApi
+  ) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const { url, parcelFormData } = payload;
+
+      const parcelToAdd: Parcel = createParcel(parcelFormData);
+
+      const addParcelResponse = await axios.post<Parcel>(url, parcelToAdd);
+
+      const addedParcel = addParcelResponse.data;
+      console.log('Добавлена посылка:', addedParcel);
+
+      return addedParcel;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

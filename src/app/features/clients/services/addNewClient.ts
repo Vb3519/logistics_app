@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios, { AxiosResponse } from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -51,3 +52,38 @@ export const addNewClient = createAsyncThunk(
 );
 
 export default addNewClient;
+
+// Добавление нового клиента (Axios):
+// ------------------------------------------------
+const addNewClientAxios = createAsyncThunk(
+  'clients/addNewClientAxios',
+  async (
+    payload: { url: string; clientFormData: ClientFormFields },
+    thunkApi
+  ) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const { url, clientFormData } = payload;
+
+      const clientToAdd: Client = createCompanyClient(clientFormData);
+
+      const addClientResponse: AxiosResponse<Client> = await axios.post(
+        url,
+        clientToAdd
+      );
+
+      const addedClient: Client = addClientResponse.data;
+
+      console.log('Добавлен новый заказчик:', addedClient);
+
+      return addedClient;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error ${(error as Error).message}`;
+
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

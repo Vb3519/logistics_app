@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
@@ -43,3 +44,32 @@ export const loadShipmentRequestsData = createAsyncThunk(
 );
 
 export default loadShipmentRequestsData;
+
+// Загрузка с api данных по непроведенным заявкам на отгрузку:
+// ---------------------------------------------------
+const loadShipmentRequestsDataAxios = createAsyncThunk(
+  'shipments/loadShipmentRequestsData',
+  async (url: string, thunkApi) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const shipmentRequestsDataResponse = await axios.get<ShipmentRequest[]>(
+        url
+      );
+
+      const shipmentRequestsData = shipmentRequestsDataResponse.data;
+
+      console.log(
+        'Данные по непроведенным заявкам на отгрузку:',
+        shipmentRequestsData
+      );
+
+      return shipmentRequestsData;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 // Types:
 import { Client } from '../../../../types/clients.interface';
@@ -36,3 +37,28 @@ export const loadClientsData = createAsyncThunk(
 );
 
 export default loadClientsData;
+
+// Загрузка данных по клиентам компании (axios):
+// ------------------------------------------------
+const loadClientsDataAxios = createAsyncThunk(
+  'clients/loadData',
+  async (url: string, thunkApi) => {
+    try {
+      await serverResponseImitation(2000);
+
+      const clientsDataResponse = await axios.get<Client[]>(url);
+
+      const clientsData = clientsDataResponse.data;
+
+      console.log('Загруженные данные по клиентам:', clientsData);
+
+      return clientsData;
+    } catch (error: unknown) {
+      const errorMsg: string = `Error: ${(error as Error).message}`;
+
+      console.log(errorMsg);
+
+      return thunkApi.rejectWithValue(errorMsg);
+    }
+  }
+);

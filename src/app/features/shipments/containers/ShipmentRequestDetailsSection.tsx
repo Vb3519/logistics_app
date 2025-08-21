@@ -25,6 +25,8 @@ import {
   toggleShipmentParcelsList,
 } from '../../../redux/slices/shipmentParcelsListSlice';
 
+import { selectIsUnloadingParcel } from '../../../redux/slices/parcelsSlice';
+
 // Services:
 import unloadParcelFromShipmentRequest from '../../parcels/services/unloadParcelFromShipmentRequest';
 
@@ -51,6 +53,8 @@ const ShipmentRequestDetailsSection = () => {
   const isShipmentParcelsListOpened: boolean = useSelector(
     selectIsShipmentParselsListOpened
   );
+
+  const isUnloadingParcel = useSelector(selectIsUnloadingParcel);
 
   // Отображение списка посылок, добавленных к непроведенной заявке на отгрузку:
   // ----------------------------------------------------------
@@ -189,12 +193,15 @@ const ShipmentRequestDetailsSection = () => {
           </div>
 
           <CustomButton
-            className="p-2 mx-auto w-1/2 min-w-50 border-2 border-[#e3d9ff] text-sm text-secondary transition duration-200 ease-in-out xl:text-base hover:text-primary hover:border-[#cbb9fd]"
+            disabled={isUnloadingParcel}
+            className={`p-2 mx-auto w-1/2 min-w-50 border-2 border-[#e3d9ff] text-sm text-secondary transition duration-200 ease-in-out ${
+              isUnloadingParcel && 'animate-pulse'
+            } xl:text-base hover:text-primary hover:border-[#cbb9fd]`}
             onClick={() => {
               handleRemoveParcelsFromShipment(PARCELS_URL, uploadedParcels);
             }}
           >
-            Отменить заявку
+            {isUnloadingParcel ? 'Выгрузка посылок' : 'Отменить заявку'}
           </CustomButton>
         </div>
       </div>
