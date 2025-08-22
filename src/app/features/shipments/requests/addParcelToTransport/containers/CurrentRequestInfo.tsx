@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
-interface ShipmentRequestInfo_Props {
+interface CurrentRequestInfoInfo_Props {
   shipment_number: string;
   transport: string;
 }
 
-const ShipmentRequestInfo: React.FC<ShipmentRequestInfo_Props> = memo(
+const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
   ({ shipment_number, transport }) => {
     return (
       <>
@@ -68,4 +68,4 @@ const ShipmentRequestInfo: React.FC<ShipmentRequestInfo_Props> = memo(
   }
 );
 
-export default ShipmentRequestInfo;
+export default CurrentRequestInfo;
