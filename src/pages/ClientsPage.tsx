@@ -1,8 +1,8 @@
 // Ui:
 import BreadCrumbs from '../shared/ui/BreadCrumbs';
-import AddClientTip from '../app/features/clients/elements/AddClientTip';
-import AddClientForm from '../app/features/clients/containers/AddClientForm';
-import ClientsTable from '../app/features/clients/containers/ClientsTable';
+import AddClientTip from '../app/features/clients/addClient/elements/AddClientTip';
+import AddClientForm from '../app/features/clients/addClient/containers/AddClientForm';
+import ClientsTable from '../app/features/clients/loadClientsData/containers/ClientsTable';
 
 const ClientsPage = () => {
   return (

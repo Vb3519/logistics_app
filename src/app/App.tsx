@@ -6,11 +6,11 @@ import MainLayout from '../shared/layouts/MainLayout';
 // Pages:
 import GeneralPage from '../pages/GeneralPage';
 
-import AllShipmentsLogPage from '../pages/shipments_log/AllShipmentsLogPage';
-import CompletedShipmentsLogPage from '../pages/shipments_log/CompletedShipmentsLogPage';
+import AllShipmentsPage from '../pages/shipments/log/AllShipmentsPage';
+import CompletedShipmentsPage from '../pages/shipments/log/CompletedShipmentsPage';
 
-import ShipmentRequestsPage from '../pages/shipment_requests/ShipmentRequestsPage';
-import ShipmentRequestDetailsPage from '../pages/shipment_requests/ShipmentRequestDetailsPage';
+import ShipmentRequestsPage from '../pages/shipments/requests/ShipmentRequestsPage';
+import RequestDetailsPage from '../pages/shipments/requests/RequestDetailsPage';
 
 import ParcelsPage from '../pages/ParcelsPage';
 import ClientsPage from '../pages/ClientsPage';
@@ -23,15 +23,12 @@ const App = () => {
           <Route index={true} element={<GeneralPage />} />
 
           <Route path="shipments" element={<ShipmentRequestsPage />} />
-          <Route
-            path="shipments/:id"
-            element={<ShipmentRequestDetailsPage />}
-          />
+          <Route path="shipments/:id" element={<RequestDetailsPage />} />
 
-          <Route path="shipments/all" element={<AllShipmentsLogPage />} />
+          <Route path="shipments/all" element={<AllShipmentsPage />} />
           <Route
             path="shipments/completed"
-            element={<CompletedShipmentsLogPage />}
+            element={<CompletedShipmentsPage />}
           />
 
           <Route path="parcels" element={<ParcelsPage />} />

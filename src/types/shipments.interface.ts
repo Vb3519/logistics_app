@@ -58,7 +58,7 @@ export interface ShipmentsTableElem_Props
 
 // Components:
 // ------------------------
-export interface ShipmentRequestCard_Props
+export interface ActiveRequestCard_Props
   extends React.HtmlHTMLAttributes<HTMLDivElement> {
   id?: string;
   created_at: string;
@@ -71,14 +71,4 @@ export interface ShipmentRequestCard_Props
   to_city: string;
   transport_info: string;
   children?: React.ReactNode;
-}
-
-export interface ShipmentRequestListItem_Props
-  extends React.LiHTMLAttributes<HTMLLIElement> {
-  id?: string;
-  shipment_number: string;
-  from_city: string;
-  to_city: string;
-  current_load_value: number;
-  max_load_value: number;
 }
