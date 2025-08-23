@@ -1,12 +1,11 @@
-import { useState, useEffect, memo, useMemo, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 // React-icons:
-import { BsBoxSeamFill, BsClockHistory } from 'react-icons/bs';
+import { BsClockHistory } from 'react-icons/bs';
 
 // MUI:
-import { TableRowProps } from '@mui/material/TableRow';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,10 +13,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Checkbox from '@mui/material/Checkbox';
 
 // Ui:
 import CustomSection from '../../../../../shared/ui/CustomSection';
+import ShipmentParcelsTableRow from './ShipmentParcelsTableRow';
 
 // Data:
 import { parcelsData } from '../../../../../shared/data/parcelsData';
@@ -26,26 +25,16 @@ import { parcelsData } from '../../../../../shared/data/parcelsData';
 import {
   selectParcelsData,
   selectIsParcelsDataLoading,
-  selectIsUploadingParcel,
 } from '../../../../redux/slices/parcelsSlice';
 
 // Services:
 import loadParcelsData from '../../services/loadParcelsData';
 
-import {
-  selectParcelsToUploadData,
-  selectParcelsWeightOverloadError,
-  addParcelToUpload,
-  removeParcelFromUpload,
-  setParcelsWeightOverloadError,
-} from '../../../../redux/slices/parcelsToUploadSlice';
+import { selectParcelsToUploadData } from '../../../../redux/slices/parcelsToUploadSlice';
 
 // Types:
 import { AppDispatch } from '../../../../redux/store';
-import {
-  Parcel,
-  ParcelAndShipmentInfo,
-} from '../../../../../types/parcels.interface';
+import { Parcel } from '../../../../../types/parcels.interface';
 
 // Api:
 import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
@@ -53,8 +42,6 @@ import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
 const ShipmentParcelsTable = () => {
   const dispatch: AppDispatch = useDispatch();
   const headerTitles: string[] = ['Выбор', 'Номер посылки', 'Вес, кг'];
-
-  const { id } = useParams();
 
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
@@ -78,32 +65,6 @@ const ShipmentParcelsTable = () => {
   const isParcelsDataLoading: boolean = useSelector(selectIsParcelsDataLoading);
 
   const parcelsToUploadData: Parcel[] = useSelector(selectParcelsToUploadData);
-
-  const parcelsWeightOverloadError: string = useSelector(
-    selectParcelsWeightOverloadError
-  );
-
-  const isUploadingParcel: boolean = useSelector(selectIsUploadingParcel);
-
-  // Добавление и удаление посылок в непроведенную заявку на отгрузку:
-  // -----------------------------------
-  const handleAddParcelToUpload = (
-    parcelAndShipmentData: ParcelAndShipmentInfo
-  ) => {
-    dispatch(addParcelToUpload(parcelAndShipmentData));
-
-    if (parcelsWeightOverloadError !== '') {
-      dispatch(setParcelsWeightOverloadError(''));
-    }
-  };
-
-  const handleRemoveParcelFromUpload = (parcelId: string) => {
-    dispatch(removeParcelFromUpload(parcelId));
-
-    if (parcelsWeightOverloadError !== '') {
-      dispatch(setParcelsWeightOverloadError(''));
-    }
-  };
 
   useEffect(() => {
     if (parcelsData.length === 0 && !isParcelsDataLoading) {
@@ -173,20 +134,6 @@ const ShipmentParcelsTable = () => {
                     key={parcelInfo.id}
                     parcelData={parcelInfo}
                     isParcelSelectedToUpload={isParcelSelectedToUpload}
-                    onClick={() => {
-                      if (parcelInfo.isUploaded || isUploadingParcel) {
-                        return;
-                      }
-
-                      if (isParcelSelectedToUpload) {
-                        handleRemoveParcelFromUpload(parcelInfo.id);
-                      } else if (id) {
-                        handleAddParcelToUpload({
-                          parcelData: parcelInfo,
-                          shipmentId: id,
-                        });
-                      }
-                    }}
                   />
                 );
               })}
@@ -214,74 +161,6 @@ const ShipmentParcelsTable = () => {
 };
 
 export default ShipmentParcelsTable;
-
-// ----------------------------------------------------------------------------
-// Ряд таблицы посылок:
-// ----------------------------------------------------------------------------
-export interface ShipmentParcelsTableRow_Props extends TableRowProps {
-  parcelData: Parcel;
-  isParcelSelectedToUpload: boolean;
-}
-
-const ShipmentParcelsTableRow: React.FC<ShipmentParcelsTableRow_Props> = memo(
-  ({ parcelData, isParcelSelectedToUpload, ...props }) => {
-    // const { parcelData, isParcelSelectedToUpload } = props;
-
-    return (
-      <TableRow {...props} sx={{ cursor: 'pointer' }}>
-        <TableCell sx={{ textAlign: 'center' }}>
-          {parcelData.isUploaded ? (
-            <BsBoxSeamFill className="h-10.5 m-auto text-xl text-secondary" />
-          ) : (
-            <Checkbox
-              checked={isParcelSelectedToUpload || parcelData.isUploaded}
-            ></Checkbox>
-          )}
-        </TableCell>
-
-        <TableCell
-          sx={{
-            textAlign: 'center',
-            fontFamily: 'inter',
-            color: `${
-              isParcelSelectedToUpload
-                ? '#7B57DF'
-                : parcelData.isUploaded && '#99a1af'
-            }`,
-            fontSize: {
-              xs: '14px',
-              '@media (min-width:1280px)': {
-                fontSize: '16px',
-              },
-            },
-          }}
-        >
-          {parcelData.parcel_number}
-        </TableCell>
-
-        <TableCell
-          sx={{
-            textAlign: 'center',
-            fontFamily: 'inter',
-            color: `${
-              isParcelSelectedToUpload
-                ? '#7B57DF'
-                : parcelData.isUploaded && '#99a1af'
-            }`,
-            fontSize: {
-              xs: '14px',
-              '@media (min-width:1280px)': {
-                fontSize: '16px',
-              },
-            },
-          }}
-        >
-          {parcelData.parcel_weight}
-        </TableCell>
-      </TableRow>
-    );
-  }
-);
 
 // ----------------------------------------------------------------------------
 // Лоадеры:

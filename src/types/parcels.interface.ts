@@ -24,7 +24,7 @@ export interface Parcel {
   isUploaded: boolean;
 }
 
-export interface ParcelAndShipmentInfo {
+export interface ParcelWidthShipmentData {
   parcelData: Parcel;
   shipmentId: string;
 }
