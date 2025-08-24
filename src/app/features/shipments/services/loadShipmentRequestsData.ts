@@ -6,16 +6,24 @@ import serverResponseImitation from '../../../../shared/utils/serverResponseImit
 
 // Types:
 import { ShipmentRequest } from '../../../../types/shipments.interface';
+import { ShipmentStatus } from '../../../../types/shipments.interface';
 
 // Загрузка с api данных по непроведенным заявкам на отгрузку:
 // ---------------------------------------------------
 export const loadShipmentRequestsData = createAsyncThunk(
   'shipments/loadShipmentRequestsData',
-  async (url: string, thunkApi) => {
+  async (
+    payload: { url: string; shipmentStatus: ShipmentStatus },
+    thunkApi
+  ) => {
     try {
       await serverResponseImitation(2000);
 
-      const shipmentRequestsDataResponse: Response = await fetch(url);
+      const { url, shipmentStatus } = payload;
+
+      const shipmentRequestsDataResponse: Response = await fetch(
+        `${url}?shipment_status=${shipmentStatus}`
+      );
 
       if (shipmentRequestsDataResponse.ok) {
         const shipmentRequestsData: ShipmentRequest[] =
@@ -49,12 +57,17 @@ export default loadShipmentRequestsData;
 // ---------------------------------------------------
 const loadShipmentRequestsDataAxios = createAsyncThunk(
   'shipments/loadShipmentRequestsData',
-  async (url: string, thunkApi) => {
+  async (
+    payload: { url: string; shipmentStatus: ShipmentStatus },
+    thunkApi
+  ) => {
     try {
       await serverResponseImitation(2000);
 
+      const { url, shipmentStatus } = payload;
+
       const shipmentRequestsDataResponse = await axios.get<ShipmentRequest[]>(
-        url
+        `${url}?shipment_status=${shipmentStatus}`
       );
 
       const shipmentRequestsData = shipmentRequestsDataResponse.data;

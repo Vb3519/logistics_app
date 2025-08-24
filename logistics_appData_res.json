@@ -8,7 +8,7 @@
       "current_load_value": 0,
       "transport": "ГАЗель 3302 (до 160 кг)",
       "max_load_value": 160,
-      "shipment_status": "",
+      "shipment_status": null,
       "from_city": "Санкт-Петербург",
       "to_city": "Москва",
       "transport_info": "{\"transport\":\"ГАЗель 3302 (до 160 кг)\",\"max_load_value\":\"160\"}"
@@ -21,10 +21,148 @@
       "current_load_value": 0,
       "transport": "ГАЗель A21R32 (до 200 кг)",
       "max_load_value": 200,
-      "shipment_status": "",
+      "shipment_status": null,
       "from_city": "Москва",
       "to_city": "Ярославль",
       "transport_info": "{\"transport\":\"ГАЗель A21R32 (до 200 кг)\",\"max_load_value\":\"200\"}"
+    }
+  ],
+  "parcels": [
+    {
+      "id": "4671fecc-1a5f-4de7-89aa-af6878381995",
+      "isUploaded": false,
+      "parcel_number": "CN-4671fec",
+      "parcel_status": "Изменен адрес отправки",
+      "parcel_weight": "60",
+      "shipment_id": null
+    },
+    {
+      "id": "ba929e1b-2da1-48e7-8cf9-10ba3ebbcece",
+      "isUploaded": false,
+      "parcel_number": "CN-ba929e1",
+      "parcel_status": "Изменен адрес отправки",
+      "parcel_weight": "40",
+      "shipment_id": null
+    },
+    {
+      "id": "7149fa8e-2bf5-4b62-823d-da7c1f4a4ff3",
+      "isUploaded": false,
+      "parcel_number": "CN-7149fa8",
+      "parcel_status": "Проблема с упаковкой",
+      "parcel_weight": "80",
+      "shipment_id": null
+    },
+    {
+      "id": "5751f2dd-f562-4f12-b504-870bae650ebb",
+      "isUploaded": false,
+      "parcel_number": "CN-5751f2d",
+      "parcel_status": "Проблема с упаковкой",
+      "parcel_weight": "20",
+      "shipment_id": null
+    },
+    {
+      "id": "97580e51-c1fd-4606-a6c1-33913fcf8abd",
+      "isUploaded": false,
+      "parcel_number": "CN-97580e5",
+      "parcel_status": "Проблема с упаковкой",
+      "parcel_weight": "80",
+      "shipment_id": null
+    },
+    {
+      "id": "5bfd7ab4-5b80-4f4b-a95c-68ce285eaf6a",
+      "parcel_number": "CN-5bfd7ab",
+      "isUploaded": false,
+      "parcel_weight": "40",
+      "parcel_status": "Вышел из строя транспорт",
+      "shipment_id": null
+    },
+    {
+      "id": "2c04cc79-4a75-4d5d-8f55-919a86f0c830",
+      "parcel_number": "CN-2c04cc7",
+      "isUploaded": false,
+      "parcel_weight": "40",
+      "parcel_status": "Изменен адрес отправки",
+      "shipment_id": null
+    },
+    {
+      "id": "c56de5a5-f968-403c-9cd5-11937cacd669",
+      "parcel_number": "CN-c56de5a",
+      "isUploaded": false,
+      "parcel_weight": "100",
+      "parcel_status": "Проблема с упаковкой",
+      "shipment_id": null
+    },
+    {
+      "id": "b91de2d7-59e8-4046-8d8a-58eb627c43d0",
+      "parcel_number": "CN-b91de2d",
+      "isUploaded": false,
+      "parcel_weight": "20",
+      "parcel_status": "Изменен адрес отправки",
+      "shipment_id": null
+    },
+    {
+      "id": "ba12e778-c28a-43bc-9072-8f714b15f74a",
+      "parcel_number": "CN-ba12e77",
+      "isUploaded": false,
+      "parcel_weight": "60",
+      "parcel_status": "Вышел из строя транспорт",
+      "shipment_id": null
+    },
+    {
+      "id": "922b9072-7426-4715-a145-87dff1c7b2cc",
+      "parcel_number": "CN-922b907",
+      "isUploaded": false,
+      "parcel_weight": "20",
+      "parcel_status": "Проблема с упаковкой",
+      "shipment_id": null
+    },
+    {
+      "id": "47df38bd-290c-4211-887f-f6a1e56f482d",
+      "parcel_number": "CN-47df38b",
+      "isUploaded": false,
+      "parcel_weight": "80",
+      "parcel_status": "Изменен адрес отправки",
+      "shipment_id": null
+    },
+    {
+      "id": "c88171aa-324c-48b2-ae59-634f0317915f",
+      "parcel_number": "CN-c88171a",
+      "isUploaded": false,
+      "parcel_weight": "100",
+      "parcel_status": "Проблема с упаковкой",
+      "shipment_id": null
+    },
+    {
+      "id": "6caff6c0-4867-4f8b-b4db-d0cc56b70098",
+      "parcel_number": "CN-6caff6c",
+      "isUploaded": false,
+      "parcel_weight": "40",
+      "parcel_status": "Проблема с упаковкой",
+      "shipment_id": null
+    },
+    {
+      "id": "4020ccac-a3a4-4129-a813-e531aecd74c4",
+      "parcel_number": "CN-4020cca",
+      "isUploaded": false,
+      "parcel_weight": "60",
+      "parcel_status": "Вышел из строя транспорт",
+      "shipment_id": null
+    },
+    {
+      "id": "fa80a99e-1539-4a33-aa5d-60cc88eb7b30",
+      "parcel_number": "CN-fa80a99",
+      "isUploaded": false,
+      "parcel_weight": "40",
+      "parcel_status": "Проблема с упаковкой",
+      "shipment_id": null
+    },
+    {
+      "id": "a3b647e4-632a-4eeb-9973-c59039497716",
+      "parcel_number": "CN-a3b647e",
+      "isUploaded": false,
+      "parcel_weight": "60",
+      "parcel_status": "Изменен адрес отправки",
+      "shipment_id": null
     }
   ],
   "clients": [
@@ -67,144 +205,6 @@
       "employee_name": "Виктор",
       "employee_sern": "Бордюгов",
       "id": "9bb015e0-5e8b-4c27-a3d6-7ba5689519f8"
-    }
-  ],
-  "parcels": [
-    {
-      "id": "4671fecc-1a5f-4de7-89aa-af6878381995",
-      "isUploaded": false,
-      "parcel_number": "CN-4671fec",
-      "parcel_status": "Изменен адрес отправки",
-      "parcel_weight": "60",
-      "shipment_id": ""
-    },
-    {
-      "id": "ba929e1b-2da1-48e7-8cf9-10ba3ebbcece",
-      "isUploaded": false,
-      "parcel_number": "CN-ba929e1",
-      "parcel_status": "Изменен адрес отправки",
-      "parcel_weight": "40",
-      "shipment_id": ""
-    },
-    {
-      "id": "7149fa8e-2bf5-4b62-823d-da7c1f4a4ff3",
-      "isUploaded": false,
-      "parcel_number": "CN-7149fa8",
-      "parcel_status": "Проблема с упаковкой",
-      "parcel_weight": "80",
-      "shipment_id": ""
-    },
-    {
-      "id": "5751f2dd-f562-4f12-b504-870bae650ebb",
-      "isUploaded": false,
-      "parcel_number": "CN-5751f2d",
-      "parcel_status": "Проблема с упаковкой",
-      "parcel_weight": "20",
-      "shipment_id": ""
-    },
-    {
-      "id": "97580e51-c1fd-4606-a6c1-33913fcf8abd",
-      "isUploaded": false,
-      "parcel_number": "CN-97580e5",
-      "parcel_status": "Проблема с упаковкой",
-      "parcel_weight": "80",
-      "shipment_id": ""
-    },
-    {
-      "id": "5bfd7ab4-5b80-4f4b-a95c-68ce285eaf6a",
-      "parcel_number": "CN-5bfd7ab",
-      "isUploaded": false,
-      "parcel_weight": "40",
-      "parcel_status": "Вышел из строя транспорт",
-      "shipment_id": ""
-    },
-    {
-      "id": "2c04cc79-4a75-4d5d-8f55-919a86f0c830",
-      "parcel_number": "CN-2c04cc7",
-      "isUploaded": false,
-      "parcel_weight": "40",
-      "parcel_status": "Изменен адрес отправки",
-      "shipment_id": ""
-    },
-    {
-      "id": "c56de5a5-f968-403c-9cd5-11937cacd669",
-      "parcel_number": "CN-c56de5a",
-      "isUploaded": false,
-      "parcel_weight": "100",
-      "parcel_status": "Проблема с упаковкой",
-      "shipment_id": ""
-    },
-    {
-      "id": "b91de2d7-59e8-4046-8d8a-58eb627c43d0",
-      "parcel_number": "CN-b91de2d",
-      "isUploaded": false,
-      "parcel_weight": "20",
-      "parcel_status": "Изменен адрес отправки",
-      "shipment_id": ""
-    },
-    {
-      "id": "ba12e778-c28a-43bc-9072-8f714b15f74a",
-      "parcel_number": "CN-ba12e77",
-      "isUploaded": false,
-      "parcel_weight": "60",
-      "parcel_status": "Вышел из строя транспорт",
-      "shipment_id": ""
-    },
-    {
-      "id": "922b9072-7426-4715-a145-87dff1c7b2cc",
-      "parcel_number": "CN-922b907",
-      "isUploaded": false,
-      "parcel_weight": "20",
-      "parcel_status": "Проблема с упаковкой",
-      "shipment_id": ""
-    },
-    {
-      "id": "47df38bd-290c-4211-887f-f6a1e56f482d",
-      "parcel_number": "CN-47df38b",
-      "isUploaded": false,
-      "parcel_weight": "80",
-      "parcel_status": "Изменен адрес отправки",
-      "shipment_id": ""
-    },
-    {
-      "id": "c88171aa-324c-48b2-ae59-634f0317915f",
-      "parcel_number": "CN-c88171a",
-      "isUploaded": false,
-      "parcel_weight": "100",
-      "parcel_status": "Проблема с упаковкой",
-      "shipment_id": ""
-    },
-    {
-      "id": "6caff6c0-4867-4f8b-b4db-d0cc56b70098",
-      "parcel_number": "CN-6caff6c",
-      "isUploaded": false,
-      "parcel_weight": "40",
-      "parcel_status": "Проблема с упаковкой",
-      "shipment_id": ""
-    },
-    {
-      "id": "4020ccac-a3a4-4129-a813-e531aecd74c4",
-      "parcel_number": "CN-4020cca",
-      "isUploaded": false,
-      "parcel_weight": "60",
-      "parcel_status": "Вышел из строя транспорт",
-      "shipment_id": ""
-    },
-    {
-      "id": "fa80a99e-1539-4a33-aa5d-60cc88eb7b30",
-      "parcel_number": "CN-fa80a99",
-      "isUploaded": false,
-      "parcel_weight": "40",
-      "parcel_status": "Проблема с упаковкой",
-      "shipment_id": ""
-    },
-    {
-      "id": "a3b647e4-632a-4eeb-9973-c59039497716",
-      "parcel_number": "CN-a3b647e",
-      "isUploaded": false,
-      "shipment_id": "",
-      "parcel_weight": "60",
-      "parcel_status": "Изменен адрес отправки"
     }
   ]
 }

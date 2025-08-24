@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // React-icons:
 import { BsBoxSeamFill } from 'react-icons/bs';
@@ -9,12 +10,27 @@ import { BsBoxSeamFill } from 'react-icons/bs';
 import CustomButton from '../../../../../../shared/ui/CustomButton';
 
 // State:
-import { selectIsUnloadingParcel } from '../../../../../redux/slices/parcelsSlice';
+import {
+  selectIsUnloadingParcel,
+  updateParcelsByShipmentId,
+} from '../../../../../redux/slices/parcelsSlice';
 import { toggleShipmentParcelsList } from '../../../../../redux/slices/shipmentParcelsListSlice';
-import { removeParcelsFromShipment } from '../../../../../redux/slices/shipmentsSlice';
+
+import {
+  removeParcelsFromShipment,
+  updateShipmentRequestsByStatus,
+} from '../../../../../redux/slices/shipmentsSlice';
+
+import {
+  selectShipmentStatus,
+  selectShipmentStatusError,
+  setShipmentStatusErrorMsg,
+} from '../../../../../redux/slices/shipmentStatusSlice';
 
 // Services:
 import unloadParcelFromShipmentRequest from '../../../../parcels/services/unloadParcelFromShipmentRequest';
+import approveShipmentRequest from '../../../services/approveShipmentRequest';
+import attachParcelToShipment from '../../../../parcels/services/attachParcelToShipment';
 
 // Types:
 import { Parcel } from '../../../../../../types/parcels.interface';
@@ -22,18 +38,25 @@ import { AppDispatch } from '../../../../../redux/store';
 
 // Api:
 import { PARCELS_URL } from '../../../../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from '../../../../../../shared/api/logistics_appApi';
 
 // Кнопки действий для работы с заявкой на отгрузку:
 // ---------------------------------------------------------------------------
 interface CurrentRequestActions_Props {
   uploadedParcels: Parcel[] | undefined;
+  currentWeightVal: number;
 }
 const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
-  ({ uploadedParcels }) => {
+  ({ uploadedParcels, currentWeightVal }) => {
     const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate();
+
     const { id } = useParams();
 
     const isUnloadingParcel = useSelector(selectIsUnloadingParcel);
+
+    const shipmentStatus = useSelector(selectShipmentStatus);
+    const shipmentStatusError: string = useSelector(selectShipmentStatusError);
 
     // Отображение списка посылок, добавленных к непроведенной заявке на отгрузку:
     // ----------------------------------------------------------
@@ -48,7 +71,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
       uploadedParcelsData: Parcel[] | undefined
     ) => {
       if (uploadedParcelsData) {
-        const parcelsToUnload = uploadedParcelsData?.map((parcelInfo) => {
+        const parcelsToUnload = uploadedParcelsData.map((parcelInfo) => {
           const parcelToUnloadData = {
             url: url,
             parcelId: parcelInfo.id,
@@ -60,6 +83,65 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
         await Promise.all(parcelsToUnload);
 
         dispatch(removeParcelsFromShipment(id));
+      }
+    };
+
+    // Закончить погрузку (провести) заявку на отгрузку:
+    // ----------------------------------------------------------
+    const handleApproveShipment = async () => {
+      if (shipmentStatus === '') {
+        if (!shipmentStatusError) {
+          dispatch(
+            setShipmentStatusErrorMsg('Необходимо указать статус отгрузки')
+          );
+        }
+
+        return;
+      } else {
+        if (uploadedParcels === undefined || id === undefined) return;
+
+        if (uploadedParcels.length === 0) {
+          console.log('Добавьте посылки в транспорт!');
+          return;
+        }
+
+        await dispatch(
+          approveShipmentRequest({
+            id: id,
+            url: SHIPMENTS_URL,
+            shipment_parcels: uploadedParcels,
+            current_load_value: currentWeightVal,
+            shipment_status: shipmentStatus,
+          })
+        );
+
+        // ---------------------------------------------------------------------
+        // Это необходимо перенести в отдельную функцию:
+        // ---------------------------------------------------------------------
+        // Сервер:
+        const parcelsToAttach = uploadedParcels.map((parcelInfo) => {
+          const parcelToAttachData = {
+            url: PARCELS_URL,
+            parcelId: parcelInfo.id,
+            shipmentId: id,
+          };
+
+          return dispatch(attachParcelToShipment(parcelToAttachData));
+        });
+
+        await Promise.all(parcelsToAttach);
+
+        // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
+        dispatch(updateShipmentRequestsByStatus(null));
+        dispatch(updateParcelsByShipmentId(null));
+        // ---------------------------------------------------------------------
+
+        navigate(`/shipments/`);
+
+        console.log('Отгрузка проведена!');
+
+        // Done: Убирать загруженные в транспорт посылки из списка посылок (обновив им поле shipment_id)
+        // Done: Редирект на страницу с активными отгрузками
       }
     };
 
@@ -76,13 +158,20 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
             <span className="text-nowrap">Список посылок</span>
           </CustomButton>
 
-          <CustomButton className="p-2 w-40 text-[#7B57DF] bg-element_primary xl:w-45">
+          <CustomButton
+            className={`p-2 w-40 ${
+              shipmentStatus && uploadedParcels?.length !== 0
+                ? 'text-[#7B57DF]'
+                : 'text-secondary'
+            } bg-element_primary xl:w-45`}
+            onClick={handleApproveShipment}
+          >
             <span className="text-nowrap">Завершить загрузку</span>
           </CustomButton>
         </div>
 
         <CustomButton
-          disabled={isUnloadingParcel}
+          disabled={isUnloadingParcel || uploadedParcels?.length === 0}
           className={`p-2 mx-auto w-1/2 min-w-50 border-2 border-[#e3d9ff] text-sm text-secondary transition duration-200 ease-in-out ${
             isUnloadingParcel && 'animate-pulse'
           } xl:text-base hover:text-primary hover:border-[#cbb9fd]`}

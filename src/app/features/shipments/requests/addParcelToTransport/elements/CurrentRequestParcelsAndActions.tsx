@@ -31,7 +31,10 @@ const CurrentRequestParcelsAndActions: React.FC<
         <CurrentTransportLoad currentVal={currentVal} maxVal={maxVal} />
       )}
 
-      <CurrentRequestActions uploadedParcels={uploadedParcels} />
+      <CurrentRequestActions
+        uploadedParcels={uploadedParcels}
+        currentWeightVal={currentVal}
+      />
     </>
   );
 };

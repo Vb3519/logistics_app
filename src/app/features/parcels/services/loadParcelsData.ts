@@ -11,11 +11,18 @@ import { Parcel } from '../../../../types/parcels.interface';
 // ---------------------------------------------------
 export const loadParcelsData = createAsyncThunk(
   'parcels/loadData',
-  async (url: string, thunkAPI) => {
+  async (payload: { url: string; shipmentId: string | null }, thunkAPI) => {
     try {
       await serverResponseImitation(2000);
 
-      const parcelsDataResponse: Response = await fetch(url, { method: 'GET' });
+      const { url, shipmentId } = payload;
+
+      const parcelsDataResponse: Response = await fetch(
+        `${url}?shipment_id=${shipmentId}`,
+        {
+          method: 'GET',
+        }
+      );
 
       if (parcelsDataResponse.ok) {
         const parcelsData: Parcel[] = await parcelsDataResponse.json();

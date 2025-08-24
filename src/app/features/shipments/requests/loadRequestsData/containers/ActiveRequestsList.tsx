@@ -12,6 +12,7 @@ import ActiveRequestsListElem from '../elements/ActiveRequestsListElem';
 
 // Types:
 import { AppDispatch } from '../../../../../redux/store';
+import { ShipmentStatus } from '../../../../../../types/shipments.interface';
 
 // Api:
 import { SHIPMENTS_URL } from '../../../../../../shared/api/logistics_appApi';
@@ -37,13 +38,18 @@ const ActiveRequestsList = () => {
     selectisShipmentRequestsDataLoading
   );
 
-  const handleLoadShipmentRequestsData = (url: string) => {
-    dispatch(loadShipmentRequestsData(url));
+  const handleLoadShipmentRequestsData = (
+    url: string,
+    shipmentStatus: ShipmentStatus
+  ) => {
+    dispatch(
+      loadShipmentRequestsData({ url: url, shipmentStatus: shipmentStatus })
+    );
   };
 
   useEffect(() => {
     if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
-      handleLoadShipmentRequestsData(SHIPMENTS_URL);
+      handleLoadShipmentRequestsData(SHIPMENTS_URL, null);
     }
   }, []);
 

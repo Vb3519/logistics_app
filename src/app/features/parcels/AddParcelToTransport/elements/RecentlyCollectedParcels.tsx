@@ -37,7 +37,7 @@ const RecentlyCollectedParcels = () => {
 
   useEffect(() => {
     if (parcelsData.length === 0 && !isParcelsDataLoading) {
-      dispatch(loadParcelsData(PARCELS_URL));
+      dispatch(loadParcelsData({ url: PARCELS_URL, shipmentId: null }));
     }
   }, []);
 

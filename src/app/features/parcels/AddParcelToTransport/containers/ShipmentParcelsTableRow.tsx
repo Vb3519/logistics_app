@@ -38,7 +38,6 @@ export interface ShipmentParcelsTableRow_Props extends TableRowProps {
 const ShipmentParcelsTableRow: React.FC<ShipmentParcelsTableRow_Props> = memo(
   ({ parcelData, isParcelSelectedToUpload, ...props }) => {
     // const { parcelData, isParcelSelectedToUpload } = props;
-    console.log('ShipmentParcelsTableRow render');
 
     const dispatch = useDispatch();
 

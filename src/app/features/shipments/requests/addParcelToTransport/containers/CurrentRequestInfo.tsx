@@ -1,4 +1,15 @@
 import { memo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+// State:
+import {
+  setShipmentStatus,
+  setShipmentStatusErrorMsg,
+  selectShipmentStatusError,
+} from '../../../../../redux/slices/shipmentStatusSlice';
+
+// Types:
+import { AppDispatch } from '../../../../../redux/store';
 
 interface CurrentRequestInfoInfo_Props {
   shipment_number: string;
@@ -7,6 +18,29 @@ interface CurrentRequestInfoInfo_Props {
 
 const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
   ({ shipment_number, transport }) => {
+    const dispatch: AppDispatch = useDispatch();
+
+    const shipmentStatusError: string = useSelector(selectShipmentStatusError);
+
+    // Установка статуса для заявки на отгрузку:
+    const handleSetShipmentStatus = (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      if (shipmentStatusError) {
+        dispatch(setShipmentStatusErrorMsg(''));
+      }
+
+      const statusVal = event.target.value;
+
+      if (
+        statusVal === 'В пути' ||
+        statusVal === 'Завершена' ||
+        statusVal === 'Опаздывает'
+      ) {
+        dispatch(setShipmentStatus(statusVal));
+      }
+    };
+
     return (
       <>
         <div className="h-full flex flex-col gap-4 text-sm xl:text-base">
@@ -34,6 +68,8 @@ const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
                 name="shipment_status"
                 id="shipment_in_proccess"
                 type="radio"
+                value="В пути"
+                onChange={handleSetShipmentStatus}
               ></input>
               <label htmlFor="shipment_in_proccess" className="cursor-pointer">
                 В пути
@@ -45,9 +81,11 @@ const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
                 name="shipment_status"
                 id="shipment_completed"
                 type="radio"
+                value="Завершена"
+                onChange={handleSetShipmentStatus}
               ></input>
               <label htmlFor="shipment_completed" className="cursor-pointer">
-                Завершен
+                Завершена
               </label>
             </div>
 
@@ -56,11 +94,17 @@ const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
                 name="shipment_status"
                 id="shipment_is_delayed"
                 type="radio"
+                value="Опаздывает"
+                onChange={handleSetShipmentStatus}
               ></input>
               <label htmlFor="shipment_is_delayed" className="cursor-pointer">
                 Опаздывает
               </label>
             </div>
+
+            <span className="text-amber-500 text-sm leading-4">
+              {shipmentStatusError && 'Укажите статус отгрузки'}
+            </span>
           </fieldset>
         </div>
       </>

@@ -24,7 +24,10 @@ import {
 import loadShipmentRequestsData from '../../../app/features/shipments/services/loadShipmentRequestsData';
 
 // Types:
-import { ShipmentRequest } from '../../../types/shipments.interface';
+import {
+  ShipmentRequest,
+  ShipmentStatus,
+} from '../../../types/shipments.interface';
 import { AppDispatch } from '../../../app/redux/store';
 
 // Api:
@@ -39,8 +42,13 @@ const ShipmentRequestsPage = () => {
   };
 
   // Загрузка с api данных по непроведенным заявкам на отгрузку:
-  const handleLoadShipmentRequestsData = (url: string) => {
-    dispatch(loadShipmentRequestsData(url));
+  const handleLoadShipmentRequestsData = (
+    url: string,
+    shipmentStatus: ShipmentStatus
+  ) => {
+    dispatch(
+      loadShipmentRequestsData({ url: url, shipmentStatus: shipmentStatus })
+    );
   };
 
   const shipmentRequests: ShipmentRequest[] = useSelector(
@@ -52,7 +60,7 @@ const ShipmentRequestsPage = () => {
 
   useEffect(() => {
     if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
-      handleLoadShipmentRequestsData(SHIPMENTS_URL);
+      handleLoadShipmentRequestsData(SHIPMENTS_URL, null);
     }
   }, []);
 

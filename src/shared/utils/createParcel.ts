@@ -11,7 +11,7 @@ export const createParcel = (parcelFormData: ParcelFormFields): Parcel => {
     id: parcelId,
     parcel_number: parcelNumber,
     isUploaded: false,
-    shipment_id: '',
+    shipment_id: null,
     ...parcelFormData,
   };
 

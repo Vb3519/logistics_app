@@ -20,7 +20,7 @@ export interface Parcel {
     | 'Изменен адрес отправки'
     | 'Проблема с упаковкой'
     | 'Вышел из строя транспорт';
-  shipment_id: string;
+  shipment_id: string | null;
   isUploaded: boolean;
 }
 
@@ -44,6 +44,9 @@ export interface ParcelsState {
 
   isUnloadingParcel: boolean;
   parcelUnloadError: string;
+
+  isAttachingParcel: boolean;
+  parcelAttachError: string;
 }
 
 export interface ParcelsStateSlice {

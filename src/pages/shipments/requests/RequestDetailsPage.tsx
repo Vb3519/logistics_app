@@ -22,18 +22,25 @@ import loadShipmentRequestsData from '../../../app/features/shipments/services/l
 
 // Types:
 import { AppDispatch } from '../../../app/redux/store';
+import { ShipmentStatus } from '../../../types/shipments.interface';
 
 // Api:
 import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
 
 const RequestDetailsPage = () => {
   const dispatch: AppDispatch = useDispatch();
+
   const params = useParams();
   const { id } = params;
 
   // Загрузка с api данных по непроведенным заявкам на отгрузку:
-  const handleLoadShipmentRequestsData = (url: string) => {
-    dispatch(loadShipmentRequestsData(url));
+  const handleLoadShipmentRequestsData = (
+    url: string,
+    shipmentStatus: ShipmentStatus
+  ) => {
+    dispatch(
+      loadShipmentRequestsData({ url: url, shipmentStatus: shipmentStatus })
+    );
   };
 
   const shipmentRequests = useSelector(selectShipmentRequests);
@@ -48,7 +55,7 @@ const RequestDetailsPage = () => {
 
   useEffect(() => {
     if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
-      handleLoadShipmentRequestsData(SHIPMENTS_URL);
+      handleLoadShipmentRequestsData(SHIPMENTS_URL, null);
     }
   }, []);
 

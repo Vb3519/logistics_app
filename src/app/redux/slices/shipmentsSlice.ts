@@ -5,12 +5,14 @@ import {
   ShipmentsState,
   ShipmentsStateSlice,
   ShipmentRequest,
+  ShipmentStatus,
 } from '../../../types/shipments.interface';
 import { Parcel } from '../../../types/parcels.interface';
 
 // Services:
 import loadShipmentRequestsData from '../../features/shipments/services/loadShipmentRequestsData';
 import addShipmentRequest from '../../features/shipments/services/addShipmentRequest';
+import approveShipmentRequest from '../../features/shipments/services/approveShipmentRequest';
 
 const initialState: ShipmentsState = {
   shipmentRequestsData: [],
@@ -19,6 +21,9 @@ const initialState: ShipmentsState = {
 
   isShipmentRequestsFormDataSending: false,
   shipmentRequestsFormError: '',
+
+  isShipmentApproveSending: false,
+  shipmentApproveError: '',
 };
 
 const shipmentsSlice = createSlice({
@@ -66,6 +71,15 @@ const shipmentsSlice = createSlice({
         currentShipmentRequest.shipment_parcels = [];
         currentShipmentRequest.current_load_value = 0;
       }
+    },
+
+    updateShipmentRequestsByStatus: (
+      state,
+      action: { payload: ShipmentStatus; type: string }
+    ) => {
+      state.shipmentRequestsData = state.shipmentRequestsData.filter(
+        (shipmentRequest) => shipmentRequest.shipment_status === action.payload
+      );
     },
   },
 
@@ -126,12 +140,47 @@ const shipmentsSlice = createSlice({
         };
       }
     });
+
+    // Завершение погрузки (проведение) заявки на отгрузку:
+    builder.addCase(approveShipmentRequest.pending, (state) => {
+      return { ...state, isShipmentApproveSending: true };
+    });
+
+    builder.addCase(approveShipmentRequest.fulfilled, (state, action) => {
+      const { id, shipment_parcels, current_load_value, shipment_status } =
+        action.payload;
+
+      const shipmentRequestToApprove = state.shipmentRequestsData.find(
+        (requestInfo) => requestInfo.id === id
+      );
+
+      if (shipmentRequestToApprove) {
+        shipmentRequestToApprove.shipment_parcels = shipment_parcels;
+        shipmentRequestToApprove.current_load_value = current_load_value;
+        shipmentRequestToApprove.shipment_status = shipment_status;
+      }
+
+      state.isShipmentApproveSending = false;
+    });
+
+    builder.addCase(approveShipmentRequest.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        return {
+          ...state,
+          isShipmentApproveSending: false,
+          shipmentApproveError: action.payload,
+        };
+      }
+    });
   },
 });
 
 // Действия:
-export const { addParcelsToShipment, removeParcelsFromShipment } =
-  shipmentsSlice.actions;
+export const {
+  addParcelsToShipment,
+  removeParcelsFromShipment,
+  updateShipmentRequestsByStatus,
+} = shipmentsSlice.actions;
 
 // Состояние:
 export const selectShipmentRequests = (state: ShipmentsStateSlice) =>

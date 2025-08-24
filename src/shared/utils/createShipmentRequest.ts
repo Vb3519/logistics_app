@@ -31,7 +31,7 @@ export const createShipmentRequest = (
     current_load_value: 0,
     transport: parcedTransportInfo.transport,
     max_load_value: Number(parcedTransportInfo.max_load_value),
-    shipment_status: '',
+    shipment_status: null,
     ...shipmentRequestFormData,
   };
 

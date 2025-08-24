@@ -12,6 +12,7 @@ import loadParcelsData from '../../features/parcels/services/loadParcelsData';
 import addNewParcel from '../../features/parcels/services/addNewParcel';
 import uploadParcelToShipmentRequest from '../../features/parcels/services/uploadParcelToShipmentRequest';
 import unloadParcelFromShipmentRequest from '../../features/parcels/services/unloadParcelFromShipmentRequest';
+import attachParcelToShipment from '../../features/parcels/services/attachParcelToShipment';
 
 const initialState: ParcelsState = {
   parcelsData: [],
@@ -26,12 +27,21 @@ const initialState: ParcelsState = {
 
   isUnloadingParcel: false,
   parcelUnloadError: '',
+
+  isAttachingParcel: false,
+  parcelAttachError: '',
 };
 
 const parcelsSlice = createSlice({
   name: 'parcels',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    updateParcelsByShipmentId: (state, action) => {
+      state.parcelsData = state.parcelsData.filter(
+        (parcelInfo) => parcelInfo.shipment_id === action.payload
+      );
+    },
+  },
 
   extraReducers: (builder) => {
     //  Загрузка с api данных по посылкам:
@@ -154,10 +164,42 @@ const parcelsSlice = createSlice({
         }
       }
     );
+
+    // "Привязка" посылки к заявке
+    // Обновление поля shipment_id (у каждой загруженной в транспорт посылки), после проведения заявки на отгрузку:
+    builder.addCase(attachParcelToShipment.pending, (state) => {
+      return { ...state, isAttachingParcel: true, parcelAttachError: '' };
+    });
+
+    builder.addCase(attachParcelToShipment.fulfilled, (state, action) => {
+      const attachedParcel: Parcel = action.payload;
+      const { shipment_id } = attachedParcel;
+
+      if (shipment_id !== '') {
+        const parcelToUpdate = state.parcelsData.find(
+          (parcelInfo) => parcelInfo.id === attachedParcel.id
+        );
+
+        if (parcelToUpdate) {
+          parcelToUpdate.shipment_id = attachedParcel.id;
+        }
+      }
+
+      state.isAttachingParcel = false;
+    });
+
+    builder.addCase(attachParcelToShipment.rejected, (state, action) => {
+      state.isAttachingParcel = false;
+
+      if (typeof action.payload === 'string') {
+        state.parcelAttachError = action.payload;
+      }
+    });
   },
 });
 
 // Действия:
+export const { updateParcelsByShipmentId } = parcelsSlice.actions;
 
 // Состояние:
 export const selectParcelsData = (state: ParcelsStateSlice) =>
