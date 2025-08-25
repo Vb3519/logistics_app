@@ -190,4 +190,7 @@ export const selectisShipmentRequestsDataLoading = (
   state: ShipmentsStateSlice
 ) => state.shipments.isShipmentRequestsDataLoading;
 
+export const selectIsShipmentApproveSending = (state: ShipmentsStateSlice) =>
+  state.shipments.isShipmentApproveSending;
+
 export default shipmentsSlice.reducer;

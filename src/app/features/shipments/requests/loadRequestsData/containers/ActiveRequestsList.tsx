@@ -15,7 +15,10 @@ import { AppDispatch } from '../../../../../redux/store';
 import { ShipmentStatus } from '../../../../../../types/shipments.interface';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../../../../shared/api/logistics_appApi';
+import {
+  SHIPMENTS_URL,
+  ACTIVE_SHIPMENTS_URL,
+} from '../../../../../../shared/api/logistics_appApi';
 
 // State:
 import { toggleMobileNavPage } from '../../../../../redux/slices/mobileNavMenuSlice';
@@ -38,18 +41,13 @@ const ActiveRequestsList = () => {
     selectisShipmentRequestsDataLoading
   );
 
-  const handleLoadShipmentRequestsData = (
-    url: string,
-    shipmentStatus: ShipmentStatus
-  ) => {
-    dispatch(
-      loadShipmentRequestsData({ url: url, shipmentStatus: shipmentStatus })
-    );
+  const handleLoadShipmentRequestsData = (url: string) => {
+    dispatch(loadShipmentRequestsData(url));
   };
 
   useEffect(() => {
     if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
-      handleLoadShipmentRequestsData(SHIPMENTS_URL, null);
+      handleLoadShipmentRequestsData(ACTIVE_SHIPMENTS_URL);
     }
   }, []);
 

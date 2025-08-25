@@ -37,7 +37,10 @@ import { AppDispatch } from '../../../../redux/store';
 import { Parcel } from '../../../../../types/parcels.interface';
 
 // Api:
-import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
+import {
+  PARCELS_URL,
+  ACTIVE_PARCELS_URL,
+} from '../../../../../shared/api/logistics_appApi';
 
 const ShipmentParcelsTable = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -68,7 +71,7 @@ const ShipmentParcelsTable = () => {
 
   useEffect(() => {
     if (parcelsData.length === 0 && !isParcelsDataLoading) {
-      dispatch(loadParcelsData({ url: PARCELS_URL, shipmentId: null }));
+      dispatch(loadParcelsData(ACTIVE_PARCELS_URL));
     }
   }, []);
 

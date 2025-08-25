@@ -23,7 +23,10 @@ import loadParcelsData from '../../services/loadParcelsData';
 import { AppDispatch } from '../../../../redux/store';
 
 // Api:
-import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
+import {
+  PARCELS_URL,
+  ACTIVE_PARCELS_URL,
+} from '../../../../../shared/api/logistics_appApi';
 
 // Contants:
 import { MIN_PARCELS_TO_RENDER } from '../../../../../constants/logisticAppContants';
@@ -37,7 +40,7 @@ const RecentlyCollectedParcels = () => {
 
   useEffect(() => {
     if (parcelsData.length === 0 && !isParcelsDataLoading) {
-      dispatch(loadParcelsData({ url: PARCELS_URL, shipmentId: null }));
+      dispatch(loadParcelsData(ACTIVE_PARCELS_URL));
     }
   }, []);
 

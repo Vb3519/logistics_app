@@ -34,13 +34,8 @@ const RequestDetailsPage = () => {
   const { id } = params;
 
   // Загрузка с api данных по непроведенным заявкам на отгрузку:
-  const handleLoadShipmentRequestsData = (
-    url: string,
-    shipmentStatus: ShipmentStatus
-  ) => {
-    dispatch(
-      loadShipmentRequestsData({ url: url, shipmentStatus: shipmentStatus })
-    );
+  const handleLoadShipmentRequestsData = (url: string) => {
+    dispatch(loadShipmentRequestsData(url));
   };
 
   const shipmentRequests = useSelector(selectShipmentRequests);
@@ -55,7 +50,7 @@ const RequestDetailsPage = () => {
 
   useEffect(() => {
     if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
-      handleLoadShipmentRequestsData(SHIPMENTS_URL, null);
+      handleLoadShipmentRequestsData(SHIPMENTS_URL);
     }
   }, []);
 

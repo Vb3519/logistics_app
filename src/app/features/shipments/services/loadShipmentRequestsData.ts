@@ -12,18 +12,11 @@ import { ShipmentStatus } from '../../../../types/shipments.interface';
 // ---------------------------------------------------
 export const loadShipmentRequestsData = createAsyncThunk(
   'shipments/loadShipmentRequestsData',
-  async (
-    payload: { url: string; shipmentStatus: ShipmentStatus },
-    thunkApi
-  ) => {
+  async (url: string, thunkApi) => {
     try {
       await serverResponseImitation(2000);
 
-      const { url, shipmentStatus } = payload;
-
-      const shipmentRequestsDataResponse: Response = await fetch(
-        `${url}?shipment_status=${shipmentStatus}`
-      );
+      const shipmentRequestsDataResponse: Response = await fetch(url);
 
       if (shipmentRequestsDataResponse.ok) {
         const shipmentRequestsData: ShipmentRequest[] =

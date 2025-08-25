@@ -166,14 +166,14 @@ const parcelsSlice = createSlice({
     );
 
     // "Привязка" посылки к заявке
-    // Обновление поля shipment_id (у каждой загруженной в транспорт посылки), после проведения заявки на отгрузку:
+    // Обновление поля shipment_id и isAttached (у каждой загруженной в транспорт посылки), после проведения заявки на отгрузку:
     builder.addCase(attachParcelToShipment.pending, (state) => {
       return { ...state, isAttachingParcel: true, parcelAttachError: '' };
     });
 
     builder.addCase(attachParcelToShipment.fulfilled, (state, action) => {
       const attachedParcel: Parcel = action.payload;
-      const { shipment_id } = attachedParcel;
+      const { shipment_id, isAttached } = attachedParcel;
 
       if (shipment_id !== '') {
         const parcelToUpdate = state.parcelsData.find(
@@ -182,6 +182,7 @@ const parcelsSlice = createSlice({
 
         if (parcelToUpdate) {
           parcelToUpdate.shipment_id = attachedParcel.id;
+          parcelToUpdate.isAttached = isAttached;
         }
       }
 
@@ -213,5 +214,8 @@ export const selectIsUploadingParcel = (state: ParcelsStateSlice) =>
 
 export const selectIsUnloadingParcel = (state: ParcelsStateSlice) =>
   state.parcels.isUnloadingParcel;
+
+export const selectIsAttachingParcel = (state: ParcelsStateSlice) =>
+  state.parcels.isAttachingParcel;
 
 export default parcelsSlice.reducer;

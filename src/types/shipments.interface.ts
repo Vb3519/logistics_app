@@ -21,7 +21,8 @@ export interface ShipmentRequest {
   current_load_value: number;
   max_load_value: number;
   transport: string;
-  shipment_status?: 'В пути' | 'Завершена' | 'Опаздывает' | null;
+  shipment_status?: 'В пути' | 'Завершена' | 'Опаздывает' | '';
+  is_shipment_status_set: boolean;
   from_city: string;
   to_city: string;
   transport_info:
@@ -48,7 +49,7 @@ export interface ShipmentsStateSlice {
   shipments: ShipmentsState;
 }
 
-export type ShipmentStatus = 'В пути' | 'Завершена' | 'Опаздывает' | null;
+export type ShipmentStatus = 'В пути' | 'Завершена' | 'Опаздывает' | '';
 
 // Table:
 // ------------------------
@@ -58,7 +59,7 @@ export interface ShipmentsTableElem_Props
   shipment_number: string;
   truck_number: string;
   total_weight: string;
-  status: 'В пути' | 'Завершена' | 'Опаздывает' | 'Нет';
+  status: 'В пути' | 'Завершена' | 'Опаздывает' | '';
 }
 
 // Components:
@@ -71,13 +72,8 @@ export interface ActiveRequestCard_Props
   current_load_value: number;
   max_load_value: number;
   transport: string;
-  shipment_status?:
-    | 'В пути'
-    | 'Завершена'
-    | 'Опаздывает'
-    | 'Нет'
-    | undefined
-    | null;
+  shipment_status?: 'В пути' | 'Завершена' | 'Опаздывает' | '' | undefined;
+  is_shipment_status_set?: boolean;
   from_city: string;
   to_city: string;
   transport_info: string;

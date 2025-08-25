@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,16 +13,34 @@ import TableRow from '@mui/material/TableRow';
 import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
 import CustomSection from '../../../shared/ui/CustomSection';
 
+// State:
+import {
+  selectShipmentsLogData,
+  selectIsShipmentsLogDataLoading,
+} from '../../../app/redux/slices/shipmentsLogSlice';
+
+// Services:
+import loadShipmentsLogData from '../../../app/features/shipments/services/loadShipmentsLogData';
+
 // Data:
 import {
   tableHeaderCols,
-  shipmentsData,
+  // shipmentsData,
 } from '../../../shared/data/shipmentsData';
 
 // Types:
 import { ShipmentsTableElem_Props } from '../../../types/shipments.interface';
+import { AppDispatch } from '../../../app/redux/store';
+
+// Api:
+import {
+  SHIPMENTS_URL,
+  SHIPMENTS_LOG_URL,
+} from '../../../shared/api/logistics_appApi';
 
 const AllShipmentsPage = () => {
+  const dispatch: AppDispatch = useDispatch();
+
   const [page, setPage] = useState<number>(0);
   const [rowsPerPage, setRowsPerPage] = useState<number>(20);
 
@@ -36,6 +54,22 @@ const AllShipmentsPage = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  const isShipmentsLogDataLoading: boolean = useSelector(
+    selectIsShipmentsLogDataLoading
+  );
+  const shipmentsLogData = useSelector(selectShipmentsLogData);
+
+  useEffect(() => {
+    if (shipmentsLogData.length === 0 && !isShipmentsLogDataLoading) {
+      dispatch(
+        loadShipmentsLogData({
+          url: SHIPMENTS_URL,
+          param: '?is_shipment_status_set=true',
+        })
+      );
+    }
+  }, []);
 
   return (
     <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
@@ -70,9 +104,9 @@ const AllShipmentsPage = () => {
             </TableHead>
 
             <TableBody>
-              {shipmentsData
+              {shipmentsLogData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((el, index) => {
+                .map((shipmentLogElem, index) => {
                   return (
                     <TableRow
                       key={index}
@@ -82,31 +116,41 @@ const AllShipmentsPage = () => {
                       <TableCell
                         sx={{ textAlign: 'center', fontFamily: 'inter' }}
                       >
-                        {el.adress}
+                        <span>{shipmentLogElem.from_city}</span> -{' '}
+                        <span>{shipmentLogElem.to_city}</span>
                       </TableCell>
                       <TableCell
                         sx={{ textAlign: 'center', fontFamily: 'inter' }}
                       >
-                        {el.shipment_number}
+                        {shipmentLogElem.shipment_number}
                       </TableCell>
                       <TableCell
                         sx={{ textAlign: 'center', fontFamily: 'inter' }}
                       >
-                        {el.truck_number}
+                        {shipmentLogElem.transport}
                       </TableCell>
                       <TableCell
                         sx={{ textAlign: 'center', fontFamily: 'inter' }}
                       >
-                        {el.total_weight}
+                        {shipmentLogElem.current_load_value}
                       </TableCell>
                       <TableCell
                         sx={{ textAlign: 'center', fontFamily: 'inter' }}
                       >
-                        {el.status}
+                        {shipmentLogElem.shipment_status}
                       </TableCell>
                     </TableRow>
                   );
                 })}
+
+              {Array.from({ length: 15 }).map((_, index) => {
+                return (
+                  <AllShipmentsTableSkeleton
+                    key={index}
+                    isDataLoading={isShipmentsLogDataLoading}
+                  />
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -114,7 +158,7 @@ const AllShipmentsPage = () => {
         <TablePagination
           rowsPerPageOptions={[20, 50, 100]}
           component="div"
-          count={shipmentsData.length}
+          count={shipmentsLogData.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -126,6 +170,43 @@ const AllShipmentsPage = () => {
 };
 
 export default AllShipmentsPage;
+
+// Скелетон:
+// --------------------------------------
+interface AllShipmentsTableSkeleton_Props {
+  isDataLoading: boolean;
+}
+
+const AllShipmentsTableSkeleton: React.FC<AllShipmentsTableSkeleton_Props> = ({
+  isDataLoading,
+}) => {
+  const emptyTitles: string[] = ['-', '-', '-', '-', '-'];
+
+  return (
+    <TableRow className={`${isDataLoading && 'animate-pulse'}`}>
+      {emptyTitles.map((emptyEl, index) => {
+        return (
+          <TableCell
+            key={index}
+            sx={{
+              textAlign: 'center',
+              fontSize: {
+                xs: '14px',
+                '@media (min-width:1280px)': {
+                  fontSize: '16px',
+                },
+              },
+              color: '#99a1af',
+              fontWeight: 'bold',
+            }}
+          >
+            {emptyEl}
+          </TableCell>
+        );
+      })}
+    </TableRow>
+  );
+};
 
 // Самостоятельная верстка таблицы:
 // --------------------------------------

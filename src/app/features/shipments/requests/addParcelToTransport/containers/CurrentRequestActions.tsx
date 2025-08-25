@@ -12,6 +12,7 @@ import CustomButton from '../../../../../../shared/ui/CustomButton';
 // State:
 import {
   selectIsUnloadingParcel,
+  selectIsAttachingParcel,
   updateParcelsByShipmentId,
 } from '../../../../../redux/slices/parcelsSlice';
 import { toggleShipmentParcelsList } from '../../../../../redux/slices/shipmentParcelsListSlice';
@@ -19,6 +20,7 @@ import { toggleShipmentParcelsList } from '../../../../../redux/slices/shipmentP
 import {
   removeParcelsFromShipment,
   updateShipmentRequestsByStatus,
+  selectIsShipmentApproveSending,
 } from '../../../../../redux/slices/shipmentsSlice';
 
 import {
@@ -54,6 +56,10 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
     const { id } = useParams();
 
     const isUnloadingParcel = useSelector(selectIsUnloadingParcel);
+    const isAttachingParcel = useSelector(selectIsAttachingParcel);
+    const isShipmentApproveSending = useSelector(
+      selectIsShipmentApproveSending
+    );
 
     const shipmentStatus = useSelector(selectShipmentStatus);
     const shipmentStatusError: string = useSelector(selectShipmentStatusError);
@@ -112,6 +118,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
             shipment_parcels: uploadedParcels,
             current_load_value: currentWeightVal,
             shipment_status: shipmentStatus,
+            is_shipment_status_set: true,
           })
         );
 
@@ -124,6 +131,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
             url: PARCELS_URL,
             parcelId: parcelInfo.id,
             shipmentId: id,
+            isAttached: true,
           };
 
           return dispatch(attachParcelToShipment(parcelToAttachData));
@@ -132,11 +140,11 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
         await Promise.all(parcelsToAttach);
 
         // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
-        dispatch(updateShipmentRequestsByStatus(null));
-        dispatch(updateParcelsByShipmentId(null));
+        dispatch(updateShipmentRequestsByStatus(''));
+        dispatch(updateParcelsByShipmentId(''));
         // ---------------------------------------------------------------------
 
-        navigate(`/shipments/`);
+        navigate(`/shipments/all`);
 
         console.log('Отгрузка проведена!');
 
@@ -159,19 +167,33 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
           </CustomButton>
 
           <CustomButton
+            disabled={
+              isShipmentApproveSending || isAttachingParcel || isUnloadingParcel
+            }
             className={`p-2 w-40 ${
               shipmentStatus && uploadedParcels?.length !== 0
                 ? 'text-[#7B57DF]'
                 : 'text-secondary'
+            } ${
+              (isShipmentApproveSending || isAttachingParcel) && 'animate-pulse'
             } bg-element_primary xl:w-45`}
             onClick={handleApproveShipment}
           >
-            <span className="text-nowrap">Завершить загрузку</span>
+            <span className="text-nowrap">
+              {isShipmentApproveSending || isAttachingParcel
+                ? 'Проводим заявку'
+                : 'Завершить загрузку'}
+            </span>
           </CustomButton>
         </div>
 
         <CustomButton
-          disabled={isUnloadingParcel || uploadedParcels?.length === 0}
+          disabled={
+            isUnloadingParcel ||
+            uploadedParcels?.length === 0 ||
+            isShipmentApproveSending ||
+            isAttachingParcel
+          }
           className={`p-2 mx-auto w-1/2 min-w-50 border-2 border-[#e3d9ff] text-sm text-secondary transition duration-200 ease-in-out ${
             isUnloadingParcel && 'animate-pulse'
           } xl:text-base hover:text-primary hover:border-[#cbb9fd]`}

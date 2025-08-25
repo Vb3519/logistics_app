@@ -20,8 +20,9 @@ export interface Parcel {
     | 'Изменен адрес отправки'
     | 'Проблема с упаковкой'
     | 'Вышел из строя транспорт';
-  shipment_id: string | null;
+  shipment_id: string;
   isUploaded: boolean;
+  isAttached: boolean;
 }
 
 export interface ParcelWidthShipmentData {

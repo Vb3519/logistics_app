@@ -1,3 +1,9 @@
 export const CLIENTS_URL: string = 'http://localhost:3001/clients';
 export const PARCELS_URL: string = 'http://localhost:3001/parcels';
+export const ACTIVE_PARCELS_URL: string =
+  'http://localhost:3001/parcels?isAttached=false';
 export const SHIPMENTS_URL: string = 'http://localhost:3001/shipments';
+export const ACTIVE_SHIPMENTS_URL: string =
+  'http://localhost:3001/shipments?is_shipment_status_set=false';
+export const SHIPMENTS_LOG_URL =
+  'http://localhost:3001/shipments?is_shipment_status_set=true';

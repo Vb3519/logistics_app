@@ -11,18 +11,26 @@ import { Parcel } from '../../../../types/parcels.interface';
 const attachParcelToShipment = createAsyncThunk(
   'parcels/attachParcel',
   async (
-    payload: { url: string; parcelId: string; shipmentId: string },
+    payload: {
+      url: string;
+      parcelId: string;
+      shipmentId: string;
+      isAttached: boolean;
+    },
     thunkApi
   ) => {
     try {
       await serverResponseImitation(2000);
 
-      const { url, parcelId, shipmentId } = payload;
+      const { url, parcelId, shipmentId, isAttached } = payload;
 
       const attachParcelResponse: Response = await fetch(`${url}/${parcelId}`, {
         method: 'PATCH',
         headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({ shipment_id: shipmentId }),
+        body: JSON.stringify({
+          shipment_id: shipmentId,
+          isAttached: isAttached,
+        }),
       });
 
       if (attachParcelResponse.ok) {

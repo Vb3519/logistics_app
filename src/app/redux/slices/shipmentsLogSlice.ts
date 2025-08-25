@@ -1,0 +1,69 @@
+import { createSlice } from '@reduxjs/toolkit';
+
+// Types:
+import { ShipmentRequest } from '../../../types/shipments.interface';
+
+// Services:
+import loadShipmentsLogData from '../../features/shipments/services/loadShipmentsLogData';
+
+interface ShipmentsLogState {
+  shipmentsLog: ShipmentRequest[];
+  isShipmentLogDataLoading: boolean;
+  shipmentLogDataError: string;
+}
+
+interface ShipmentsLogSlice {
+  shipments_log: ShipmentsLogState;
+}
+
+const initialState: ShipmentsLogState = {
+  shipmentsLog: [],
+  isShipmentLogDataLoading: false,
+  shipmentLogDataError: '',
+};
+
+const shipmentsLogSlice = createSlice({
+  name: 'shipments_log',
+  initialState: initialState,
+  reducers: {},
+
+  extraReducers: (builder) => {
+    builder.addCase(loadShipmentsLogData.pending, (state) => {
+      return {
+        ...state,
+        isShipmentLogDataLoading: true,
+        shipmentLogDataError: '',
+      };
+    });
+
+    builder.addCase(loadShipmentsLogData.fulfilled, (state, action) => {
+      //   state.isShipmentLogDataLoading = false;
+      //   state.shipmentsLog.push(...action.payload);
+
+      return {
+        ...state,
+        isShipmentLogDataLoading: false,
+        shipmentsLog: [...state.shipmentsLog, ...action.payload],
+      };
+    });
+
+    builder.addCase(loadShipmentsLogData.rejected, (state, action) => {
+      if (typeof action.payload === 'string') {
+        return {
+          ...state,
+          isShipmentLogDataLoading: false,
+          shipmentLogDataError: action.payload,
+        };
+      }
+    });
+  },
+});
+
+// Состояние:
+export const selectShipmentsLogData = (state: ShipmentsLogSlice) =>
+  state.shipments_log.shipmentsLog;
+
+export const selectIsShipmentsLogDataLoading = (state: ShipmentsLogSlice) =>
+  state.shipments_log.isShipmentLogDataLoading;
+
+export default shipmentsLogSlice.reducer;

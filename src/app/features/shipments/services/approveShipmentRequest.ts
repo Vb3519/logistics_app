@@ -17,14 +17,21 @@ const approveShipmentRequest = createAsyncThunk(
       shipment_parcels: Parcel[];
       current_load_value: number;
       shipment_status: ShipmentStatus;
+      is_shipment_status_set: boolean;
     },
     thunkApi
   ) => {
     try {
       await serverResponseImitation(2000);
 
-      const { id, url, shipment_parcels, current_load_value, shipment_status } =
-        payload;
+      const {
+        id,
+        url,
+        shipment_parcels,
+        current_load_value,
+        shipment_status,
+        is_shipment_status_set,
+      } = payload;
 
       const approveShipmentRequestResponse: Response = await fetch(
         `${url}/${id}`,
@@ -35,6 +42,7 @@ const approveShipmentRequest = createAsyncThunk(
             shipment_parcels: shipment_parcels,
             current_load_value: current_load_value,
             shipment_status: shipment_status,
+            is_shipment_status_set: is_shipment_status_set,
           }),
         }
       );
