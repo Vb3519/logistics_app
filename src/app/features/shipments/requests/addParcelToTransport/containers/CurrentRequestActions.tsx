@@ -111,11 +111,16 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
           return;
         }
 
+        const parcelsToAttachToShipment = uploadedParcels.map((parcelInfo) => {
+          return { ...parcelInfo, isAttached: true };
+        });
+
+        // Подтверждение проведения заявки на отгрузку (сервер):
         await dispatch(
           approveShipmentRequest({
             id: id,
             url: SHIPMENTS_URL,
-            shipment_parcels: uploadedParcels,
+            shipment_parcels: parcelsToAttachToShipment,
             current_load_value: currentWeightVal,
             shipment_status: shipmentStatus,
             is_shipment_status_set: true,
@@ -125,7 +130,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
         // ---------------------------------------------------------------------
         // Это необходимо перенести в отдельную функцию:
         // ---------------------------------------------------------------------
-        // Сервер:
+        // Сервер: Обновление данных посылок
         const parcelsToAttach = uploadedParcels.map((parcelInfo) => {
           const parcelToAttachData = {
             url: PARCELS_URL,
