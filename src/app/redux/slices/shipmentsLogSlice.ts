@@ -25,7 +25,14 @@ const initialState: ShipmentsLogState = {
 const shipmentsLogSlice = createSlice({
   name: 'shipments_log',
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    addShipmentToLog: (
+      state,
+      action: { payload: ShipmentRequest; type: string }
+    ) => {
+      state.shipmentsLog.push(action.payload);
+    },
+  },
 
   extraReducers: (builder) => {
     builder.addCase(loadShipmentsLogData.pending, (state) => {
@@ -58,6 +65,9 @@ const shipmentsLogSlice = createSlice({
     });
   },
 });
+
+// Действия:
+export const { addShipmentToLog } = shipmentsLogSlice.actions;
 
 // Состояние:
 export const selectShipmentsLogData = (state: ShipmentsLogSlice) =>

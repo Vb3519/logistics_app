@@ -8,6 +8,9 @@ import { ShipmentStatus } from '../../../../types/shipments.interface';
 // Utils:
 import serverResponseImitation from '../../../../shared/utils/serverResponseImitation';
 
+// State:
+import { addShipmentToLog } from '../../../redux/slices/shipmentsLogSlice';
+
 const approveShipmentRequest = createAsyncThunk(
   'shipments/approveShipmentRequest',
   async (
@@ -54,6 +57,8 @@ const approveShipmentRequest = createAsyncThunk(
           'Подвержденная заявка на отгрузку:',
           approvedShipmentRequest
         );
+
+        thunkApi.dispatch(addShipmentToLog(approvedShipmentRequest));
 
         return approvedShipmentRequest;
       } else {

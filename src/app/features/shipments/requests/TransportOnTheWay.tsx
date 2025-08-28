@@ -1,4 +1,6 @@
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 // React-icons:
 import { FaAngleRight } from 'react-icons/fa';
@@ -9,7 +11,40 @@ import CustomSection from '../../../../shared/ui/CustomSection';
 // Data:
 import { transportOnTheWayData } from '../../../../shared/data/shipmentsData';
 
+// Services:
+import loadShipmentsLogData from '../services/loadShipmentsLogData';
+
+// State:
+import {
+  selectShipmentsLogData,
+  selectIsShipmentsLogDataLoading,
+} from '../../../redux/slices/shipmentsLogSlice';
+
+// Api:
+import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
+
+// Types:
+import { AppDispatch } from '../../../redux/store';
+
 const TransportOnTheWay = () => {
+  const dispatch: AppDispatch = useDispatch();
+
+  const shipmentsLogData = useSelector(selectShipmentsLogData);
+  const isShipmentsLogDataLoading = useSelector(
+    selectIsShipmentsLogDataLoading
+  );
+
+  useEffect(() => {
+    if (shipmentsLogData.length === 0 && !isShipmentsLogDataLoading) {
+      dispatch(
+        loadShipmentsLogData({
+          url: SHIPMENTS_URL,
+          param: '?is_shipment_status_set=true',
+        })
+      );
+    }
+  }, []);
+
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
       <div className="flex justify-between gap-2 text-sm xl:text-base">
@@ -18,7 +53,7 @@ const TransportOnTheWay = () => {
         </h2>
 
         <NavLink
-          to="shipments"
+          to="shipments/all"
           className="flex items-center gap-1 text-[#7B57DF]"
         >
           Весь список
@@ -26,7 +61,7 @@ const TransportOnTheWay = () => {
         </NavLink>
       </div>
 
-      <div className="h-full flex">
+      <div className="h-full flex overflow-x-auto">
         <table className="w-full text-center flex-1 text-sm xl:text-base">
           <thead className="bg-element_primary">
             <tr>
@@ -37,9 +72,9 @@ const TransportOnTheWay = () => {
           </thead>
 
           <tbody>
-            {transportOnTheWayData.map((shipmentData, index) => {
+            {shipmentsLogData.map((shipmentData, index) => {
               const isTransportLate: boolean =
-                shipmentData.shipment_status === 'Да' ? true : false;
+                shipmentData.shipment_status === 'Опаздывает' ? true : false;
 
               return (
                 <TransportOnTheWayTableRow
@@ -52,6 +87,11 @@ const TransportOnTheWay = () => {
                 />
               );
             })}
+
+            <LogPlaceholdersContainer
+              counter={3 - shipmentsLogData.length}
+              isShipmentsLogDataLoading={isShipmentsLogDataLoading}
+            />
           </tbody>
         </table>
       </div>
@@ -61,12 +101,14 @@ const TransportOnTheWay = () => {
 
 export default TransportOnTheWay;
 
+// Ряд таблицы:
+// --------------------------------------------
 interface TransportOnTheWayTableRow_Props {
   from_city: string;
   to_city: string;
   transport: string;
   isTransportLate: boolean;
-  shipment_status: string;
+  shipment_status: string | undefined;
 }
 
 const TransportOnTheWayTableRow: React.FC<TransportOnTheWayTableRow_Props> = (
@@ -76,7 +118,7 @@ const TransportOnTheWayTableRow: React.FC<TransportOnTheWayTableRow_Props> = (
     props;
 
   return (
-    <tr className="p-2 border-b-2 border-gray-200">
+    <tr className="h-18 p-2 border-b-2 border-gray-200">
       <td className="p-2">
         <span>{from_city}</span> - <span>{to_city}</span>
       </td>
@@ -90,6 +132,50 @@ const TransportOnTheWayTableRow: React.FC<TransportOnTheWayTableRow_Props> = (
           {shipment_status}
         </span>
       </td>
+    </tr>
+  );
+};
+
+// ----------------------------------------------------------------------------
+// Лоадеры:
+// ----------------------------------------------------------------------------
+
+// Контейнер для плейсхолдеров:
+interface LogPlaceholdersContainer_Props {
+  counter: number;
+  isShipmentsLogDataLoading: boolean;
+}
+const LogPlaceholdersContainer: React.FC<LogPlaceholdersContainer_Props> = ({
+  counter,
+  isShipmentsLogDataLoading,
+}) => {
+  return Array.from({ length: counter }).map((_, index) => {
+    return (
+      <LogSkeleton key={index} isDataLoading={isShipmentsLogDataLoading} />
+    );
+  });
+};
+
+interface LogSkeleton_Props {
+  isDataLoading: boolean;
+}
+
+const LogSkeleton: React.FC<LogSkeleton_Props> = ({ isDataLoading }) => {
+  const emptyTitles: string[] = ['-', '-', '-'];
+
+  return (
+    <tr
+      className={`h-18 p-2 border-b-2 border-gray-200 ${
+        isDataLoading && 'animate-pulse'
+      }`}
+    >
+      {emptyTitles.map((emptyEl, index) => {
+        return (
+          <td key={index} className="p-2 text-secondary font-bold">
+            {emptyEl}
+          </td>
+        );
+      })}
     </tr>
   );
 };

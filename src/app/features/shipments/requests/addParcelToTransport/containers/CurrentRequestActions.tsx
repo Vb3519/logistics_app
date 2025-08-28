@@ -18,6 +18,7 @@ import {
 import { toggleShipmentParcelsList } from '../../../../../redux/slices/shipmentParcelsListSlice';
 
 import {
+  selectShipmentRequests,
   removeParcelsFromShipment,
   updateShipmentRequestsByStatus,
   selectIsShipmentApproveSending,
@@ -62,6 +63,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
     );
 
     const shipmentStatus = useSelector(selectShipmentStatus);
+
     const shipmentStatusError: string = useSelector(selectShipmentStatusError);
 
     // Отображение списка посылок, добавленных к непроведенной заявке на отгрузку:
@@ -115,7 +117,8 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
           return { ...parcelInfo, isAttached: true };
         });
 
-        // Подтверждение проведения заявки на отгрузку (сервер):
+        // Подтверждение проведения заявки на отгрузку (сервер и клиент):
+
         await dispatch(
           approveShipmentRequest({
             id: id,
@@ -144,9 +147,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
 
         await Promise.all(parcelsToAttach);
 
-        // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
-        dispatch(updateShipmentRequestsByStatus(''));
-        dispatch(updateParcelsByShipmentId(''));
+        // ---------------------------------------------------------------------
         // ---------------------------------------------------------------------
 
         navigate(`/shipments/all`);
@@ -155,6 +156,10 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
 
         // Done: Убирать загруженные в транспорт посылки из списка посылок (обновив им поле shipment_id)
         // Done: Редирект на страницу с активными отгрузками
+
+        // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
+        dispatch(updateShipmentRequestsByStatus(''));
+        dispatch(updateParcelsByShipmentId(''));
       }
     };
 

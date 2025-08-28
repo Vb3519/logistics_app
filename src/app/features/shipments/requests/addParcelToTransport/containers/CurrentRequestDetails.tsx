@@ -23,12 +23,9 @@ const CurrentRequestDetails = () => {
 
   const shipmentRequests = useSelector(selectShipmentRequests);
 
-  const currentShipmentRequestData: ShipmentRequest | undefined =
-    useMemo(() => {
-      return shipmentRequests.find(
-        (shipmentRequest) => shipmentRequest.id === id
-      );
-    }, [shipmentRequests, id]);
+  const currentShipmentRequestData = shipmentRequests.find(
+    (shipmentRequest) => shipmentRequest.id === id
+  );
 
   const uploadedParcels: Parcel[] | undefined =
     currentShipmentRequestData?.shipment_parcels;

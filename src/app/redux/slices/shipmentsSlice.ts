@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 // Types:
 import {
@@ -147,8 +147,13 @@ const shipmentsSlice = createSlice({
     });
 
     builder.addCase(approveShipmentRequest.fulfilled, (state, action) => {
-      const { id, shipment_parcels, current_load_value, shipment_status } =
-        action.payload;
+      const {
+        id,
+        shipment_parcels,
+        current_load_value,
+        shipment_status,
+        is_shipment_status_set,
+      } = action.payload;
 
       const shipmentRequestToApprove = state.shipmentRequestsData.find(
         (requestInfo) => requestInfo.id === id
@@ -158,6 +163,8 @@ const shipmentsSlice = createSlice({
         shipmentRequestToApprove.shipment_parcels = shipment_parcels;
         shipmentRequestToApprove.current_load_value = current_load_value;
         shipmentRequestToApprove.shipment_status = shipment_status;
+        shipmentRequestToApprove.is_shipment_status_set =
+          is_shipment_status_set;
       }
 
       state.isShipmentApproveSending = false;
