@@ -45,6 +45,12 @@ const TransportOnTheWay = () => {
     }
   }, []);
 
+  const activeShimentsLogData = shipmentsLogData.filter(
+    (shipmentInfo) =>
+      shipmentInfo.shipment_status === 'В пути' ||
+      shipmentInfo.shipment_status === 'Опаздывает'
+  );
+
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
       <div className="flex justify-between gap-2 text-sm xl:text-base">
@@ -72,7 +78,7 @@ const TransportOnTheWay = () => {
           </thead>
 
           <tbody>
-            {shipmentsLogData.map((shipmentData, index) => {
+            {activeShimentsLogData.map((shipmentData, index) => {
               const isTransportLate: boolean =
                 shipmentData.shipment_status === 'Опаздывает' ? true : false;
 
@@ -89,7 +95,7 @@ const TransportOnTheWay = () => {
             })}
 
             <LogPlaceholdersContainer
-              counter={3 - shipmentsLogData.length}
+              counter={3 - activeShimentsLogData.length}
               isShipmentsLogDataLoading={isShipmentsLogDataLoading}
             />
           </tbody>

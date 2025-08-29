@@ -28,6 +28,7 @@ import {
   selectShipmentStatus,
   selectShipmentStatusError,
   setShipmentStatusErrorMsg,
+  setShipmentStatus,
 } from '../../../../../redux/slices/shipmentStatusSlice';
 
 // Services:
@@ -91,6 +92,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
         await Promise.all(parcelsToUnload);
 
         dispatch(removeParcelsFromShipment(id));
+        dispatch(setShipmentStatus(''));
       }
     };
 
@@ -160,6 +162,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
         // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
         dispatch(updateShipmentRequestsByStatus(''));
         dispatch(updateParcelsByShipmentId(''));
+        dispatch(setShipmentStatus(''));
       }
     };
 

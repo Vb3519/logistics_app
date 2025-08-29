@@ -20,7 +20,10 @@ const shipmentStatusSlice = createSlice({
   reducers: {
     setShipmentStatus: (
       state,
-      action: { payload: 'В пути' | 'Завершена' | 'Опаздывает'; type: string }
+      action: {
+        payload: 'В пути' | 'Завершена' | 'Опаздывает' | '';
+        type: string;
+      }
     ) => {
       return { ...state, shipmentStatus: action.payload };
     },

@@ -4,12 +4,31 @@
       "id": "08dce0b3-64fe-4b61-b1b3-1d244e68f39c",
       "created_at": "13.08.2025",
       "shipment_number": "SH-08dce0b",
-      "shipment_parcels": [],
-      "current_load_value": 0,
+      "shipment_parcels": [
+        {
+          "id": "4671fecc-1a5f-4de7-89aa-af6878381995",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_number": "CN-4671fec",
+          "parcel_status": "Изменен адрес отправки",
+          "parcel_weight": "60",
+          "shipment_id": "08dce0b3-64fe-4b61-b1b3-1d244e68f39c"
+        },
+        {
+          "id": "ba929e1b-2da1-48e7-8cf9-10ba3ebbcece",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_number": "CN-ba929e1",
+          "parcel_status": "Изменен адрес отправки",
+          "parcel_weight": "40",
+          "shipment_id": "08dce0b3-64fe-4b61-b1b3-1d244e68f39c"
+        }
+      ],
+      "current_load_value": 100,
       "transport": "ГАЗель 3302 (до 160 кг)",
       "max_load_value": 160,
-      "is_shipment_status_set": false,
-      "shipment_status": "",
+      "is_shipment_status_set": true,
+      "shipment_status": "В пути",
       "from_city": "Санкт-Петербург",
       "to_city": "Москва",
       "transport_info": "{\"transport\":\"ГАЗель 3302 (до 160 кг)\",\"max_load_value\":\"160\"}"
@@ -18,80 +37,169 @@
       "id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de",
       "created_at": "13.08.2025",
       "shipment_number": "SH-8ce06c3",
+      "shipment_parcels": [
+        {
+          "id": "7149fa8e-2bf5-4b62-823d-da7c1f4a4ff3",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_number": "CN-7149fa8",
+          "parcel_status": "Проблема с упаковкой",
+          "parcel_weight": "80",
+          "shipment_id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de"
+        },
+        {
+          "id": "5751f2dd-f562-4f12-b504-870bae650ebb",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_number": "CN-5751f2d",
+          "parcel_status": "Проблема с упаковкой",
+          "parcel_weight": "20",
+          "shipment_id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de"
+        },
+        {
+          "id": "97580e51-c1fd-4606-a6c1-33913fcf8abd",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_number": "CN-97580e5",
+          "parcel_status": "Проблема с упаковкой",
+          "parcel_weight": "80",
+          "shipment_id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de"
+        }
+      ],
+      "current_load_value": 180,
+      "transport": "ГАЗель A21R32 (до 200 кг)",
+      "max_load_value": 200,
+      "is_shipment_status_set": true,
+      "shipment_status": "Завершена",
+      "from_city": "Москва",
+      "to_city": "Ярославль",
+      "transport_info": "{\"transport\":\"ГАЗель A21R32 (до 200 кг)\",\"max_load_value\":\"200\"}"
+    },
+    {
+      "id": "1acede1f-4eee-4033-9b49-b7e2cd2d367e",
+      "created_at": "29.08.2025",
+      "shipment_number": "SH-1acede1",
+      "shipment_parcels": [
+        {
+          "id": "5bfd7ab4-5b80-4f4b-a95c-68ce285eaf6a",
+          "parcel_number": "CN-5bfd7ab",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_weight": "40",
+          "parcel_status": "Вышел из строя транспорт",
+          "shipment_id": "1acede1f-4eee-4033-9b49-b7e2cd2d367e"
+        },
+        {
+          "id": "2c04cc79-4a75-4d5d-8f55-919a86f0c830",
+          "parcel_number": "CN-2c04cc7",
+          "isUploaded": true,
+          "isAttached": true,
+          "parcel_weight": "40",
+          "parcel_status": "Изменен адрес отправки",
+          "shipment_id": "1acede1f-4eee-4033-9b49-b7e2cd2d367e"
+        }
+      ],
+      "current_load_value": 80,
+      "transport": "ГАЗель A21R22 (до 100 кг)",
+      "max_load_value": 100,
+      "shipment_status": "Опаздывает",
+      "is_shipment_status_set": true,
+      "from_city": "Москва",
+      "to_city": "Калуга",
+      "transport_info": "{\"transport\":\"ГАЗель A21R22 (до 100 кг)\",\"max_load_value\":\"100\"}"
+    },
+    {
+      "id": "663351e5-e453-4ce3-b7e5-0bcc5b618da4",
+      "created_at": "29.08.2025",
+      "shipment_number": "SH-663351e",
       "shipment_parcels": [],
       "current_load_value": 0,
       "transport": "ГАЗель A21R32 (до 200 кг)",
       "max_load_value": 200,
-      "is_shipment_status_set": false,
       "shipment_status": "",
-      "from_city": "Москва",
+      "is_shipment_status_set": false,
+      "from_city": "Санкт-Петербург",
       "to_city": "Ярославль",
       "transport_info": "{\"transport\":\"ГАЗель A21R32 (до 200 кг)\",\"max_load_value\":\"200\"}"
+    },
+    {
+      "id": "1d686925-4900-466d-a69e-c61b5d80e773",
+      "created_at": "29.08.2025",
+      "shipment_number": "SH-1d68692",
+      "shipment_parcels": [],
+      "current_load_value": 0,
+      "transport": "ГАЗель 3302 (до 160 кг)",
+      "max_load_value": 160,
+      "shipment_status": "",
+      "is_shipment_status_set": false,
+      "from_city": "Санкт-Петербург",
+      "to_city": "Кронштадт",
+      "transport_info": "{\"transport\":\"ГАЗель 3302 (до 160 кг)\",\"max_load_value\":\"160\"}"
     }
   ],
   "parcels": [
     {
       "id": "4671fecc-1a5f-4de7-89aa-af6878381995",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_number": "CN-4671fec",
       "parcel_status": "Изменен адрес отправки",
       "parcel_weight": "60",
-      "shipment_id": ""
+      "shipment_id": "08dce0b3-64fe-4b61-b1b3-1d244e68f39c"
     },
     {
       "id": "ba929e1b-2da1-48e7-8cf9-10ba3ebbcece",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_number": "CN-ba929e1",
       "parcel_status": "Изменен адрес отправки",
       "parcel_weight": "40",
-      "shipment_id": ""
+      "shipment_id": "08dce0b3-64fe-4b61-b1b3-1d244e68f39c"
     },
     {
       "id": "7149fa8e-2bf5-4b62-823d-da7c1f4a4ff3",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_number": "CN-7149fa8",
       "parcel_status": "Проблема с упаковкой",
       "parcel_weight": "80",
-      "shipment_id": ""
+      "shipment_id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de"
     },
     {
       "id": "5751f2dd-f562-4f12-b504-870bae650ebb",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_number": "CN-5751f2d",
       "parcel_status": "Проблема с упаковкой",
       "parcel_weight": "20",
-      "shipment_id": ""
+      "shipment_id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de"
     },
     {
       "id": "97580e51-c1fd-4606-a6c1-33913fcf8abd",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_number": "CN-97580e5",
       "parcel_status": "Проблема с упаковкой",
       "parcel_weight": "80",
-      "shipment_id": ""
+      "shipment_id": "8ce06c36-2b1b-404a-8b2e-caa51c65e4de"
     },
     {
       "id": "5bfd7ab4-5b80-4f4b-a95c-68ce285eaf6a",
       "parcel_number": "CN-5bfd7ab",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_weight": "40",
       "parcel_status": "Вышел из строя транспорт",
-      "shipment_id": ""
+      "shipment_id": "1acede1f-4eee-4033-9b49-b7e2cd2d367e"
     },
     {
       "id": "2c04cc79-4a75-4d5d-8f55-919a86f0c830",
       "parcel_number": "CN-2c04cc7",
-      "isUploaded": false,
-      "isAttached": false,
+      "isUploaded": true,
+      "isAttached": true,
       "parcel_weight": "40",
       "parcel_status": "Изменен адрес отправки",
-      "shipment_id": ""
+      "shipment_id": "1acede1f-4eee-4033-9b49-b7e2cd2d367e"
     },
     {
       "id": "c56de5a5-f968-403c-9cd5-11937cacd669",
@@ -182,6 +290,15 @@
       "parcel_weight": "60",
       "parcel_status": "Изменен адрес отправки",
       "shipment_id": ""
+    },
+    {
+      "id": "2f68a92c-d286-4bec-8707-ea01cb39ee0a",
+      "parcel_number": "CN-2f68a92",
+      "isUploaded": false,
+      "isAttached": false,
+      "shipment_id": "",
+      "parcel_weight": "40",
+      "parcel_status": "Изменен адрес отправки"
     }
   ],
   "clients": [

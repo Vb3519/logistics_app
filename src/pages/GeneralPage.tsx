@@ -1,6 +1,6 @@
 // Features:
 import GeneralInfo from '../app/features/general_info/GeneralInfo';
-import TransportOnTheWay from '../app/features/shipments/requests/TransportOnTheWay';
+import TransportOnTheWay from '../app/features/shipments/log/TransportOnTheWay';
 import DailyPlan from '../app/features/work_plans/DailyPlan';
 import RecentlyCollectedParcels from '../app/features/parcels/AddParcelToTransport/elements/RecentlyCollectedParcels';
 import ActiveRequestsList from '../app/features/shipments/requests/loadRequestsData/containers/ActiveRequestsList';
