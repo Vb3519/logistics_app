@@ -39,6 +39,7 @@ const RequestDetailsPage = () => {
   };
 
   const shipmentRequests = useSelector(selectShipmentRequests);
+
   const isShipmentRequestsDataLoading: boolean = useSelector(
     selectisShipmentRequestsDataLoading
   );
@@ -50,7 +51,11 @@ const RequestDetailsPage = () => {
 
   useEffect(() => {
     if (shipmentRequests.length === 0 && !isShipmentRequestsDataLoading) {
-      handleLoadShipmentRequestsData(SHIPMENTS_URL);
+      // `${SHIPMENTS_URL}?id=${id}`
+
+      handleLoadShipmentRequestsData(
+        `${SHIPMENTS_URL}?is_shipment_status_set=false`
+      );
     }
   }, []);
 
@@ -60,7 +65,11 @@ const RequestDetailsPage = () => {
         backTopath="/shipments"
         backToPageTitle="Текущие отгрузки"
         currentPath=""
-        currentPageTitle={`${currentShipmentRequestData?.shipment_number}`}
+        currentPageTitle={`${
+          currentShipmentRequestData
+            ? currentShipmentRequestData.shipment_number
+            : 'Номер отгрузки'
+        }`}
       />
 
       <div className="w-full flex flex-col gap-4 md:flex-row">

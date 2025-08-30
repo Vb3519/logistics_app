@@ -33,16 +33,16 @@ import { ShipmentsTableElem_Props } from '../../../types/shipments.interface';
 import { AppDispatch } from '../../../app/redux/store';
 
 // Api:
-import {
-  SHIPMENTS_URL,
-  SHIPMENTS_LOG_URL,
-} from '../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
+
+// Constants:
+import { MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER } from '../../../constants/logisticAppContants';
 
 const AllShipmentsPage = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const [page, setPage] = useState<number>(0);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(20);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(15);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -59,6 +59,9 @@ const AllShipmentsPage = () => {
     selectIsShipmentsLogDataLoading
   );
   const shipmentsLogData = useSelector(selectShipmentsLogData);
+
+  const tablePlaceholdersConter: number =
+    MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER - shipmentsLogData.length;
 
   useEffect(() => {
     if (shipmentsLogData.length === 0 && !isShipmentsLogDataLoading) {
@@ -143,20 +146,22 @@ const AllShipmentsPage = () => {
                   );
                 })}
 
-              {Array.from({ length: 15 }).map((_, index) => {
-                return (
-                  <AllShipmentsTableSkeleton
-                    key={index}
-                    isDataLoading={isShipmentsLogDataLoading}
-                  />
-                );
-              })}
+              {Array.from({ length: tablePlaceholdersConter }).map(
+                (_, index) => {
+                  return (
+                    <AllShipmentsTableSkeleton
+                      key={index}
+                      isDataLoading={isShipmentsLogDataLoading}
+                    />
+                  );
+                }
+              )}
             </TableBody>
           </Table>
         </TableContainer>
 
         <TablePagination
-          rowsPerPageOptions={[20, 50, 100]}
+          rowsPerPageOptions={[15, 30, 45]}
           component="div"
           count={shipmentsLogData.length}
           rowsPerPage={rowsPerPage}
