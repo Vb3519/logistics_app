@@ -299,6 +299,15 @@
       "shipment_id": "",
       "parcel_weight": "40",
       "parcel_status": "Изменен адрес отправки"
+    },
+    {
+      "id": "466ef055-0f49-45cd-9ee3-8ae76f1eeecd",
+      "parcel_number": "CN-466ef05",
+      "isUploaded": false,
+      "isAttached": false,
+      "shipment_id": "",
+      "parcel_weight": "40",
+      "parcel_status": "Вышел из строя транспорт"
     }
   ],
   "clients": [

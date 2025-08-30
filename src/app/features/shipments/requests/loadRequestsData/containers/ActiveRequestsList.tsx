@@ -70,7 +70,7 @@ const ActiveRequestsList = () => {
         </NavLink>
       </div>
 
-      <ul className="grid grid-rows-3 gap-2 text-sm overflow-y-auto xl:text-base">
+      <ul className="h-full grid grid-rows-3 gap-2 text-sm overflow-y-auto xl:text-base">
         {shipmentRequests
           .slice(0, MIN_SHIPMENT_REQUESTS_TO_RENDER)
           .map((shipmentRequestInfo) => {

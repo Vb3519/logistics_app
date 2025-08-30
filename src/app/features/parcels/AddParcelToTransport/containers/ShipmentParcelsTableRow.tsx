@@ -88,7 +88,7 @@ const ShipmentParcelsTableRow: React.FC<ShipmentParcelsTableRow_Props> = memo(
       >
         <TableCell sx={{ textAlign: 'center' }}>
           {parcelData.isUploaded ? (
-            <BsBoxSeamFill className="h-10.5 m-auto text-xl text-[#7B57DF]" />
+            <BsBoxSeamFill className="h-10.5 m-auto text-xl text-secondary" />
           ) : (
             <Checkbox
               checked={isParcelSelectedToUpload || parcelData.isUploaded}

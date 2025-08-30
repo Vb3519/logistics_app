@@ -100,7 +100,21 @@ const ShipmentRequestsPage = () => {
       </div>
 
       <CustomSection className="min-h-screen w-full p-2 grid grid-rows-6 gap-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 sm:grid-cols-2 sm:grid-rows-3 lg:min-h-0 lg:h-full">
-        {shipmentRequests.length ? (
+        {/* Загрузка данных (лоадер): */}
+        {isShipmentRequestsDataLoading &&
+          Array.from({ length: min_shipmentRequests_toRender }).map(
+            (_, index) => {
+              return (
+                <div
+                  key={index}
+                  className="h-57 bg-element_primary rounded-md animate-pulse sm:h-75 lg:h-60"
+                ></div>
+              );
+            }
+          )}
+
+        {/* Данные загружены: */}
+        {shipmentRequests.length > 0 && (
           <>
             {shipmentRequests.map((shipmentRequest) => {
               return (
@@ -122,6 +136,7 @@ const ShipmentRequestsPage = () => {
               );
             })}
 
+            {/* Плейсхолдеры: */}
             {Array.from({ length: shipmentRequestsPlaceholdersCounter }).map(
               (_, index) => {
                 return (
@@ -138,16 +153,26 @@ const ShipmentRequestsPage = () => {
               }
             )}
           </>
-        ) : (
-          Array.from({ length: 6 }).map((_, index) => {
-            return (
-              <div
-                key={index}
-                className="h-57 bg-element_primary rounded-md animate-pulse sm:h-75 lg:h-60"
-              ></div>
-            );
-          })
         )}
+
+        {/* Данные загружены, но отсутствуют: */}
+        {shipmentRequests.length === 0 &&
+          !isShipmentRequestsDataLoading &&
+          Array.from({ length: shipmentRequestsPlaceholdersCounter }).map(
+            (_, index) => {
+              return (
+                <div
+                  key={index}
+                  className="p-2 flex flex-col items-center justify-center gap-4 bg-gray-100 rounded-md text-sm xs:p-4 lg:text-base"
+                >
+                  <h3 className="text-secondary/50">
+                    Ожидается заявка на отгрузку
+                  </h3>
+                  <BsClockHistory className="text-8xl text-secondary/20 lg:text-9xl" />
+                </div>
+              );
+            }
+          )}
       </CustomSection>
     </main>
   );

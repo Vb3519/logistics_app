@@ -23,6 +23,9 @@ import {
 // Api:
 import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
 
+// Constants:
+import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../../constants/logisticAppContants';
+
 // Types:
 import { AppDispatch } from '../../../redux/store';
 
@@ -78,24 +81,28 @@ const TransportOnTheWay = () => {
           </thead>
 
           <tbody>
-            {activeShimentsLogData.map((shipmentData, index) => {
-              const isTransportLate: boolean =
-                shipmentData.shipment_status === 'Опаздывает' ? true : false;
+            {activeShimentsLogData
+              .slice(-MIN_SHIPMENT_REQUESTS_TO_RENDER)
+              .map((shipmentData, index) => {
+                const isTransportLate: boolean =
+                  shipmentData.shipment_status === 'Опаздывает' ? true : false;
 
-              return (
-                <TransportOnTheWayTableRow
-                  key={index}
-                  from_city={shipmentData.from_city}
-                  to_city={shipmentData.to_city}
-                  transport={shipmentData.transport}
-                  isTransportLate={isTransportLate}
-                  shipment_status={shipmentData.shipment_status}
-                />
-              );
-            })}
+                return (
+                  <TransportOnTheWayTableRow
+                    key={index}
+                    from_city={shipmentData.from_city}
+                    to_city={shipmentData.to_city}
+                    transport={shipmentData.transport}
+                    isTransportLate={isTransportLate}
+                    shipment_status={shipmentData.shipment_status}
+                  />
+                );
+              })}
 
             <LogPlaceholdersContainer
-              counter={3 - activeShimentsLogData.length}
+              counter={
+                MIN_SHIPMENT_REQUESTS_TO_RENDER - activeShimentsLogData.length
+              }
               isShipmentsLogDataLoading={isShipmentsLogDataLoading}
             />
           </tbody>

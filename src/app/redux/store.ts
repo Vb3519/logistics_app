@@ -1,4 +1,16 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+
+import {
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+
+import storageSession from 'redux-persist/lib/storage/session';
 
 import clientsReducer from './slices/clientsSlice';
 import parcelsReducer from './slices/parcelsSlice';
@@ -10,18 +22,37 @@ import shipmentStatusReducer from './slices/shipmentStatusSlice';
 
 import shipmentsLogReducer from './slices/shipmentsLogSlice';
 
+const persistConfig = {
+  key: 'root',
+  storage: storageSession,
+  blacklist: ['clients', 'parcels', 'shipments_log', 'shipmentStatus'],
+};
+
+const rootReducer = combineReducers({
+  clients: clientsReducer,
+  parcels: parcelsReducer,
+  parcelsToUpload: parcelsToUploadReducer,
+  shipments: shipmentsReducer,
+  shipments_log: shipmentsLogReducer,
+  mobileNavPage: mobileNavPageReducer,
+  shipmentParcelsList: shipmentParcelsListReducer,
+  shipmentStatus: shipmentStatusReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 const store = configureStore({
-  reducer: {
-    clients: clientsReducer,
-    parcels: parcelsReducer,
-    parcelsToUpload: parcelsToUploadReducer,
-    shipments: shipmentsReducer,
-    shipments_log: shipmentsLogReducer,
-    mobileNavPage: mobileNavPageReducer,
-    shipmentParcelsList: shipmentParcelsListReducer,
-    shipmentStatus: shipmentStatusReducer,
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    });
   },
 });
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
