@@ -11,18 +11,9 @@ import CustomSection from '../../../shared/ui/CustomSection';
 import GeneralInfoCard from './GeneralInfoCard';
 
 // State:
-import {
-  selectShipmentRequests,
-  selectisShipmentRequestsDataLoading,
-} from '../../redux/slices/shipmentsSlice';
-import {
-  selectParcelsData,
-  selectIsParcelsDataLoading,
-} from '../../redux/slices/parcelsSlice';
-import {
-  selectShipmentsLogData,
-  selectIsShipmentsLogDataLoading,
-} from '../../redux/slices/shipmentsLogSlice';
+import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
+import { selectParcelsData } from '../../redux/slices/parcelsSlice';
+import { selectShipmentsLogData } from '../../redux/slices/shipmentsLogSlice';
 
 const GeneralInfo = () => {
   const shipmentRequestsData = useSelector(selectShipmentRequests);

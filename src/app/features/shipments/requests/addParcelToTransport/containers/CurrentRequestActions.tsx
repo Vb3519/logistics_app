@@ -18,7 +18,6 @@ import {
 import { toggleShipmentParcelsList } from '../../../../../redux/slices/shipmentParcelsListSlice';
 
 import {
-  selectShipmentRequests,
   removeParcelsFromShipment,
   updateShipmentRequestsByStatus,
   selectIsShipmentApproveSending,
@@ -27,14 +26,12 @@ import {
 import {
   selectShipmentStatus,
   selectShipmentStatusError,
-  setShipmentStatusErrorMsg,
   setShipmentStatus,
 } from '../../../../../redux/slices/shipmentStatusSlice';
 
 // Services:
 import unloadParcelFromShipmentRequest from '../../../../parcels/services/unloadParcelFromShipmentRequest';
 import approveShipmentRequest from '../../../services/approveShipmentRequest';
-import attachParcelToShipment from '../../../../parcels/services/attachParcelToShipment';
 
 // Types:
 import { Parcel } from '../../../../../../types/parcels.interface';
@@ -43,6 +40,13 @@ import { AppDispatch } from '../../../../../redux/store';
 // Api:
 import { PARCELS_URL } from '../../../../../../shared/api/logistics_appApi';
 import { SHIPMENTS_URL } from '../../../../../../shared/api/logistics_appApi';
+
+// Helpers:
+import {
+  setShipmentStatusErr,
+  attachParcelsToShipment,
+  updateParcelAttach,
+} from '../helpers/addParcelToTransportHelpers';
 
 // Кнопки действий для работы с заявкой на отгрузку:
 // ---------------------------------------------------------------------------
@@ -100,27 +104,20 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
     // ----------------------------------------------------------
     const handleApproveShipment = async () => {
       if (shipmentStatus === '') {
-        if (!shipmentStatusError) {
-          dispatch(
-            setShipmentStatusErrorMsg('Необходимо указать статус отгрузки')
-          );
-        }
+        // Установить ошибку статуса заявки:
+        setShipmentStatusErr(shipmentStatusError, dispatch);
 
         return;
       } else {
         if (uploadedParcels === undefined || id === undefined) return;
 
-        if (uploadedParcels.length === 0) {
-          console.log('Добавьте посылки в транспорт!');
-          return;
-        }
+        // "Привязка" посылок к заявке на отгрузку (эндпоинт /shipments):
+        const parcelsToAttachToShipment: Parcel[] | undefined =
+          attachParcelsToShipment(uploadedParcels);
 
-        const parcelsToAttachToShipment = uploadedParcels.map((parcelInfo) => {
-          return { ...parcelInfo, isAttached: true };
-        });
+        if (parcelsToAttachToShipment === undefined) return;
 
         // Подтверждение проведения заявки на отгрузку (сервер и клиент):
-
         await dispatch(
           approveShipmentRequest({
             id: id,
@@ -132,32 +129,21 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
           })
         );
 
-        // ---------------------------------------------------------------------
-        // Это необходимо перенести в отдельную функцию:
-        // ---------------------------------------------------------------------
-        // Сервер: Обновление данных посылок
-        const parcelsToAttach = uploadedParcels.map((parcelInfo) => {
-          const parcelToAttachData = {
-            url: PARCELS_URL,
-            parcelId: parcelInfo.id,
-            shipmentId: id,
-            isAttached: true,
-          };
-
-          return dispatch(attachParcelToShipment(parcelToAttachData));
-        });
+        // Изменение у "привязанных" к отгрузке посылок поля isAttached (эндпоинт /parcels):
+        const parcelsToAttach = updateParcelAttach(
+          uploadedParcels,
+          PARCELS_URL,
+          id,
+          true,
+          dispatch
+        );
 
         await Promise.all(parcelsToAttach);
 
-        // ---------------------------------------------------------------------
-        // ---------------------------------------------------------------------
-
+        // Переход в журнал отгрузок:
         navigate(`/shipments/all`);
 
         console.log('Отгрузка проведена!');
-
-        // Done: Убирать загруженные в транспорт посылки из списка посылок (обновив им поле shipment_id)
-        // Done: Редирект на страницу с активными отгрузками
 
         // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
         dispatch(updateShipmentRequestsByStatus(''));
