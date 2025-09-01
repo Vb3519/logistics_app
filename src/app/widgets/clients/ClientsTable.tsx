@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 // Ui:
-import CustomSection from '../../../../../shared/ui/CustomSection';
+import CustomSection from '../../../shared/ui/CustomSection';
 import ClientsTableRow from './ClientsTableRow';
 import ClientsTableRowSkeleton from './ClientsTableRowSkeleton';
 
@@ -19,22 +19,22 @@ import ClientsTableRowSkeleton from './ClientsTableRowSkeleton';
 import {
   clientsData,
   clientsTableHeaderTitles,
-} from '../../../../../shared/data/clientsData';
+} from '../../../shared/data/clientsData';
 
 // State:
 import {
   selectClientsData,
   selectIsClientsDataLoading,
-} from '../../../../redux/slices/clientsSlice';
+} from '../../redux/slices/clientsSlice';
 
 // Services:
-import loadClientsData from '../../../../services/clients/loadClientsData';
+import loadClientsData from '../../services/clients/loadClientsData';
 
 // Api:
-import { CLIENTS_URL } from '../../../../../shared/api/logistics_appApi';
+import { CLIENTS_URL } from '../../../shared/api/logistics_appApi';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from '../../redux/store';
 
 const ClientsTable = () => {
   const dispatch: AppDispatch = useDispatch();

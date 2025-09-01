@@ -6,28 +6,28 @@ import { useEffect } from 'react';
 import { FaAngleRight } from 'react-icons/fa';
 
 // Ui:
-import CustomSection from '../../../../shared/ui/CustomSection';
+import CustomSection from '../../../shared/ui/CustomSection';
 
 // Data:
-import { transportOnTheWayData } from '../../../../shared/data/shipmentsData';
+import { transportOnTheWayData } from '../../../shared/data/shipmentsData';
 
 // Services:
-import loadShipmentsLogData from '../../../services/shipments/loadShipmentsLogData';
+import loadShipmentsLogData from '../../services/shipments/loadShipmentsLogData';
 
 // State:
 import {
   selectShipmentsLogData,
   selectIsShipmentsLogDataLoading,
-} from '../../../redux/slices/shipmentsLogSlice';
+} from '../../redux/slices/shipmentsLogSlice';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
 
 // Constants:
-import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../../constants/logisticAppContants';
+import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../constants/logisticAppContants';
 
 // Types:
-import { AppDispatch } from '../../../redux/store';
+import { AppDispatch } from '../../redux/store';
 
 const TransportOnTheWay = () => {
   const dispatch: AppDispatch = useDispatch();

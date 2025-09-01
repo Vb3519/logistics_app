@@ -6,15 +6,15 @@ import { MdOutlineSegment } from 'react-icons/md';
 import { PiMagnifyingGlassBold } from 'react-icons/pi';
 
 // Ui:
-import MobileNavPage from '../pages/MobileNavPage';
-import CustomButton from '../shared/ui/CustomButton';
+import MobileNavPage from '../../../pages/MobileNavPage';
+import CustomButton from '../../../shared/ui/CustomButton';
 import Logo from './Logo';
 
 // State:
 import {
   toggleMobileNavPage,
   selectIsMobileNavPageOpened,
-} from '../app/redux/slices/mobileNavMenuSlice';
+} from '../../redux/slices/mobileNavMenuSlice';
 
 const Header = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 // Features:
-import GeneralInfo from '../app/widgets/showGeneralInfo/ui/GeneralInfo';
-import TransportOnTheWay from '../app/widgets/showTransportOnTheWay/ui/TransportOnTheWay';
-import DailyPlan from '../app/widgets/dailyPlan/ui/DailyPlan';
+import GeneralInfo from '../app/widgets/generalInfo/GeneralInfo';
+import TransportOnTheWay from '../app/widgets/shipments/TransportOnTheWay';
+import DailyPlan from '../app/widgets/dailyPlan/DailyPlan';
 import RecentlyCollectedParcels from '../app/widgets/parcels/RecentlyCollectedParcels';
 import ActiveRequestsList from '../app/entites/shipmentRequests/ActiveRequestsList';
 

@@ -46,7 +46,7 @@ import {
   setShipmentStatusErr,
   attachParcelsToShipment,
   updateParcelAttach,
-} from '../../helpers/addParcelToTransportHelpers';
+} from '../../parcels/helpers/addParcelToTransportHelpers';
 
 // Кнопки действий для работы с заявкой на отгрузку:
 // ---------------------------------------------------------------------------

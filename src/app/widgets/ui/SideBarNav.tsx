@@ -12,7 +12,7 @@ import { RiHomeSmile2Line } from 'react-icons/ri';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 
 // Ui:
-import CustomButton from '../shared/ui/CustomButton';
+import CustomButton from '../../../shared/ui/CustomButton';
 import Logo from './Logo';
 
 const SideBarNav = () => {

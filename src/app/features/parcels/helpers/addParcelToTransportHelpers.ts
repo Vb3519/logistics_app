@@ -1,12 +1,12 @@
 // Types:
-import { AppDispatch } from '../../redux/store';
-import { Parcel } from '../../../types/parcels.interface';
+import { AppDispatch } from '../../../redux/store';
+import { Parcel } from '../../../../types/parcels.interface';
 
 // State:
-import { setShipmentStatusErrorMsg } from '../../redux/slices/shipmentStatusSlice';
+import { setShipmentStatusErrorMsg } from '../../../redux/slices/shipmentStatusSlice';
 
 // Services:
-import attachParcelToShipment from '../../services/parcels/attachParcelToShipment';
+import attachParcelToShipment from '../../../services/parcels/attachParcelToShipment';
 
 // Установить ошибку статуса заявки:
 // -----------------------------------

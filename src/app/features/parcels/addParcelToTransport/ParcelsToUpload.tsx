@@ -2,33 +2,33 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Ui:
-import CustomButton from '../../../shared/ui/CustomButton';
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomButton from '../../../../shared/ui/CustomButton';
+import CustomSection from '../../../../shared/ui/CustomSection';
 
 // State:
 import {
   selectShipmentRequests,
   addParcelsToShipment,
-} from '../../redux/slices/shipmentsSlice';
+} from '../../../redux/slices/shipmentsSlice';
 
 import {
   selectParcelsToUploadData,
   selectParcelsWeightOverloadError,
   setParcelsWeightOverloadError,
   resetParcelsToUploadState,
-} from '../../redux/slices/parcelsToUploadSlice';
+} from '../../../redux/slices/parcelsToUploadSlice';
 
-import { selectIsUploadingParcel } from '../../redux/slices/parcelsSlice';
+import { selectIsUploadingParcel } from '../../../redux/slices/parcelsSlice';
 
 // Services:
-import uploadParcelToShipmentRequest from '../../services/parcels/uploadParcelToShipmentRequest';
+import uploadParcelToShipmentRequest from '../../../services/parcels/uploadParcelToShipmentRequest';
 
 // Types:
-import { AppDispatch } from '../../redux/store';
-import { ShipmentRequest } from '../../../types/shipments.interface';
+import { AppDispatch } from '../../../redux/store';
+import { ShipmentRequest } from '../../../../types/shipments.interface';
 
 // Api:
-import { PARCELS_URL } from '../../../shared/api/logistics_appApi';
+import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
 
 const ParcelsToUpload = () => {
   const dispatch: AppDispatch = useDispatch();

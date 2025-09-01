@@ -2,7 +2,7 @@
 import BreadCrumbs from '../shared/ui/BreadCrumbs';
 import AddClientTip from '../app/entites/clients/AddClientTip';
 import AddClientForm from '../app/features/clients/addNewClient/AddClientForm';
-import ClientsTable from '../app/widgets/clients/showClientsInfo/ui/ClientsTable';
+import ClientsTable from '../app/widgets/clients/ClientsTable';
 
 const ClientsPage = () => {
   return (

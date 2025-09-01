@@ -7,13 +7,13 @@ import { FaTruck } from 'react-icons/fa';
 import { AiOutlineFileDone } from 'react-icons/ai';
 
 // Ui:
-import CustomSection from '../../../../shared/ui/CustomSection';
-import GeneralInfoCard from '../../../entites/generalInfo/GeneralInfoCard';
+import CustomSection from '../../../shared/ui/CustomSection';
+import GeneralInfoCard from '../../entites/generalInfo/GeneralInfoCard';
 
 // State:
-import { selectShipmentRequests } from '../../../redux/slices/shipmentsSlice';
-import { selectParcelsData } from '../../../redux/slices/parcelsSlice';
-import { selectShipmentsLogData } from '../../../redux/slices/shipmentsLogSlice';
+import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
+import { selectParcelsData } from '../../redux/slices/parcelsSlice';
+import { selectShipmentsLogData } from '../../redux/slices/shipmentsLogSlice';
 
 const GeneralInfo = () => {
   const shipmentRequestsData = useSelector(selectShipmentRequests);

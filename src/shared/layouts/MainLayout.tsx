@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 
 // Ui:
-import SideBarNav from '../../widgets/SideBarNav';
-import Header from '../../widgets/Header';
-import Footer from '../../widgets/Footer';
+import SideBarNav from '../../app/widgets/ui/SideBarNav';
+import Header from '../../app/widgets/ui/Header';
+import Footer from '../../app/widgets/ui/Footer';
 
 const MainLayout = () => {
   return (

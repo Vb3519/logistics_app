@@ -3,20 +3,20 @@ import { useParams } from 'react-router-dom';
 import { useMemo, memo } from 'react';
 
 // Ui:
-import CustomSection from '../../../../shared/ui/CustomSection';
-import CurrentRequestInfo from '../../../features/shipments/setShipmentRequestStatus/CurrentRequestInfo';
-import CurrentRequestSkeleton from '../../../entites/shipmentRequests/CurrentRequestSkeleton';
-import CurrentRequestParcelsAndActions from '../../showUploadedParcels/ui/CurrentRequestParcelsAndActions';
+import CustomSection from '../../../shared/ui/CustomSection';
+import CurrentRequestInfo from '../../features/shipments/setShipmentRequestStatus/CurrentRequestInfo';
+import CurrentRequestSkeleton from '../../entites/shipmentRequests/CurrentRequestSkeleton';
+import CurrentRequestParcelsAndActions from './CurrentRequestParcelsAndActions';
 
 // State:
-import { selectShipmentRequests } from '../../../redux/slices/shipmentsSlice';
+import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
 
 // Types:
-import { ShipmentRequest } from '../../../../types/shipments.interface';
-import { Parcel } from '../../../../types/parcels.interface';
+import { ShipmentRequest } from '../../../types/shipments.interface';
+import { Parcel } from '../../../types/parcels.interface';
 
 // Utils:
-import { calcTransportLoadProgressColor } from '../../../../shared/utils/calcTransportLoad';
+import { calcTransportLoadProgressColor } from '../../../shared/utils/calcTransportLoad';
 
 const CurrentRequestDetails = () => {
   const { id } = useParams();

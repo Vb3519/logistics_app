@@ -3,7 +3,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 // Types:
-import { ClientsTableRowSkeleton_Props } from '../../../../../types/clients.interface';
+import { ClientsTableRowSkeleton_Props } from '../../../types/clients.interface';
 
 const ClientsTableRowSkeleton: React.FC<ClientsTableRowSkeleton_Props> = ({
   isClientsDataLoading,

@@ -2,12 +2,12 @@
 import { MdOutlineSegment } from 'react-icons/md';
 
 // Ui:
-import { SearchShipment } from '../widgets/Header';
-import MobileNavMenu from '../widgets/MobileNavMenu';
+import { SearchShipment } from '../app/widgets/ui/Header';
+import MobileNavMenu from '../app/widgets/ui/MobileNavMenu';
 import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/AddShipmentRequestForm';
 import CustomButton from '../shared/ui/CustomButton';
-import Logo from '../widgets/Logo';
-import FreeTransport from '../app/widgets/showCurrentShipmentRequests/ui/FreeTransport';
+import Logo from '../app/widgets/ui/Logo';
+import FreeTransport from '../app/widgets/shipments/FreeTransport';
 
 interface MobileNavPage_Props {
   isOpened?: boolean;

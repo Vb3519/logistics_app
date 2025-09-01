@@ -5,7 +5,7 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 // Types:
-import { ClientsTableRow_Props } from '../../../../../types/clients.interface';
+import { ClientsTableRow_Props } from '../../../types/clients.interface';
 
 const ClientsTableRow: React.FC<ClientsTableRow_Props> = memo(
   ({ companyClientData }) => {

@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
 
 import ParcelsToUploadSection from '../../../app/widgets/parcels/ParcelsToUploadSection';
-import CurrentRequestDetails from '../../../app/widgets/showCurrentRequestDetails/ui/CurrentRequestDetails';
+import CurrentRequestDetails from '../../../app/widgets/shipments/CurrentRequestDetails';
 
 // Data:
 import { shipmentRequestsData } from '../../../shared/data/shipmentsData';
