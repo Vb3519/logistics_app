@@ -7,8 +7,8 @@ import {
 } from '../../../types/clients.interface';
 
 // Services:
-import loadClientsData from '../../features/clients/services/loadClientsData';
-import addNewClient from '../../features/clients/services/addNewClient';
+import loadClientsData from '../../services/clients/loadClientsData';
+import addNewClient from '../../services/clients/addNewClient';
 
 // Слайс состояния клиентов компании:
 // ------------------------------------------------

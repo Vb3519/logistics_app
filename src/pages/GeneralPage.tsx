@@ -1,11 +1,11 @@
 // Features:
-import GeneralInfo from '../app/features/general_info/GeneralInfo';
-import TransportOnTheWay from '../app/features/shipments/log/TransportOnTheWay';
-import DailyPlan from '../app/features/work_plans/DailyPlan';
-import RecentlyCollectedParcels from '../app/features/parcels/AddParcelToTransport/elements/RecentlyCollectedParcels';
-import ActiveRequestsList from '../app/features/shipments/requests/loadRequestsData/containers/ActiveRequestsList';
+import GeneralInfo from '../app/widgets/showGeneralInfo/ui/GeneralInfo';
+import TransportOnTheWay from '../app/widgets/showTransportOnTheWay/ui/TransportOnTheWay';
+import DailyPlan from '../app/widgets/dailyPlan/ui/DailyPlan';
+import RecentlyCollectedParcels from '../app/widgets/parcels/RecentlyCollectedParcels';
+import ActiveRequestsList from '../app/entites/shipmentRequests/ActiveRequestsList';
 
-import AddShipmentRequestForm from '../app/features/shipments/requests/addRequest/containers/AddShipmentRequestForm';
+import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/AddShipmentRequestForm';
 
 const GeneralPage = () => {
   return (

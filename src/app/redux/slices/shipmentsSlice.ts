@@ -10,9 +10,9 @@ import {
 import { Parcel } from '../../../types/parcels.interface';
 
 // Services:
-import loadShipmentRequestsData from '../../features/shipments/services/loadShipmentRequestsData';
-import addShipmentRequest from '../../features/shipments/services/addShipmentRequest';
-import approveShipmentRequest from '../../features/shipments/services/approveShipmentRequest';
+import loadShipmentRequestsData from '../../services/shipments/loadShipmentRequestsData';
+import addShipmentRequest from '../../services/shipments/addShipmentRequest';
+import approveShipmentRequest from '../../services/shipments/approveShipmentRequest';
 
 const initialState: ShipmentsState = {
   shipmentRequestsData: [],

@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 // Ui:
 import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
 
-import ParcelsToUploadSection from '../../../app/features/parcels/AddParcelToTransport/elements/ParcelsToUploadSection';
-import CurrentRequestDetails from '../../../app/features/shipments/requests/addParcelToTransport/containers/CurrentRequestDetails';
+import ParcelsToUploadSection from '../../../app/widgets/parcels/ParcelsToUploadSection';
+import CurrentRequestDetails from '../../../app/widgets/showCurrentRequestDetails/ui/CurrentRequestDetails';
 
 // Data:
 import { shipmentRequestsData } from '../../../shared/data/shipmentsData';
@@ -18,7 +18,7 @@ import {
 } from '../../../app/redux/slices/shipmentsSlice';
 
 // Services:
-import loadShipmentRequestsData from '../../../app/features/shipments/services/loadShipmentRequestsData';
+import loadShipmentRequestsData from '../../../app/services/shipments/loadShipmentRequestsData';
 
 // Types:
 import { AppDispatch } from '../../../app/redux/store';

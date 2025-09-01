@@ -8,7 +8,7 @@ import { BsClockHistory } from 'react-icons/bs';
 
 // Ui:
 import CustomSection from '../../../shared/ui/CustomSection';
-import ActiveRequestCard from '../../../app/features/shipments/requests/loadRequestsData/elements/ActiveRequestCard';
+import ActiveRequestCard from '../../../app/entites/shipmentRequests/ActiveRequestCard';
 import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
 
 // Data:
@@ -21,7 +21,7 @@ import {
 } from '../../../app/redux/slices/shipmentsSlice';
 
 // Services:
-import loadShipmentRequestsData from '../../../app/features/shipments/services/loadShipmentRequestsData';
+import loadShipmentRequestsData from '../../../app/services/shipments/loadShipmentRequestsData';
 
 // Types:
 import {

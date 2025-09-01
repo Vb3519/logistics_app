@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { ShipmentRequest } from '../../../types/shipments.interface';
 
 // Services:
-import loadShipmentsLogData from '../../features/shipments/services/loadShipmentsLogData';
+import loadShipmentsLogData from '../../services/shipments/loadShipmentsLogData';
 
 interface ShipmentsLogState {
   shipmentsLog: ShipmentRequest[];

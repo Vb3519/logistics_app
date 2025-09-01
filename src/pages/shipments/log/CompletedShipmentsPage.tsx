@@ -27,7 +27,7 @@ import {
 } from '../../../app/redux/slices/shipmentsLogSlice';
 
 // Services:
-import loadShipmentsLogData from '../../../app/features/shipments/services/loadShipmentsLogData';
+import loadShipmentsLogData from '../../../app/services/shipments/loadShipmentsLogData';
 
 // Api:
 import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';

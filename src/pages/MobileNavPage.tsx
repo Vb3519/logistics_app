@@ -4,10 +4,10 @@ import { MdOutlineSegment } from 'react-icons/md';
 // Ui:
 import { SearchShipment } from '../widgets/Header';
 import MobileNavMenu from '../widgets/MobileNavMenu';
-import AddShipmentRequestForm from '../app/features/shipments/requests/addRequest/containers/AddShipmentRequestForm';
+import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/AddShipmentRequestForm';
 import CustomButton from '../shared/ui/CustomButton';
 import Logo from '../widgets/Logo';
-import FreeTransport from '../app/features/shipments/requests/FreeTransport';
+import FreeTransport from '../app/widgets/showCurrentShipmentRequests/ui/FreeTransport';
 
 interface MobileNavPage_Props {
   isOpened?: boolean;

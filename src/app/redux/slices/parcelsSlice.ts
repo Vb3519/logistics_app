@@ -8,11 +8,11 @@ import {
 } from '../../../types/parcels.interface';
 
 // Services:
-import loadParcelsData from '../../features/parcels/services/loadParcelsData';
-import addNewParcel from '../../features/parcels/services/addNewParcel';
-import uploadParcelToShipmentRequest from '../../features/parcels/services/uploadParcelToShipmentRequest';
-import unloadParcelFromShipmentRequest from '../../features/parcels/services/unloadParcelFromShipmentRequest';
-import attachParcelToShipment from '../../features/parcels/services/attachParcelToShipment';
+import loadParcelsData from '../../services/parcels/loadParcelsData';
+import addNewParcel from '../../services/parcels/addNewParcel';
+import uploadParcelToShipmentRequest from '../../services/parcels/uploadParcelToShipmentRequest';
+import unloadParcelFromShipmentRequest from '../../services/parcels/unloadParcelFromShipmentRequest';
+import attachParcelToShipment from '../../services/parcels/attachParcelToShipment';
 
 const initialState: ParcelsState = {
   parcelsData: [],
