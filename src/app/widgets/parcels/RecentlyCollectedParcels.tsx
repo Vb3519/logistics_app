@@ -29,7 +29,7 @@ import {
 } from '../../../shared/api/logistics_appApi';
 
 // Contants:
-import { MIN_PARCELS_TO_RENDER } from '../../../constants/logisticAppContants';
+import { MIN_PARCELS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
 
 const RecentlyCollectedParcels = () => {
   const dispatch: AppDispatch = useDispatch();

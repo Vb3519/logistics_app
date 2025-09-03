@@ -14,7 +14,7 @@ import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
 import { toggleMobileNavPage } from '../../redux/slices/mobileNavMenuSlice';
 
 // Constants:
-import { MIN_FREE_TRANSPORT_ELEMS_TO_RENDER } from '../../../constants/logisticAppContants';
+import { MIN_FREE_TRANSPORT_ELEMS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
 
 const FreeTransport = () => {
   const dispatch = useDispatch();

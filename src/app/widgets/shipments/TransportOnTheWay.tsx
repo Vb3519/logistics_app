@@ -24,7 +24,7 @@ import {
 import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
 
 // Constants:
-import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../constants/logisticAppContants';
+import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
 
 // Types:
 import { AppDispatch } from '../../redux/store';

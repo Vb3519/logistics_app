@@ -1,7 +1,7 @@
 // Ui:
 import BreadCrumbs from '../shared/ui/BreadCrumbs';
 import AddParcelTip from '../app/entites/parcels/AddParcelTip';
-import AddParcelForm from '../app/features/parcels/addNewParcel/AddParcelForm';
+import AddParcelForm from '../app/features/parcels/addNewParcel/ui/AddParcelForm';
 import ParcelsInfoTable from '../app/widgets/parcels/ParcelsInfoTable';
 
 const ParcelsPage = () => {

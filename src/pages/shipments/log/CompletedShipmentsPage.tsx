@@ -36,7 +36,7 @@ import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
 import { AppDispatch } from '../../../app/redux/store';
 
 // Constants:
-import { MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER } from '../../../constants/logisticAppContants';
+import { MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
 
 const CompletedShipmentsPage = () => {
   const dispatch: AppDispatch = useDispatch();

@@ -2,33 +2,33 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Ui:
-import CustomButton from '../../../../shared/ui/CustomButton';
-import CustomSection from '../../../../shared/ui/CustomSection';
+import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomSection from '../../../../../shared/ui/CustomSection';
 
 // State:
 import {
   selectShipmentRequests,
   addParcelsToShipment,
-} from '../../../redux/slices/shipmentsSlice';
+} from '../../../../redux/slices/shipmentsSlice';
 
 import {
   selectParcelsToUploadData,
   selectParcelsWeightOverloadError,
   setParcelsWeightOverloadError,
   resetParcelsToUploadState,
-} from '../../../redux/slices/parcelsToUploadSlice';
+} from '../../../../redux/slices/parcelsToUploadSlice';
 
-import { selectIsUploadingParcel } from '../../../redux/slices/parcelsSlice';
-
-// Services:
-import uploadParcelToShipmentRequest from '../../../services/parcels/uploadParcelToShipmentRequest';
+import { selectIsUploadingParcel } from '../../../../redux/slices/parcelsSlice';
 
 // Types:
-import { AppDispatch } from '../../../redux/store';
-import { ShipmentRequest } from '../../../../types/shipments.interface';
+import { AppDispatch } from '../../../../redux/store';
+import { ShipmentRequest } from '../../../../../types/shipments.interface';
 
-// Api:
-import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
+// Lib:
+import calcIsOverloadByWeight from '../lib/calcIsOverloadByWeight';
+
+// Model:
+import uploadParcelsToTransport from '../model/uploadParcelsToTransport';
 
 const ParcelsToUpload = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -56,37 +56,28 @@ const ParcelsToUpload = () => {
   // "Привязать" выбранные посылки к непроведенной заявке на отгрузку:
   // -----------------------------------------------------------------------
   const handleAddParcelsToShipment = async () => {
-    if (currentShipmentRequest) {
-      // Расчет суммарного веса посылок:
-      const totalMaxLoadVal: number = currentShipmentRequest.max_load_value;
+    const isOverloadByWeight: boolean | undefined = calcIsOverloadByWeight(
+      id,
+      shipmentRequests,
+      parcelsToUploadData
+    );
 
-      const remainingLoadVal: number =
-        currentShipmentRequest.max_load_value -
-        currentShipmentRequest.current_load_value;
+    // Есть ли "перегруз" транспорта:
+    if (isOverloadByWeight) {
+      if (parcelsWeightOverloadError === '') {
+        dispatch(setParcelsWeightOverloadError('Уменьшите вес посылок'));
+      }
+    } else {
+      // Обход всех посылок и замена у нужных поля isUploaded на true (эндпоинт /parcels)
+      const uploadAllParcels = uploadParcelsToTransport(
+        parcelsToUploadData,
+        dispatch
+      );
 
-      const isWeightOverload: boolean =
-        totalMaxLoadVal < parcelsTotalWeight ||
-        remainingLoadVal < parcelsTotalWeight;
+      await Promise.all(uploadAllParcels);
 
-      // Логика обработки веса выбранных посылок по сравнению с грузоподъемностью машины:
-      if (isWeightOverload) {
-        if (parcelsWeightOverloadError === '') {
-          dispatch(setParcelsWeightOverloadError('Уменьшите вес посылок'));
-        }
-      } else {
-        // Сервер: обход всех посылок и замена у нужных поля isUploaded на true
-        const uploadAllParcels = parcelsToUploadData.map((parcelInfo) => {
-          const parcelToUpload = {
-            url: PARCELS_URL,
-            parcelId: parcelInfo.id,
-          };
-
-          return dispatch(uploadParcelToShipmentRequest(parcelToUpload));
-        });
-
-        await Promise.all(uploadAllParcels);
-
-        // Клиент: Добавление всех выбранных посылок в массив посылок активной заявки на отгрузку:
+      // Клиент: Добавление всех выбранных посылок в массив посылок активной заявки на отгрузку:
+      if (currentShipmentRequest) {
         const parcelsAndShipmentData = {
           currentShipmentId: currentShipmentRequest.id,
           parcelsToUploadData: parcelsToUploadData,
@@ -94,10 +85,10 @@ const ParcelsToUpload = () => {
         };
 
         dispatch(addParcelsToShipment(parcelsAndShipmentData));
-
-        // Клиент: ресет выбранных посылок в компоненте расчета их общего веса:
-        dispatch(resetParcelsToUploadState());
       }
+
+      // Клиент: ресет выбранных посылок в компоненте расчета их общего веса:
+      dispatch(resetParcelsToUploadState());
     }
   };
 

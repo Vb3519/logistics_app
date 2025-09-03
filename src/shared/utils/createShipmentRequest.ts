@@ -18,6 +18,7 @@ export const createShipmentRequest = (
   shipmentRequestFormData: ShipmentRequestFormFileds
 ): ShipmentRequest => {
   const shipmentRequestId: string = uuidv4();
+
   const shipmentNumber: string = 'SH-' + shipmentRequestId.slice(0, 7);
 
   const { transport_info } = shipmentRequestFormData;

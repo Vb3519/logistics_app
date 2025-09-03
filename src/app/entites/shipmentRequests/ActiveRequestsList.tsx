@@ -32,7 +32,7 @@ import {
 import loadShipmentRequestsData from '../../services/shipments/loadShipmentRequestsData';
 
 // Constants:
-import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../constants/logisticAppContants';
+import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
 
 const ActiveRequestsList = () => {
   const dispatch: AppDispatch = useDispatch();

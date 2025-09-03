@@ -1,5 +1,5 @@
 // Ui:
-import ParcelsToUpload from '../../features/parcels/addParcelToTransport/ParcelsToUpload';
+import ParcelsToUpload from '../../features/parcels/addParcelToTransport/ui/ParcelsToUpload';
 import ShipmentParcelsTable from './ShipmentParcelsTable';
 
 const ParcelsToUploadSection = () => {

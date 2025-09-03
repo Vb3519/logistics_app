@@ -1,58 +1,16 @@
-import { useDispatch } from 'react-redux';
-import { useForm, SubmitHandler } from 'react-hook-form';
-
 // Ui:
-import CustomButton from '../../../../shared/ui/CustomButton';
-import CustomSection from '../../../../shared/ui/CustomSection';
+import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomSection from '../../../../../shared/ui/CustomSection';
 
-// Services:
-import addNewParcel from '../../../services/parcels/addNewParcel';
+// Model:
+import useAddNewParcelForm from '../model/useAddNewParcelForm';
 
-// Types:
-import { AppDispatch } from '../../../redux/store';
-import { ParcelFormFields } from '../../../../types/parcels.interface';
-
-// Api:
-import { PARCELS_URL } from '../../../../shared/api/logistics_appApi';
+// Patterns:
+import { parcelWeightPattern } from '../model/useAddNewParcelForm';
 
 const AddParcelForm = () => {
-  const dispatch: AppDispatch = useDispatch();
-
-  const {
-    register,
-    handleSubmit,
-    setError,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ParcelFormFields>();
-
-  const onSubmit: SubmitHandler<ParcelFormFields> = async (formData) => {
-    if (
-      Number(formData.parcel_weight) % 20 !== 0 ||
-      Number(formData.parcel_weight) > 100
-    ) {
-      setError('parcel_weight', {
-        type: 'pattern',
-        message: 'Укажите число кратное 20. В диапазоне от 20 до 100.',
-      });
-
-      return;
-    }
-
-    try {
-      await dispatch(
-        addNewParcel({ url: PARCELS_URL, parcelFormData: formData })
-      ).unwrap();
-
-      reset();
-    } catch (error: unknown) {
-      setError('root', { message: 'Что-то пошло не так...' });
-    }
-  };
-
-  // Регулярные выражения для проверки полей формы:
-  // ------------------------------------------------------------
-  const parcelWeightPattern: RegExp = /^(?:[1-9]\d*)$/;
+  const { register, handleSubmit, onSubmit, errors, isSubmitting } =
+    useAddNewParcelForm();
 
   return (
     <CustomSection className="w-full p-2 bg-section_primary container-shadow xs:rounded-md xs:gap-4 lg:h-full lg:basis-2/5">

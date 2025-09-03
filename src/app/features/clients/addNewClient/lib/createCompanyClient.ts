@@ -1,7 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 
 // Types:
-import { ClientFormFields, Client } from '../../types/clients.interface';
+import {
+  ClientFormFields,
+  Client,
+} from '../../../../../types/clients.interface';
 
 const createCompanyClient = (clientFormData: ClientFormFields) => {
   const companyClientData: Client = {

@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import createCompanyClient from '../../../shared/utils/createCompanyClient';
+import createCompanyClient from '../../features/clients/addNewClient/lib/createCompanyClient';
 
 // Types:
 import { Client, ClientFormFields } from '../../../types/clients.interface';

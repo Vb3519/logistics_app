@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import { createParcel } from '../../../shared/utils/createParcel';
+import createNewParcel from '../../features/parcels/addNewParcel/lib/createNewParcel';
 
 // Types:
 import { ParcelFormFields, Parcel } from '../../../types/parcels.interface';
@@ -18,7 +18,7 @@ export const addNewParcel = createAsyncThunk(
   ) => {
     const { url, parcelFormData } = payload;
 
-    const newParcel: Parcel = createParcel(parcelFormData);
+    const newParcel: Parcel = createNewParcel(parcelFormData);
 
     try {
       await serverResponseImitation(2000);
@@ -67,7 +67,7 @@ const addNewParcelAxios = createAsyncThunk(
 
       const { url, parcelFormData } = payload;
 
-      const parcelToAdd: Parcel = createParcel(parcelFormData);
+      const parcelToAdd: Parcel = createNewParcel(parcelFormData);
 
       const addParcelResponse = await axios.post<Parcel>(url, parcelToAdd);
 

@@ -1,52 +1,21 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-
 // Ui:
-import CustomSection from '../../../../shared/ui/CustomSection';
-import CustomButton from '../../../../shared/ui/CustomButton';
+import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomSection from '../../../../../shared/ui/CustomSection';
 
-// State:
-import addNewClient from '../../../services/clients/addNewClient';
+// Model:
+import useAddNewClientForm from '../model/useAddNewClientForm';
 
-// Types:
-import { AppDispatch } from '../../../redux/store';
-import { ClientFormFields } from '../../../../types/clients.interface';
-
-// Api:
-import { CLIENTS_URL } from '../../../../shared/api/logistics_appApi';
+// Patterns:
+import {
+  companyTitlePattern,
+  userNameAndSernPattern,
+  userPhoneNumberPattern,
+  userEmailPattern,
+} from '../model/useAddNewClientForm';
 
 const AddClientForm = () => {
-  const dispatch: AppDispatch = useDispatch();
-
-  const {
-    register,
-    handleSubmit,
-    setError,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ClientFormFields>();
-
-  const onSubmit: SubmitHandler<ClientFormFields> = async (formData) => {
-    try {
-      await dispatch(
-        addNewClient({ clientFormData: formData, url: CLIENTS_URL })
-      ).unwrap();
-
-      reset();
-    } catch (error: unknown) {
-      setError('root', {
-        message: 'Что-то пошло не так...',
-      });
-    }
-  };
-
-  // Регулярные выражения для проверки полей формы:
-  // ------------------------------------------------------------
-  const companyTitlePattern: RegExp = /[а-яА-Яa-zA-Z]/;
-  const userNameAndSernPattern: RegExp = /^[a-zA-Zа-яА-ЯёЁ]+$/;
-  const userPhoneNumberPattern: RegExp =
-    /^\+7\s?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}$/;
-  const userEmailPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const { register, handleSubmit, onSubmit, errors, isSubmitting } =
+    useAddNewClientForm();
 
   return (
     <CustomSection className="h-full w-full bg-section_primary">
