@@ -2,3 +2,4 @@ export const MIN_PARCELS_TO_RENDER = 3;
 export const MIN_SHIPMENT_REQUESTS_TO_RENDER = 3;
 export const MIN_FREE_TRANSPORT_ELEMS_TO_RENDER = 6;
 export const MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER = 15;
+export const PARCELS_WEIGHT_OVERLOAD_ERR = 'Уменьшите вес посылок';

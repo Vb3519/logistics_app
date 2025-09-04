@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Utils:
 import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import { createShipmentRequest } from '../../../shared/utils/createShipmentRequest';
+import { createShipmentRequest } from '../../features/shipments/addShipmentRequest/lib/createShipmentRequest';
 
 // Types:
 import {

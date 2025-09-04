@@ -4,7 +4,7 @@ import { MdOutlineSegment } from 'react-icons/md';
 // Ui:
 import { SearchShipment } from '../app/widgets/ui/Header';
 import MobileNavMenu from '../app/widgets/ui/MobileNavMenu';
-import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/AddShipmentRequestForm';
+import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/ui/AddShipmentRequestForm';
 import CustomButton from '../shared/ui/CustomButton';
 import Logo from '../app/widgets/ui/Logo';
 import FreeTransport from '../app/widgets/shipments/FreeTransport';

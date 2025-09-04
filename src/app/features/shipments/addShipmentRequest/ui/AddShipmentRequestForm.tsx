@@ -1,64 +1,30 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 // React-icons:
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
 
 // Ui:
-import CustomButton from '../../../../shared/ui/CustomButton';
-import CustomSection from '../../../../shared/ui/CustomSection';
+import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomSection from '../../../../../shared/ui/CustomSection';
 
-// Types:
-import {
-  ShipmentRequestFormFileds,
-  ShipmentRequest,
-} from '../../../../types/shipments.interface';
-import { AppDispatch } from '../../../redux/store';
+// Model:
+import useAddShipmentRequestForm from '../model/useAddShipmentRequestForm';
 
-// Utils:
-import { createShipmentRequest } from '../../../../shared/utils/createShipmentRequest';
-
-// Api:
-import { SHIPMENTS_URL } from '../../../../shared/api/logistics_appApi';
-
-// Services:
-import addShipmentRequest from '../../../services/shipments/addShipmentRequest';
+// Patterns:
+import { shipmentAdressPattern } from '../model/useAddShipmentRequestForm';
 
 const AddShipmentRequestForm = () => {
-  const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
 
   const {
     register,
     handleSubmit,
-    setError,
+    onSubmit,
     clearErrors,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<ShipmentRequestFormFileds>();
-
-  const onSubmit: SubmitHandler<ShipmentRequestFormFileds> = async (
-    formData
-  ) => {
-    try {
-      await dispatch(
-        addShipmentRequest({
-          url: SHIPMENTS_URL,
-          shipmentRequestFormData: formData,
-        })
-      ).unwrap();
-
-      reset();
-    } catch (error: unknown) {
-      setError('root', { message: 'Что-то пошло не так...' });
-    }
-  };
-
-  // Регулярные выражения для проверки полей формы:
-  // ------------------------------------------------------------
-  const shipmentAdressPattern: RegExp = /^[А-Яа-яЁё]+([\- ][А-Яа-яЁё]+)*$/;
+    errors,
+    isSubmitting,
+  } = useAddShipmentRequestForm();
 
   useEffect(() => {
     clearErrors();

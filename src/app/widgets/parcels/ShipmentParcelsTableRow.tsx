@@ -48,7 +48,7 @@ const ShipmentParcelsTableRow: React.FC<ShipmentParcelsTableRow_Props> = memo(
       selectParcelsWeightOverloadError
     );
 
-    // Добавление и уделание посылки из транспорта и проверка перевеса:
+    // Добавление и удаление посылки из транспорта и проверка перевеса:
     const toggleUploadParcelToTransport = (
       parcelData: Parcel,
       shipmentId: string | undefined,

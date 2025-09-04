@@ -4,8 +4,7 @@ import TransportOnTheWay from '../app/widgets/shipments/TransportOnTheWay';
 import DailyPlan from '../app/widgets/dailyPlan/DailyPlan';
 import RecentlyCollectedParcels from '../app/widgets/parcels/RecentlyCollectedParcels';
 import ActiveRequestsList from '../app/entites/shipmentRequests/ActiveRequestsList';
-
-import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/AddShipmentRequestForm';
+import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/ui/AddShipmentRequestForm';
 
 const GeneralPage = () => {
   return (
