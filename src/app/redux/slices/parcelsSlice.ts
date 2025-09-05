@@ -36,9 +36,12 @@ const parcelsSlice = createSlice({
   name: 'parcels',
   initialState: initialState,
   reducers: {
-    updateParcelsByShipmentId: (state, action) => {
+    updateParcelsByIsAttached: (
+      state,
+      action: { payload: boolean; type: string }
+    ) => {
       state.parcelsData = state.parcelsData.filter(
-        (parcelInfo) => parcelInfo.shipment_id === action.payload
+        (parcelInfo) => parcelInfo.isAttached === action.payload
       );
     },
   },
@@ -200,7 +203,7 @@ const parcelsSlice = createSlice({
 });
 
 // Действия:
-export const { updateParcelsByShipmentId } = parcelsSlice.actions;
+export const { updateParcelsByIsAttached } = parcelsSlice.actions;
 
 // Состояние:
 export const selectParcelsData = (state: ParcelsStateSlice) =>

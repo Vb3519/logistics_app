@@ -10,6 +10,7 @@ import {
 
 // Types:
 import { AppDispatch } from '../../../redux/store';
+import { ShipmentStatus } from '../../../../types/shipments.interface';
 
 interface CurrentRequestInfoInfo_Props {
   shipment_number: string;
@@ -63,44 +64,26 @@ const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
           <span className="text-[#7B57DF]">Статус отгрузки</span>
 
           <fieldset className="p-4 flex flex-col gap-1 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md lg:gap-2">
-            <div className="flex items-center gap-2">
-              <input
-                name="shipment_status"
-                id="shipment_in_proccess"
-                type="radio"
-                value="В пути"
-                onChange={handleSetShipmentStatus}
-              ></input>
-              <label htmlFor="shipment_in_proccess" className="cursor-pointer">
-                В пути
-              </label>
-            </div>
+            <CurrentRequestStatusElem
+              shipmentStatusId="shipment_in_proccess"
+              shipmentStatusValue="В пути"
+              shipmentStatusLabel="В пути"
+              changeShipmentStatus={handleSetShipmentStatus}
+            />
 
-            <div className="flex items-center gap-2">
-              <input
-                name="shipment_status"
-                id="shipment_completed"
-                type="radio"
-                value="Завершена"
-                onChange={handleSetShipmentStatus}
-              ></input>
-              <label htmlFor="shipment_completed" className="cursor-pointer">
-                Завершена
-              </label>
-            </div>
+            <CurrentRequestStatusElem
+              shipmentStatusId="shipment_completed"
+              shipmentStatusValue="Завершена"
+              shipmentStatusLabel="Завершена"
+              changeShipmentStatus={handleSetShipmentStatus}
+            />
 
-            <div className="flex items-center gap-2">
-              <input
-                name="shipment_status"
-                id="shipment_is_delayed"
-                type="radio"
-                value="Опаздывает"
-                onChange={handleSetShipmentStatus}
-              ></input>
-              <label htmlFor="shipment_is_delayed" className="cursor-pointer">
-                Опаздывает
-              </label>
-            </div>
+            <CurrentRequestStatusElem
+              shipmentStatusId="shipment_is_delayed"
+              shipmentStatusValue="Опаздывает"
+              shipmentStatusLabel="Опаздывает"
+              changeShipmentStatus={handleSetShipmentStatus}
+            />
 
             <span className="text-amber-500 text-sm leading-4">
               {shipmentStatusError && 'Укажите статус отгрузки'}
@@ -113,3 +96,43 @@ const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
 );
 
 export default CurrentRequestInfo;
+
+// Инпут для выбора статуса отгрузки:
+// -----------------------------------------
+interface CurrentRequestStatusElem_Props {
+  shipmentStatusId: ShipmentStatusIdType;
+  shipmentStatusValue: ShipmentStatus;
+  shipmentStatusLabel: ShipmentStatus;
+  changeShipmentStatus: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const ShipmentStatusId = {
+  inProcess: 'shipment_in_proccess',
+  completed: 'shipment_completed',
+  delayed: 'shipment_is_delayed',
+} as const;
+
+type ShipmentStatusIdType =
+  (typeof ShipmentStatusId)[keyof typeof ShipmentStatusId];
+
+const CurrentRequestStatusElem: React.FC<CurrentRequestStatusElem_Props> = ({
+  shipmentStatusId,
+  shipmentStatusValue,
+  shipmentStatusLabel,
+  changeShipmentStatus,
+}) => {
+  return (
+    <div className="flex items-center gap-2">
+      <input
+        name="shipment_status"
+        id={shipmentStatusId}
+        value={shipmentStatusValue}
+        onChange={changeShipmentStatus}
+        type="radio"
+      ></input>
+      <label htmlFor={shipmentStatusId} className="cursor-pointer">
+        {shipmentStatusLabel}
+      </label>
+    </div>
+  );
+};

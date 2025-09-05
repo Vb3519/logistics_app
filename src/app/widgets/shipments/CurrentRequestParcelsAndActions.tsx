@@ -7,7 +7,7 @@ import { selectIsShipmentParselsListOpened } from '../../redux/slices/shipmentPa
 import { Parcel } from '../../../types/parcels.interface';
 
 // Ui:
-import CurrentRequestActions from '../../features/shipments/approveShipmentRequest/CurrentRequestActions';
+import CurrentRequestActions from './CurrentRequestActions';
 import CurrentTransportLoad from '../../entites/shipmentRequests/CurrentTransportLoad';
 import UploadedToTransportParcels from '../../entites/shipmentRequests/UploadedToTransportParcels';
 
