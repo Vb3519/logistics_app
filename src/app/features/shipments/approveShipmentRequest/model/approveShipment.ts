@@ -4,17 +4,13 @@ import { Parcel } from '../../../../../types/parcels.interface';
 import { ShipmentStatus } from '../../../../../types/shipments.interface';
 import { NavigateFunction } from 'react-router-dom';
 
-// State:
-import { setShipmentStatusErr } from '../../../parcels/helpers/addParcelToTransportHelpers';
-import { updateShipmentRequestsByStatus } from '../../../../redux/slices/shipmentsSlice';
-import { setShipmentStatus } from '../../../../redux/slices/shipmentStatusSlice';
-import { updateParcelsByIsAttached } from '../../../../redux/slices/parcelsSlice';
-
 // Services:
 import approveShipmentRequest from '../../../../services/shipments/approveShipmentRequest';
 
 // Model:
 import updateParcelAttach from './updateParcelAttach';
+import setShipmentStatusErr from './setShipmentStatusErr';
+import stateUpdateAfterApprove from './stateUpdateAfterApprove';
 
 // Api:
 import { SHIPMENTS_URL } from '../../../../../shared/api/logistics_appApi';
@@ -73,9 +69,7 @@ const approveShipment = async (
     console.log('Отгрузка проведена!');
 
     // Клиент: (обновление на клиенте данных по отгрузкам и посылкам)
-    dispatch(updateShipmentRequestsByStatus(''));
-    dispatch(updateParcelsByIsAttached(false));
-    dispatch(setShipmentStatus(''));
+    stateUpdateAfterApprove(dispatch);
   }
 };
 

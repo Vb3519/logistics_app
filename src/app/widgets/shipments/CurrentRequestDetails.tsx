@@ -4,7 +4,7 @@ import { useMemo, memo } from 'react';
 
 // Ui:
 import CustomSection from '../../../shared/ui/CustomSection';
-import CurrentRequestInfo from '../../features/shipments/setShipmentRequestStatus/CurrentRequestInfo';
+import CurrentRequestInfo from '../../features/shipments/setShipmentRequestStatus/ui/CurrentRequestInfo';
 import CurrentRequestSkeleton from '../../entites/shipmentRequests/CurrentRequestSkeleton';
 import CurrentRequestParcelsAndActions from './CurrentRequestParcelsAndActions';
 

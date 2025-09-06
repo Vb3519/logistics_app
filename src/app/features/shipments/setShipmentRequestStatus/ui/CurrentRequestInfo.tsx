@@ -1,45 +1,28 @@
 import { memo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-// State:
-import {
-  setShipmentStatus,
-  setShipmentStatusErrorMsg,
-  selectShipmentStatusError,
-} from '../../../redux/slices/shipmentStatusSlice';
 
 // Types:
-import { AppDispatch } from '../../../redux/store';
-import { ShipmentStatus } from '../../../../types/shipments.interface';
+import { ShipmentStatus } from '../../../../../types/shipments.interface';
 
-interface CurrentRequestInfoInfo_Props {
+// Model:
+import useSetShipmentStatus from '../model/useSetShipmentStatus';
+
+interface CurrentRequestInfo_Props {
   shipment_number: string;
   transport: string;
 }
 
-const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
+const CurrentRequestInfo: React.FC<CurrentRequestInfo_Props> = memo(
   ({ shipment_number, transport }) => {
-    const dispatch: AppDispatch = useDispatch();
-
-    const shipmentStatusError: string = useSelector(selectShipmentStatusError);
+    const { setShipmentStatusWrapper, shipmentStatusError } =
+      useSetShipmentStatus();
 
     // Установка статуса для заявки на отгрузку:
     const handleSetShipmentStatus = (
       event: React.ChangeEvent<HTMLInputElement>
     ) => {
-      if (shipmentStatusError) {
-        dispatch(setShipmentStatusErrorMsg(''));
-      }
+      const statusVal: string = event.target.value;
 
-      const statusVal = event.target.value;
-
-      if (
-        statusVal === 'В пути' ||
-        statusVal === 'Завершена' ||
-        statusVal === 'Опаздывает'
-      ) {
-        dispatch(setShipmentStatus(statusVal));
-      }
+      setShipmentStatusWrapper(shipmentStatusError, statusVal);
     };
 
     return (
@@ -64,21 +47,21 @@ const CurrentRequestInfo: React.FC<CurrentRequestInfoInfo_Props> = memo(
           <span className="text-[#7B57DF]">Статус отгрузки</span>
 
           <fieldset className="p-4 flex flex-col gap-1 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md lg:gap-2">
-            <CurrentRequestStatusElem
+            <CurrentRequestStatusInput
               shipmentStatusId="shipment_in_proccess"
               shipmentStatusValue="В пути"
               shipmentStatusLabel="В пути"
               changeShipmentStatus={handleSetShipmentStatus}
             />
 
-            <CurrentRequestStatusElem
+            <CurrentRequestStatusInput
               shipmentStatusId="shipment_completed"
               shipmentStatusValue="Завершена"
               shipmentStatusLabel="Завершена"
               changeShipmentStatus={handleSetShipmentStatus}
             />
 
-            <CurrentRequestStatusElem
+            <CurrentRequestStatusInput
               shipmentStatusId="shipment_is_delayed"
               shipmentStatusValue="Опаздывает"
               shipmentStatusLabel="Опаздывает"
@@ -99,7 +82,7 @@ export default CurrentRequestInfo;
 
 // Инпут для выбора статуса отгрузки:
 // -----------------------------------------
-interface CurrentRequestStatusElem_Props {
+interface CurrentRequestStatusInput_Props {
   shipmentStatusId: ShipmentStatusIdType;
   shipmentStatusValue: ShipmentStatus;
   shipmentStatusLabel: ShipmentStatus;
@@ -115,7 +98,7 @@ const ShipmentStatusId = {
 type ShipmentStatusIdType =
   (typeof ShipmentStatusId)[keyof typeof ShipmentStatusId];
 
-const CurrentRequestStatusElem: React.FC<CurrentRequestStatusElem_Props> = ({
+const CurrentRequestStatusInput: React.FC<CurrentRequestStatusInput_Props> = ({
   shipmentStatusId,
   shipmentStatusValue,
   shipmentStatusLabel,
