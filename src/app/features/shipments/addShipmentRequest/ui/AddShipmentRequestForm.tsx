@@ -3,10 +3,12 @@ import { useEffect } from 'react';
 
 // React-icons:
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
+import { RxCross2 } from 'react-icons/rx';
 
 // Ui:
 import CustomButton from '../../../../../shared/ui/CustomButton';
 import CustomSection from '../../../../../shared/ui/CustomSection';
+import CloseShipmentModalBtn from '../../toggleShipmentRequestModal/ui/CloseShipmentModalBtn';
 
 // Model:
 import useAddShipmentRequestForm from '../model/useAddShipmentRequestForm';
@@ -44,6 +46,8 @@ const AddShipmentRequestForm = () => {
             <h3 className="font-semibold text-[#7B57DF] title-shadow">
               Заявка на отгрузку
             </h3>
+
+            <CloseShipmentModalBtn />
           </div>
 
           <div className="w-full flex flex-col gap-1">

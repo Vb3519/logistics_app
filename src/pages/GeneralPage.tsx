@@ -16,7 +16,7 @@ const GeneralPage = () => {
       <TransportOnTheWay />
 
       {/* Секция (Создание новой заявки на отгрузку) */}
-      <AddShipmentRequestForm />
+      <DailyPlan />
 
       {/* Секция (Текущие заявки на отгрузку) */}
       <ActiveRequestsList />

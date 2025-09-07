@@ -13,19 +13,30 @@ import {
 import storageSession from 'redux-persist/lib/storage/session';
 
 import clientsReducer from './slices/clientsSlice';
+
 import parcelsReducer from './slices/parcelsSlice';
 import parcelsToUploadReducer from './slices/parcelsToUploadSlice';
+
 import mobileNavPageReducer from './slices/mobileNavMenuSlice';
+
 import shipmentsReducer from './slices/shipmentsSlice';
 import shipmentParcelsListReducer from './slices/shipmentParcelsListSlice';
 import shipmentStatusReducer from './slices/shipmentStatusSlice';
+
+import shipmentRequestsModalReducer from './slices/shipmentRequestModalSlice';
 
 import shipmentsLogReducer from './slices/shipmentsLogSlice';
 
 const persistConfig = {
   key: 'root',
   storage: storageSession,
-  blacklist: ['clients', 'parcels', 'shipments_log', 'shipmentStatus'],
+  blacklist: [
+    'clients',
+    'parcels',
+    'shipments_log',
+    'shipmentStatus',
+    'shipmentsModal',
+  ],
 };
 
 const rootReducer = combineReducers({
@@ -37,6 +48,7 @@ const rootReducer = combineReducers({
   mobileNavPage: mobileNavPageReducer,
   shipmentParcelsList: shipmentParcelsListReducer,
   shipmentStatus: shipmentStatusReducer,
+  shipmentsModal: shipmentRequestsModalReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -5,6 +5,9 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { AppDispatch } from '../../../../redux/store';
 import { ShipmentRequestFormFileds } from '../../../../../types/shipments.interface';
 
+// State:
+import { closeShipmentRequestModal } from '../../../../redux/slices/shipmentRequestModalSlice';
+
 // Services:
 import addShipmentRequest from '../../../../services/shipments/addShipmentRequest';
 
@@ -37,6 +40,8 @@ const useAddShipmentRequestForm = () => {
           shipmentRequestFormData: formData,
         })
       ).unwrap();
+
+      dispatch(closeShipmentRequestModal());
 
       reset();
     } catch (error: unknown) {

@@ -5,10 +5,13 @@ import SideBarNav from '../../app/widgets/ui/SideBarNav';
 import Header from '../../app/widgets/ui/Header';
 import Footer from '../../app/widgets/ui/Footer';
 
+import AddShipmentRequestModal from '../../app/widgets/shipments/AddShipmentRequestModal';
+
 const MainLayout = () => {
   return (
     <div className="font-[inter] bg-layout_primary lg:grid lg:grid-cols-[1fr_4fr]">
       <SideBarNav />
+      <AddShipmentRequestModal />
 
       <div className="flex flex-col gap-4 justify-between xl:mr-6 2xl:mr-25">
         <Header />
