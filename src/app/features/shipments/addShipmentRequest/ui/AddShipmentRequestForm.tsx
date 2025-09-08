@@ -7,7 +7,7 @@ import { FaTruck, FaChevronDown } from 'react-icons/fa';
 // Ui:
 import CustomButton from '../../../../../shared/ui/CustomButton';
 import CustomSection from '../../../../../shared/ui/CustomSection';
-import CloseShipmentModalBtn from '../../toggleShipmentRequestModal/ui/CloseShipmentModalBtn';
+import CloseAddShipmentModalBtn from '../../toggleAddShipmentModal/ui/CloseAddShipmentModalBtn';
 
 // Model:
 import useAddShipmentRequestForm from '../model/useAddShipmentRequestForm';
@@ -46,7 +46,7 @@ const AddShipmentRequestForm = () => {
               Заявка на отгрузку
             </h3>
 
-            <CloseShipmentModalBtn />
+            <CloseAddShipmentModalBtn />
           </div>
 
           <div className="w-full flex flex-col gap-1">

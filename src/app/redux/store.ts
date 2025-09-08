@@ -23,8 +23,7 @@ import shipmentsReducer from './slices/shipmentsSlice';
 import shipmentParcelsListReducer from './slices/shipmentParcelsListSlice';
 import shipmentStatusReducer from './slices/shipmentStatusSlice';
 
-import shipmentRequestsModalReducer from './slices/shipmentRequestModalSlice';
-import shipmentAdressModalReducer from './slices/shipmentAdressModalSlice';
+import shipmentModalsReducer from './slices/shipmentModalsSlice';
 
 import shipmentsLogReducer from './slices/shipmentsLogSlice';
 
@@ -36,8 +35,7 @@ const persistConfig = {
     'parcels',
     'shipments_log',
     'shipmentStatus',
-    'shipmentsModal',
-    'shipmentAdressModal',
+    'shipmentModals',
   ],
 };
 
@@ -50,8 +48,7 @@ const rootReducer = combineReducers({
   mobileNavPage: mobileNavPageReducer,
   shipmentParcelsList: shipmentParcelsListReducer,
   shipmentStatus: shipmentStatusReducer,
-  shipmentsModal: shipmentRequestsModalReducer,
-  shipmentAdressModal: shipmentAdressModalReducer,
+  shipmentModals: shipmentModalsReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

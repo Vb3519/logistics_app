@@ -5,13 +5,13 @@ import { RxCross2 } from 'react-icons/rx';
 import CustomButton from '../../../../../shared/ui/CustomButton';
 
 // Model:
-import useCloseShipmentModal from '../model/useCloseShipmentModal';
+import useCloseAddShipmentModal from '../model/useCloseAddShipmentModal';
 
-const CloseShipmentModalBtn = () => {
-  const { closeShipmentsModal } = useCloseShipmentModal();
+const CloseAddShipmentModalBtn = () => {
+  const { hideAddShipmentModal } = useCloseAddShipmentModal();
 
   const handleCloseShipmentsModal = () => {
-    closeShipmentsModal();
+    hideAddShipmentModal();
   };
 
   return (
@@ -25,4 +25,4 @@ const CloseShipmentModalBtn = () => {
   );
 };
 
-export default CloseShipmentModalBtn;
+export default CloseAddShipmentModalBtn;

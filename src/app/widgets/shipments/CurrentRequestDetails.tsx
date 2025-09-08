@@ -7,7 +7,7 @@ import CustomSection from '../../../shared/ui/CustomSection';
 import CurrentRequestInfo from '../../features/shipments/setShipmentRequestStatus/ui/CurrentRequestInfo';
 import CurrentRequestSkeleton from '../../entites/shipmentRequests/CurrentRequestSkeleton';
 import CurrentRequestParcelsAndActions from './CurrentRequestParcelsAndActions';
-import EditShipmentAdressBtn from '../../features/shipments/editShipmentAdress/ui/EditShipmentAdressBtn';
+import OpenShipmentAdressModalBtn from '../../features/shipments/editShipmentAdress/ui/OpenShipmentAdressModalBtn';
 
 // State:
 import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
@@ -37,7 +37,7 @@ const CurrentRequestDetails = () => {
       <div className="w-full h-full flex flex-col gap-2 lg:gap-4">
         <div className="flex items-center gap-1 text-sm flex-wrap xl:gap-2">
           <div className="flex items-center gap-2">
-            <EditShipmentAdressBtn />
+            <OpenShipmentAdressModalBtn />
 
             <div className="font-semibold lg:text-base xl:text-lg">
               <span className="leading-5">

@@ -2,23 +2,24 @@
 import CustomButton from '../../../../../shared/ui/CustomButton';
 
 // Model:
-import useOpenShipmentModal from '../model/useOpenShipmentModal';
+import useOpenAddShipmentModal from '../model/useOpenAddShipmentModal';
 
-const OpenShipmentModalBtn = () => {
-  const { openShipmentRequestsModal } = useOpenShipmentModal();
+const OpenAddShipmentModalBtn = () => {
+  const { showAddShipmentModal } = useOpenAddShipmentModal();
 
   const handleOpenShipmentsModal = () => {
-    openShipmentRequestsModal();
+    showAddShipmentModal();
   };
 
   return (
     <CustomButton
       className="py-2 px-4 bg-[#7B57DF] text-[whitesmoke] text-sm xl:text-base"
       onClick={handleOpenShipmentsModal}
+      title="Новая заявка"
     >
       + Добавить Заявку
     </CustomButton>
   );
 };
 
-export default OpenShipmentModalBtn;
+export default OpenAddShipmentModalBtn;

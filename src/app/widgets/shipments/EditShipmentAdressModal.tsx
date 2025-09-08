@@ -3,10 +3,9 @@ import { useSelector } from 'react-redux';
 
 // Ui:
 import EditShipmentAdressForm from '../../features/shipments/editShipmentAdress/ui/EditShipmentAdressForm';
+import ModalWrapper from '../ui/ModalWrapper';
 
-import { selectIsShipmentAdressModalOpened } from '../../redux/slices/shipmentAdressModalSlice';
-
-const modalRoot: HTMLElement | null = document.getElementById('modal-root');
+import { selectIsShipmentAdressModalOpened } from '../../redux/slices/shipmentModalsSlice';
 
 const EditShipmentAdressModal = () => {
   const isShipmentAdressModalOpened = useSelector(
@@ -14,15 +13,9 @@ const EditShipmentAdressModal = () => {
   );
 
   return (
-    modalRoot &&
-    createPortal(
-      isShipmentAdressModalOpened ? (
-        <div className="h-screen w-full fixed flex items-center justify-center z-60 bg-[#000000a8]">
-          <EditShipmentAdressForm />
-        </div>
-      ) : null,
-      modalRoot
-    )
+    <ModalWrapper isOpened={isShipmentAdressModalOpened} className="flex">
+      <EditShipmentAdressForm />
+    </ModalWrapper>
   );
 };
 

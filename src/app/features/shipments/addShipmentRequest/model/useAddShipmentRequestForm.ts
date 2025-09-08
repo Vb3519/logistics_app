@@ -6,7 +6,7 @@ import { AppDispatch } from '../../../../redux/store';
 import { ShipmentRequestFormFileds } from '../../../../../types/shipments.interface';
 
 // State:
-import { closeShipmentRequestModal } from '../../../../redux/slices/shipmentRequestModalSlice';
+import { toggleAddShipmentModal } from '../../../../redux/slices/shipmentModalsSlice';
 
 // Services:
 import addShipmentRequest from '../../../../services/shipments/addShipmentRequest';
@@ -41,7 +41,7 @@ const useAddShipmentRequestForm = () => {
         })
       ).unwrap();
 
-      dispatch(closeShipmentRequestModal());
+      dispatch(toggleAddShipmentModal());
 
       reset();
     } catch (error: unknown) {

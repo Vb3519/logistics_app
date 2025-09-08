@@ -12,7 +12,7 @@ import { RiHomeSmile2Line } from 'react-icons/ri';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 
 // Ui:
-import OpenShipmentModalBtn from '../../features/shipments/toggleShipmentRequestModal/ui/OpenShipmentModalBtn';
+import OpenAddShipmentModalBtn from '../../features/shipments/toggleAddShipmentModal/ui/OpenAddShipmentModalBtn';
 import Logo from './Logo';
 
 // Widgets:
@@ -161,7 +161,7 @@ const SideBarNav = () => {
             </ul>
           </nav>
 
-          <OpenShipmentModalBtn />
+          <OpenAddShipmentModalBtn />
         </div>
 
         <div className="p-4 flex items-center gap-2">

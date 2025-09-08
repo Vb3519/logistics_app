@@ -8,10 +8,10 @@ import { MdEditDocument } from 'react-icons/md';
 // Ui:
 import CustomSection from '../../../../../shared/ui/CustomSection';
 import CustomButton from '../../../../../shared/ui/CustomButton';
-import CloseEditAdressFormBtn from './CloseEditAdressFormBtn';
+import CloseShipmentAdressModalBtn from './CloseShipmentAdressModalBtn';
 
 // State:
-import { toggleShipmentAdressModal } from '../../../../redux/slices/shipmentAdressModalSlice';
+import { toggleShipmentAdressModal } from '../../../../redux/slices/shipmentModalsSlice';
 
 // Services:
 import editShipmentAdressAxios from '../../../../services/shipments/editShipmentAdress';
@@ -78,7 +78,7 @@ const EditShipmentAdressForm = () => {
               Редактирование адреса
             </h3>
 
-            <CloseEditAdressFormBtn />
+            <CloseShipmentAdressModalBtn />
           </div>
 
           {/* Отправка: */}

@@ -1,29 +1,24 @@
 import { useSelector } from 'react-redux';
-import { createPortal } from 'react-dom';
 
 // Ui:
 import AddShipmentRequestForm from '../../features/shipments/addShipmentRequest/ui/AddShipmentRequestForm';
+import ModalWrapper from '../ui/ModalWrapper';
 
 // State:
-import { selectIsShipmentsModalOpened } from '../../redux/slices/shipmentRequestModalSlice';
-
-const modalRoot: HTMLElement | null = document.getElementById('modal-root');
+import { selectIsAddShipmentModalOpened } from '../../redux/slices/shipmentModalsSlice';
 
 const AddShipmentRequestModal = () => {
-  const isShipmentsModalOpened: boolean = useSelector(
-    selectIsShipmentsModalOpened
+  const isAddShipmentModalOpened: boolean = useSelector(
+    selectIsAddShipmentModalOpened
   );
 
   return (
-    modalRoot &&
-    createPortal(
-      isShipmentsModalOpened ? (
-        <div className="hidden h-screen w-full fixed items-center justify-center z-60 bg-[#000000a8] lg:flex">
-          <AddShipmentRequestForm />
-        </div>
-      ) : null,
-      modalRoot
-    )
+    <ModalWrapper
+      isOpened={isAddShipmentModalOpened}
+      className="hidden lg:flex"
+    >
+      <AddShipmentRequestForm />
+    </ModalWrapper>
   );
 };
 
