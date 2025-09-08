@@ -7,6 +7,7 @@ import CustomSection from '../../../shared/ui/CustomSection';
 import CurrentRequestInfo from '../../features/shipments/setShipmentRequestStatus/ui/CurrentRequestInfo';
 import CurrentRequestSkeleton from '../../entites/shipmentRequests/CurrentRequestSkeleton';
 import CurrentRequestParcelsAndActions from './CurrentRequestParcelsAndActions';
+import EditShipmentAdressBtn from '../../features/shipments/editShipmentAdress/ui/EditShipmentAdressBtn';
 
 // State:
 import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
@@ -35,10 +36,17 @@ const CurrentRequestDetails = () => {
       {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
       <div className="w-full h-full flex flex-col gap-2 lg:gap-4">
         <div className="flex items-center gap-1 text-sm flex-wrap xl:gap-2">
-          <div className="font-semibold leading-4 lg:text-base xl:text-lg">
-            <span>{currentShipmentRequestData.from_city} - </span>
-            <span>{currentShipmentRequestData.to_city}</span>
+          <div className="flex items-center gap-2">
+            <EditShipmentAdressBtn />
+
+            <div className="font-semibold lg:text-base xl:text-lg">
+              <span className="leading-5">
+                {currentShipmentRequestData.from_city} -{' '}
+              </span>
+              <span>{currentShipmentRequestData.to_city}</span>
+            </div>
           </div>
+
           <div className="text-primary xl:text-base">
             {currentShipmentRequestData.created_at}
           </div>

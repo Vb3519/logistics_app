@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 // Ui:
 import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
 
+// Widgets:
+import EditShipmentAdressModal from '../../../app/widgets/shipments/EditShipmentAdressModal';
+
 import ParcelsToUploadSection from '../../../app/widgets/parcels/ParcelsToUploadSection';
 import CurrentRequestDetails from '../../../app/widgets/shipments/CurrentRequestDetails';
 
@@ -60,26 +63,31 @@ const RequestDetailsPage = () => {
   }, []);
 
   return (
-    <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
-      <BreadCrumbs
-        backTopath="/shipments"
-        backToPageTitle="Текущие отгрузки"
-        currentPath=""
-        currentPageTitle={`${
-          currentShipmentRequestData
-            ? currentShipmentRequestData.shipment_number
-            : 'Номер отгрузки'
-        }`}
-      />
+    <>
+      <main className="h-full flex flex-col items-center gap-4 xs:mx-4 lg:mx-0 lg:px-4">
+        <BreadCrumbs
+          backTopath="/shipments"
+          backToPageTitle="Текущие отгрузки"
+          currentPath=""
+          currentPageTitle={`${
+            currentShipmentRequestData
+              ? currentShipmentRequestData.shipment_number
+              : 'Номер отгрузки'
+          }`}
+        />
 
-      <div className="w-full flex flex-col gap-4 md:flex-row">
-        {/* Детализированная карточка текущей непроведенной заявки на отгрузку: */}
-        <CurrentRequestDetails />
+        <div className="w-full flex flex-col gap-4 md:flex-row">
+          {/* Детализированная карточка текущей непроведенной заявки на отгрузку: */}
+          <CurrentRequestDetails />
 
-        {/* Таблица посылок и перечень выбранных к погрузке посылок: */}
-        <ParcelsToUploadSection />
-      </div>
-    </main>
+          {/* Таблица посылок и перечень выбранных к погрузке посылок: */}
+          <ParcelsToUploadSection />
+        </div>
+      </main>
+
+      {/* Модалка (редактирование адреса доставки): */}
+      <EditShipmentAdressModal />
+    </>
   );
 };
 

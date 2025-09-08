@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 // React-icons:
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
-import { RxCross2 } from 'react-icons/rx';
 
 // Ui:
 import CustomButton from '../../../../../shared/ui/CustomButton';
@@ -80,7 +79,7 @@ const AddShipmentRequestForm = () => {
               Адрес получения
             </label>
             <input
-              id="from_adress"
+              id="to_adress"
               className="p-2 bg-element_primary rounded-sm outline-none"
               type="text"
               placeholder="Название города"

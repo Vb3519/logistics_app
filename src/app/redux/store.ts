@@ -24,6 +24,7 @@ import shipmentParcelsListReducer from './slices/shipmentParcelsListSlice';
 import shipmentStatusReducer from './slices/shipmentStatusSlice';
 
 import shipmentRequestsModalReducer from './slices/shipmentRequestModalSlice';
+import shipmentAdressModalReducer from './slices/shipmentAdressModalSlice';
 
 import shipmentsLogReducer from './slices/shipmentsLogSlice';
 
@@ -36,6 +37,7 @@ const persistConfig = {
     'shipments_log',
     'shipmentStatus',
     'shipmentsModal',
+    'shipmentAdressModal',
   ],
 };
 
@@ -49,6 +51,7 @@ const rootReducer = combineReducers({
   shipmentParcelsList: shipmentParcelsListReducer,
   shipmentStatus: shipmentStatusReducer,
   shipmentsModal: shipmentRequestsModalReducer,
+  shipmentAdressModal: shipmentAdressModalReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

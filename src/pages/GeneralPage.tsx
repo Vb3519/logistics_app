@@ -1,4 +1,4 @@
-// Features:
+// Widgets:
 import GeneralInfo from '../app/widgets/generalInfo/GeneralInfo';
 import TransportOnTheWay from '../app/widgets/shipments/TransportOnTheWay';
 import DailyPlan from '../app/widgets/dailyPlan/DailyPlan';

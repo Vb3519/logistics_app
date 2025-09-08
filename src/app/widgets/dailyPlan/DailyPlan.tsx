@@ -24,10 +24,18 @@ const DailyPlan = () => {
               2 / <span>10</span>
             </p>
           </li>
+
           <li className="flex flex-col gap-1">
             <p>Создано заявок</p>
             <p>
               3 / <span>5</span>
+            </p>
+          </li>
+
+          <li className="flex flex-col gap-1">
+            <p>Проведено отгрузок</p>
+            <p>
+              0 / <span>1</span>
             </p>
           </li>
         </ul>

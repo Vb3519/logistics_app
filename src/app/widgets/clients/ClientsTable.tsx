@@ -76,7 +76,7 @@ const ClientsTable = () => {
         sx={{
           maxHeight: '50vh',
           '@media (min-width:768px)': { maxHeight: '80vh' },
-          '@media (min-width:1028px)': { maxHeight: '40vh' },
+          '@media (min-width:1024px)': { maxHeight: '40vh' },
           '@media (min-width:1280px)': { maxHeight: '90vh' },
         }}
       >

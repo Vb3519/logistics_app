@@ -43,6 +43,9 @@ export interface ShipmentsState {
 
   isShipmentApproveSending: boolean;
   shipmentApproveError: string;
+
+  isShipmentAdressEditing: boolean;
+  shipmentAdressEditError: string;
 }
 
 export interface ShipmentsStateSlice {

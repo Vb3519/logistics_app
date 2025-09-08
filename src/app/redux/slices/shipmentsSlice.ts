@@ -13,6 +13,7 @@ import { Parcel } from '../../../types/parcels.interface';
 import loadShipmentRequestsData from '../../services/shipments/loadShipmentRequestsData';
 import addShipmentRequest from '../../services/shipments/addShipmentRequest';
 import approveShipmentRequest from '../../services/shipments/approveShipmentRequest';
+import editShipmentAdressAxios from '../../services/shipments/editShipmentAdress';
 
 const initialState: ShipmentsState = {
   shipmentRequestsData: [],
@@ -24,6 +25,9 @@ const initialState: ShipmentsState = {
 
   isShipmentApproveSending: false,
   shipmentApproveError: '',
+
+  isShipmentAdressEditing: false,
+  shipmentAdressEditError: '',
 };
 
 const shipmentsSlice = createSlice({
@@ -177,6 +181,38 @@ const shipmentsSlice = createSlice({
           isShipmentApproveSending: false,
           shipmentApproveError: action.payload,
         };
+      }
+    });
+
+    // Изменение адреса в заявке на отгрузку:
+    builder.addCase(editShipmentAdressAxios.pending, (state) => {
+      return {
+        ...state,
+        isShipmentAdressEditing: true,
+        shipmentAdressEditError: '',
+      };
+    });
+
+    builder.addCase(editShipmentAdressAxios.fulfilled, (state, action) => {
+      const { id, from_city, to_city } = action.payload;
+
+      const shipmentToEditAdress = state.shipmentRequestsData.find(
+        (shipmentInfo) => shipmentInfo.id === id
+      );
+
+      if (shipmentToEditAdress) {
+        shipmentToEditAdress.from_city = from_city;
+        shipmentToEditAdress.to_city = to_city;
+      }
+
+      state.isShipmentAdressEditing = false;
+    });
+
+    builder.addCase(editShipmentAdressAxios.rejected, (state, action) => {
+      state.isShipmentAdressEditing = false;
+
+      if (typeof action.payload === 'string') {
+        state.shipmentAdressEditError = action.payload;
       }
     });
   },
