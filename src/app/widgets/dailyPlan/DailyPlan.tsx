@@ -1,15 +1,45 @@
+import { useSelector } from 'react-redux';
+
 // React-icons:
 import { BsThreeDots } from 'react-icons/bs';
 import { LuClipboardList } from 'react-icons/lu';
 import { BsBoxSeamFill } from 'react-icons/bs';
 import { FaTruck } from 'react-icons/fa';
 import { GiProgression } from 'react-icons/gi';
+import { MdDone } from 'react-icons/md';
 
 // Ui:
 import CustomButton from '../../../shared/ui/CustomButton';
 import CustomSection from '../../../shared/ui/CustomSection';
 
+// State:
+import {
+  selectAllActionsCounter,
+  selectDailyParcelsCollected,
+  selectDailyShipmentsCreated,
+  selectDailyShipmentsApproved,
+} from '../../redux/slices/dailyPlanSlice';
+
+// Constants:
+import { DAILY_PLAN_LIMITS } from '../../../shared/constants/logisticAppContants';
+
 const DailyPlan = () => {
+  const allActionsCounter = useSelector(selectAllActionsCounter);
+  const parcelsCollected = useSelector(selectDailyParcelsCollected);
+  const shipmentsCreated = useSelector(selectDailyShipmentsCreated);
+  const shipmentsApproved = useSelector(selectDailyShipmentsApproved);
+
+  const calcProgressPercent = (
+    actionsCounter: number,
+    actionsLimit: number
+  ) => {
+    const progressPercent: number = Math.floor(
+      (actionsCounter / actionsLimit) * 100
+    );
+
+    return progressPercent;
+  };
+
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
       <div className="flex justify-between gap-2 text-sm xl:text-base">
@@ -29,8 +59,8 @@ const DailyPlan = () => {
               <BsBoxSeamFill className="text-xl flex-shrink-0 text-secondary xl:text-2xl" />
             }
             title="Собрано посылок"
-            actionsDone={0}
-            actionsTotal={3}
+            actionsDone={parcelsCollected}
+            actionsTotal={DAILY_PLAN_LIMITS.parcelsLimit}
           />
 
           <DailyPlanElement
@@ -38,8 +68,8 @@ const DailyPlan = () => {
               <LuClipboardList className="text-2xl flex-shrink-0 text-secondary xl:text-3xl" />
             }
             title="Создано заявок"
-            actionsDone={0}
-            actionsTotal={2}
+            actionsDone={shipmentsCreated}
+            actionsTotal={DAILY_PLAN_LIMITS.shipmentsCreatedLimit}
           />
 
           <DailyPlanElement
@@ -47,8 +77,8 @@ const DailyPlan = () => {
               <FaTruck className="text-2xl flex-shrink-0 text-secondary xl:text-3xl" />
             }
             title="Проведено отгрузок"
-            actionsDone={0}
-            actionsTotal={1}
+            actionsDone={shipmentsApproved}
+            actionsTotal={DAILY_PLAN_LIMITS.shipmentsApprovedLimit}
           />
         </ul>
 
@@ -57,13 +87,29 @@ const DailyPlan = () => {
             <GiProgression className="text-5xl text-secondary sm:text-7xl 2xl:text-8xl" />
             <div className="w-2/3 flex flex-col gap-2">
               <p className="text-base text-nowrap text-center">
-                <span className="text-secondary">0 </span>
+                <span className="text-secondary">
+                  {calcProgressPercent(
+                    allActionsCounter,
+                    DAILY_PLAN_LIMITS.actionsTotalLimit
+                  )}{' '}
+                </span>
                 <span className="text-primary">/ 100%</span>
               </p>
-              <progress className="hidden h-2 w-full mx-auto daily_plan text-secondary sm:block"></progress>
+              <progress
+                className={`hidden h-2 w-full mx-auto daily_plan text-secondary sm:block`}
+                value={allActionsCounter}
+                max={DAILY_PLAN_LIMITS.actionsTotalLimit}
+              ></progress>
             </div>
             <p className="text-secondary text-center sm:text-base">
-              Приступите к работе
+              {allActionsCounter === 0 && 'Приступите к работе'}
+
+              {allActionsCounter > 0 &&
+                allActionsCounter < DAILY_PLAN_LIMITS.actionsTotalLimit &&
+                'Выполняется...'}
+
+              {allActionsCounter === DAILY_PLAN_LIMITS.actionsTotalLimit &&
+                'План выполнен!'}
             </p>
           </div>
         </div>
@@ -100,10 +146,15 @@ const DailyPlanElement: React.FC<DailyPlanElement_Props> = ({
         <p>{title}</p>
       </div>
 
-      <p className="text-base xl:text-lg">
-        <span>{actionsDone} </span>
-        <span className="text-primary">/ {actionsTotal}</span>
-      </p>
+      <div className="flex items-center gap-2">
+        <p className="text-base xl:text-lg">
+          <span>{actionsDone} </span>
+          <span className="text-primary">/ {actionsTotal}</span>
+        </p>
+        {actionsDone === actionsTotal && (
+          <MdDone className="text-xl text-green-700" />
+        )}
+      </div>
     </li>
   );
 };

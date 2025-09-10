@@ -25,6 +25,7 @@ interface ApproveShipmentRequestBtn_Props {
   shipmentId: string | undefined;
   uploadedParcels: Parcel[] | undefined;
   currentWeightVal: number;
+  dailyShipmentsApproved: number;
 }
 
 const ApproveShipmentRequestBtn: React.FC<ApproveShipmentRequestBtn_Props> = (
@@ -37,6 +38,7 @@ const ApproveShipmentRequestBtn: React.FC<ApproveShipmentRequestBtn_Props> = (
     shipmentId,
     uploadedParcels,
     currentWeightVal,
+    dailyShipmentsApproved,
   } = props;
 
   const dispatch: AppDispatch = useDispatch();
@@ -53,6 +55,7 @@ const ApproveShipmentRequestBtn: React.FC<ApproveShipmentRequestBtn_Props> = (
       currentWeightVal,
       shipmentStatus,
       shipmentStatusError,
+      dailyShipmentsApproved,
       dispatch,
       navigate
     );

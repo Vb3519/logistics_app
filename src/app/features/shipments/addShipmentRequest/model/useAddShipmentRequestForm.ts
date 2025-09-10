@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 // Types:
@@ -7,6 +7,10 @@ import { ShipmentRequestFormFileds } from '../../../../../types/shipments.interf
 
 // State:
 import { toggleAddShipmentModal } from '../../../../redux/slices/shipmentModalsSlice';
+import {
+  selectDailyShipmentsCreated,
+  incrementShipmentsCreated,
+} from '../../../../redux/slices/dailyPlanSlice';
 
 // Services:
 import addShipmentRequest from '../../../../services/shipments/addShipmentRequest';
@@ -14,12 +18,17 @@ import addShipmentRequest from '../../../../services/shipments/addShipmentReques
 // Api:
 import { SHIPMENTS_URL } from '../../../../../shared/api/logistics_appApi';
 
+// Constants:
+import { DAILY_PLAN_LIMITS } from '../../../../../shared/constants/logisticAppContants';
+
 // Регулярные выражения для проверки полей формы:
 // ------------------------------------------------------------
 export const shipmentAdressPattern: RegExp = /^[А-Яа-яЁё]+([\- ][А-Яа-яЁё]+)*$/;
 
 const useAddShipmentRequestForm = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const shipmentsCreated = useSelector(selectDailyShipmentsCreated);
 
   const {
     register,
@@ -42,6 +51,10 @@ const useAddShipmentRequestForm = () => {
       ).unwrap();
 
       dispatch(toggleAddShipmentModal());
+
+      if (shipmentsCreated < DAILY_PLAN_LIMITS.shipmentsCreatedLimit) {
+        dispatch(incrementShipmentsCreated());
+      }
 
       reset();
     } catch (error: unknown) {

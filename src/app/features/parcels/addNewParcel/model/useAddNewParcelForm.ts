@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 // Types:
@@ -11,6 +11,15 @@ import addNewParcel from '../../../../services/parcels/addNewParcel';
 // Api:
 import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
 
+// Constants:
+import { DAILY_PLAN_LIMITS } from '../../../../../shared/constants/logisticAppContants';
+
+// State:
+import {
+  incrementParcelsCollected,
+  selectDailyParcelsCollected,
+} from '../../../../redux/slices/dailyPlanSlice';
+
 // Регулярные выражения для проверки полей формы:
 // ------------------------------------------------------------
 export const parcelWeightPattern: RegExp = /^(?:[1-9]\d*)$/;
@@ -19,6 +28,8 @@ export const parcelWeightPattern: RegExp = /^(?:[1-9]\d*)$/;
 // --------------------------
 const useAddNewParcelForm = () => {
   const dispatch: AppDispatch = useDispatch();
+
+  const parcelsCollected = useSelector(selectDailyParcelsCollected);
 
   const {
     register,
@@ -45,6 +56,10 @@ const useAddNewParcelForm = () => {
       await dispatch(
         addNewParcel({ url: PARCELS_URL, parcelFormData: formData })
       ).unwrap();
+
+      if (parcelsCollected < DAILY_PLAN_LIMITS.parcelsLimit) {
+        dispatch(incrementParcelsCollected());
+      }
 
       reset();
     } catch (error: unknown) {

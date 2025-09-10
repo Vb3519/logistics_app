@@ -1,3 +1,5 @@
+import { useSelector } from 'react-redux';
+
 // Types:
 import { AppDispatch } from '../../../../redux/store';
 import { Parcel } from '../../../../../types/parcels.interface';
@@ -19,12 +21,19 @@ import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
 // Lib:
 import prepareParcelsToAttach from '../lib/prepareParcelsToAttach';
 
+// State:
+import { incrementShipmentsApproved } from '../../../../redux/slices/dailyPlanSlice';
+
+// Constants:
+import { DAILY_PLAN_LIMITS } from '../../../../../shared/constants/logisticAppContants';
+
 const approveShipment = async (
   shipmentId: string | undefined,
   uploadedParcels: Parcel[] | undefined,
   currentWeightVal: number,
   shipmentStatus: ShipmentStatus,
   shipmentStatusError: string,
+  dailyShipmentsApproved: number,
   dispatch: AppDispatch,
   navigate: NavigateFunction
 ) => {
@@ -62,6 +71,11 @@ const approveShipment = async (
       true,
       dispatch
     );
+
+    // Дневной план (выполнение проведения заявки на отгрузку):
+    if (dailyShipmentsApproved < DAILY_PLAN_LIMITS.shipmentsApprovedLimit) {
+      dispatch(incrementShipmentsApproved());
+    }
 
     // Переход в журнал отгрузок:
     navigate(`/shipments/all`);

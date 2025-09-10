@@ -15,6 +15,8 @@ import {
 
 import { selectIsShipmentApproveSending } from '../../redux/slices/shipmentsSlice';
 
+import { selectDailyShipmentsApproved } from '../../redux/slices/dailyPlanSlice';
+
 // Types:
 import { Parcel } from '../../../types/parcels.interface';
 
@@ -35,6 +37,8 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
       selectIsShipmentApproveSending
     );
 
+    const dailyShipmentsApproved = useSelector(selectDailyShipmentsApproved);
+
     return (
       <div className="flex flex-col gap-4">
         <div className="flex gap-2 justify-center text-sm flex-wrap xl:text-base">
@@ -47,6 +51,7 @@ const CurrentRequestActions: React.FC<CurrentRequestActions_Props> = memo(
             shipmentId={id}
             uploadedParcels={uploadedParcels}
             currentWeightVal={currentWeightVal}
+            dailyShipmentsApproved={dailyShipmentsApproved}
           />
         </div>
 

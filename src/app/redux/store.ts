@@ -27,6 +27,8 @@ import shipmentModalsReducer from './slices/shipmentModalsSlice';
 
 import shipmentsLogReducer from './slices/shipmentsLogSlice';
 
+import dailyPlanReducer from './slices/dailyPlanSlice';
+
 const persistConfig = {
   key: 'root',
   storage: storageSession,
@@ -49,6 +51,7 @@ const rootReducer = combineReducers({
   shipmentParcelsList: shipmentParcelsListReducer,
   shipmentStatus: shipmentStatusReducer,
   shipmentModals: shipmentModalsReducer,
+  dailyPlan: dailyPlanReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
