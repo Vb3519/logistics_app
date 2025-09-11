@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 // React-icons:
 import { MdOutlineSegment } from 'react-icons/md';
-import { PiMagnifyingGlassBold } from 'react-icons/pi';
 
 // Ui:
+import SearchShipment from '../../features/shipments/searchShipmentByNumber/ui/SearchShipment';
 import MobileNavPage from '../../../pages/MobileNavPage';
 import CustomButton from '../../../shared/ui/CustomButton';
 import Logo from './Logo';
@@ -77,32 +77,3 @@ const Header = () => {
 };
 
 export default Header;
-
-interface SearchShipment_Props {
-  className: string;
-}
-
-export const SearchShipment: React.FC<SearchShipment_Props> = ({
-  className,
-}) => {
-  return (
-    <section
-      className={`${
-        className ? className : ''
-      } p-2 justify-between gap-2 text-sm bg-section_primary container-shadow xs:p-4 xs:rounded-md xl:text-base`}
-    >
-      <form className="w-full max-w-95 p-2 flex gap-1 items-center bg-element_primary rounded-sm">
-        <PiMagnifyingGlassBold className="text-2xl text-gray-300" />
-        <input
-          className="w-full outline-none"
-          placeholder="Номер отгрузки..."
-        />
-      </form>
-
-      <div className="hidden font-semibold flex-col gap-1">
-        <p className="text-nowrap">Сб, 26.07.25</p>
-        <p>16:45</p>
-      </div>
-    </section>
-  );
-};

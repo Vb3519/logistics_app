@@ -7,7 +7,14 @@ import CustomButton from '../../../../../shared/ui/CustomButton';
 // Model:
 import useOpenShipmentAdressModal from '../model/useOpenShipmentAdressModal';
 
-const OpenShipmentAdressModalBtn = () => {
+interface OpenShipmentAdressModalBtn_Props {
+  from_city: string;
+  to_city: string;
+}
+
+const OpenShipmentAdressModalBtn: React.FC<
+  OpenShipmentAdressModalBtn_Props
+> = ({ from_city, to_city }) => {
   const { showEditShipmentAdressModal } = useOpenShipmentAdressModal();
 
   const handleOpenShipmentAdressModal = () => {
@@ -19,7 +26,14 @@ const OpenShipmentAdressModalBtn = () => {
       title="Редактировать адрес"
       onClick={handleOpenShipmentAdressModal}
     >
-      <LuPencilLine className="text-xl text-primary cursor-pointer transition delay-200 ease-in hover:text-[#7B57DF] lg:text-2xl" />
+      <div className="group flex items-center gap-2">
+        <LuPencilLine className="text-xl text-primary cursor-pointer transition delay-200 ease-in group-hover:text-[#7B57DF] lg:text-2xl" />
+
+        <div className="font-semibold lg:text-base xl:text-lg">
+          <span className="leading-5">{from_city} - </span>
+          <span>{to_city}</span>
+        </div>
+      </div>
     </CustomButton>
   );
 };

@@ -7,6 +7,7 @@ import { BsBoxSeamFill } from 'react-icons/bs';
 import { FaTruck } from 'react-icons/fa';
 import { GiProgression } from 'react-icons/gi';
 import { MdDone } from 'react-icons/md';
+import { GiPartyPopper } from 'react-icons/gi';
 
 // Ui:
 import CustomButton from '../../../shared/ui/CustomButton';
@@ -39,6 +40,11 @@ const DailyPlan = () => {
 
     return progressPercent;
   };
+
+  const progressPercentVal = calcProgressPercent(
+    allActionsCounter,
+    DAILY_PLAN_LIMITS.actionsTotalLimit
+  );
 
   return (
     <CustomSection className="flex flex-col gap-4 bg-section_primary xs:mx-4">
@@ -84,23 +90,26 @@ const DailyPlan = () => {
 
         <div className="p-2 w-full flex items-center justify-center border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md">
           <div className="p-2 w-full flex flex-col items-center justify-center gap-2">
-            <GiProgression className="text-5xl text-secondary sm:text-7xl 2xl:text-8xl" />
+            {allActionsCounter === DAILY_PLAN_LIMITS.actionsTotalLimit ? (
+              <GiPartyPopper className="text-5xl text-secondary sm:text-7xl 2xl:text-8xl" />
+            ) : (
+              <GiProgression className="text-5xl text-secondary sm:text-7xl 2xl:text-8xl" />
+            )}
+
             <div className="w-2/3 flex flex-col gap-2">
               <p className="text-base text-nowrap text-center">
-                <span className="text-secondary">
-                  {calcProgressPercent(
-                    allActionsCounter,
-                    DAILY_PLAN_LIMITS.actionsTotalLimit
-                  )}{' '}
-                </span>
-                <span className="text-primary">/ 100%</span>
+                <span className="text-primary">{progressPercentVal} </span>
+                <span className="text-secondary">/ 100%</span>
               </p>
-              <progress
-                className={`hidden h-2 w-full mx-auto daily_plan text-secondary sm:block`}
-                value={allActionsCounter}
-                max={DAILY_PLAN_LIMITS.actionsTotalLimit}
-              ></progress>
+
+              <div className="hidden w-full h-2 bg-gray-400/50 rounded-sm sm:block">
+                <div
+                  style={{ width: `${progressPercentVal}%` }}
+                  className={`h-2 bg-green-700 rounded-sm`}
+                ></div>
+              </div>
             </div>
+
             <p className="text-secondary text-center sm:text-base">
               {allActionsCounter === 0 && 'Приступите к работе'}
 

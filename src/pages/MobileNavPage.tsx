@@ -2,7 +2,7 @@
 import { MdOutlineSegment } from 'react-icons/md';
 
 // Ui:
-import { SearchShipment } from '../app/widgets/ui/Header';
+import SearchShipment from '../app/features/shipments/searchShipmentByNumber/ui/SearchShipment';
 import MobileNavMenu from '../app/widgets/ui/MobileNavMenu';
 import AddShipmentRequestForm from '../app/features/shipments/addShipmentRequest/ui/AddShipmentRequestForm';
 import CustomButton from '../shared/ui/CustomButton';
@@ -46,6 +46,7 @@ const MobileNavPage = (props: MobileNavPage_Props) => {
         </div>
       </div>
 
+      {/* --- Поиск заявки на отгрузку по ее номеру: --- */}
       <SearchShipment className="flex xs:mx-4 lg:hidden" />
 
       <div className="flex flex-col gap-4 sm:gap-0 sm:flex-row">

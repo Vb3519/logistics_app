@@ -11,6 +11,7 @@ import CompletedShipmentsPage from '../pages/shipments/log/CompletedShipmentsPag
 
 import ShipmentRequestsPage from '../pages/shipments/requests/ShipmentRequestsPage';
 import RequestDetailsPage from '../pages/shipments/requests/RequestDetailsPage';
+import ShipmentNotFoundPage from '../pages/shipments/requests/ShipmentNotFoundPage';
 
 import ParcelsPage from '../pages/ParcelsPage';
 import ClientsPage from '../pages/ClientsPage';
@@ -24,6 +25,10 @@ const App = () => {
 
           <Route path="shipments" element={<ShipmentRequestsPage />} />
           <Route path="shipments/:id" element={<RequestDetailsPage />} />
+          <Route
+            path="shipments/not-found"
+            element={<ShipmentNotFoundPage />}
+          />
 
           <Route path="shipments/all" element={<AllShipmentsPage />} />
           <Route

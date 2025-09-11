@@ -22,6 +22,33 @@ export function calcTransportLoad(currentLoadVal: number, maxLoadVal: number) {
   }
 }
 
+export function calcTransportLoadCustom(
+  currentLoadVal: number,
+  maxLoadVal: number
+) {
+  if ((currentLoadVal / maxLoadVal) * 100 === 0) {
+    return 'text-secondary';
+  }
+
+  if ((currentLoadVal / maxLoadVal) * 100 <= 35) {
+    return 'transport_load_green_custom';
+  }
+
+  if (
+    (currentLoadVal / maxLoadVal) * 100 > 35 &&
+    (currentLoadVal / maxLoadVal) * 100 <= 70
+  ) {
+    return 'transport_load_orange_custom';
+  }
+
+  if (
+    (currentLoadVal / maxLoadVal) * 100 > 70 &&
+    (currentLoadVal / maxLoadVal) * 100 <= 100
+  ) {
+    return 'transport_load_red_custom';
+  }
+}
+
 export function calcTransportLoadProgressColor(
   currentLoadVal: number,
   maxLoadVal: number

@@ -1,6 +1,6 @@
 // Utils:
 import {
-  calcTransportLoad,
+  calcTransportLoadCustom,
   calcTransportLoadProgressColor,
 } from '../../../shared/utils/calcTransportLoad';
 
@@ -28,7 +28,7 @@ const ActiveRequestsListElem: React.FC<ActiveRequestsListElem_Props> = (
 
   return (
     <li
-      className="h-full min-h-20 p-2 flex gap-2 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md sm:p-4"
+      className="h-full p-2 flex gap-2 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md xs:min-h-20 sm:p-4"
       {...props}
     >
       <div className="w-full flex flex-col gap-1">
@@ -50,14 +50,19 @@ const ActiveRequestsListElem: React.FC<ActiveRequestsListElem_Props> = (
           <span className="text-primary">/ 100%</span>
         </p>
 
-        <progress
-          className={`hidden h-2 w-full transport_load_mobile ${calcTransportLoad(
-            current_load_value,
-            max_load_value
-          )} sm:block`}
-          value={current_load_value}
-          max={max_load_value}
-        ></progress>
+        <div className="hidden w-full h-2 bg-gray-400/50 rounded-sm sm:block">
+          <div
+            style={{
+              width: `${Math.floor(
+                (current_load_value / max_load_value) * 100
+              )}%`,
+            }}
+            className={`h-2 ${calcTransportLoadCustom(
+              current_load_value,
+              max_load_value
+            )} rounded-sm`}
+          ></div>
+        </div>
       </div>
     </li>
   );

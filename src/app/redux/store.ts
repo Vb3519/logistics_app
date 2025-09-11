@@ -22,6 +22,7 @@ import mobileNavPageReducer from './slices/mobileNavMenuSlice';
 import shipmentsReducer from './slices/shipmentsSlice';
 import shipmentParcelsListReducer from './slices/shipmentParcelsListSlice';
 import shipmentStatusReducer from './slices/shipmentStatusSlice';
+import searchShipmentReducer from './slices/searchShipmentSlice';
 
 import shipmentModalsReducer from './slices/shipmentModalsSlice';
 
@@ -52,6 +53,7 @@ const rootReducer = combineReducers({
   shipmentStatus: shipmentStatusReducer,
   shipmentModals: shipmentModalsReducer,
   dailyPlan: dailyPlanReducer,
+  searchShipment: searchShipmentReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

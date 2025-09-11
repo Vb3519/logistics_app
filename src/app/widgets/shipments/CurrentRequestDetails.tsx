@@ -36,16 +36,10 @@ const CurrentRequestDetails = () => {
       {/* ДЕТАЛЬНАЯ ИНФОРМАЦИЯ О ВЫБРАННОЙ ЗАЯВКЕ: */}
       <div className="w-full h-full flex flex-col gap-2 lg:gap-4">
         <div className="flex items-center gap-1 text-sm flex-wrap xl:gap-2">
-          <div className="flex items-center gap-2">
-            <OpenShipmentAdressModalBtn />
-
-            <div className="font-semibold lg:text-base xl:text-lg">
-              <span className="leading-5">
-                {currentShipmentRequestData.from_city} -{' '}
-              </span>
-              <span>{currentShipmentRequestData.to_city}</span>
-            </div>
-          </div>
+          <OpenShipmentAdressModalBtn
+            from_city={currentShipmentRequestData.from_city}
+            to_city={currentShipmentRequestData.to_city}
+          />
 
           <div className="text-primary xl:text-base">
             {currentShipmentRequestData.created_at}

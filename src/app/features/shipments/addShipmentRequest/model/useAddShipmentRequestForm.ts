@@ -12,6 +12,8 @@ import {
   incrementShipmentsCreated,
 } from '../../../../redux/slices/dailyPlanSlice';
 
+import { selectShipmentRequests } from '../../../../redux/slices/shipmentsSlice';
+
 // Services:
 import addShipmentRequest from '../../../../services/shipments/addShipmentRequest';
 
@@ -29,6 +31,7 @@ const useAddShipmentRequestForm = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const shipmentsCreated = useSelector(selectDailyShipmentsCreated);
+  const activeShipmentRequests = useSelector(selectShipmentRequests);
 
   const {
     register,
@@ -43,6 +46,11 @@ const useAddShipmentRequestForm = () => {
     formData
   ) => {
     try {
+      if (activeShipmentRequests.length >= 6) {
+        alert('Вы достигли лимита по непроведенным заявкам на отгрузку!');
+        return;
+      }
+
       await dispatch(
         addShipmentRequest({
           url: SHIPMENTS_URL,
