@@ -1,10 +1,10 @@
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 // State:
-import { updateShipmentRequestsByStatus } from '../../../../redux/slices/shipmentsSlice';
-import { updateParcelsByIsAttached } from '../../../../redux/slices/parcelsSlice';
-import { setShipmentStatus } from '../../../../redux/slices/shipmentStatusSlice';
+import { updateShipmentRequestsByStatus } from 'app/redux/slices/shipmentsSlice';
+import { updateParcelsByIsAttached } from 'app/redux/slices/parcelsSlice';
+import { setShipmentStatus } from 'app/redux/slices/shipmentStatusSlice';
 
 const stateUpdateAfterApprove = (dispatch: AppDispatch) => {
   dispatch(updateShipmentRequestsByStatus(''));

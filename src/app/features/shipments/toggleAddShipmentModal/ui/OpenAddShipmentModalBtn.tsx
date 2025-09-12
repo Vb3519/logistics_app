@@ -1,5 +1,5 @@
 // Ui:
-import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomButton from 'shared/ui/CustomButton';
 
 // Model:
 import useOpenAddShipmentModal from '../model/useOpenAddShipmentModal';

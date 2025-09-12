@@ -2,7 +2,7 @@
 import { BsBoxSeamFill, BsClockHistory } from 'react-icons/bs';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // Посылки, добавленные в транспорт:
 // ---------------------------------------------------------------------------

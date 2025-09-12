@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
 // State:
-import { selectisShipmentRequestsDataLoading } from '../../redux/slices/shipmentsSlice';
-import { selectIsParcelsDataLoading } from '../../redux/slices/parcelsSlice';
-import { selectIsShipmentsLogDataLoading } from '../../redux/slices/shipmentsLogSlice';
+import { selectisShipmentRequestsDataLoading } from 'app/redux/slices/shipmentsSlice';
+import { selectIsParcelsDataLoading } from 'app/redux/slices/parcelsSlice';
+import { selectIsShipmentsLogDataLoading } from 'app/redux/slices/shipmentsLogSlice';
 
 interface GeneralInfoCard_Props extends React.LiHTMLAttributes<HTMLLIElement> {
   className?: string;

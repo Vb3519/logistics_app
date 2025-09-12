@@ -2,7 +2,7 @@
 import { BsTruckFlatbed } from 'react-icons/bs';
 
 // Utils:
-import { calcTransportLoad } from '../../../shared/utils/calcTransportLoad';
+import { calcTransportLoad } from 'shared/utils/calcTransportLoad';
 
 // Текущая загруженность транспорта:
 // ---------------------------------------------------------------------------

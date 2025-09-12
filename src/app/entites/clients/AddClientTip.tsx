@@ -2,7 +2,7 @@
 import { MdOutlinePersonOutline } from 'react-icons/md';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomSection from 'shared/ui/CustomSection';
 
 const AddClientTip = () => {
   return (

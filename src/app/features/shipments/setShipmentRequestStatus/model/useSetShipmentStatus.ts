@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 // State:
 import {
   setShipmentStatusErrorMsg,
   setShipmentStatus,
   selectShipmentStatusError,
-} from '../../../../redux/slices/shipmentStatusSlice';
+} from 'app/redux/slices/shipmentStatusSlice';
 
 const useSetShipmentStatus = () => {
   const dispatch: AppDispatch = useDispatch();

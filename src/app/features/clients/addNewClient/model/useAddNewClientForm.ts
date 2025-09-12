@@ -2,14 +2,14 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { ClientFormFields } from '../../../../../types/clients.interface';
+import { AppDispatch } from 'app/redux/store';
+import { ClientFormFields } from 'types/clients.interface';
 
 // Services:
-import addNewClient from '../../../../services/clients/addNewClient';
+import addNewClient from 'app/services/clients/addNewClient';
 
 // Api:
-import { CLIENTS_URL } from '../../../../../shared/api/logistics_appApi';
+import { CLIENTS_URL } from 'shared/api/logistics_appApi';
 
 // Регулярные выражения для проверки полей формы:
 // ------------------------------------------------------------

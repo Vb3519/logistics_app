@@ -2,23 +2,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { ParcelFormFields } from '../../../../../types/parcels.interface';
+import { AppDispatch } from 'app/redux/store';
+import { ParcelFormFields } from 'types/parcels.interface';
 
 // Services:
-import addNewParcel from '../../../../services/parcels/addNewParcel';
+import addNewParcel from 'app/services/parcels/addNewParcel';
 
 // Api:
-import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
+import { PARCELS_URL } from 'shared/api/logistics_appApi';
 
 // Constants:
-import { DAILY_PLAN_LIMITS } from '../../../../../shared/constants/logisticAppContants';
+import { DAILY_PLAN_LIMITS } from 'shared/constants/logisticAppContants';
 
 // State:
 import {
   incrementParcelsCollected,
   selectDailyParcelsCollected,
-} from '../../../../redux/slices/dailyPlanSlice';
+} from 'app/redux/slices/dailyPlanSlice';
 
 // Регулярные выражения для проверки полей формы:
 // ------------------------------------------------------------

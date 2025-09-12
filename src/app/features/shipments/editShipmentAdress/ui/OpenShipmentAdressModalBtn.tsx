@@ -2,7 +2,7 @@
 import { LuPencilLine } from 'react-icons/lu';
 
 // Ui:
-import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomButton from 'shared/ui/CustomButton';
 
 // Model:
 import useOpenShipmentAdressModal from '../model/useOpenShipmentAdressModal';

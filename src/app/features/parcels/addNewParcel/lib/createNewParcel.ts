@@ -1,10 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 // Types:
-import {
-  ParcelFormFields,
-  Parcel,
-} from '../../../../../types/parcels.interface';
+import { ParcelFormFields, Parcel } from 'types/parcels.interface';
 
 const createNewParcel = (parcelFormData: ParcelFormFields): Parcel => {
   const parcelId: string = uuidv4();

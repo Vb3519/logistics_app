@@ -1,12 +1,12 @@
 // Services:
-import uploadParcelToShipmentRequest from '../../../../services/parcels/uploadParcelToShipmentRequest';
+import uploadParcelToShipmentRequest from 'app/services/parcels/uploadParcelToShipmentRequest';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { Parcel } from '../../../../../types/parcels.interface';
+import { AppDispatch } from 'app/redux/store';
+import { Parcel } from 'types/parcels.interface';
 
 // Api:
-import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
+import { PARCELS_URL } from 'shared/api/logistics_appApi';
 
 // Lib:
 import prepareParcelToUpload from '../lib/prepareParcelToUpload';

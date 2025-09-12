@@ -1,14 +1,14 @@
 import { useDispatch } from 'react-redux';
 
 // Ui:
-import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomButton from 'shared/ui/CustomButton';
 
 // Model:
 import unloadParcelsFromShipment from '../model/unloadParcelsFromShipment';
 
 // Types:
-import { Parcel } from '../../../../../types/parcels.interface';
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
+import { Parcel } from 'types/parcels.interface';
 
 interface RemoveParcelsFromTransportBtn_Props {
   uploadedParcels: Parcel[] | undefined;

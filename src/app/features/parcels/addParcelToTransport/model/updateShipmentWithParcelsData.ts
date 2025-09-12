@@ -1,10 +1,10 @@
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { ShipmentRequest } from '../../../../../types/shipments.interface';
-import { Parcel } from '../../../../../types/parcels.interface';
+import { AppDispatch } from 'app/redux/store';
+import { ShipmentRequest } from 'types/shipments.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // State:
-import { addParcelsToShipment } from '../../../../redux/slices/shipmentsSlice';
+import { addParcelsToShipment } from 'app/redux/slices/shipmentsSlice';
 
 const updateShipmentWithParcelsData = (
   shipmentId: string | undefined,

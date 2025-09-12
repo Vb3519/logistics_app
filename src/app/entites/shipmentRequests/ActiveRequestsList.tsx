@@ -7,28 +7,26 @@ import { FaAngleRight } from 'react-icons/fa';
 import { BsClockHistory } from 'react-icons/bs';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomSection from 'shared/ui/CustomSection';
 import ActiveRequestsListElem from './ActiveRequestsListElem';
 
 // Types:
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 // Api:
-import {
-  SHIPMENTS_URL,
-  ACTIVE_SHIPMENTS_URL,
-} from '../../../shared/api/logistics_appApi';
+import { ACTIVE_SHIPMENTS_URL } from 'shared/api/logistics_appApi';
 
+// import {
 import {
   selectShipmentRequests,
   selectisShipmentRequestsDataLoading,
-} from '../../redux/slices/shipmentsSlice';
+} from 'app/redux/slices/shipmentsSlice';
 
 // Services:
-import loadShipmentRequestsData from '../../services/shipments/loadShipmentRequestsData';
+import loadShipmentRequestsData from 'app/services/shipments/loadShipmentRequestsData';
 
 // Constants:
-import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
+import { MIN_SHIPMENT_REQUESTS_TO_RENDER } from 'shared/constants/logisticAppContants';
 
 const ActiveRequestsList = () => {
   const dispatch: AppDispatch = useDispatch();

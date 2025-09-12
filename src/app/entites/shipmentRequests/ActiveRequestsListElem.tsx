@@ -2,7 +2,7 @@
 import {
   calcTransportLoadCustom,
   calcTransportLoadProgressColor,
-} from '../../../shared/utils/calcTransportLoad';
+} from 'shared/utils/calcTransportLoad';
 
 // Types:
 export interface ActiveRequestsListElem_Props

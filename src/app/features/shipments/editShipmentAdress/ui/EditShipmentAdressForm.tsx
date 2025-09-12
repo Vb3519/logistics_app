@@ -6,18 +6,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import { MdEditDocument } from 'react-icons/md';
 
 // Ui:
-import CustomSection from '../../../../../shared/ui/CustomSection';
-import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomButton from 'shared/ui/CustomButton';
+import CustomSection from 'shared/ui/CustomSection';
 import CloseShipmentAdressModalBtn from './CloseShipmentAdressModalBtn';
 
 // State:
-import { toggleShipmentAdressModal } from '../../../../redux/slices/shipmentModalsSlice';
+import { toggleShipmentAdressModal } from 'app/redux/slices/shipmentModalsSlice';
 
 // Services:
-import editShipmentAdressAxios from '../../../../services/shipments/editShipmentAdress';
+import editShipmentAdressAxios from 'app/services/shipments/editShipmentAdress';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 interface EditShipmentAdressFormFields {
   from_city: string;

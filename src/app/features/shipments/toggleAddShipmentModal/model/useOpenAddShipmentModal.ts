@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectIsAddShipmentModalOpened,
   openAddShipmentModal,
-} from '../../../../redux/slices/shipmentModalsSlice';
+} from 'app/redux/slices/shipmentModalsSlice';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 const useOpenAddShipmentModal = () => {
   const dispatch: AppDispatch = useDispatch();

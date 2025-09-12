@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 import { BsBoxSeamFill } from 'react-icons/bs';
 
 // Types:
-import { AppDispatch } from '../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 // State:
-import { toggleShipmentParcelsList } from '../../../redux/slices/shipmentParcelsListSlice';
+import { toggleShipmentParcelsList } from 'app/redux/slices/shipmentParcelsListSlice';
 
 // Ui:
-import CustomButton from '../../../../shared/ui/CustomButton';
+import CustomButton from 'shared/ui/CustomButton';
 
 const ToggleShipmentParcelsListBtn = () => {
   const dispatch: AppDispatch = useDispatch();

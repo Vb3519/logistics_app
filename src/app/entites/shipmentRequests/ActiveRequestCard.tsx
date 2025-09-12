@@ -2,7 +2,7 @@
 import { BsTruckFlatbed } from 'react-icons/bs';
 
 // Types:
-import { ActiveRequestCard_Props } from '../../../types/shipments.interface';
+import { ActiveRequestCard_Props } from 'types/shipments.interface';
 
 // Utils:
 import {

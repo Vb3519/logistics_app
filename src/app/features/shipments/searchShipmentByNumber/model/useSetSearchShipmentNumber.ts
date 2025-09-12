@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 
 // State:
-import { setSearchShipmentNumber } from '../../../../redux/slices/searchShipmentSlice';
+import { setSearchShipmentNumber } from 'app/redux/slices/searchShipmentSlice';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 const useSetSearchShipmentNumber = () => {
   const dispatch: AppDispatch = useDispatch();

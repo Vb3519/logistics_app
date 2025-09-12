@@ -1,13 +1,13 @@
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { ShipmentRequest } from '../../../../../types/shipments.interface';
-import { Parcel } from '../../../../../types/parcels.interface';
+import { AppDispatch } from 'app/redux/store';
+import { ShipmentRequest } from 'types/shipments.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // State:
 import {
   setParcelsWeightOverloadError,
   resetParcelsToUploadState,
-} from '../../../../redux/slices/parcelsToUploadSlice';
+} from 'app/redux/slices/parcelsToUploadSlice';
 
 // Lib:
 import calcIsOverloadByWeight from '../lib/calcIsOverloadByWeight';
@@ -17,7 +17,7 @@ import updateShipmentWithParcelsData from './updateShipmentWithParcelsData';
 import uploadParcelsToTransport from './uploadParcelsToTransport';
 
 // Constants:
-import { PARCELS_WEIGHT_OVERLOAD_ERR } from '../../../../../shared/constants/logisticAppContants';
+import { PARCELS_WEIGHT_OVERLOAD_ERR } from 'shared/constants/logisticAppContants';
 
 type UploadParcelsToShipmentParams = {
   id: string | undefined;

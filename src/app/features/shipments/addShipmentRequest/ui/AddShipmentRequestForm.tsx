@@ -5,8 +5,8 @@ import { useEffect } from 'react';
 import { FaTruck, FaChevronDown } from 'react-icons/fa';
 
 // Ui:
-import CustomButton from '../../../../../shared/ui/CustomButton';
-import CustomSection from '../../../../../shared/ui/CustomSection';
+import CustomButton from 'shared/ui/CustomButton';
+import CustomSection from 'shared/ui/CustomSection';
 import CloseAddShipmentModalBtn from '../../toggleAddShipmentModal/ui/CloseAddShipmentModalBtn';
 
 // Model:

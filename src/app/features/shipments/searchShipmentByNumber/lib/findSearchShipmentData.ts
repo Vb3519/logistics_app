@@ -1,5 +1,5 @@
 // Types:
-import { ShipmentRequest } from '../../../../../types/shipments.interface';
+import { ShipmentRequest } from 'types/shipments.interface';
 
 const findSearchShipmentData = (
   requestsData: ShipmentRequest[],

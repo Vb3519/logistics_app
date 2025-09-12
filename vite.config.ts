@@ -12,4 +12,12 @@ export default defineConfig({
       ignored: ['**/logistics_appData.json'],
     },
   },
+  resolve: {
+    alias: {
+      app: '/src/app',
+      pages: '/src/pages',
+      shared: '/src/shared',
+      types: '/src/types',
+    },
+  },
 });

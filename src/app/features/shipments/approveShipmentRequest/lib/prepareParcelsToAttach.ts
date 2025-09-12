@@ -1,5 +1,5 @@
 // Types:
-import { Parcel } from '../../../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // Обновление у погруженных посылок поля isAttached:
 const prepareParcelsToAttach = (

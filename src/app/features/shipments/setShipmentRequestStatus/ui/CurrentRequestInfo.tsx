@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 // Types:
-import { ShipmentStatus } from '../../../../../types/shipments.interface';
+import { ShipmentStatus } from 'types/shipments.interface';
 
 // Model:
 import useSetShipmentStatus from '../model/useSetShipmentStatus';

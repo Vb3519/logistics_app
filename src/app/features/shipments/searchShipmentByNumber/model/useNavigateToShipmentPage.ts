@@ -5,18 +5,18 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   selectSearchShipmentNumber,
   setSearchShipmentNumber,
-} from '../../../../redux/slices/searchShipmentSlice';
+} from 'app/redux/slices/searchShipmentSlice';
 
-import { selectShipmentRequests } from '../../../../redux/slices/shipmentsSlice';
+import { selectShipmentRequests } from 'app/redux/slices/shipmentsSlice';
 
 import {
   selectIsMobileNavPageOpened,
   toggleMobileNavPage,
-} from '../../../../redux/slices/mobileNavMenuSlice';
+} from 'app/redux/slices/mobileNavMenuSlice';
 
 // Types:
-import { ShipmentRequest } from '../../../../../types/shipments.interface';
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
+import { ShipmentRequest } from 'types/shipments.interface';
 
 // Lib:
 import findSearchShipmentData from '../lib/findSearchShipmentData';

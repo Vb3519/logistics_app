@@ -2,7 +2,7 @@
 import { RxCross2 } from 'react-icons/rx';
 
 // Ui:
-import CustomButton from '../../../../../shared/ui/CustomButton';
+import CustomButton from 'shared/ui/CustomButton';
 
 // Model:
 import useCloseShipmentAdressModal from '../model/useCloseShipmentAdressModal';

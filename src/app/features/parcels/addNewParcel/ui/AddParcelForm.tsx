@@ -1,6 +1,6 @@
 // Ui:
-import CustomButton from '../../../../../shared/ui/CustomButton';
-import CustomSection from '../../../../../shared/ui/CustomSection';
+import CustomButton from 'shared/ui/CustomButton';
+import CustomSection from 'shared/ui/CustomSection';
 
 // Model:
 import useAddNewParcelForm from '../model/useAddNewParcelForm';

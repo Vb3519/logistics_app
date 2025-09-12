@@ -1,8 +1,8 @@
 // Types:
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 // State:
-import { setShipmentStatusErrorMsg } from '../../../../redux/slices/shipmentStatusSlice';
+import { setShipmentStatusErrorMsg } from 'app/redux/slices/shipmentStatusSlice';
 
 // Установить ошибку статуса заявки:
 const setShipmentStatusErr = (statusErr: string, dispatch: AppDispatch) => {

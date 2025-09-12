@@ -2,26 +2,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { ShipmentRequestFormFileds } from '../../../../../types/shipments.interface';
+import { AppDispatch } from 'app/redux/store';
+import { ShipmentRequestFormFileds } from 'types/shipments.interface';
 
 // State:
-import { toggleAddShipmentModal } from '../../../../redux/slices/shipmentModalsSlice';
+import { toggleAddShipmentModal } from 'app/redux/slices/shipmentModalsSlice';
+
 import {
   selectDailyShipmentsCreated,
   incrementShipmentsCreated,
-} from '../../../../redux/slices/dailyPlanSlice';
+} from 'app/redux/slices/dailyPlanSlice';
 
-import { selectShipmentRequests } from '../../../../redux/slices/shipmentsSlice';
+import { selectShipmentRequests } from 'app/redux/slices/shipmentsSlice';
 
 // Services:
-import addShipmentRequest from '../../../../services/shipments/addShipmentRequest';
+import addShipmentRequest from 'app/services/shipments/addShipmentRequest';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from 'shared/api/logistics_appApi';
 
 // Constants:
-import { DAILY_PLAN_LIMITS } from '../../../../../shared/constants/logisticAppContants';
+import { DAILY_PLAN_LIMITS } from 'shared/constants/logisticAppContants';
 
 // Регулярные выражения для проверки полей формы:
 // ------------------------------------------------------------

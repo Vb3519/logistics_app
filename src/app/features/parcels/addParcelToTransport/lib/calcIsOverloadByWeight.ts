@@ -1,8 +1,6 @@
-import { useMemo } from 'react';
-
 // Types:
-import { ShipmentRequest } from '../../../../../types/shipments.interface';
-import { Parcel } from '../../../../../types/parcels.interface';
+import { ShipmentRequest } from 'types/shipments.interface';
+import { Parcel } from 'types/parcels.interface';
 
 const calcIsOverloadByWeight = (
   shipmentId: string | undefined,

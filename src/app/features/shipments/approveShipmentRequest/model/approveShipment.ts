@@ -1,13 +1,12 @@
-import { useSelector } from 'react-redux';
-
 // Types:
-import { AppDispatch } from '../../../../redux/store';
-import { Parcel } from '../../../../../types/parcels.interface';
-import { ShipmentStatus } from '../../../../../types/shipments.interface';
 import { NavigateFunction } from 'react-router-dom';
 
+import { AppDispatch } from 'app/redux/store';
+import { Parcel } from 'types/parcels.interface';
+import { ShipmentStatus } from 'types/shipments.interface';
+
 // Services:
-import approveShipmentRequest from '../../../../services/shipments/approveShipmentRequest';
+import approveShipmentRequest from 'app/services/shipments/approveShipmentRequest';
 
 // Model:
 import updateParcelAttach from './updateParcelAttach';
@@ -15,17 +14,17 @@ import setShipmentStatusErr from './setShipmentStatusErr';
 import stateUpdateAfterApprove from './stateUpdateAfterApprove';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../../../shared/api/logistics_appApi';
-import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from 'shared/api/logistics_appApi';
+import { PARCELS_URL } from 'shared/api/logistics_appApi';
 
 // Lib:
 import prepareParcelsToAttach from '../lib/prepareParcelsToAttach';
 
 // State:
-import { incrementShipmentsApproved } from '../../../../redux/slices/dailyPlanSlice';
+import { incrementShipmentsApproved } from 'app/redux/slices/dailyPlanSlice';
 
 // Constants:
-import { DAILY_PLAN_LIMITS } from '../../../../../shared/constants/logisticAppContants';
+import { DAILY_PLAN_LIMITS } from 'shared/constants/logisticAppContants';
 
 const approveShipment = async (
   shipmentId: string | undefined,

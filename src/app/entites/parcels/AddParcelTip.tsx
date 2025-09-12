@@ -2,7 +2,7 @@
 import { BsBoxSeamFill } from 'react-icons/bs';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomSection from 'shared/ui/CustomSection';
 
 const AddParcelTip = () => {
   return (

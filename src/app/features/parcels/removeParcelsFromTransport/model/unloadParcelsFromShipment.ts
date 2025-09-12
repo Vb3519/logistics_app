@@ -1,16 +1,16 @@
 // Types:
-import { Parcel } from '../../../../../types/parcels.interface';
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
+import { Parcel } from 'types/parcels.interface';
 
 // Api:
-import { PARCELS_URL } from '../../../../../shared/api/logistics_appApi';
+import { PARCELS_URL } from 'shared/api/logistics_appApi';
 
 // State:
-import { removeParcelsFromShipment } from '../../../../redux/slices/shipmentsSlice';
-import { setShipmentStatus } from '../../../../redux/slices/shipmentStatusSlice';
+import { removeParcelsFromShipment } from 'app/redux/slices/shipmentsSlice';
+import { setShipmentStatus } from 'app/redux/slices/shipmentStatusSlice';
 
 // Services:
-import unloadParcelFromShipmentRequest from '../../../../services/parcels/unloadParcelFromShipmentRequest';
+import unloadParcelFromShipmentRequest from 'app/services/parcels/unloadParcelFromShipmentRequest';
 
 // Lib:
 import prepareParcelToUnload from '../lib/prepareParcelToUnload';

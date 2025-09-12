@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 
 // Utils:
-import getCurrentDate from '../../../../../shared/utils/getCurrentDate';
+import getCurrentDate from 'shared/utils/getCurrentDate';
 
 // Types:
 import {
   ShipmentRequestFormFileds,
   ShipmentRequest,
-} from '../../../../../types/shipments.interface';
+} from 'types/shipments.interface';
 
 interface TransportInfo {
   transport: string;

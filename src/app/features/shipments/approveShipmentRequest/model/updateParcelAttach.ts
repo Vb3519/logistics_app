@@ -1,9 +1,9 @@
 // Types:
-import { Parcel } from '../../../../../types/parcels.interface';
-import { AppDispatch } from '../../../../redux/store';
+import { AppDispatch } from 'app/redux/store';
+import { Parcel } from 'types/parcels.interface';
 
 // Services:
-import attachParcelToShipment from '../../../../services/parcels/attachParcelToShipment';
+import attachParcelToShipment from 'app/services/parcels/attachParcelToShipment';
 
 // Изменение у "привязанных" к отгрузке посылок поля isAttached (эндпоинт /parcels):
 const updateParcelAttach = async (
