@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 
 // Ui:
-import AddShipmentRequestForm from '../../features/shipments/addShipmentRequest/ui/AddShipmentRequestForm';
+import AddShipmentRequestForm from 'app/features/shipments/addShipmentRequest/ui/AddShipmentRequestForm';
 import ModalWrapper from '../ui/ModalWrapper';
 
 // State:
-import { selectIsAddShipmentModalOpened } from '../../redux/slices/shipmentModalsSlice';
+import { selectIsAddShipmentModalOpened } from 'app/redux/slices/shipmentModalsSlice';
 
 const AddShipmentRequestModal = () => {
   const isAddShipmentModalOpened: boolean = useSelector(

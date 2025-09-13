@@ -1,14 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Types:
-import {
-  ClientsState,
-  ClientsStateSlice,
-} from '../../../types/clients.interface';
+import { ClientsState, ClientsStateSlice } from 'types/clients.interface';
 
 // Services:
-import loadClientsData from '../../services/clients/loadClientsData';
-import addNewClient from '../../services/clients/addNewClient';
+import loadClientsData from 'app/services/clients/loadClientsData';
+import addNewClient from 'app/services/clients/addNewClient';
 
 // Слайс состояния клиентов компании:
 // ------------------------------------------------

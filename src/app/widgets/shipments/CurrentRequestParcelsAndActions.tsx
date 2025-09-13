@@ -1,15 +1,15 @@
 import { useSelector } from 'react-redux';
 
 // State:
-import { selectIsShipmentParselsListOpened } from '../../redux/slices/shipmentParcelsListSlice';
+import { selectIsShipmentParselsListOpened } from 'app/redux/slices/shipmentParcelsListSlice';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // Ui:
 import CurrentRequestActions from './CurrentRequestActions';
-import CurrentTransportLoad from '../../entites/shipmentRequests/CurrentTransportLoad';
-import UploadedToTransportParcels from '../../entites/shipmentRequests/UploadedToTransportParcels';
+import CurrentTransportLoad from 'app/entites/shipmentRequests/CurrentTransportLoad';
+import UploadedToTransportParcels from 'app/entites/shipmentRequests/UploadedToTransportParcels';
 
 interface CurrentRequestParcelsAndActions_Props {
   uploadedParcels: Parcel[] | undefined;

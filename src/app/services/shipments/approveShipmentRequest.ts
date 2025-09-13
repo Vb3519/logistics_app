@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
-import { ShipmentStatus } from '../../../types/shipments.interface';
+import { Parcel } from 'types/parcels.interface';
+import { ShipmentStatus } from 'types/shipments.interface';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
 
 // State:
-import { addShipmentToLog } from '../../redux/slices/shipmentsLogSlice';
+import { addShipmentToLog } from 'app/redux/slices/shipmentsLogSlice';
 
 const approveShipmentRequest = createAsyncThunk(
   'shipments/approveShipmentRequest',

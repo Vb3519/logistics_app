@@ -3,32 +3,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 // Ui:
-import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
+import BreadCrumbs from 'shared/ui/BreadCrumbs';
 
 // Widgets:
-import EditShipmentAdressModal from '../../../app/widgets/shipments/EditShipmentAdressModal';
+import EditShipmentAdressModal from 'app/widgets/shipments/EditShipmentAdressModal';
 
-import ParcelsToUploadSection from '../../../app/widgets/parcels/ParcelsToUploadSection';
-import CurrentRequestDetails from '../../../app/widgets/shipments/CurrentRequestDetails';
-
-// Data:
-import { shipmentRequestsData } from '../../../shared/data/shipmentsData';
+import ParcelsToUploadSection from 'app/widgets/parcels/ParcelsToUploadSection';
+import CurrentRequestDetails from 'app/widgets/shipments/CurrentRequestDetails';
 
 // State:
 import {
   selectShipmentRequests,
   selectisShipmentRequestsDataLoading,
-} from '../../../app/redux/slices/shipmentsSlice';
+} from 'app/redux/slices/shipmentsSlice';
 
 // Services:
-import loadShipmentRequestsData from '../../../app/services/shipments/loadShipmentRequestsData';
+import loadShipmentRequestsData from 'app/services/shipments/loadShipmentRequestsData';
 
 // Types:
-import { AppDispatch } from '../../../app/redux/store';
-import { ShipmentStatus } from '../../../types/shipments.interface';
+import { AppDispatch } from 'app/redux/store';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from 'shared/api/logistics_appApi';
 
 const RequestDetailsPage = () => {
   const dispatch: AppDispatch = useDispatch();

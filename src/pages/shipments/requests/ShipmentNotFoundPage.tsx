@@ -2,8 +2,8 @@
 import { ImFilesEmpty } from 'react-icons/im';
 
 // Ui:
-import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
-import CustomSection from '../../../shared/ui/CustomSection';
+import BreadCrumbs from 'shared/ui/BreadCrumbs';
+import CustomSection from 'shared/ui/CustomSection';
 
 const ShipmentNotFoundPage = () => {
   return (

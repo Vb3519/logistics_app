@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import { createShipmentRequest } from '../../features/shipments/addShipmentRequest/lib/createShipmentRequest';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
+import { createShipmentRequest } from 'app/features/shipments/addShipmentRequest/lib/createShipmentRequest';
 
 // Types:
 import {
   ShipmentRequest,
   ShipmentRequestFormFileds,
-} from '../../../types/shipments.interface';
+} from 'types/shipments.interface';
 
 // Добавление нового запроса на создание заявки на отгрузку:
 // -----------------------------------------------------------------

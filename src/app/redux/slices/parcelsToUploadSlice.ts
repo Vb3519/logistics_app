@@ -5,7 +5,7 @@ import {
   Parcel,
   ParcelsToUploadState,
   ParcelsToUploadSlice,
-} from '../../../types/parcels.interface';
+} from 'types/parcels.interface';
 
 const initialState: ParcelsToUploadState = {
   parcelsToUploadData: [],

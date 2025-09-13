@@ -11,32 +11,29 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 // Ui:
-import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
-import CustomSection from '../../../shared/ui/CustomSection';
+import BreadCrumbs from 'shared/ui/BreadCrumbs';
+import CustomSection from 'shared/ui/CustomSection';
 
 // Data:
-import {
-  tableHeaderCols,
-  shipmentsData,
-} from '../../../shared/data/shipmentsData';
+import { tableHeaderCols } from 'shared/data/shipmentsData';
 
 // State:
 import {
   selectShipmentsLogData,
   selectIsShipmentsLogDataLoading,
-} from '../../../app/redux/slices/shipmentsLogSlice';
+} from 'app/redux/slices/shipmentsLogSlice';
 
 // Services:
-import loadShipmentsLogData from '../../../app/services/shipments/loadShipmentsLogData';
+import loadShipmentsLogData from 'app/services/shipments/loadShipmentsLogData';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from 'shared/api/logistics_appApi';
 
 // Types:
-import { AppDispatch } from '../../../app/redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 // Constants:
-import { MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
+import { MIN_SHIPMENTS_LOG_ELEMS_TO_RENDER } from 'shared/constants/logisticAppContants';
 
 const CompletedShipmentsPage = () => {
   const dispatch: AppDispatch = useDispatch();

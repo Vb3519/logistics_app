@@ -1,20 +1,20 @@
 import { HashRouter, Routes, Route } from 'react-router-dom';
 
 // Layouts:
-import MainLayout from '../shared/layouts/MainLayout';
+import MainLayout from 'shared/layouts/MainLayout';
 
 // Pages:
-import GeneralPage from '../pages/GeneralPage';
+import GeneralPage from 'pages/GeneralPage';
 
-import AllShipmentsPage from '../pages/shipments/log/AllShipmentsPage';
-import CompletedShipmentsPage from '../pages/shipments/log/CompletedShipmentsPage';
+import AllShipmentsPage from 'pages/shipments/log/AllShipmentsPage';
+import CompletedShipmentsPage from 'pages/shipments/log/CompletedShipmentsPage';
 
-import ShipmentRequestsPage from '../pages/shipments/requests/ShipmentRequestsPage';
-import RequestDetailsPage from '../pages/shipments/requests/RequestDetailsPage';
-import ShipmentNotFoundPage from '../pages/shipments/requests/ShipmentNotFoundPage';
+import ShipmentRequestsPage from 'pages/shipments/requests/ShipmentRequestsPage';
+import RequestDetailsPage from 'pages/shipments/requests/RequestDetailsPage';
+import ShipmentNotFoundPage from 'pages/shipments/requests/ShipmentNotFoundPage';
 
-import ParcelsPage from '../pages/ParcelsPage';
-import ClientsPage from '../pages/ClientsPage';
+import ParcelsPage from 'pages/ParcelsPage';
+import ClientsPage from 'pages/ClientsPage';
 
 const App = () => {
   return (

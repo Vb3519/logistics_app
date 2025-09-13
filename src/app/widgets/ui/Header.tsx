@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { MdOutlineSegment } from 'react-icons/md';
 
 // Ui:
-import SearchShipment from '../../features/shipments/searchShipmentByNumber/ui/SearchShipment';
-import MobileNavPage from '../../../pages/MobileNavPage';
-import CustomButton from '../../../shared/ui/CustomButton';
+import SearchShipment from 'app/features/shipments/searchShipmentByNumber/ui/SearchShipment';
+import MobileNavPage from 'pages/MobileNavPage';
+import CustomButton from 'shared/ui/CustomButton';
 import Logo from './Logo';
 
 // State:
 import {
   toggleMobileNavPage,
   selectIsMobileNavPageOpened,
-} from '../../redux/slices/mobileNavMenuSlice';
+} from 'app/redux/slices/mobileNavMenuSlice';
 
 const Header = () => {
   const dispatch = useDispatch();

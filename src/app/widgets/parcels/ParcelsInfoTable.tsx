@@ -14,26 +14,23 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomSection from 'shared/ui/CustomSection';
 
 // State:
 import {
   selectParcelsData,
   selectIsParcelsDataLoading,
-} from '../../redux/slices/parcelsSlice';
+} from 'app/redux/slices/parcelsSlice';
 
 // Services:
-import loadParcelsData from '../../services/parcels/loadParcelsData';
+import loadParcelsData from 'app/services/parcels/loadParcelsData';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch } from 'app/redux/store';
+import { Parcel } from 'types/parcels.interface';
 
 // Api:
-import {
-  PARCELS_URL,
-  ACTIVE_PARCELS_URL,
-} from '../../../shared/api/logistics_appApi';
+import { ACTIVE_PARCELS_URL } from 'shared/api/logistics_appApi';
 
 const ParcelsInfoTable = () => {
   const dispatch: AppDispatch = useDispatch();

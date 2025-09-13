@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // Загрузка и "привязка" посылки к непроведенной заявке на отгрузку:
 // ------------------------------------------------------------------

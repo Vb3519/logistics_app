@@ -6,15 +6,15 @@ import { FaAngleRight } from 'react-icons/fa';
 import { BsClockHistory } from 'react-icons/bs';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
-import ActiveRequestsListElem from '../../entites/shipmentRequests/ActiveRequestsListElem';
+import CustomSection from 'shared/ui/CustomSection';
+import ActiveRequestsListElem from 'app/entites/shipmentRequests/ActiveRequestsListElem';
 
 // State:
-import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
-import { toggleMobileNavPage } from '../../redux/slices/mobileNavMenuSlice';
+import { selectShipmentRequests } from 'app/redux/slices/shipmentsSlice';
+import { toggleMobileNavPage } from 'app/redux/slices/mobileNavMenuSlice';
 
 // Constants:
-import { MIN_FREE_TRANSPORT_ELEMS_TO_RENDER } from '../../../shared/constants/logisticAppContants';
+import { MIN_FREE_TRANSPORT_ELEMS_TO_RENDER } from 'shared/constants/logisticAppContants';
 
 const FreeTransport = () => {
   const dispatch = useDispatch();

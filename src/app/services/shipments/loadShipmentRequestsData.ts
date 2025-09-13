@@ -2,13 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
 
 // Types:
-import {
-  ShipmentRequest,
-  ShipmentStatus,
-} from '../../../types/shipments.interface';
+import { ShipmentRequest, ShipmentStatus } from 'types/shipments.interface';
 
 // Загрузка с api данных по непроведенным заявкам на отгрузку:
 // ---------------------------------------------------

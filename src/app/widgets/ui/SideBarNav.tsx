@@ -12,7 +12,7 @@ import { RiHomeSmile2Line } from 'react-icons/ri';
 import { MdOutlinePersonOutline } from 'react-icons/md';
 
 // Ui:
-import OpenAddShipmentModalBtn from '../../features/shipments/toggleAddShipmentModal/ui/OpenAddShipmentModalBtn';
+import OpenAddShipmentModalBtn from 'app/features/shipments/toggleAddShipmentModal/ui/OpenAddShipmentModalBtn';
 import Logo from './Logo';
 
 // Widgets:

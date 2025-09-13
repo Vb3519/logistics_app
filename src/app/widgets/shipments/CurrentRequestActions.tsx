@@ -3,22 +3,22 @@ import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 
 // Ui:
-import RemoveParcelsFromTransportBtn from '../../features/parcels/removeParcelsFromTransport/ui/RemoveParcelsFromTransportBtn';
-import ToggleShipmentParcelsListBtn from '../../features/parcels/toggleShipmentParcelsList/ToggleShipmentParcelsListBtn';
-import ApproveShipmentRequestBtn from '../../features/shipments/approveShipmentRequest/ui/ApproveShipmentRequestBtn';
+import RemoveParcelsFromTransportBtn from 'app/features/parcels/removeParcelsFromTransport/ui/RemoveParcelsFromTransportBtn';
+import ToggleShipmentParcelsListBtn from 'app/features/parcels/toggleShipmentParcelsList/ToggleShipmentParcelsListBtn';
+import ApproveShipmentRequestBtn from 'app/features/shipments/approveShipmentRequest/ui/ApproveShipmentRequestBtn';
 
 // State:
 import {
   selectIsUnloadingParcel,
   selectIsAttachingParcel,
-} from '../../redux/slices/parcelsSlice';
+} from 'app/redux/slices/parcelsSlice';
 
-import { selectIsShipmentApproveSending } from '../../redux/slices/shipmentsSlice';
+import { selectIsShipmentApproveSending } from 'app/redux/slices/shipmentsSlice';
 
-import { selectDailyShipmentsApproved } from '../../redux/slices/dailyPlanSlice';
+import { selectDailyShipmentsApproved } from 'app/redux/slices/dailyPlanSlice';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // Кнопки действий для работы с заявкой на отгрузку:
 // ---------------------------------------------------------------------------

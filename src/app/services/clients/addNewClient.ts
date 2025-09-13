@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import createCompanyClient from '../../features/clients/addNewClient/lib/createCompanyClient';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
+import createCompanyClient from 'app/features/clients/addNewClient/lib/createCompanyClient';
 
 // Types:
-import { Client, ClientFormFields } from '../../../types/clients.interface';
+import { Client, ClientFormFields } from 'types/clients.interface';
 
 // Добавление нового клиента:
 // ------------------------------------------------

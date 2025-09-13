@@ -10,8 +10,8 @@ import { MdDone } from 'react-icons/md';
 import { GiPartyPopper } from 'react-icons/gi';
 
 // Ui:
-import CustomButton from '../../../shared/ui/CustomButton';
-import CustomSection from '../../../shared/ui/CustomSection';
+import CustomButton from 'shared/ui/CustomButton';
+import CustomSection from 'shared/ui/CustomSection';
 
 // State:
 import {
@@ -19,10 +19,10 @@ import {
   selectDailyParcelsCollected,
   selectDailyShipmentsCreated,
   selectDailyShipmentsApproved,
-} from '../../redux/slices/dailyPlanSlice';
+} from 'app/redux/slices/dailyPlanSlice';
 
 // Constants:
-import { DAILY_PLAN_LIMITS } from '../../../shared/constants/logisticAppContants';
+import { DAILY_PLAN_LIMITS } from 'shared/constants/logisticAppContants';
 
 const DailyPlan = () => {
   const allActionsCounter = useSelector(selectAllActionsCounter);

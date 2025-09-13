@@ -6,14 +6,15 @@ import {
   ShipmentsStateSlice,
   ShipmentRequest,
   ShipmentStatus,
-} from '../../../types/shipments.interface';
-import { Parcel } from '../../../types/parcels.interface';
+} from 'types/shipments.interface';
+
+import { Parcel } from 'types/parcels.interface';
 
 // Services:
-import loadShipmentRequestsData from '../../services/shipments/loadShipmentRequestsData';
-import addShipmentRequest from '../../services/shipments/addShipmentRequest';
-import approveShipmentRequest from '../../services/shipments/approveShipmentRequest';
-import editShipmentAdressAxios from '../../services/shipments/editShipmentAdress';
+import loadShipmentRequestsData from 'app/services/shipments/loadShipmentRequestsData';
+import addShipmentRequest from 'app/services/shipments/addShipmentRequest';
+import approveShipmentRequest from 'app/services/shipments/approveShipmentRequest';
+import editShipmentAdressAxios from 'app/services/shipments/editShipmentAdress';
 
 const initialState: ShipmentsState = {
   shipmentRequestsData: [],

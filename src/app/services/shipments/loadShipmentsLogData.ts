@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
 
 const loadShipmentsLogData = createAsyncThunk(
   'shipments/loadShipmentsLogData',

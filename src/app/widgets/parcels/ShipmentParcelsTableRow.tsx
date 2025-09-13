@@ -12,21 +12,20 @@ import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
 
 // Types:
-import { Parcel } from '../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // State:
-import { selectIsUploadingParcel } from '../../redux/slices/parcelsSlice';
+import { selectIsUploadingParcel } from 'app/redux/slices/parcelsSlice';
+
 import {
   selectParcelsWeightOverloadError,
   setParcelsWeightOverloadError,
   removeParcelFromUpload,
   addParcelToUpload,
-} from '../../redux/slices/parcelsToUploadSlice';
+} from 'app/redux/slices/parcelsToUploadSlice';
 
 // Utils:
-import { addShipmentDataToParcel } from '../../../shared/utils/addShipmentDataToParcel';
-
-// Services:
+import { addShipmentDataToParcel } from 'shared/utils/addShipmentDataToParcel';
 
 // Ряд таблицы посылок:
 // ----------------------------------------------------------------------------

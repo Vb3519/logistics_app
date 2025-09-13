@@ -5,14 +5,16 @@ import {
   Parcel,
   ParcelsState,
   ParcelsStateSlice,
-} from '../../../types/parcels.interface';
+} from 'types/parcels.interface';
 
 // Services:
-import loadParcelsData from '../../services/parcels/loadParcelsData';
-import addNewParcel from '../../services/parcels/addNewParcel';
-import uploadParcelToShipmentRequest from '../../services/parcels/uploadParcelToShipmentRequest';
-import unloadParcelFromShipmentRequest from '../../services/parcels/unloadParcelFromShipmentRequest';
-import attachParcelToShipment from '../../services/parcels/attachParcelToShipment';
+import loadParcelsData from 'app/services/parcels/loadParcelsData';
+import addNewParcel from 'app/services/parcels/addNewParcel';
+
+import uploadParcelToShipmentRequest from 'app/services/parcels/uploadParcelToShipmentRequest';
+import unloadParcelFromShipmentRequest from 'app/services/parcels/unloadParcelFromShipmentRequest';
+
+import attachParcelToShipment from 'app/services/parcels/attachParcelToShipment';
 
 const initialState: ParcelsState = {
   parcelsData: [],

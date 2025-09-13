@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
-import createNewParcel from '../../features/parcels/addNewParcel/lib/createNewParcel';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
+import createNewParcel from 'app/features/parcels/addNewParcel/lib/createNewParcel';
 
 // Types:
-import { ParcelFormFields, Parcel } from '../../../types/parcels.interface';
+import { ParcelFormFields, Parcel } from 'types/parcels.interface';
 
 // Добавление информации о новой посылке:
 // ---------------------------------------------------

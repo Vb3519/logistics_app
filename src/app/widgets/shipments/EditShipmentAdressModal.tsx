@@ -1,11 +1,10 @@
-import { createPortal } from 'react-dom';
 import { useSelector } from 'react-redux';
 
 // Ui:
-import EditShipmentAdressForm from '../../features/shipments/editShipmentAdress/ui/EditShipmentAdressForm';
+import EditShipmentAdressForm from 'app/features/shipments/editShipmentAdress/ui/EditShipmentAdressForm';
 import ModalWrapper from '../ui/ModalWrapper';
 
-import { selectIsShipmentAdressModalOpened } from '../../redux/slices/shipmentModalsSlice';
+import { selectIsShipmentAdressModalOpened } from 'app/redux/slices/shipmentModalsSlice';
 
 const EditShipmentAdressModal = () => {
   const isShipmentAdressModalOpened = useSelector(

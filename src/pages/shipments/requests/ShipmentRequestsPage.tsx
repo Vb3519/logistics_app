@@ -3,38 +3,28 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 // React-icons:
-import { BsTruckFlatbed } from 'react-icons/bs';
 import { BsClockHistory } from 'react-icons/bs';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
-import ActiveRequestCard from '../../../app/entites/shipmentRequests/ActiveRequestCard';
-import BreadCrumbs from '../../../shared/ui/BreadCrumbs';
-
-// Data:
-import { shipmentRequestsData } from '../../../shared/data/shipmentsData';
+import BreadCrumbs from 'shared/ui/BreadCrumbs';
+import ActiveRequestCard from 'app/entites/shipmentRequests/ActiveRequestCard';
+import CustomSection from 'shared/ui/CustomSection';
 
 // State:
 import {
   selectShipmentRequests,
   selectisShipmentRequestsDataLoading,
-} from '../../../app/redux/slices/shipmentsSlice';
+} from 'app/redux/slices/shipmentsSlice';
 
 // Services:
-import loadShipmentRequestsData from '../../../app/services/shipments/loadShipmentRequestsData';
+import loadShipmentRequestsData from 'app/services/shipments/loadShipmentRequestsData';
 
 // Types:
-import {
-  ShipmentRequest,
-  ShipmentStatus,
-} from '../../../types/shipments.interface';
-import { AppDispatch } from '../../../app/redux/store';
+import { AppDispatch } from 'app/redux/store';
+import { ShipmentRequest } from 'types/shipments.interface';
 
 // Api:
-import {
-  SHIPMENTS_URL,
-  ACTIVE_SHIPMENTS_URL,
-} from '../../../shared/api/logistics_appApi';
+import { ACTIVE_SHIPMENTS_URL } from 'shared/api/logistics_appApi';
 
 const ShipmentRequestsPage = () => {
   const dispatch: AppDispatch = useDispatch();

@@ -2,10 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // Types:
-import { Client } from '../../../types/clients.interface';
+import { Client } from 'types/clients.interface';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
 
 // Загрузка данных по клиентам компании:
 // ------------------------------------------------

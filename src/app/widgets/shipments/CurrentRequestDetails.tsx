@@ -1,23 +1,22 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useMemo, memo } from 'react';
+import { memo } from 'react';
 
 // Ui:
-import CustomSection from '../../../shared/ui/CustomSection';
-import CurrentRequestInfo from '../../features/shipments/setShipmentRequestStatus/ui/CurrentRequestInfo';
-import CurrentRequestSkeleton from '../../entites/shipmentRequests/CurrentRequestSkeleton';
+import CustomSection from 'shared/ui/CustomSection';
+import CurrentRequestInfo from 'app/features/shipments/setShipmentRequestStatus/ui/CurrentRequestInfo';
+import CurrentRequestSkeleton from 'app/entites/shipmentRequests/CurrentRequestSkeleton';
 import CurrentRequestParcelsAndActions from './CurrentRequestParcelsAndActions';
-import OpenShipmentAdressModalBtn from '../../features/shipments/editShipmentAdress/ui/OpenShipmentAdressModalBtn';
+import OpenShipmentAdressModalBtn from 'app/features/shipments/editShipmentAdress/ui/OpenShipmentAdressModalBtn';
 
 // State:
-import { selectShipmentRequests } from '../../redux/slices/shipmentsSlice';
+import { selectShipmentRequests } from 'app/redux/slices/shipmentsSlice';
 
 // Types:
-import { ShipmentRequest } from '../../../types/shipments.interface';
-import { Parcel } from '../../../types/parcels.interface';
+import { Parcel } from 'types/parcels.interface';
 
 // Utils:
-import { calcTransportLoadProgressColor } from '../../../shared/utils/calcTransportLoad';
+import { calcTransportLoadProgressColor } from 'shared/utils/calcTransportLoad';
 
 const CurrentRequestDetails = () => {
   const { id } = useParams();

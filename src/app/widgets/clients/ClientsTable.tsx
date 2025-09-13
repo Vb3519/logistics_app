@@ -16,25 +16,22 @@ import ClientsTableRow from './ClientsTableRow';
 import ClientsTableRowSkeleton from './ClientsTableRowSkeleton';
 
 // Data:
-import {
-  clientsData,
-  clientsTableHeaderTitles,
-} from '../../../shared/data/clientsData';
+import { clientsData, clientsTableHeaderTitles } from 'shared/data/clientsData';
 
 // State:
 import {
   selectClientsData,
   selectIsClientsDataLoading,
-} from '../../redux/slices/clientsSlice';
+} from 'app/redux/slices/clientsSlice';
 
 // Services:
-import loadClientsData from '../../services/clients/loadClientsData';
+import loadClientsData from 'app/services/clients/loadClientsData';
 
 // Api:
-import { CLIENTS_URL } from '../../../shared/api/logistics_appApi';
+import { CLIENTS_URL } from 'shared/api/logistics_appApi';
 
 // Types:
-import { AppDispatch } from '../../redux/store';
+import { AppDispatch } from 'app/redux/store';
 
 const ClientsTable = () => {
   const dispatch: AppDispatch = useDispatch();

@@ -2,13 +2,13 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 // Types:
-import { ShipmentRequest } from '../../../types/shipments.interface';
+import { ShipmentRequest } from 'types/shipments.interface';
 
 // Utils:
-import serverResponseImitation from '../../../shared/utils/serverResponseImitation';
+import serverResponseImitation from 'shared/utils/serverResponseImitation';
 
 // Api:
-import { SHIPMENTS_URL } from '../../../shared/api/logistics_appApi';
+import { SHIPMENTS_URL } from 'shared/api/logistics_appApi';
 
 const editShipmentAdress = createAsyncThunk(
   'shipments/editAdress',

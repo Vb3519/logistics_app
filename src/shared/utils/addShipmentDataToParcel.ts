@@ -1,5 +1,5 @@
 // Types:
-import { Parcel, ParcelWidthShipmentData } from '../../types/parcels.interface';
+import { Parcel, ParcelWidthShipmentData } from 'types/parcels.interface';
 
 export const addShipmentDataToParcel = (
   parcelData: Parcel,
