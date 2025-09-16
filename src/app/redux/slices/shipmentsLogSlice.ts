@@ -2,19 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 // Types:
 import { ShipmentRequest } from 'types/shipments.interface';
+import { ShipmentsLogState, ShipmentsLogSlice } from 'types/state.interface';
 
 // Services:
 import loadShipmentsLogData from 'app/services/shipments/loadShipmentsLogData';
-
-interface ShipmentsLogState {
-  shipmentsLog: ShipmentRequest[];
-  isShipmentLogDataLoading: boolean;
-  shipmentLogDataError: string;
-}
-
-interface ShipmentsLogSlice {
-  shipments_log: ShipmentsLogState;
-}
 
 const initialState: ShipmentsLogState = {
   shipmentsLog: [],

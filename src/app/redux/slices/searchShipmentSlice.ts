@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface SearchShipmentState {
-  searchShipmentNumber: string;
-  searchShipmentError: string;
-}
-
-interface SearchShipmentSlice {
-  searchShipment: SearchShipmentState;
-}
+// Types:
+import {
+  SearchShipmentState,
+  SearchShipmentSlice,
+} from 'types/state.interface';
 
 const initialState: SearchShipmentState = {
   searchShipmentNumber: '',

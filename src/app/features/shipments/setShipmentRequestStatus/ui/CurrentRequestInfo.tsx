@@ -1,15 +1,11 @@
 import { memo } from 'react';
 
 // Types:
-import { ShipmentStatus } from 'types/shipments.interface';
+import { CurrentRequestInfo_Props } from './types';
+import { CurrentRequestStatusInput_Props } from './types';
 
 // Model:
 import useSetShipmentStatus from '../model/useSetShipmentStatus';
-
-interface CurrentRequestInfo_Props {
-  shipment_number: string;
-  transport: string;
-}
 
 const CurrentRequestInfo: React.FC<CurrentRequestInfo_Props> = memo(
   ({ shipment_number, transport }) => {
@@ -82,22 +78,6 @@ export default CurrentRequestInfo;
 
 // Инпут для выбора статуса отгрузки:
 // -----------------------------------------
-interface CurrentRequestStatusInput_Props {
-  shipmentStatusId: ShipmentStatusIdType;
-  shipmentStatusValue: ShipmentStatus;
-  shipmentStatusLabel: ShipmentStatus;
-  changeShipmentStatus: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-const ShipmentStatusId = {
-  inProcess: 'shipment_in_proccess',
-  completed: 'shipment_completed',
-  delayed: 'shipment_is_delayed',
-} as const;
-
-type ShipmentStatusIdType =
-  (typeof ShipmentStatusId)[keyof typeof ShipmentStatusId];
-
 const CurrentRequestStatusInput: React.FC<CurrentRequestStatusInput_Props> = ({
   shipmentStatusId,
   shipmentStatusValue,

@@ -8,15 +8,7 @@ import unloadParcelsFromShipment from '../model/unloadParcelsFromShipment';
 
 // Types:
 import { AppDispatch } from 'app/redux/store';
-import { Parcel } from 'types/parcels.interface';
-
-interface RemoveParcelsFromTransportBtn_Props {
-  uploadedParcels: Parcel[] | undefined;
-  shipmentId: string | undefined;
-  isUnloadingParcel: boolean;
-  isAttachingParcel: boolean;
-  isShipmentApproveSending: boolean;
-}
+import { RemoveParcelsFromTransportBtn_Props } from './types';
 
 const RemoveParcelsFromTransportBtn: React.FC<
   RemoveParcelsFromTransportBtn_Props

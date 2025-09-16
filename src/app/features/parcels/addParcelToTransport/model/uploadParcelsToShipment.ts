@@ -1,7 +1,5 @@
 // Types:
-import { AppDispatch } from 'app/redux/store';
-import { ShipmentRequest } from 'types/shipments.interface';
-import { Parcel } from 'types/parcels.interface';
+import { UploadParcelsToShipmentParams } from './types';
 
 // State:
 import {
@@ -18,14 +16,6 @@ import uploadParcelsToTransport from './uploadParcelsToTransport';
 
 // Constants:
 import { PARCELS_WEIGHT_OVERLOAD_ERR } from 'shared/constants/logisticAppContants';
-
-type UploadParcelsToShipmentParams = {
-  id: string | undefined;
-  parcelsWeightOverloadError: string;
-  shipmentRequests: ShipmentRequest[];
-  parcelsToUploadData: Parcel[];
-  dispatch: AppDispatch;
-};
 
 const uploadParcelsToShipment = async ({
   id,

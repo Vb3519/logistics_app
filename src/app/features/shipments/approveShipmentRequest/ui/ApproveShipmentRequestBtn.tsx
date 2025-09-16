@@ -6,8 +6,8 @@ import CustomButton from '../../../../../shared/ui/CustomButton';
 
 // Types:
 import { AppDispatch } from '../../../../redux/store';
-import { Parcel } from '../../../../../types/parcels.interface';
 import { ShipmentStatus } from '../../../../../types/shipments.interface';
+import { ApproveShipmentRequestBtn_Props } from './types';
 
 // Model:
 import approveShipment from '../model/approveShipment';
@@ -17,16 +17,6 @@ import {
   selectShipmentStatus,
   selectShipmentStatusError,
 } from '../../../../redux/slices/shipmentStatusSlice';
-
-interface ApproveShipmentRequestBtn_Props {
-  isUnloadingParcel: boolean;
-  isAttachingParcel: boolean;
-  isShipmentApproveSending: boolean;
-  shipmentId: string | undefined;
-  uploadedParcels: Parcel[] | undefined;
-  currentWeightVal: number;
-  dailyShipmentsApproved: number;
-}
 
 const ApproveShipmentRequestBtn: React.FC<ApproveShipmentRequestBtn_Props> = (
   props

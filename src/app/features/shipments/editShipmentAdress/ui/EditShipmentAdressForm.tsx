@@ -18,11 +18,7 @@ import editShipmentAdressAxios from 'app/services/shipments/editShipmentAdress';
 
 // Types:
 import { AppDispatch } from 'app/redux/store';
-
-interface EditShipmentAdressFormFields {
-  from_city: string;
-  to_city: string;
-}
+import { EditShipmentAdressFormFields } from './types';
 
 const EditShipmentAdressForm = () => {
   const { id } = useParams();

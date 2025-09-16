@@ -1,14 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface MobileNavPageState {
-  isMobileNavPageOpened: boolean;
-}
+// Types:
+import { MobileNavPageState, MobileNavPageSlice } from 'types/state.interface';
 
-interface MobileNavPageSlice {
-  mobileNavPage: MobileNavPageState;
-}
-
-const initialState = {
+const initialState: MobileNavPageState = {
   isMobileNavPageOpened: false,
 };
 

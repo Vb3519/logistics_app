@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 // Types:
 import { ClientsState, ClientsStateSlice } from 'types/clients.interface';

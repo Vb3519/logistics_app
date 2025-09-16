@@ -1,14 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface ShipmentParcelsListState {
-  isShipmentParselsListOpened: boolean;
-}
+// Types:
+import {
+  ShipmentParcelsListState,
+  ShipmentParcelsListSlice,
+} from 'types/state.interface';
 
-interface ShipmentParcelsListSlice {
-  shipmentParcelsList: ShipmentParcelsListState;
-}
-
-const initialState = {
+const initialState: ShipmentParcelsListState = {
   isShipmentParselsListOpened: false,
 };
 

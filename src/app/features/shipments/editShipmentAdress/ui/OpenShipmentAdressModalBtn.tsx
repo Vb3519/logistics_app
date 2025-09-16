@@ -7,10 +7,8 @@ import CustomButton from 'shared/ui/CustomButton';
 // Model:
 import useOpenShipmentAdressModal from '../model/useOpenShipmentAdressModal';
 
-interface OpenShipmentAdressModalBtn_Props {
-  from_city: string;
-  to_city: string;
-}
+// Types:
+import { OpenShipmentAdressModalBtn_Props } from './types';
 
 const OpenShipmentAdressModalBtn: React.FC<
   OpenShipmentAdressModalBtn_Props

@@ -9,10 +9,7 @@ import {
   ShipmentRequest,
 } from 'types/shipments.interface';
 
-interface TransportInfo {
-  transport: string;
-  max_load_value: string;
-}
+import { TransportInfo } from './types';
 
 export const createShipmentRequest = (
   shipmentRequestFormData: ShipmentRequestFormFileds

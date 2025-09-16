@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface ShipmentStatusState {
-  shipmentStatus: 'В пути' | 'Завершена' | 'Опаздывает' | '';
-  shipmentStatusErrorMsg: string;
-}
-
-interface ShipmentStatusSlice {
-  shipmentStatus: ShipmentStatusState;
-}
+// Types:
+import {
+  ShipmentStatusState,
+  ShipmentStatusSlice,
+} from 'types/state.interface';
 
 const initialState: ShipmentStatusState = {
   shipmentStatus: '',

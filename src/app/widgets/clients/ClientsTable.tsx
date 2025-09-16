@@ -16,7 +16,7 @@ import ClientsTableRow from './ClientsTableRow';
 import ClientsTableRowSkeleton from './ClientsTableRowSkeleton';
 
 // Data:
-import { clientsData, clientsTableHeaderTitles } from 'shared/data/clientsData';
+import { clientsTableHeaderTitles } from 'shared/data/clientsData';
 
 // State:
 import {

@@ -1,13 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface ShipmentModalsState {
-  isAddShipmentModalOpened: boolean;
-  isShipmentAdressModalOpened: boolean;
-}
-
-interface ShipmentModalsSlice {
-  shipmentModals: ShipmentModalsState;
-}
+// Types:
+import {
+  ShipmentModalsState,
+  ShipmentModalsSlice,
+} from 'types/state.interface';
 
 const initialState: ShipmentModalsState = {
   isAddShipmentModalOpened: false,

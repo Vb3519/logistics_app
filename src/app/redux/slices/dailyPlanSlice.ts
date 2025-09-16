@@ -1,15 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface DailyPlanState {
-  dailyParcelsCollected: number;
-  dailyShipmentsCreated: number;
-  dailyShipmentsApproved: number;
-  allActionsCounter: number;
-}
-
-interface DailyPlanSlice {
-  dailyPlan: DailyPlanState;
-}
+// Types:
+import { DailyPlanState, DailyPlanSlice } from 'types/state.interface';
 
 const initialState: DailyPlanState = {
   dailyParcelsCollected: 0,
