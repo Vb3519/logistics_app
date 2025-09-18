@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // React-icons:
 import { MdEditDocument } from 'react-icons/md';
@@ -28,7 +28,6 @@ const EditShipmentAdressForm = () => {
     register,
     handleSubmit,
     setError,
-    clearErrors,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<EditShipmentAdressFormFields>();

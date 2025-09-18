@@ -24,6 +24,20 @@ const ActiveRequestCard: React.FC<ActiveRequestCard_Props> = ({
   children,
   ...props
 }) => {
+  const transportLoadPercentColor = calcTransportLoadProgressColor(
+    current_load_value,
+    max_load_value
+  );
+
+  const transportLoadPercent = Math.floor(
+    (current_load_value / max_load_value) * 100
+  );
+
+  const transportLoadProgressColor = calcTransportLoad(
+    current_load_value,
+    max_load_value
+  );
+
   return (
     <div
       {...props}
@@ -38,12 +52,9 @@ const ActiveRequestCard: React.FC<ActiveRequestCard_Props> = ({
           <div className="text-primary xl:text-base">{created_at}</div>
         </div>
         <span
-          className={`ml-auto text-2xl lg:text-3xl ${calcTransportLoadProgressColor(
-            current_load_value,
-            max_load_value
-          )}`}
+          className={`ml-auto text-2xl lg:text-3xl ${transportLoadPercentColor}`}
         >
-          {Math.floor((current_load_value / max_load_value) * 100)}%
+          {transportLoadPercent}%
         </span>
       </div>
 
@@ -68,10 +79,7 @@ const ActiveRequestCard: React.FC<ActiveRequestCard_Props> = ({
 
         <div className="relative h-37 flex items-center justify-center">
           <progress
-            className={`absolute w-17 h-12 top-9.5 left-0 border-2 border-gray-400/70 transport_load ${calcTransportLoad(
-              current_load_value,
-              max_load_value
-            )} md:w-22 md:h-15 md:top-7.5 xl:h-15`}
+            className={`absolute w-17 h-12 top-9.5 left-0 border-2 border-gray-400/70 transport_load ${transportLoadProgressColor} md:w-22 md:h-15 md:top-7.5 xl:h-15`}
             value={current_load_value}
             max={max_load_value}
           ></progress>

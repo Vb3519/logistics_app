@@ -26,6 +26,20 @@ const ActiveRequestsListElem: React.FC<ActiveRequestsListElem_Props> = (
     max_load_value,
   } = props;
 
+  const transportLoadPercentColor = calcTransportLoadProgressColor(
+    current_load_value,
+    max_load_value
+  );
+
+  const transportLoadPercent = Math.floor(
+    (current_load_value / max_load_value) * 100
+  );
+
+  const transportLoadCustomColor = calcTransportLoadCustom(
+    current_load_value,
+    max_load_value
+  );
+
   return (
     <li
       className="h-full p-2 flex gap-2 border-b-2 border-b-[#cbcbcb] bg-element_primary rounded-md xs:min-h-20 sm:p-4"
@@ -39,13 +53,8 @@ const ActiveRequestsListElem: React.FC<ActiveRequestsListElem_Props> = (
       </div>
       <div className="w-full flex flex-col justify-end gap-2">
         <p className="text-right text-base">
-          <span
-            className={`${calcTransportLoadProgressColor(
-              current_load_value,
-              max_load_value
-            )}`}
-          >
-            {Math.floor((current_load_value / max_load_value) * 100)}
+          <span className={`${transportLoadPercentColor}`}>
+            {transportLoadPercent}
           </span>{' '}
           <span className="text-primary">/ 100%</span>
         </p>
@@ -53,14 +62,9 @@ const ActiveRequestsListElem: React.FC<ActiveRequestsListElem_Props> = (
         <div className="hidden w-full h-2 bg-gray-400/50 rounded-sm sm:block">
           <div
             style={{
-              width: `${Math.floor(
-                (current_load_value / max_load_value) * 100
-              )}%`,
+              width: `${transportLoadPercent}%`,
             }}
-            className={`h-2 ${calcTransportLoadCustom(
-              current_load_value,
-              max_load_value
-            )} rounded-sm`}
+            className={`h-2 ${transportLoadCustomColor} rounded-sm`}
           ></div>
         </div>
       </div>
